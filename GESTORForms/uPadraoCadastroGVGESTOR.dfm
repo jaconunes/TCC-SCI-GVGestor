@@ -2,7 +2,7 @@ object frPadraoCadastroGVGESTOR: TfrPadraoCadastroGVGESTOR
   Left = 0
   Top = 0
   Caption = 'frPadraoCadastroGVGESTOR'
-  ClientHeight = 417
+  ClientHeight = 376
   ClientWidth = 739
   Color = clGradientInactiveCaption
   Font.Charset = DEFAULT_CHARSET
@@ -11,6 +11,8 @@ object frPadraoCadastroGVGESTOR: TfrPadraoCadastroGVGESTOR
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
   object ToolBar1: TToolBar
@@ -25,30 +27,31 @@ object frPadraoCadastroGVGESTOR: TfrPadraoCadastroGVGESTOR
     Constraints.MinWidth = 739
     Images = ImageList1
     TabOrder = 0
-    object ToolButton3: TToolButton
+    object btSalvar: TToolButton
       Left = 0
       Top = 0
-      Caption = 'ToolButton3'
+      Caption = 'btSalvar'
       ImageIndex = 2
     end
-    object ToolButton5: TToolButton
+    object btPesquisar: TToolButton
       Left = 33
       Top = 0
-      Caption = 'ToolButton5'
+      Caption = 'btPesquisar'
       ImageIndex = 4
     end
-    object ToolButton1: TToolButton
+    object btExcluir: TToolButton
       Left = 66
       Top = 0
-      Caption = 'ToolButton1'
+      Caption = 'btExcluir'
       ImageIndex = 5
+      OnClick = btExcluirClick
     end
   end
   object ImageList1: TImageList
-    Left = 560
-    Top = 153
+    Left = 536
+    Top = 9
     Bitmap = {
-      494C010106000800580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101060008005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

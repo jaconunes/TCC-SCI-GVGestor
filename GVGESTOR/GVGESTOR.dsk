@@ -15,22 +15,22 @@ File_12=TSourceModule,'C:\Projeto Fiscal\PEDSCI\Cadastros\uCadNota.pas',0,1,82,4
 File_13=TSourceModule,'C:\Projeto Fiscal\PEDSCI\Cadastros\uCadProduto.pas',0,1,1,1,1,0,0,,
 
 [Modules]
-Module0=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas
-Module1=C:\TCC - Gestor de Vistorias\GVGESTOR\uLogin.pas
+Module0=C:\TCC - Gestor de Vistorias\GVGESTOR\uLogin.pas
+Module1=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas
 Module2=C:\TCC - Gestor de Vistorias\GESTORForms\DataModule\udmDadosGVGESTOR.pas
 Module3=C:\TCC - Gestor de Vistorias\GESTORForms\DataModule\udmConnectionGVGestor.pas
 Count=4
 EditWindowCount=1
 
-[C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas]
+[C:\TCC - Gestor de Vistorias\GVGESTOR\uLogin.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=1
 
-[C:\TCC - Gestor de Vistorias\GVGESTOR\uLogin.pas]
+[C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=0
+FormOnTop=1
 
 [C:\TCC - Gestor de Vistorias\GESTORForms\DataModule\udmDadosGVGESTOR.pas]
 ModuleType=TSourceModule
@@ -44,7 +44,7 @@ FormOnTop=0
 
 [EditWindow0]
 ViewCount=4
-CurrentEditView=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas
+CurrentEditView=C:\TCC - Gestor de Vistorias\GVGESTOR\uLogin.pas
 View0=0
 View1=1
 View2=2
@@ -104,8 +104,8 @@ EditViewName=Borland.FormDesignerView
 CustomEditViewType=TEditView
 Module=C:\TCC - Gestor de Vistorias\GVGESTOR\uLogin.pas
 CursorX=1
-CursorY=1
-TopLine=1
+CursorY=32
+TopLine=26
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -350,8 +350,8 @@ SplitPos=111
 
 [PropInspDesignerSelection]
 ArrangeBy=Name
-SelectedItem=Name,
-ExpandedItems="LiveBindings Designer=0"
+SelectedItem=Align,
+ExpandedItems="LiveBindings Designer=0",Anchors=0,BorderIcons=0,Constraints=0,Font=1,Font.Style=0,LiveBindings=0,Margins=0,Touch=0
 
 [frmDesignPreview]
 PercentageSizes=1

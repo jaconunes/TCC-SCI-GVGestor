@@ -1,0 +1,126 @@
+unit uPadraoCadastroGVGESTOR;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ToolWin, Vcl.ComCtrls,
+  System.ImageList, Vcl.ImgList, Datasnap.DBClient;
+
+type
+  TfrPadraoCadastroGVGESTOR = class(TForm)
+    ToolBar1: TToolBar;
+    ImageList1: TImageList;
+    btSalvar: TToolButton;
+    btPesquisar: TToolButton;
+    btExcluir: TToolButton;
+    procedure btExcluirClick(Sender: TObject);
+  private
+    { Private declarations }
+    FIDEdit: TWinControl;// variável do campo chave
+    FLastEdit: TWinControl;// variável do último campo da tela
+    FTeclouEsc : Boolean;
+    FValidandoCampos : Boolean;
+    FPressionouSalvar : Boolean;
+  public
+    { Public declarations }
+    FTabela: TClientDataSet;// essa variável vai manter a tabela do cadastro
+    function setTabela: TClientDataSet; virtual; abstract; // deve informar qual tabela será usada
+    function setIDEdit: TWinControl; virtual; abstract; // informar qual o campo chave da tela
+    function setLastEdit: TWinControl; virtual; abstract; // informar o último campo da tela para salvar automaticamente
+    procedure CarregaCampos; virtual; abstract; // carregar os campos da tabela para os camnpos da tela
+    procedure SalvarCampos; virtual; abstract; // salvar os valores dos campos da tela para os campos da tabela
+    function ValidaCampos: Boolean; virtual;
+    function getID: Boolean; virtual;
+    function getPodeExcluir: Boolean; virtual;
+    procedure ExcluirRegistro; virtual;
+    procedure setLimpaCampos; virtual;
+    procedure ConfirmarDados; virtual;
+
+    //valida campo CNPJ
+    function validaCnpj(S: String): String;
+  end;
+
+var
+  frPadraoCadastroGVGESTOR: TfrPadraoCadastroGVGESTOR;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrPadraoCadastroGVGESTOR.btExcluirClick(Sender: TObject);
+begin
+  ExcluirRegistro;
+end;
+
+procedure TfrPadraoCadastroGVGESTOR.ConfirmarDados;
+begin
+  if ValidaCampos then// validar conteúdo dos campo
+    begin
+      if Assigned(FTabela) then
+        begin
+          if getID then// verificar se a chave existe
+             FTabela.Edit// caso exista, deve editar
+          else
+             FTabela.Insert;// caso NÃO exista, deve inserir
+        end;
+      SalvarCampos;// salvar os dados dos campos da tela nos campos da tabela, esse evento deve ser implementado nas heranças
+      if Assigned(FTabela) then
+        begin
+          if FTabela.State in [dsInsert , dsEdit] then// antes de salvar, verificar se está em mode de edição ou inserção, caso não esteja, algo deu errado em SalvarCampos
+            begin
+              FTabela.Post;
+              FTabela.ApplyUpdates(0);
+              FTabela.Refresh;
+
+              setLimpaCampos;// limpar campos da tela
+              if Assigned(FIDEdit) and FIDEdit.CanFocus then// apos salvar voltar para o campo chave
+                FIDEdit.SetFocus;
+              end
+              else
+                MessageDlg('O cadastro não está em modo de edição ou inserção!', mtInformation, [mbOK], 0);
+        end;
+    end;
+end;
+
+procedure TfrPadraoCadastroGVGESTOR.ExcluirRegistro;
+begin
+  if getPodeExcluir and getID then// verificar se o registro existe
+    begin
+      FTabela.Delete;
+      FTabela.ApplyUpdates(0);
+      FTabela.Refresh;
+
+      setLimpaCampos;
+
+      if Assigned(FIDEdit) and FIDEdit.CanFocus then// voltar ao campo chave
+       FIDEdit.SetFocus;
+    end;
+end;
+
+function TfrPadraoCadastroGVGESTOR.getID: Boolean;
+begin
+
+end;
+
+function TfrPadraoCadastroGVGESTOR.getPodeExcluir: Boolean;
+begin
+  Result := MessageDlg('Deseja realmente excluir este registro?', mtWarning, [mbYes,mbNo], 0) = mrYes;
+end;
+
+procedure TfrPadraoCadastroGVGESTOR.setLimpaCampos;
+begin
+
+end;
+
+function TfrPadraoCadastroGVGESTOR.ValidaCampos: Boolean;
+begin
+
+end;
+
+function TfrPadraoCadastroGVGESTOR.validaCnpj(S: String): String;
+begin
+
+end;
+
+end.
