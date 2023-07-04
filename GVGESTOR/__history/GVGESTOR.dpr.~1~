@@ -1,0 +1,14 @@
+program GVGESTOR;
+
+uses
+  Vcl.Forms,
+  uGVGESTOR in 'uGVGESTOR.pas' {frGVGESTOR};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrGVGESTOR, frGVGESTOR);
+  Application.Run;
+end.

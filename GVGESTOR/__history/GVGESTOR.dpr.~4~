@@ -1,0 +1,18 @@
+program GVGESTOR;
+
+uses
+  Vcl.Forms,
+  uGVGESTOR in 'uGVGESTOR.pas' {frGVGESTOR},
+  udmConnectionGVGestor in '..\GESTORForms\DataModule\udmConnectionGVGestor.pas' {dmConnection: TDataModule},
+  udmDadosGVGESTOR in '..\GESTORForms\DataModule\udmDadosGVGESTOR.pas' {dmTabelas: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrGVGESTOR, frGVGESTOR);
+  Application.CreateForm(TdmConnection, dmConnection);
+  Application.CreateForm(TdmTabelas, dmTabelas);
+  Application.Run;
+end.

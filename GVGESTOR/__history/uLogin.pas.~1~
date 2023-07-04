@@ -1,0 +1,24 @@
+unit uGVGESTOR;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TfrGVGESTOR = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frGVGESTOR: TfrGVGESTOR;
+
+implementation
+
+{$R *.dfm}
+
+end.

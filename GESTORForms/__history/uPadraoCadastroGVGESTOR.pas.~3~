@@ -1,0 +1,33 @@
+unit uPadraoCadastroGVGESTOR;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ToolWin, Vcl.ComCtrls,
+  System.ImageList, Vcl.ImgList;
+
+type
+  TfrPadraoCadastroGVGESTOR = class(TForm)
+    ToolBar1: TToolBar;
+    pnPai: TPanel;
+    ImageList1: TImageList;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
+    ToolButton4: TToolButton;
+    ToolButton5: TToolButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frPadraoCadastroGVGESTOR: TfrPadraoCadastroGVGESTOR;
+
+implementation
+
+{$R *.dfm}
+
+end.

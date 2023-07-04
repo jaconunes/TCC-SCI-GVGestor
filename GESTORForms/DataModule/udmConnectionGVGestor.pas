@@ -1,0 +1,72 @@
+unit udmConnectionGVGestor;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Vcl.Dialogs, Data.DB, Data.SqlExpr,
+  Data.DBXFirebird;
+
+type
+  TdmConnection = class(TDataModule)
+    SQLConnectionGVGESTOR: TSQLConnection;
+    odSelecionaBanco: TOpenDialog;
+    procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
+  private
+    { Private declarations }
+    procedure setConnection;
+  public
+    { Public declarations }
+  end;
+
+var
+  dmConnection: TdmConnection;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+{ TDataModule1 }
+
+procedure TdmConnection.DataModuleCreate(Sender: TObject);
+begin
+  setConnection;
+end;
+
+procedure TdmConnection.DataModuleDestroy(Sender: TObject);
+begin
+  SQLConnectionGVGESTOR.Close;
+end;
+
+procedure TdmConnection.setConnection;
+begin
+  SQLConnectionGVGESTOR.Close;
+  SQLConnectionGVGESTOR.ConnectionName := 'FBConnection';
+  SQLConnectionGVGESTOR.DriverName := 'Firebird';
+  SQLConnectionGVGESTOR.KeepConnection := True;
+  SQLConnectionGVGESTOR.LoginPrompt := False;
+  SQLConnectionGVGESTOR.GetDriverFunc := 'getSQLDriverINTERBASE';
+  SQLConnectionGVGESTOR.LibraryName := 'dbxfb.dll';
+  SQLConnectionGVGESTOR.VendorLib := '"C:\Program Files\Firebird\Firebird_4_0\WOW64\fbclient.dll"';
+
+  SQLConnectionGVGESTOR.Params.Clear;
+  SQLConnectionGVGESTOR.Params.Values['DriverName'] := 'Firebird';
+  SQLConnectionGVGESTOR.Params.Values['Database'] := 'C:\TCC - Gestor de Vistorias\BD\gestor.FDB';
+  SQLConnectionGVGESTOR.Params.Values['RoleName'] := EmptyStr;//'RoleName';
+  SQLConnectionGVGESTOR.Params.Values['User_Name'] := 'SYSDBA';
+  SQLConnectionGVGESTOR.Params.Values['Password'] := 'sci';
+  SQLConnectionGVGESTOR.Params.Values['ServerCharSet'] := 'WIN1252';
+  SQLConnectionGVGESTOR.Params.Values['SQLDialect'] := '3';
+  SQLConnectionGVGESTOR.Params.Values['ErrorResourceFile'] := EmptyStr;
+  SQLConnectionGVGESTOR.Params.Values['LocaleCode'] := '0000';
+  SQLConnectionGVGESTOR.Params.Values['BlobSize'] := '-1';
+  SQLConnectionGVGESTOR.Params.Values['CommitRetain'] := 'False';
+  SQLConnectionGVGESTOR.Params.Values['WaitOnLocks'] := 'True';
+  SQLConnectionGVGESTOR.Params.Values['IsolationLevel'] := 'ReadCommitted';
+  SQLConnectionGVGESTOR.Params.Values['Trim Char'] := 'False';
+  SQLConnectionGVGESTOR.Open;
+end;
+
+end.

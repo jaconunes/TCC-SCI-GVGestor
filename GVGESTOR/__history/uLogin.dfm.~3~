@@ -1,0 +1,73 @@
+object frLogin: TfrLogin
+  Left = 0
+  Top = 0
+  Caption = 'Login - GV Gestor'
+  ClientHeight = 481
+  ClientWidth = 754
+  Color = clBtnFace
+  Constraints.MaxHeight = 520
+  Constraints.MaxWidth = 770
+  Constraints.MinHeight = 520
+  Constraints.MinWidth = 770
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Image1: TImage
+    Left = 0
+    Top = 0
+    Width = 305
+    Height = 481
+  end
+  object Image2: TImage
+    Left = 400
+    Top = 168
+    Width = 33
+    Height = 33
+  end
+  object Image3: TImage
+    Left = 400
+    Top = 207
+    Width = 33
+    Height = 33
+  end
+  object Edit1: TEdit
+    Left = 432
+    Top = 168
+    Width = 217
+    Height = 33
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+  end
+  object Edit2: TEdit
+    Left = 432
+    Top = 207
+    Width = 217
+    Height = 33
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    PasswordChar = '*'
+    TabOrder = 1
+  end
+  object Button1: TButton
+    Left = 400
+    Top = 288
+    Width = 249
+    Height = 41
+    Caption = 'Button1'
+    TabOrder = 2
+  end
+end

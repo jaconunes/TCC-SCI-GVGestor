@@ -1,0 +1,16 @@
+object dmConnection: TdmConnection
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
+  Height = 280
+  Width = 399
+  object SQLConnectionGVGESTOR: TSQLConnection
+    Left = 104
+    Top = 64
+  end
+  object odSelecionaBanco: TOpenDialog
+    Filter = 'Firebird|*.fdb'
+    Left = 272
+    Top = 160
+  end
+end

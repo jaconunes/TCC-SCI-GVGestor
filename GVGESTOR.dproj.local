@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2023/05/22 13:36:48.000.329,=C:\Users\Prog47\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2023/06/21 17:08:48.000.125,=C:\Users\Prog47\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2023/06/21 17:09:10.000.547,C:\Users\Prog47\Documents\Embarcadero\Studio\Projects\Unit3.pas=C:\TCC - Gestor de Vistorias\Unit3.pas</Transaction>
+    <Transaction>2023/06/21 17:09:10.000.547,C:\Users\Prog47\Documents\Embarcadero\Studio\Projects\Unit3.dfm=C:\TCC - Gestor de Vistorias\Unit3.dfm</Transaction>
+    <Transaction>2023/06/21 17:09:40.000.960,C:\Users\Prog47\Documents\Embarcadero\Studio\Projects\Project3.dproj=C:\TCC - Gestor de Vistorias\GVGESTOR.dproj</Transaction>
+    <Transaction>2023/06/21 17:10:19.000.214,C:\TCC - Gestor de Vistorias\Unit3.pas=C:\TCC - Gestor de Vistorias\uGVGESTOR.pas</Transaction>
+    <Transaction>2023/06/21 17:10:19.000.214,C:\TCC - Gestor de Vistorias\Unit3.dfm=C:\TCC - Gestor de Vistorias\uGVGESTOR.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
