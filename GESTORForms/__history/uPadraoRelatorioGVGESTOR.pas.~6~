@@ -1,0 +1,49 @@
+unit uPadraoRelatorioGVGESTOR;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ToolWin, Vcl.ComCtrls,
+  System.ImageList, Vcl.ImgList, Data.FMTBcd, frxExportDOCX, frxClass,
+  frxExportPDF, Data.DB, Data.SqlExpr, frxDBSet, frxDesgn;
+
+type
+  TfrPadraoRelatorioGVGESTOR = class(TForm)
+    ToolBar1: TToolBar;
+    GroupBox1: TGroupBox;
+    btVisualizar: TToolButton;
+    btSalvarComo: TToolButton;
+    btEditarReport: TToolButton;
+    ImageList1: TImageList;
+    frxReportPadrao: TfrxReport;
+    frxDesigner1: TfrxDesigner;
+    frxDBDataset1: TfrxDBDataset;
+    SQLQuery1: TSQLQuery;
+    PrintDialog1: TPrintDialog;
+    frxPDFExport1: TfrxPDFExport;
+    frxDOCXExport1: TfrxDOCXExport;
+    SaveDialog1: TSaveDialog;
+  private
+    { Private declarations }
+    function fCarregaFrxPadrao(Tabela: TfrPadraoRelatorioGVGESTOR ;S : String) : String;
+  public
+    { Public declarations }
+  end;
+
+var
+  frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrPadraoRelatorioGVGESTOR }
+
+function TfrPadraoRelatorioGVGESTOR.fCarregaFrxPadrao(
+  Tabela: TfrPadraoRelatorioGVGESTOR; S: String): String;
+begin
+  TfrxReport.LoadFromFile('C:\TCC - Gestor de Vistorias\Reports\' + Tabela.Name + '.fr3')
+end;
+
+end.
