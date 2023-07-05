@@ -4,19 +4,19 @@ Coordinates=10,78,57,58
 [Image1]
 Coordinates=200,10,57,58
 
-[Button1]
-Coordinates=64,10,59,58
-
-[Edit2]
-Coordinates=10,10,44,58
-Visible=True
-
-[Edit1]
-Coordinates=77,78,44,58
-
 [Image3]
 Coordinates=133,10,57,58
 
 []
 Coordinates=142,87,91,36
+
+[edUsuario]
+Coordinates=77,78,44,58
+
+[edSenha]
+Coordinates=10,10,44,58
+Visible=True
+
+[btLogin]
+Coordinates=64,10,59,58
 

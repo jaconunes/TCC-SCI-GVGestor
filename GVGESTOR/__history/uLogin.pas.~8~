@@ -1,0 +1,48 @@
+unit uLogin;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg;
+
+type
+  TfrLogin = class(TForm)
+    Image1: TImage;
+    edUsuario: TEdit;
+    Image2: TImage;
+    edSenha: TEdit;
+    Image3: TImage;
+    btLogin: TButton;
+    Image4: TImage;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function fUsuarioLogado(Usuario: String; Senha: String): Boolean;
+  end;
+
+var
+  frLogin: TfrLogin;
+
+implementation
+
+{$R *.dfm}
+
+uses udmDadosGVGESTOR;
+
+{ TfrLogin }
+
+function TfrLogin.fUsuarioLogado(Usuario, Senha: String): Boolean;
+begin
+  Result := False;
+  dmTabelas.tbUsuario.IndexFieldNames := 'BDNOME';
+  if dmTabelas.tbUsuario.FindKey([edUsuario.Text]) then
+     begin
+       if edSenha.Text = dmTabelas.tbUsuario.FieldByName('BDSENHA').AsString then
+          Result := True;
+     end;
+end;
+
+end.

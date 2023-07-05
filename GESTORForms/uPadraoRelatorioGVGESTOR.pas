@@ -61,7 +61,7 @@ var
   wReport: TfrxReport;
 begin
   wSaveDialog.FileName := Caption;
-  if SaveDialog1.Execute then
+  if wSaveDialog.Execute then
     begin
       if MessageDlg('Deseja abrir o arquivo exportado para visualização?', mtInformation, [mbYes,mbNo], 0) = mrYes then
       begin
@@ -73,12 +73,12 @@ begin
         wPDFFile.OpenAfterExport := False;
         wDOCFile.OpenAfterExport := False;
       end;
-      wPDFFile.FileName := StringReplace(SaveDialog1.FileName, ExtractFileExt(SaveDialog1.FileName), EmptyStr, [rfIgnoreCase]) + '.pdf';
-      wDOCFile.FileName := StringReplace(SaveDialog1.FileName, ExtractFileExt(SaveDialog1.FileName), EmptyStr, [rfIgnoreCase]) + '.docx';
+      wPDFFile.FileName := StringReplace(wSaveDialog.FileName, ExtractFileExt(wSaveDialog.FileName), EmptyStr, [rfIgnoreCase]) + '.pdf';
+      wDOCFile.FileName := StringReplace(wSaveDialog.FileName, ExtractFileExt(wSaveDialog.FileName), EmptyStr, [rfIgnoreCase]) + '.docx';
 
       wReport.PrepareReport;
 
-      case SaveDialog1.FilterIndex of
+      case wSaveDialog.FilterIndex of
       1: wReport.Export(wPDFFile);
       2: wReport.Export(wDOCFile);
       end;

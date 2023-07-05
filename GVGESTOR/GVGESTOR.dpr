@@ -7,7 +7,9 @@ uses
   udmDadosGVGESTOR in '..\GESTORForms\DataModule\udmDadosGVGESTOR.pas' {dmTabelas: TDataModule},
   uPadraoCadastroGVGESTOR in '..\GESTORForms\uPadraoCadastroGVGESTOR.pas' {frPadraoCadastroGVGESTOR},
   uPadraoConsultaGVGESTOR in '..\GESTORForms\uPadraoConsultaGVGESTOR.pas' {frPadraoConsultaGVGSTOR},
-  uPadraoRelatorioGVGESTOR in '..\GESTORForms\uPadraoRelatorioGVGESTOR.pas' {frPadraoRelatorioGVGESTOR};
+  uPadraoRelatorioGVGESTOR in '..\GESTORForms\uPadraoRelatorioGVGESTOR.pas' {frPadraoRelatorioGVGESTOR},
+  uPrincipal in 'uPrincipal.pas' {frPrincipal},
+  uUsuarioLogado in 'uUsuarioLogado.pas';
 
 {$R *.res}
 
@@ -20,5 +22,6 @@ begin
   Application.CreateForm(TfrPadraoCadastroGVGESTOR, frPadraoCadastroGVGESTOR);
   Application.CreateForm(TfrPadraoConsultaGVGSTOR, frPadraoConsultaGVGSTOR);
   Application.CreateForm(TfrPadraoRelatorioGVGESTOR, frPadraoRelatorioGVGESTOR);
+  Application.CreateForm(TfrPrincipal, frPrincipal);
   Application.Run;
 end.
