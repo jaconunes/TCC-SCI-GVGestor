@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg, uUsuarioLogado, uPrincipal;
+  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg, uPrincipal, uUsuarioLogado;
 
 type
   TfrLogin = class(TForm)
@@ -17,19 +17,19 @@ type
     btLogin: TButton;
     Image4: TImage;
     procedure btLoginClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
-    wUsuarioLogado : TUsuario;
   public
     { Public declarations }
-
-    function fUsuario_Logado(Usuario: String; Senha: String): Boolean;
-    function fGet_Usuario(wUsuarioLogado : TUsuario) : TUsuario;
+    function fUsuario_Logado(wUsuario: String; wSenha: String): boolean;
+    function fGetUsuarioLogado : TUsuario;
 
   end;
 
 var
   frLogin: TfrLogin;
+  wUsuarioLogado: TUsuario;
 
 implementation
 
@@ -43,31 +43,36 @@ procedure TfrLogin.btLoginClick(Sender: TObject);
 begin
   if fUsuario_Logado(edUsuario.Text, edSenha.Text) then
      begin
-       TfrPrincipal.create(wUsuarioLogado).Show;
-       Close;
+       frPrincipal := TfrPrincipal.Create(Application);
+       frPrincipal.Show;
+       frLogin.Hide;
      end;
 end;
 
-function TfrLogin.fGet_Usuario(wUsuarioLogado: TUsuario): TUsuario;
+function TfrLogin.fGetUsuarioLogado: TUsuario;
 begin
   Result := wUsuarioLogado;
 end;
 
-function TfrLogin.fUsuario_Logado(wUsuario, wSenha: String): Boolean;
+procedure TfrLogin.FormShow(Sender: TObject);
+begin
+  //TfrPrincipal(Owner).Enabled := False;
+end;
+
+function TfrLogin.fUsuario_Logado(wUsuario, wSenha: String): boolean;
 begin
   Result := False;
-  dmTabelas.tbUsuario.IndexFieldNames := 'BDNOME';
-  if dmTabelas.tbUsuario.FindKey([Usuario]) then
+  dmTabelas.tbUsuario.IndexFieldNames := 'BDUSUARIO';
+  if dmTabelas.tbUsuario.FindKey([wUsuario]) then
      begin
-       if Senha = dmTabelas.tbUsuario.FieldByName('BDSENHA').AsString then
+       if wSenha = dmTabelas.tbUsuario.FieldByName('BDSENHA').AsString then
           begin
+            Result := True;
+
             wUsuarioLogado.Create;
             wUsuarioLogado.ID := dmTabelas.tbUsuario.FieldByName('BDCODIGO').AsInteger;
-            wUsuarioLogado.Usuario := dmTabelas.tbUsuario.FieldByName('BDNOME').AsString;
-            wUsuarioLogado.CpfOuCnpj := dmTabelas.tbUsuario.FieldByName('BDCPFCNPJ').AsString;
+            wUsuarioLogado.Nome := dmTabelas.tbUsuario.FieldByName('BDNOME').AsString;
             wUsuarioLogado.Perfil := dmTabelas.tbUsuario.FieldByName('BDPERFIL').AsString;
-            fGet_Usuario(wUsuarioLogado);
-            Result := True;
           end;
      end;
 end;

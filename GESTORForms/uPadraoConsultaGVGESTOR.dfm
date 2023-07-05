@@ -2,15 +2,17 @@ object frPadraoConsultaGVGSTOR: TfrPadraoConsultaGVGSTOR
   Left = 0
   Top = 0
   Caption = 'frPadraoConsultaGVGSTOR'
-  ClientHeight = 447
-  ClientWidth = 912
+  ClientHeight = 330
+  ClientWidth = 867
   Color = clGradientInactiveCaption
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  FormStyle = fsMDIChild
   OldCreateOrder = False
+  Visible = True
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
@@ -18,13 +20,14 @@ object frPadraoConsultaGVGSTOR: TfrPadraoConsultaGVGSTOR
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 912
+    Width = 867
     Height = 33
     ButtonHeight = 33
     ButtonWidth = 33
     Caption = 'ToolBar1'
     Images = ImageList1
     TabOrder = 0
+    ExplicitWidth = 912
     object btAnterior: TToolButton
       Left = 0
       Top = 0
@@ -54,8 +57,8 @@ object frPadraoConsultaGVGSTOR: TfrPadraoConsultaGVGSTOR
   object grConsulta: TDBGrid
     Left = 0
     Top = 33
-    Width = 912
-    Height = 414
+    Width = 867
+    Height = 297
     Align = alClient
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
@@ -68,7 +71,7 @@ object frPadraoConsultaGVGSTOR: TfrPadraoConsultaGVGSTOR
     Left = 640
     Top = 201
     Bitmap = {
-      494C01010700E0007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010700E000800010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

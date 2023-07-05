@@ -1,0 +1,73 @@
+unit uCadCliente;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoCadastroGVGESTOR,
+  System.ImageList, Vcl.ImgList, Vcl.ComCtrls, Vcl.ToolWin, Vcl.StdCtrls,
+  Vcl.ExtCtrls, Datasnap.DBClient;
+
+type
+  TfrCadUsuario = class(TfrPadraoCadastroGVGESTOR)
+    Edit1: TEdit;
+    Edit2: TEdit;
+    ComboBox1: TComboBox;
+    Edit3: TEdit;
+    Label1: TLabel;
+    GroupBox1: TGroupBox;
+    RadioButton1: TRadioButton;
+    RadioButton2: TRadioButton;
+    Label2: TLabel;
+    Label3: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function setTabela: TClientDataSet; override;
+    function setIDEdit: TWinControl; override;
+    function setLastEdit: TWinControl; override;
+    procedure CarregaCampos; override;
+    procedure SalvarCampos; override;
+
+  end;
+
+var
+  frCadUsuario: TfrCadUsuario;
+
+implementation
+
+{$R *.dfm}
+
+uses udmDadosGVGESTOR;
+
+{ TfrCadUsuario }
+
+procedure TfrCadUsuario.CarregaCampos;
+begin
+  inherited;
+
+end;
+
+procedure TfrCadUsuario.SalvarCampos;
+begin
+  inherited;
+
+end;
+
+function TfrCadUsuario.setIDEdit: TWinControl;
+begin
+
+end;
+
+function TfrCadUsuario.setLastEdit: TWinControl;
+begin
+
+end;
+
+function TfrCadUsuario.setTabela: TClientDataSet;
+begin
+  Result := dmTabelas.tbUsuario;
+end;
+
+end.

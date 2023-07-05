@@ -2,15 +2,19 @@ object frPadraoCadastroGVGESTOR: TfrPadraoCadastroGVGESTOR
   Left = 0
   Top = 0
   Caption = 'frPadraoCadastroGVGESTOR'
-  ClientHeight = 376
-  ClientWidth = 739
+  ClientHeight = 226
+  ClientWidth = 428
   Color = clGradientInactiveCaption
+  Ctl3D = False
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  FormStyle = fsMDIChild
   OldCreateOrder = False
+  Visible = True
+  OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
@@ -18,40 +22,70 @@ object frPadraoCadastroGVGESTOR: TfrPadraoCadastroGVGESTOR
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 739
+    Width = 428
     Height = 33
     ButtonHeight = 33
     ButtonWidth = 33
     Caption = 'ToolBar1'
-    Constraints.MaxWidth = 739
-    Constraints.MinWidth = 739
     Images = ImageList1
-    TabOrder = 0
+    TabOrder = 1
     object btSalvar: TToolButton
       Left = 0
       Top = 0
       Caption = 'btSalvar'
       ImageIndex = 2
     end
-    object btPesquisar: TToolButton
+    object ToolButton1: TToolButton
       Left = 33
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton1'
+      ImageIndex = 6
+      Style = tbsSeparator
+    end
+    object btPesquisar: TToolButton
+      Left = 41
       Top = 0
       Caption = 'btPesquisar'
       ImageIndex = 4
     end
+    object ToolButton2: TToolButton
+      Left = 74
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton2'
+      ImageIndex = 6
+      Style = tbsSeparator
+    end
     object btExcluir: TToolButton
-      Left = 66
+      Left = 82
       Top = 0
       Caption = 'btExcluir'
       ImageIndex = 5
       OnClick = btExcluirClick
     end
+    object ToolButton3: TToolButton
+      Left = 115
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton3'
+      ImageIndex = 6
+      Style = tbsSeparator
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 33
+    Width = 428
+    Height = 193
+    Align = alClient
+    TabOrder = 0
   end
   object ImageList1: TImageList
-    Left = 536
-    Top = 9
+    Left = 320
+    Top = 57
     Bitmap = {
-      494C0101060008005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

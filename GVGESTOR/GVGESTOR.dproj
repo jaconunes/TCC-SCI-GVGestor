@@ -97,37 +97,26 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="uLogin.pas">
-            <Form>frLogin</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="..\GESTORForms\DataModule\udmConnectionGVGestor.pas">
             <Form>dmConnection</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\GESTORForms\DataModule\udmDadosGVGESTOR.pas">
             <Form>dmTabelas</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\GESTORForms\uPadraoCadastroGVGESTOR.pas">
             <Form>frPadraoCadastroGVGESTOR</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\GESTORForms\uPadraoConsultaGVGESTOR.pas">
             <Form>frPadraoConsultaGVGSTOR</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\GESTORForms\uPadraoRelatorioGVGESTOR.pas">
             <Form>frPadraoRelatorioGVGESTOR</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uPrincipal.pas">
             <Form>frPrincipal</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uUsuarioLogado.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

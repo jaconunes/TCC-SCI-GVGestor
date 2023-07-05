@@ -1,0 +1,38 @@
+﻿program GVGESTOR;
+
+uses
+  Vcl.Forms,
+  Controls,
+  SysUtils,
+  uLogin in 'uLogin.pas' {frLogin},
+  udmConnectionGVGestor in '..\GESTORForms\DataModule\udmConnectionGVGestor.pas' {dmConnection: TDataModule},
+  udmDadosGVGESTOR in '..\GESTORForms\DataModule\udmDadosGVGESTOR.pas' {dmTabelas: TDataModule},
+  uPadraoCadastroGVGESTOR in '..\GESTORForms\uPadraoCadastroGVGESTOR.pas' {frPadraoCadastroGVGESTOR},
+  uPadraoConsultaGVGESTOR in '..\GESTORForms\uPadraoConsultaGVGESTOR.pas' {frPadraoConsultaGVGSTOR},
+  uPadraoRelatorioGVGESTOR in '..\GESTORForms\uPadraoRelatorioGVGESTOR.pas' {frPadraoRelatorioGVGESTOR},
+  uPrincipal in 'uPrincipal.pas' {frPrincipal},
+  uUsuarioLogado in 'uUsuarioLogado.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TdmConnection, dmConnection);
+  Application.CreateForm(TdmTabelas, dmTabelas);
+  Application.CreateForm(TfrLogin, frLogin);
+  //Application.CreateForm(TfrPrincipal, frPrincipal);
+  
+  if frLogin.ShowModal = mrOk then //Caso o retorno da tela seja Ok
+     begin
+       //FreeAndNil(frLogin); //Libera o form de Login da memória
+       Application.CreateForm(TfrPrincipal, frPrincipal); //Cria a janela main  
+       Application.Run; //Roda a aplicação
+     end
+  else //Caso o retorno da tela de Login seja mrCancel então
+     Application.Terminate; //Encerra a aplicação
+  
+  
+  
+  //Application.Run;
+end.

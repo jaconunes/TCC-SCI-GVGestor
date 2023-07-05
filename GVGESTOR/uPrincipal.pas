@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, uUsuarioLogado;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus;
 
 type
   TfrPrincipal = class(TForm)
@@ -14,7 +14,7 @@ type
     Relatrios1: TMenuItem;
     Sobre1: TMenuItem;
     Laudo1: TMenuItem;
-    Usurio1: TMenuItem;
+    mUsuario: TMenuItem;
     Imvel1: TMenuItem;
     Proprietrio1: TMenuItem;
     Cliente1: TMenuItem;
@@ -32,13 +32,14 @@ type
     Vistorias2: TMenuItem;
     Locatrios2: TMenuItem;
     Gerar1: TMenuItem;
+    procedure FormCreate(Sender: TObject);
+    procedure mUsuarioClick(Sender: TObject);
   private
     { Private declarations }
-     UsuarioLogado : TUsuario;
   public
     { Public declarations }
-    constructor Create(wUsuarioLogado : TUsuario); reintroduce;
-    destructor Destroy; override;
+    procedure pPerfilAdm;
+    procedure pPerfilPadrao;
   end;
 
 var
@@ -48,18 +49,53 @@ implementation
 
 {$R *.dfm}
 
+uses uLogin, udmDadosGVGESTOR, uUsuarioLogado, uCadCliente;
+
 { TfrPrincipal }
 
-constructor TfrPrincipal.Create(wUsuarioLogado: TUsuario);
+
+procedure TfrPrincipal.FormCreate(Sender: TObject);
 begin
-  inherited Create;
-  UsuarioLogado := wUsuarioLogado;
+  //TfrLogin.Create(self).Show;
+//  if Owner is TfrLogin then
+//     begin
+//       wUsuario := Trim(TfrLogin(Owner).edUsuario.Text);
+//       wUsuario := frLogin.w
+//       TfrLogin(Owner).WindowState := wsMinimized;
+//
+//       dmTabelas.tbUsuario.IndexFieldNames := 'BDUSUARIO';
+//       if dmTabelas.tbUsuario.FindKey([wUsuario]) then
+//          begin
+//            uUsuarioLogado.Create;
+//            uUsuarioLogado.ID := dmTabelas.tbUsuario.FieldByName('BDCODIGO').AsInteger;
+//            uUsuarioLogado.Usuario := wUsuario;
+//            uUsuarioLogado.Nome := dmTabelas.tbUsuario.FieldByName('BDNOME').AsString;
+//            uUsuarioLogado.CpfOuCnpj := dmTabelas.tbUsuario.FieldByName('BDCPFCNPJ').AsString;
+//            uUsuarioLogado.Perfil := dmTabelas.tbUsuario.FieldByName('BDPERFIL').AsString;
+//          end;
+//
+//     end;
+
+//     if frLogin.fGetUsuarioLogado.Perfil = 'Administrador' then
+//        pPerfilAdm
+//     else
+//     if frLogin.fGetUsuarioLogado.Perfil = 'Padrão' then
+//        pPerfilPadrao;
 end;
 
-destructor TfrPrincipal.Destroy;
+procedure TfrPrincipal.mUsuarioClick(Sender: TObject);
 begin
-  inherited;
-  Destroy;
+  TfrCadUsuario.Create(self).Show;
+end;
+
+procedure TfrPrincipal.pPerfilAdm;
+begin
+  mUsuario.Enabled := True;
+end;
+
+procedure TfrPrincipal.pPerfilPadrao;
+begin
+  mUsuario.Enabled := False;
 end;
 
 end.

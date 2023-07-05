@@ -1,0 +1,24 @@
+﻿program GVGESTOR;
+
+uses
+  Vcl.Forms,
+  uLogin in 'uLogin.pas' {frLogin},
+  udmConnectionGVGestor in '..\GESTORForms\DataModule\udmConnectionGVGestor.pas' {dmConnection: TDataModule},
+  udmDadosGVGESTOR in '..\GESTORForms\DataModule\udmDadosGVGESTOR.pas' {dmTabelas: TDataModule},
+  uPadraoCadastroGVGESTOR in '..\GESTORForms\uPadraoCadastroGVGESTOR.pas' {frPadraoCadastroGVGESTOR},
+  uPadraoConsultaGVGESTOR in '..\GESTORForms\uPadraoConsultaGVGESTOR.pas' {frPadraoConsultaGVGSTOR},
+  uPadraoRelatorioGVGESTOR in '..\GESTORForms\uPadraoRelatorioGVGESTOR.pas' {frPadraoRelatorioGVGESTOR},
+  uPrincipal in 'uPrincipal.pas' {frPrincipal},
+  uUsuarioLogado in 'uUsuarioLogado.pas',
+  uCadUsuario in 'Cadastros\uCadUsuario.pas' {frCadUsuario};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TdmConnection, dmConnection);
+  Application.CreateForm(TdmTabelas, dmTabelas);
+  Application.CreateForm(TfrPrincipal, frPrincipal);
+  Application.Run;
+end.
