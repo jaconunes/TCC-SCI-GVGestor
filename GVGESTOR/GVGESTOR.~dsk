@@ -25,7 +25,7 @@ EditWindowCount=1
 [C:\TCC - Gestor de Vistorias\GVGESTOR\uCadUsuario.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
 [C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas]
 ModuleType=TSourceModule
@@ -86,20 +86,20 @@ EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\uPrincipal.pas
 [View1]
 CustomEditViewType=TEditView
 Module=C:\TCC - Gestor de Vistorias\GVGESTOR\uCadUsuario.pas
-CursorX=25
-CursorY=149
-TopLine=92
+CursorX=53
+CursorY=190
+TopLine=1
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=Borland.FormDesignerView
+EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\uCadUsuario.pas
 
 [View2]
 CustomEditViewType=TEditView
 Module=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas
-CursorX=3
-CursorY=230
-TopLine=61
+CursorX=60
+CursorY=8
+TopLine=1
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -329,11 +329,6 @@ LRDockWidth=1896
 Dockable=1
 StayOnTop=0
 SplitPos=111
-
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Action,OnExit
-ExpandedItems=Anchors=0,BorderIcons=0,LiveBindings=0,BevelEdges=0,Constraints=0
 
 [frmDesignPreview]
 PercentageSizes=1

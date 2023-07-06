@@ -45,6 +45,7 @@ type
     procedure ExcluirRegistro; virtual;
     procedure setLimpaCampos; virtual;
     procedure ConfirmarDados; virtual;
+    procedure pLimpaFiltros(wTabela : TClientDataset); virtual;
 
     //valida campo CNPJ
     function validaCnpj(S: String): String;
@@ -64,47 +65,47 @@ end;
 
 procedure TfrPadraoCadastroGVGESTOR.ConfirmarDados;
 begin
-  if ValidaCampos then// validar conteúdo dos campo
-     begin
-       if Assigned(FTabela) then
-          begin
-            if getID then// verificar se a chave existe
-               FTabela.Edit// caso exista, deve editar
-            else
-               FTabela.Insert;// caso NÃO exista, deve inserir
-          end;
-       SalvarCampos;// salvar os dados dos campos da tela nos campos da tabela, esse evento deve ser implementado nas heranças
-       if Assigned(FTabela) then
-          begin
-            if (FTabela.State in [dsInsert , dsEdit]) then// antes de salvar, verificar se está em modo de edição ou inserção, caso não esteja, algo deu errado em SalvarCampos
-               begin
-                 FTabela.Post;
-                 FTabela.ApplyUpdates(0);
-                 FTabela.Refresh;
-
-                 setLimpaCampos;// limpar campos da tela
-                 if Assigned(FIDEdit) and FIDEdit.CanFocus then// apos salvar voltar para o campo chave
-                    FIDEdit.SetFocus;
-               end
-            else
-               MessageDlg('O cadastro não está em modo de edição ou inserção!', mtInformation, [mbOK], 0);
-          end;
-     end;
+//  if ValidaCampos then// validar conteúdo dos campo
+//     begin
+//       if Assigned(FTabela) then
+//          begin
+//            if getID then// verificar se a chave existe
+//               FTabela.Edit// caso exista, deve editar
+//            else
+//               FTabela.Insert;// caso NÃO exista, deve inserir
+//          end;
+//       SalvarCampos;// salvar os dados dos campos da tela nos campos da tabela, esse evento deve ser implementado nas heranças
+//       if Assigned(FTabela) then
+//          begin
+//            if (FTabela.State in [dsInsert , dsEdit]) then// antes de salvar, verificar se está em modo de edição ou inserção, caso não esteja, algo deu errado em SalvarCampos
+//               begin
+//                 FTabela.Post;
+//                 FTabela.ApplyUpdates(0);
+//                 FTabela.Refresh;
+//
+//                 setLimpaCampos;// limpar campos da tela
+//                 if Assigned(FIDEdit) and FIDEdit.CanFocus then// apos salvar voltar para o campo chave
+//                    FIDEdit.SetFocus;
+//               end
+//            else
+//               MessageDlg('O cadastro não está em modo de edição ou inserção!', mtInformation, [mbOK], 0);
+//          end;
+//     end;
 end;
 
 procedure TfrPadraoCadastroGVGESTOR.ExcluirRegistro;
 begin
   if getPodeExcluir and getID then// verificar se o registro existe
-    begin
-      FTabela.Delete;
-      FTabela.ApplyUpdates(0);
-      FTabela.Refresh;
+     begin
+       FTabela.Delete;
+       FTabela.ApplyUpdates(0);
+       FTabela.Refresh;
 
-      setLimpaCampos;
+       setLimpaCampos;
 
-      if Assigned(FIDEdit) and FIDEdit.CanFocus then// voltar ao campo chave
-       FIDEdit.SetFocus;
-    end;
+       if Assigned(FIDEdit) and FIDEdit.CanFocus then// voltar ao campo chave
+          FIDEdit.SetFocus;
+     end;
 end;
 
 procedure TfrPadraoCadastroGVGESTOR.FormClose(Sender: TObject;
@@ -116,20 +117,20 @@ end;
 
 procedure TfrPadraoCadastroGVGESTOR.FormCreate(Sender: TObject);
 begin
-  FTabela := setTabela;// instanciar a tabela do cadastro
-  FIDEdit := setIDEdit;// instanciar o campo da chave
-  if Assigned(FIDEdit) then// setar o evento de saida do campo
-     begin
-       if FIDEdit is TCustomEdit then
-          TEdit(FIDEdit).OnExit := IDEditExit;
-     end;
-
-  FLastEdit := setLastEdit;// instanciar último campo da tela para salvar automaticamente
-  if Assigned(FLastEdit) then// setar o evento de saida do campo
-     begin
-       if FLastEdit is TCustomEdit then
-          TEdit(FLastEdit).OnExit := LastEditExit;
-     end;
+//  FTabela := setTabela;// instanciar a tabela do cadastro
+//  FIDEdit := setIDEdit;// instanciar o campo da chave
+//  if Assigned(FIDEdit) then// setar o evento de saida do campo
+//     begin
+//       if FIDEdit is TCustomEdit then
+//          TEdit(FIDEdit).OnExit := IDEditExit;
+//     end;
+//
+//  FLastEdit := setLastEdit;// instanciar último campo da tela para salvar automaticamente
+//  if Assigned(FLastEdit) then// setar o evento de saida do campo
+//     begin
+//       if FLastEdit is TCustomEdit then
+//          TEdit(FLastEdit).OnExit := LastEditExit;
+//     end;
 end;
 
 procedure TfrPadraoCadastroGVGESTOR.FormKeyDown(Sender: TObject; var Key: Word;
@@ -189,6 +190,12 @@ procedure TfrPadraoCadastroGVGESTOR.LastEditExit(Sender: TObject);
 begin
   if (not FTeclouEsc) and (not FValidandoCampos) and (not FPressionouSalvar) then
      ConfirmarDados;// ao sair do último campo da tela, executar o click no botão ok/salvar
+end;
+
+procedure TfrPadraoCadastroGVGESTOR.pLimpaFiltros(wTabela : TClientDataset);
+begin
+  wTabela.Filter   := EmptyStr;
+  wTabela.Filtered := False;
 end;
 
 procedure TfrPadraoCadastroGVGESTOR.setLimpaCampos;

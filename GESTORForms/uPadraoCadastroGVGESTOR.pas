@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ToolWin, Vcl.ComCtrls,
-  System.ImageList, Vcl.ImgList, Datasnap.DBClient, Data.Db, Vcl.StdCtrls;
+  System.ImageList, Vcl.ImgList, Datasnap.DBClient, Data.Db, Vcl.StdCtrls, MaskUtils;
 
 type
   TfrPadraoCadastroGVGESTOR = class(TForm)
@@ -40,12 +40,13 @@ type
     procedure CarregaCampos; virtual; abstract; // carregar os campos da tabela para os camnpos da tela
     procedure SalvarCampos; virtual; abstract; // salvar os valores dos campos da tela para os campos da tabela
     function ValidaCampos: Boolean; virtual;
-    function getID: Boolean; virtual;
+    function getID: Boolean; virtual; abstract;
     function getPodeExcluir: Boolean; virtual;
     procedure ExcluirRegistro; virtual;
     procedure setLimpaCampos; virtual;
     procedure ConfirmarDados; virtual;
     procedure pLimpaFiltros(wTabela : TClientDataset); virtual;
+    function fAplicaMascara(wS : String) : String; virtual;
 
     //valida campo CNPJ
     function validaCnpj(S: String): String;
@@ -108,6 +109,15 @@ begin
      end;
 end;
 
+function TfrPadraoCadastroGVGESTOR.fAplicaMascara(wS: String): String;
+begin
+  if wS.Length = 11 then
+     Result := FormatMaskText('999.999.999-99;0', validaCnpj(wS))
+  else
+  if wS.Length = 11 then
+     Result := FormatMaskText('99.999.999/9999-99;0', validaCnpj(wS));
+end;
+
 procedure TfrPadraoCadastroGVGESTOR.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -151,26 +161,6 @@ begin
   else
   if Key = VK_RETURN then// tecla de atalho para seguir para o próximo campo com <enter>
      self.Perform(WM_NEXTDLGCTL,0,0);
-end;
-
-function TfrPadraoCadastroGVGESTOR.getID: Boolean;
-begin
-  Result := False;// define padrão false
-  if Assigned(FTabela) and Assigned(FIDEdit) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
-  begin
-    // verificar qual classe o campo chave para acessar o metodo que retorne o conteúdo do campo
-    if FIDEdit is TCustomEdit then
-      Result := FTabela.FindKey([TCustomEdit(FIDEdit).Text])
-    else
-    if FIDEdit is TCustomComboBox then
-      Result := FTabela.FindKey([TCustomComboBox(FIDEdit).ItemIndex])
-    else
-    if FIDEdit is TCheckBox then
-      Result := FTabela.FindKey([TCheckBox(FIDEdit).Checked])
-    else
-    if FIDEdit is TDateTimePicker then
-      Result := FTabela.FindKey([TDateTimePicker(FIDEdit).DateTime]);
-  end;
 end;
 
 function TfrPadraoCadastroGVGESTOR.getPodeExcluir: Boolean;

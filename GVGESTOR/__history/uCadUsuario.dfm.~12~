@@ -100,8 +100,9 @@ inherited frCadUsuario: TfrCadUsuario
     object edCpfCnpj: TEdit
       Left = 135
       Top = 78
-      Width = 193
+      Width = 146
       Height = 26
+      Enabled = False
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
@@ -137,6 +138,7 @@ inherited frCadUsuario: TfrCadUsuario
         Height = 17
         Caption = 'CPF'
         TabOrder = 0
+        OnClick = rbCpfClick
       end
       object rbCnpj: TRadioButton
         Left = 63
@@ -145,12 +147,13 @@ inherited frCadUsuario: TfrCadUsuario
         Height = 17
         Caption = 'CNPJ'
         TabOrder = 1
+        OnClick = rbCnpjClick
       end
     end
     object cbPerfil: TComboBox
       Left = 135
       Top = 109
-      Width = 193
+      Width = 146
       Height = 28
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -201,7 +204,7 @@ inherited frCadUsuario: TfrCadUsuario
     Left = 392
     Top = 113
     Bitmap = {
-      494C010106000800780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

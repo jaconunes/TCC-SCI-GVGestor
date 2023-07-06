@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoCadastroGVGESTOR,
   System.ImageList, Vcl.ImgList, Vcl.ComCtrls, Vcl.ToolWin, Vcl.StdCtrls,
-  Vcl.ExtCtrls, Datasnap.DBClient, EditSCI;
+  Vcl.ExtCtrls, Datasnap.DBClient, EditSCI, Data.Db;
 
 type
   TfrCadUsuario = class(TfrPadraoCadastroGVGESTOR)
@@ -27,7 +27,9 @@ type
     procedure FormCreate(Sender: TObject);
     procedure edRepitaSenhaExit(Sender: TObject);
     procedure edCpfCnpjExit(Sender: TObject);
-    procedure edCpfCnpjChange(Sender: TObject);
+    procedure rbCpfClick(Sender: TObject);
+    procedure rbCnpjClick(Sender: TObject);
+    procedure edCodigoExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,8 +40,8 @@ type
     procedure CarregaCampos; override;
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
-
-
+    procedure ConfirmarDados; override;
+    function getID: Boolean; override;
   end;
 
 var
@@ -64,21 +66,57 @@ begin
   edNome.Text    := FTabela.FieldByName('BDNOME').AsString;
 end;
 
-procedure TfrCadUsuario.edCpfCnpjChange(Sender: TObject);
+procedure TfrCadUsuario.ConfirmarDados;
+begin
+  //inherited;
+  if ValidaCampos then// validar conteúdo dos campo
+     begin
+       if Assigned(FTabela) then
+          begin
+            if getID then// verificar se a chave existe
+               FTabela.Edit// caso exista, deve editar
+            else
+               FTabela.Insert;// caso NÃO exista, deve inserir
+          end;
+       SalvarCampos;// salvar os dados dos campos da tela nos campos da tabela, esse evento deve ser implementado nas heranças
+       if Assigned(FTabela) then
+          begin
+            if (FTabela.State in [dsInsert , dsEdit]) then// antes de salvar, verificar se está em modo de edição ou inserção, caso não esteja, algo deu errado em SalvarCampos
+               begin
+                 FTabela.Post;
+                 FTabela.ApplyUpdates(0);
+                 FTabela.Refresh;
+
+                 setLimpaCampos;// limpar campos da tela
+                 if Assigned(edCodigo) and edCodigo.CanFocus then// apos salvar voltar para o campo chave
+                    edCodigo.SetFocus;
+               end
+            else
+               MessageDlg('O cadastro não está em modo de edição ou inserção!', mtInformation, [mbOK], 0);
+          end;
+     end;
+end;
+
+procedure TfrCadUsuario.edCodigoExit(Sender: TObject);
 begin
   inherited;
-  if rbCpf.Checked or rbCnpj.Checked then
-     edCpfCnpj.Enabled := True;
+  IDEditExit;
 end;
 
 procedure TfrCadUsuario.edCpfCnpjExit(Sender: TObject);
 begin
   inherited;
   if rbCpf.Checked then
-     edCpfCnpj.Text := FormatMaskText('999.999.999-99;0', validaCnpj(edCpfCnpj.Text))
+     begin
+       edCpfCnpj.MaxLength := 11;
+       edCpfCnpj.Text := FormatMaskText('999.999.999-99;0', validaCnpj(edCpfCnpj.Text));
+     end
   else
   if rbCnpj.Checked then
-     edCpfCnpj.Text := FormatMaskText('99.999.999/9999-99;0', validaCnpj(edCpfCnpj.Text));
+     begin
+       edCpfCnpj.MaxLength := 14;
+       edCpfCnpj.Text := FormatMaskText('99.999.999/9999-99;0', validaCnpj(edCpfCnpj.Text));
+     end;
 end;
 
 procedure TfrCadUsuario.edRepitaSenhaExit(Sender: TObject);
@@ -96,6 +134,28 @@ begin
 //
 //  if Assigned(edRepitaSenha) then// setar o evento de saida do campo
 //     edRepitaSenha.OnExit := LastEditExit;
+  FTabela := dmTabelas.tbUsuario;
+end;
+
+function TfrCadUsuario.getID: Boolean;
+begin
+  Result := False;// define padrão false
+  if Assigned(FTabela) and Assigned(edCodigo) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
+     begin
+       Result := FTabela.FindKey([edCodigo.Text]);
+     end;
+end;
+
+procedure TfrCadUsuario.rbCnpjClick(Sender: TObject);
+begin
+  inherited;
+  edCpfCnpj.Enabled := True;
+end;
+
+procedure TfrCadUsuario.rbCpfClick(Sender: TObject);
+begin
+  inherited;
+  edCpfCnpj.Enabled := True;
 end;
 
 procedure TfrCadUsuario.SalvarCampos;
@@ -121,7 +181,7 @@ end;
 
 function TfrCadUsuario.setTabela: TClientDataSet;
 begin
-  FTabela := dmTabelas.tbUsuario;
+  //FTabela := dmTabelas.tbUsuario;
 end;
 
 function TfrCadUsuario.ValidaCampos: Boolean;
@@ -166,9 +226,8 @@ begin
        wMessage := wMessage + 'As senhas não correspondem!' + #13;
      end;
 
-  ShowMessage(wMessage);
-
-
+  if wMessage <> EmptyStr then
+     ShowMessage(wMessage);
 end;
 
 end.

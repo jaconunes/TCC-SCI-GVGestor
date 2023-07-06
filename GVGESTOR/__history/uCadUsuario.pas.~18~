@@ -29,7 +29,6 @@ type
     procedure edCpfCnpjExit(Sender: TObject);
     procedure rbCpfClick(Sender: TObject);
     procedure rbCnpjClick(Sender: TObject);
-    procedure edCodigoExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,8 +41,6 @@ type
     function ValidaCampos: Boolean; override;
     procedure ConfirmarDados; override;
     function getID: Boolean; override;
-    procedure ExcluirRegistro; override;
-
   end;
 
 var
@@ -53,7 +50,7 @@ implementation
 
 {$R *.dfm}
 
-uses udmDadosGVGESTOR;
+uses udmDadosGVGESTOR, MaskUtils;
 
 { TfrCadUsuario }
 
@@ -62,10 +59,9 @@ procedure TfrCadUsuario.CarregaCampos;
 begin
   inherited;
   edNome.Text    := FTabela.FieldByName('BDUSUARIO').AsString;
-  edCpfCnpj.Text := fAplicaMascara(FTabela.FieldByName('BDCPFCNPJ').AsString);
-  cbPerfil.Text  := FTabela.FieldByName('BDPERFIL').AsString;
+  edCpfCnpj.Text := FTabela.FieldByName('BDCPFCNPJ').AsString;
+  cbPerfil.Text  :=  FTabela.FieldByName('BDPERFIL').AsString;
   edSenha.Text   := FTabela.FieldByName('BDSENHA').AsString;
-  edRepitaSenha.Text   := FTabela.FieldByName('BDSENHA').AsString;
   edNome.Text    := FTabela.FieldByName('BDNOME').AsString;
 end;
 
@@ -100,28 +96,19 @@ begin
      end;
 end;
 
-procedure TfrCadUsuario.edCodigoExit(Sender: TObject);
-begin
-  inherited;
-  if getID then// caso encontre a chave na tabela
-     CarregaCampos// deve carregar os campos da tabela nos campos da tela
-  else
-     setLimpaCampos;
-end;
-
 procedure TfrCadUsuario.edCpfCnpjExit(Sender: TObject);
 begin
   inherited;
   if rbCpf.Checked then
      begin
        edCpfCnpj.MaxLength := 11;
-       fAplicaMascara(edCpfCnpj.Text);
+       edCpfCnpj.Text := FormatMaskText('999.999.999-99;0', validaCnpj(edCpfCnpj.Text));
      end
   else
   if rbCnpj.Checked then
      begin
        edCpfCnpj.MaxLength := 14;
-       fAplicaMascara(edCpfCnpj.Text);
+       edCpfCnpj.Text := FormatMaskText('99.999.999/9999-99;0', validaCnpj(edCpfCnpj.Text));
      end;
 end;
 
@@ -131,25 +118,15 @@ begin
   ConfirmarDados;
 end;
 
-procedure TfrCadUsuario.ExcluirRegistro;
-begin
-  //inherited;
-  if getPodeExcluir and getID then// verificar se o registro existe
-     begin
-       FTabela.Delete;
-       FTabela.ApplyUpdates(0);
-       FTabela.Refresh;
-
-       setLimpaCampos;
-
-       if Assigned(edCodigo) and edCodigo.CanFocus then// voltar ao campo chave
-          edCodigo.SetFocus;
-     end;
-end;
-
 procedure TfrCadUsuario.FormCreate(Sender: TObject);
 begin
   inherited;
+//  //FTabela := setTabela;// instanciar a tabela do cadastro
+//  if Assigned(edCodigo) then// setar o evento de saida do campo
+//     edCodigo.OnExit := IDEditExit;
+//
+//  if Assigned(edRepitaSenha) then// setar o evento de saida do campo
+//     edRepitaSenha.OnExit := LastEditExit;
   FTabela := dmTabelas.tbUsuario;
 end;
 
