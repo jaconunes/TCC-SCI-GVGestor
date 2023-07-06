@@ -1,24 +1,27 @@
 inherited frCadUsuario: TfrCadUsuario
   Caption = 'Cadastro de usu'#225'rio'
-  ClientHeight = 251
+  ClientHeight = 283
   ClientWidth = 444
-  Constraints.MaxHeight = 290
-  Constraints.MaxWidth = 460
-  Constraints.MinHeight = 290
-  Constraints.MinWidth = 460
   ExplicitWidth = 460
-  ExplicitHeight = 290
+  ExplicitHeight = 322
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
     Width = 444
     ExplicitWidth = 444
+    inherited btPesquisar: TToolButton
+      OnClick = btPesquisarClick
+    end
   end
   inherited Panel1: TPanel
     Width = 444
-    Height = 218
+    Height = 250
+    Constraints.MaxHeight = 250
+    Constraints.MaxWidth = 444
+    Constraints.MinHeight = 250
+    Constraints.MinWidth = 444
     ExplicitWidth = 444
-    ExplicitHeight = 218
+    ExplicitHeight = 250
     object Label1: TLabel
       Left = 94
       Top = 54
@@ -47,7 +50,7 @@ inherited frCadUsuario: TfrCadUsuario
     end
     object Label3: TLabel
       Left = 91
-      Top = 148
+      Top = 180
       Width = 36
       Height = 16
       Caption = 'Senha'
@@ -73,10 +76,23 @@ inherited frCadUsuario: TfrCadUsuario
     end
     object Label5: TLabel
       Left = 46
-      Top = 178
+      Top = 210
       Width = 81
       Height = 16
       Caption = 'Repetir Senha'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 84
+      Top = 149
+      Width = 43
+      Height = 16
+      Caption = 'Usu'#225'rio'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -114,7 +130,7 @@ inherited frCadUsuario: TfrCadUsuario
     end
     object edSenha: TEdit
       Left = 135
-      Top = 142
+      Top = 174
       Width = 193
       Height = 26
       Font.Charset = ANSI_CHARSET
@@ -124,7 +140,7 @@ inherited frCadUsuario: TfrCadUsuario
       Font.Style = []
       ParentFont = False
       PasswordChar = '*'
-      TabOrder = 5
+      TabOrder = 6
     end
     object GroupBox1: TGroupBox
       Left = 14
@@ -171,7 +187,7 @@ inherited frCadUsuario: TfrCadUsuario
     end
     object edRepitaSenha: TEdit
       Left = 135
-      Top = 173
+      Top = 205
       Width = 193
       Height = 26
       Font.Charset = ANSI_CHARSET
@@ -181,7 +197,7 @@ inherited frCadUsuario: TfrCadUsuario
       Font.Style = []
       ParentFont = False
       PasswordChar = '*'
-      TabOrder = 6
+      TabOrder = 7
       OnExit = edRepitaSenhaExit
     end
     object edCodigo: TEdit_Numero_PEDSCI
@@ -202,12 +218,26 @@ inherited frCadUsuario: TfrCadUsuario
       DecimalSeparador = ','
       Codigo = 0
     end
+    object edUsuario: TEdit
+      Left = 135
+      Top = 143
+      Width = 193
+      Height = 26
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      PasswordChar = '*'
+      TabOrder = 5
+    end
   end
   inherited ImageList1: TImageList
     Left = 392
     Top = 113
     Bitmap = {
-      494C010106000800880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

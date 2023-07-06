@@ -8,7 +8,9 @@ uses
   uPadraoConsultaGVGESTOR in '..\GESTORForms\uPadraoConsultaGVGESTOR.pas' {frPadraoConsultaGVGSTOR},
   uPadraoRelatorioGVGESTOR in '..\GESTORForms\uPadraoRelatorioGVGESTOR.pas' {frPadraoRelatorioGVGESTOR},
   uPrincipal in 'uPrincipal.pas' {frPrincipal},
-  uCadUsuario in 'uCadUsuario.pas';
+  uCadUsuario in 'Cadastros\uCadUsuario.pas' {frCadUsuario},
+  uConsUsuario in 'Consultas\uConsUsuario.pas' {frConsUsuario},
+  uCadImovel in 'Cadastros\uCadImovel.pas' {frCadImovel};
 
 {$R *.res}
 

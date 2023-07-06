@@ -34,6 +34,8 @@ type
     Gerar1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure mUsuarioClick(Sender: TObject);
+    procedure Usurios1Click(Sender: TObject);
+    procedure Imvel1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,7 +51,7 @@ implementation
 
 {$R *.dfm}
 
-uses udmDadosGVGESTOR, uUsuarioLogado, uCadUsuario;
+uses udmDadosGVGESTOR, uUsuarioLogado, uCadUsuario, uConsUsuario, uCadImovel;
 
 { TfrPrincipal }
 
@@ -83,6 +85,11 @@ begin
 //        pPerfilPadrao;
 end;
 
+procedure TfrPrincipal.Imvel1Click(Sender: TObject);
+begin
+  TfrCadImovel.Create(self).Show;
+end;
+
 procedure TfrPrincipal.mUsuarioClick(Sender: TObject);
 begin
   TfrCadUsuario.Create(self).Show;
@@ -96,6 +103,11 @@ end;
 procedure TfrPrincipal.pPerfilPadrao;
 begin
   mUsuario.Enabled := False;
+end;
+
+procedure TfrPrincipal.Usurios1Click(Sender: TObject);
+begin
+  TfrConsUsuario.Create(self).Show;
 end;
 
 end.

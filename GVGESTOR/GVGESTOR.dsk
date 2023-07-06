@@ -1,48 +1,62 @@
 ﻿[Closed Files]
-File_0=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\source\data\Data.DB.pas',0,1,14256,27,14268,0,0,,
-File_1=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\source\rtl\win\Winapi.Windows.pas',0,1,21449,53,21468,0,0,,
-File_2=TSourceModule,'C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoConsultaGVGESTOR.pas',0,1,1,38,12,0,0,,
-File_3=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\VCL\Vcl.StdCtrls.pas',0,1,328,1,343,0,0,{{1651,4}
-File_4=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\uLogin.pas',0,1,17,31,41,0,0,,
-File_5=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\RTL\SYS\System.pas',0,1,17561,39,17575,0,0,,
-File_6=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\uUsuarioLogado.pas',0,1,1,33,21,0,0,,
-File_7=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\VCL\Vcl.Forms.pas',0,1,3581,1,3596,0,0,{{1729,4}
-File_8=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\VCL\Vcl.Controls.pas',0,1,10062,1,10083,0,0,,
-File_9=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\RTL\SYS\System.SysUtils.pas',0,1,21978,1,21998,0,0,,
-File_10=TSourceModule,'C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoRelatorioGVGESTOR.pas',0,1,61,53,75,0,0,,
-File_11=TSourceModule,'C:\TCC - Gestor de Vistorias\GESTORForms\DataModule\udmDadosGVGESTOR.pas',0,1,1,29,7,0,0,,
-File_12=TSourceModule,'c:\program files (x86)\fastreports\fastreport 5\libd23\frxClass.pas',0,1,2130,35,2145,0,0,,
-File_13=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\VCL\Vcl.ComCtrls.pas',0,1,3615,1,3630,0,0,{{17105,0}
-File_14=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\source\rtl\common\System.Classes.pas',0,1,16654,1,16668,0,0,,
+File_0=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\VCL\Vcl.Dialogs.pas',0,1,6276,33,6298,0,0,,
+File_1=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\uPrincipal.pas',0,1,81,26,91,0,0,,
+File_2=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\VCL\Vcl.Menus.pas',0,1,3448,1,3464,0,0,,
+File_3=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\RTL\SYS\System.pas',0,1,17529,1,17551,0,0,,
+File_4=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\VCL\Vcl.Forms.pas',0,1,6225,1,6239,0,0,{{1729,4}
+File_5=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\source\data\Data.DB.pas',0,1,14256,27,14268,0,0,,
+File_6=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\source\rtl\win\Winapi.Windows.pas',0,1,21449,53,21468,0,0,,
+File_7=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\VCL\Vcl.StdCtrls.pas',0,1,328,1,343,0,0,{{1651,4}
+File_8=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\uLogin.pas',0,1,17,31,41,0,0,,
+File_9=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\uUsuarioLogado.pas',0,1,1,33,21,0,0,,
+File_10=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\VCL\Vcl.Controls.pas',0,1,10062,1,10083,0,0,,
+File_11=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\RTL\SYS\System.SysUtils.pas',0,1,21978,1,21998,0,0,,
+File_12=TSourceModule,'C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoRelatorioGVGESTOR.pas',0,1,61,53,75,0,0,,
+File_13=TSourceModule,'C:\TCC - Gestor de Vistorias\GESTORForms\DataModule\udmDadosGVGESTOR.pas',0,1,1,29,7,0,0,,
+File_14=TSourceModule,'c:\program files (x86)\fastreports\fastreport 5\libd23\frxClass.pas',0,1,2130,35,2145,0,0,,
 
 [Modules]
-Module0=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas
-Module1=C:\TCC - Gestor de Vistorias\GVGESTOR\uCadUsuario.pas
-Module2=C:\TCC - Gestor de Vistorias\GVGESTOR\uPrincipal.pas
-Count=3
+Module0=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadImovel.pas
+Module1=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadUsuario.pas
+Module2=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas
+Module3=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoConsultaGVGESTOR.pas
+Module4=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsUsuario.pas
+Count=5
 EditWindowCount=1
+
+[C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadImovel.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=1
+
+[C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadUsuario.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=1
 
 [C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=0
+FormOnTop=1
 
-[C:\TCC - Gestor de Vistorias\GVGESTOR\uCadUsuario.pas]
+[C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoConsultaGVGESTOR.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[C:\TCC - Gestor de Vistorias\GVGESTOR\uPrincipal.pas]
+[C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsUsuario.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=3
-CurrentEditView=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas
+ViewCount=5
+CurrentEditView=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadImovel.pas
 View0=0
 View1=1
 View2=2
+View3=3
+View4=4
 PercentageSizes=1
 Create=1
 Visible=1
@@ -74,36 +88,58 @@ BottomMiddelPanelData=0000080001020200000009000000446F636B5369746530100000004772
 
 [View0]
 CustomEditViewType=TEditView
-Module=C:\TCC - Gestor de Vistorias\GVGESTOR\uPrincipal.pas
-CursorX=6
-CursorY=52
+Module=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadUsuario.pas
+CursorX=1
+CursorY=66
+TopLine=64
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=Borland.FormDesignerView
+
+[View1]
+CustomEditViewType=TEditView
+Module=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsUsuario.pas
+CursorX=49
+CursorY=19
 TopLine=1
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\uPrincipal.pas
-
-[View1]
-CustomEditViewType=TEditView
-Module=C:\TCC - Gestor de Vistorias\GVGESTOR\uCadUsuario.pas
-CursorX=13
-CursorY=103
-TopLine=100
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\uCadUsuario.pas
+EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsUsuario.pas
 
 [View2]
 CustomEditViewType=TEditView
-Module=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas
-CursorX=36
-CursorY=124
-TopLine=111
+Module=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoConsultaGVGESTOR.pas
+CursorX=18
+CursorY=115
+TopLine=98
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas
+EditViewName=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoConsultaGVGESTOR.pas
+
+[View3]
+CustomEditViewType=TEditView
+Module=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadImovel.pas
+CursorX=1
+CursorY=1
+TopLine=1
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=Borland.FormDesignerView
+
+[View4]
+CustomEditViewType=TEditView
+Module=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas
+CursorX=46
+CursorY=27
+TopLine=21
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=Borland.FormDesignerView
 
 [Watches]
 Count=0
@@ -130,7 +166,8 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=0
+Count=1
+Breakpoint0='C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadUsuario.pas',66,'',0,1,'',1,0,0,'',1,'','','',0,''
 
 [EmbarcaderoWin32Debugger_AddressBreakpoints]
 Count=0
@@ -332,8 +369,8 @@ SplitPos=111
 
 [PropInspDesignerSelection]
 ArrangeBy=Name
-SelectedItem=Action,OnExit
-ExpandedItems=Anchors=0,LiveBindings=0
+SelectedItem=Align,OnClick
+ExpandedItems=Anchors=0,BorderIcons=0,"LiveBindings Designer=0",LiveBindings=0,Constraints=1,Font=0,Title=1,Title.Font=0,TitleFont=0,GlassFrame=0,HorzScrollBar=0,Margins=0,Padding=0,StyleElements=0,Touch=0,VertScrollBar=0,BevelEdges=0
 
 [frmDesignPreview]
 PercentageSizes=1

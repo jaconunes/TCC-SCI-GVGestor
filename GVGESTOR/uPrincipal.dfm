@@ -28,6 +28,7 @@ object frPrincipal: TfrPrincipal
       end
       object Imvel1: TMenuItem
         Caption = 'Im'#243'veis'
+        OnClick = Imvel1Click
       end
       object Proprietrio1: TMenuItem
         Caption = 'Propriet'#225'rios'
@@ -46,6 +47,7 @@ object frPrincipal: TfrPrincipal
       Caption = 'Consultas'
       object Usurios1: TMenuItem
         Caption = 'Usu'#225'rios'
+        OnClick = Usurios1Click
       end
       object Imveis1: TMenuItem
         Caption = 'Im'#243'veis'
