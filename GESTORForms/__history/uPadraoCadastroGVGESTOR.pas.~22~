@@ -45,6 +45,7 @@ type
     procedure ExcluirRegistro; virtual;
     procedure setLimpaCampos; virtual;
     procedure ConfirmarDados; virtual;
+    procedure pLimpaFiltros(wTabela : TClientDataset); virtual;
 
     //valida campo CNPJ
     function validaCnpj(S: String): String;
@@ -95,16 +96,16 @@ end;
 procedure TfrPadraoCadastroGVGESTOR.ExcluirRegistro;
 begin
   if getPodeExcluir and getID then// verificar se o registro existe
-    begin
-      FTabela.Delete;
-      FTabela.ApplyUpdates(0);
-      FTabela.Refresh;
+     begin
+       FTabela.Delete;
+       FTabela.ApplyUpdates(0);
+       FTabela.Refresh;
 
-      setLimpaCampos;
+       setLimpaCampos;
 
-      if Assigned(FIDEdit) and FIDEdit.CanFocus then// voltar ao campo chave
-       FIDEdit.SetFocus;
-    end;
+       if Assigned(FIDEdit) and FIDEdit.CanFocus then// voltar ao campo chave
+          FIDEdit.SetFocus;
+     end;
 end;
 
 procedure TfrPadraoCadastroGVGESTOR.FormClose(Sender: TObject;
@@ -116,54 +117,60 @@ end;
 
 procedure TfrPadraoCadastroGVGESTOR.FormCreate(Sender: TObject);
 begin
-  FTabela := setTabela;// instanciar a tabela do cadastro
-  FIDEdit := setIDEdit;// instanciar o campo da chave
-  if Assigned(FIDEdit) then// setar o evento de saida do campo
-     begin
-       if FIDEdit is TCustomEdit then
-          TEdit(FIDEdit).OnExit := IDEditExit;
-     end;
-
-  FLastEdit := setLastEdit;// instanciar último campo da tela para salvar automaticamente
-  if Assigned(FLastEdit) then// setar o evento de saida do campo
-     begin
-       if FLastEdit is TCustomEdit then
-          TEdit(FLastEdit).OnExit := LastEditExit;
-     end;
+//  FTabela := setTabela;// instanciar a tabela do cadastro
+//  FIDEdit := setIDEdit;// instanciar o campo da chave
+//  if Assigned(FIDEdit) then// setar o evento de saida do campo
+//     begin
+//       if FIDEdit is TCustomEdit then
+//          TEdit(FIDEdit).OnExit := IDEditExit;
+//     end;
+//
+//  FLastEdit := setLastEdit;// instanciar último campo da tela para salvar automaticamente
+//  if Assigned(FLastEdit) then// setar o evento de saida do campo
+//     begin
+//       if FLastEdit is TCustomEdit then
+//          TEdit(FLastEdit).OnExit := LastEditExit;
+//     end;
 end;
 
 procedure TfrPadraoCadastroGVGESTOR.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  FTeclouEsc := Key = VK_ESCAPE;
-  if Key = VK_NEXT then// tecla de atalho para salvar
-    btSalvar.Click
-  else
-  if (Key = VK_ESCAPE) and Assigned(FIDEdit) and (FIDEdit <> ActiveControl) and (FIDEdit.CanFocus) then// volta ao campo chave ao pressionar ESC
-    FIDEdit.SetFocus
-  else
-  if (Key = VK_F3) then// tecla de atalho para consulta
-    btPesquisar.Click;
+//  FTeclouEsc := Key = VK_ESCAPE;
+//  if Key = VK_NEXT then// tecla de atalho para salvar
+//    btSalvar.Click
+//  else
+//  if (Key = VK_ESCAPE) and Assigned(FIDEdit) and (FIDEdit <> ActiveControl) and (FIDEdit.CanFocus) then// volta ao campo chave ao pressionar ESC
+//    FIDEdit.SetFocus
+//  else
+//  if (Key = VK_F3) then// tecla de atalho para consulta
+//    btPesquisar.Click
+//  else
+//  if Key = VK_ESCAPE then// tecla de atalho para fechar a tela
+//     Close
+//  else
+//  if Key = VK_RETURN then// tecla de atalho para seguir para o próximo campo com <enter>
+//     self.Perform(WM_NEXTDLGCTL,0,0);
 end;
 
 function TfrPadraoCadastroGVGESTOR.getID: Boolean;
 begin
-  Result := False;// define padrão false
-  if Assigned(FTabela) and Assigned(FIDEdit) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
-  begin
-    // verificar qual classe o campo chave para acessar o metodo que retorne o conteúdo do campo
-    if FIDEdit is TCustomEdit then
-      Result := FTabela.FindKey([TCustomEdit(FIDEdit).Text])
-    else
-    if FIDEdit is TCustomComboBox then
-      Result := FTabela.FindKey([TCustomComboBox(FIDEdit).ItemIndex])
-    else
-    if FIDEdit is TCheckBox then
-      Result := FTabela.FindKey([TCheckBox(FIDEdit).Checked])
-    else
-    if FIDEdit is TDateTimePicker then
-      Result := FTabela.FindKey([TDateTimePicker(FIDEdit).DateTime]);
-  end;
+//  Result := False;// define padrão false
+//  if Assigned(FTabela) and Assigned(FIDEdit) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
+//  begin
+//    // verificar qual classe o campo chave para acessar o metodo que retorne o conteúdo do campo
+//    if FIDEdit is TCustomEdit then
+//      Result := FTabela.FindKey([TCustomEdit(FIDEdit).Text])
+//    else
+//    if FIDEdit is TCustomComboBox then
+//      Result := FTabela.FindKey([TCustomComboBox(FIDEdit).ItemIndex])
+//    else
+//    if FIDEdit is TCheckBox then
+//      Result := FTabela.FindKey([TCheckBox(FIDEdit).Checked])
+//    else
+//    if FIDEdit is TDateTimePicker then
+//      Result := FTabela.FindKey([TDateTimePicker(FIDEdit).DateTime]);
+//  end;
 end;
 
 function TfrPadraoCadastroGVGESTOR.getPodeExcluir: Boolean;
@@ -173,16 +180,22 @@ end;
 
 procedure TfrPadraoCadastroGVGESTOR.IDEditExit(Sender: TObject);
 begin
-  if getID then// caso encontre a chave na tabela
-     CarregaCampos// deve carregar os campos da tabela nos campos da tela
-  else
-     setLimpaCampos;// caso NÃO encontre, deve limpar os campos da tela
+//  if getID then// caso encontre a chave na tabela
+//     CarregaCampos// deve carregar os campos da tabela nos campos da tela
+//  else
+//     setLimpaCampos;// caso NÃO encontre, deve limpar os campos da tela
 end;
 
 procedure TfrPadraoCadastroGVGESTOR.LastEditExit(Sender: TObject);
 begin
   if (not FTeclouEsc) and (not FValidandoCampos) and (not FPressionouSalvar) then
      ConfirmarDados;// ao sair do último campo da tela, executar o click no botão ok/salvar
+end;
+
+procedure TfrPadraoCadastroGVGESTOR.pLimpaFiltros(wTabela : TClientDataset);
+begin
+  wTabela.Filter   := EmptyStr;
+  wTabela.Filtered := False;
 end;
 
 procedure TfrPadraoCadastroGVGESTOR.setLimpaCampos;

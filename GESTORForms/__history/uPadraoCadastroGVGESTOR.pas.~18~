@@ -14,11 +14,16 @@ type
     btSalvar: TToolButton;
     btPesquisar: TToolButton;
     btExcluir: TToolButton;
+    Panel1: TPanel;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
     procedure btExcluirClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure IDEditExit(Sender: TObject);
     procedure LastEditExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     FIDEdit: TWinControl;// variável do campo chave
@@ -40,6 +45,7 @@ type
     procedure ExcluirRegistro; virtual;
     procedure setLimpaCampos; virtual;
     procedure ConfirmarDados; virtual;
+    procedure pLimpaFiltros(wTabela : TClientDataset); virtual;
 
     //valida campo CNPJ
     function validaCnpj(S: String): String;
@@ -102,6 +108,13 @@ begin
     end;
 end;
 
+procedure TfrPadraoCadastroGVGESTOR.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  // para tela do tipo MDI (Multi device interface), deve implementar para finalizar a tela
+  Action := caFree;
+end;
+
 procedure TfrPadraoCadastroGVGESTOR.FormCreate(Sender: TObject);
 begin
   FTabela := setTabela;// instanciar a tabela do cadastro
@@ -131,27 +144,33 @@ begin
     FIDEdit.SetFocus
   else
   if (Key = VK_F3) then// tecla de atalho para consulta
-    btPesquisar.Click;
+    btPesquisar.Click
+  else
+  if Key = VK_ESCAPE then// tecla de atalho para fechar a tela
+     Close
+  else
+  if Key = VK_RETURN then// tecla de atalho para seguir para o próximo campo com <enter>
+     self.Perform(WM_NEXTDLGCTL,0,0);
 end;
 
 function TfrPadraoCadastroGVGESTOR.getID: Boolean;
 begin
-  Result := False;// define padrão false
-  if Assigned(FTabela) and Assigned(FIDEdit) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
-  begin
-    // verificar qual classe o campo chave para acessar o metodo que retorne o conteúdo do campo
-    if FIDEdit is TCustomEdit then
-      Result := FTabela.FindKey([TCustomEdit(FIDEdit).Text])
-    else
-    if FIDEdit is TCustomComboBox then
-      Result := FTabela.FindKey([TCustomComboBox(FIDEdit).ItemIndex])
-    else
-    if FIDEdit is TCheckBox then
-      Result := FTabela.FindKey([TCheckBox(FIDEdit).Checked])
-    else
-    if FIDEdit is TDateTimePicker then
-      Result := FTabela.FindKey([TDateTimePicker(FIDEdit).DateTime]);
-  end;
+//  Result := False;// define padrão false
+//  if Assigned(FTabela) and Assigned(FIDEdit) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
+//  begin
+//    // verificar qual classe o campo chave para acessar o metodo que retorne o conteúdo do campo
+//    if FIDEdit is TCustomEdit then
+//      Result := FTabela.FindKey([TCustomEdit(FIDEdit).Text])
+//    else
+//    if FIDEdit is TCustomComboBox then
+//      Result := FTabela.FindKey([TCustomComboBox(FIDEdit).ItemIndex])
+//    else
+//    if FIDEdit is TCheckBox then
+//      Result := FTabela.FindKey([TCheckBox(FIDEdit).Checked])
+//    else
+//    if FIDEdit is TDateTimePicker then
+//      Result := FTabela.FindKey([TDateTimePicker(FIDEdit).DateTime]);
+//  end;
 end;
 
 function TfrPadraoCadastroGVGESTOR.getPodeExcluir: Boolean;
@@ -173,6 +192,12 @@ begin
      ConfirmarDados;// ao sair do último campo da tela, executar o click no botão ok/salvar
 end;
 
+procedure TfrPadraoCadastroGVGESTOR.pLimpaFiltros(wTabela : TClientDataset);
+begin
+  wTabela.Filter   := EmptyStr;
+  wTabela.Filtered := False;
+end;
+
 procedure TfrPadraoCadastroGVGESTOR.setLimpaCampos;
 var
   I: Integer;
@@ -183,7 +208,7 @@ begin
       if Assigned(FIDEdit) and (FIDEdit = Self.Components[i]) then// caso campo chave, segue sem limpar o campo
        Continue
       else
-      if (Self.Components[I] is TWinControl) and (TWinControl(Self.Components[I]).Parent = pnDados) then
+      if (Self.Components[I] is TWinControl) then
         begin
           if Self.Components[I] is TCustomEdit then
               TCustomEdit(Self.Components[I]).Clear

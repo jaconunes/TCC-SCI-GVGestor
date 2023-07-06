@@ -49,7 +49,7 @@ implementation
 
 {$R *.dfm}
 
-uses uLogin, udmDadosGVGESTOR, uUsuarioLogado, uCadCliente;
+uses udmDadosGVGESTOR, uUsuarioLogado, uCadUsuario;
 
 { TfrPrincipal }
 

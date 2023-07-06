@@ -33,7 +33,7 @@ type
     Locatrios2: TMenuItem;
     Gerar1: TMenuItem;
     procedure FormCreate(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure mUsuarioClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,24 +49,18 @@ implementation
 
 {$R *.dfm}
 
-uses uLogin, udmDadosGVGESTOR, uUsuarioLogado;
+uses uLogin, udmDadosGVGESTOR, uUsuarioLogado, uCadUsuario;
 
 { TfrPrincipal }
 
 
-procedure TfrPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  //FreeAndNil();
-end;
-
 procedure TfrPrincipal.FormCreate(Sender: TObject);
-var
-  wUsuario : String;
 begin
-  if Owner is TfrLogin then
-     begin
-       wUsuario := Trim(TfrLogin(Owner).edUsuario.Text);
-       //wUsuario := frLogin.w
+  //TfrLogin.Create(self).Show;
+//  if Owner is TfrLogin then
+//     begin
+//       wUsuario := Trim(TfrLogin(Owner).edUsuario.Text);
+//       wUsuario := frLogin.w
 //       TfrLogin(Owner).WindowState := wsMinimized;
 //
 //       dmTabelas.tbUsuario.IndexFieldNames := 'BDUSUARIO';
@@ -79,14 +73,19 @@ begin
 //            uUsuarioLogado.CpfOuCnpj := dmTabelas.tbUsuario.FieldByName('BDCPFCNPJ').AsString;
 //            uUsuarioLogado.Perfil := dmTabelas.tbUsuario.FieldByName('BDPERFIL').AsString;
 //          end;
+//
+//     end;
 
-     end;
+//     if frLogin.fGetUsuarioLogado.Perfil = 'Administrador' then
+//        pPerfilAdm
+//     else
+//     if frLogin.fGetUsuarioLogado.Perfil = 'Padrão' then
+//        pPerfilPadrao;
+end;
 
-     if frLogin.fGetUsuarioLogado.Perfil = 'Administrador' then
-        pPerfilAdm
-     else
-     if frLogin.fGetUsuarioLogado.Perfil = 'Padrão' then
-        pPerfilPadrao;
+procedure TfrPrincipal.mUsuarioClick(Sender: TObject);
+begin
+  TfrCadUsuario.Create(self).Show;
 end;
 
 procedure TfrPrincipal.pPerfilAdm;
