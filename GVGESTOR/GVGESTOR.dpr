@@ -10,7 +10,9 @@ uses
   uPrincipal in 'uPrincipal.pas' {frPrincipal},
   uCadUsuario in 'Cadastros\uCadUsuario.pas' {frCadUsuario},
   uConsUsuario in 'Consultas\uConsUsuario.pas' {frConsUsuario},
-  uCadImovel in 'Cadastros\uCadImovel.pas' {frCadImovel};
+  uCadImovel in 'Cadastros\uCadImovel.pas' {frCadImovel},
+  uConsProprietario in 'Consultas\uConsProprietario.pas' {frConsProprietario},
+  uConsImovel in 'Consultas\uConsImovel.pas' {frConsImovel};
 
 {$R *.res}
 

@@ -64,7 +64,6 @@ object frPadraoConsultaGVGSTOR: TfrPadraoConsultaGVGSTOR
       Top = 0
       Caption = 'btEditar'
       ImageIndex = 2
-      OnClick = btEditarClick
     end
     object ToolButton3: TToolButton
       Left = 115
@@ -96,6 +95,8 @@ object frPadraoConsultaGVGSTOR: TfrPadraoConsultaGVGSTOR
     Width = 867
     Height = 297
     Align = alClient
+    DataSource = dsConsulta
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -107,7 +108,7 @@ object frPadraoConsultaGVGSTOR: TfrPadraoConsultaGVGSTOR
     Left = 640
     Top = 201
     Bitmap = {
-      494C01010700E0009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010700E000A00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

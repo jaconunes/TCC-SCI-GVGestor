@@ -33,6 +33,8 @@ type
     lbNomeProprietario: TLabel;
     procedure edCodPropExit(Sender: TObject);
     procedure edCodigoExit(Sender: TObject);
+    procedure btPesquisarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,9 +57,19 @@ implementation
 
 {$R *.dfm}
 
-uses udmDadosGVGESTOR;
+uses udmDadosGVGESTOR, uConsProprietario, uConsImovel;
 
 { TfrCadImovel }
+
+procedure TfrCadImovel.btPesquisarClick(Sender: TObject);
+begin
+  inherited;
+  if ActiveControl = edCodProp then
+     TfrConsProprietario.Create(edCodProp)
+  else
+  if ActiveControl = edCodigo then
+     TfrConsImovel.Create(edCodigo);
+end;
 
 procedure TfrCadImovel.CarregaCampos;
 begin
@@ -138,6 +150,17 @@ begin
        if Assigned(edCodigo) and edCodigo.CanFocus then// voltar ao campo chave
           edCodigo.SetFocus;
      end;
+end;
+
+procedure TfrCadImovel.FormCreate(Sender: TObject);
+begin
+  //inherited;
+  setTabela;
+  if Owner is TfrConsImovel then
+     edCodigo.Text := IntToStr(TfrConsImovel(Owner).grConsulta.Columns[0].Field.AsInteger)
+  else
+  if Owner is TfrConsProprietario then
+     edCodProp.Text := IntToStr(TfrConsProprietario(Owner).grConsulta.Columns[0].Field.AsInteger);
 end;
 
 function TfrCadImovel.getID: Boolean;

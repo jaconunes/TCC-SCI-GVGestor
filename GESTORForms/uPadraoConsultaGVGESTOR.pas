@@ -27,7 +27,6 @@ type
     procedure btAnteriorClick(Sender: TObject);
     procedure btProximoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure btEditarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -64,14 +63,6 @@ begin
   if Assigned(FTabela) then
      begin
        Result := grConsulta.Columns[0].Field.AsInteger;
-     end;
-end;
-
-procedure TfrPadraoConsultaGVGSTOR.btEditarClick(Sender: TObject);
-begin
-  if Assigned(FTabela) then
-     begin
-       TfrCadUsuario.Create(self);
      end;
 end;
 

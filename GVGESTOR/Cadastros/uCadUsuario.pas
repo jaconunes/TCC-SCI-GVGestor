@@ -33,6 +33,7 @@ type
     procedure rbCnpjClick(Sender: TObject);
     procedure edCodigoExit(Sender: TObject);
     procedure btPesquisarClick(Sender: TObject);
+    procedure edNomeKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -63,7 +64,7 @@ uses udmDadosGVGESTOR, uConsUsuario;
 
 procedure TfrCadUsuario.btPesquisarClick(Sender: TObject);
 begin
-  TfrConsUsuario.Create(self);
+  TfrConsUsuario.Create(edCodigo);
 end;
 
 procedure TfrCadUsuario.CarregaCampos;
@@ -134,6 +135,12 @@ begin
      end;
 end;
 
+procedure TfrCadUsuario.edNomeKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+end;
+
 procedure TfrCadUsuario.edRepitaSenhaExit(Sender: TObject);
 begin
   inherited;
@@ -159,11 +166,9 @@ end;
 procedure TfrCadUsuario.FormCreate(Sender: TObject);
 begin
   inherited;
-  FTabela := dmTabelas.tbUsuario;
-
+  setTabela;
   if Owner is TfrConsUsuario then
-     edCodigo.Text := IntToStr(TfrConsUsuario(Owner).grConsulta.Columns[0].Field.AsInteger);
-
+       edCodigo.Text := IntToStr(TfrConsUsuario(Owner).grConsulta.Columns[0].Field.AsInteger);
 end;
 
 function TfrCadUsuario.getID: Boolean;
@@ -210,7 +215,7 @@ end;
 
 function TfrCadUsuario.setTabela: TClientDataSet;
 begin
-  //FTabela := dmTabelas.tbUsuario;
+  FTabela := dmTabelas.tbUsuario;
 end;
 
 function TfrCadUsuario.ValidaCampos: Boolean;
