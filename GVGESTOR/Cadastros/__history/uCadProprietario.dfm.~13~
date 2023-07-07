@@ -1,0 +1,285 @@
+inherited frCadProprietario: TfrCadProprietario
+  Caption = 'Cadastro de propriet'#225'rio'
+  ClientHeight = 261
+  ClientWidth = 564
+  Constraints.MaxHeight = 300
+  Constraints.MaxWidth = 580
+  Constraints.MinHeight = 300
+  Constraints.MinWidth = 580
+  ExplicitWidth = 580
+  ExplicitHeight = 300
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited ToolBar1: TToolBar
+    Width = 564
+    ExplicitWidth = 564
+    inherited btPesquisar: TToolButton
+      OnClick = btPesquisarClick
+    end
+  end
+  inherited Panel1: TPanel
+    Width = 564
+    Height = 228
+    ExplicitWidth = 564
+    ExplicitHeight = 228
+    object Label1: TLabel
+      Left = 57
+      Top = 16
+      Width = 43
+      Height = 17
+      Caption = 'C'#243'digo'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 64
+      Top = 46
+      Width = 36
+      Height = 17
+      Caption = 'Nome'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 288
+      Top = 78
+      Width = 55
+      Height = 17
+      Caption = 'CPF/CNPJ'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 59
+      Top = 79
+      Width = 41
+      Height = 17
+      Caption = 'Pessoa'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 51
+      Top = 111
+      Width = 49
+      Height = 17
+      Caption = 'Telefone'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object edCodProp: TEdit_Numero_PEDSCI
+      Left = 106
+      Top = 12
+      Width = 67
+      Height = 26
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      Text = '0'
+      Decimal = False
+      DecimalSeparador = ','
+      Codigo = 0
+    end
+    object cbTipoPessoa: TComboBox
+      Left = 106
+      Top = 74
+      Width = 143
+      Height = 28
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ItemIndex = 0
+      ParentFont = False
+      TabOrder = 2
+      Text = 'F'#237'sica'
+      Items.Strings = (
+        'F'#237'sica'
+        'Jur'#237'dica')
+    end
+    object edCpfCnpj: TEdit
+      Left = 349
+      Top = 74
+      Width = 185
+      Height = 26
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+    end
+    object edTelefone: TEdit
+      Left = 106
+      Top = 107
+      Width = 143
+      Height = 26
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+    end
+    object GroupBox1: TGroupBox
+      Left = 13
+      Top = 137
+      Width = 536
+      Height = 80
+      Caption = 'Endere'#231'o'
+      TabOrder = 5
+      object Label6: TLabel
+        Left = 18
+        Top = 17
+        Width = 70
+        Height = 17
+        Caption = 'Logradouro'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label7: TLabel
+        Left = 393
+        Top = 17
+        Width = 48
+        Height = 17
+        Caption = 'N'#250'mero'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label8: TLabel
+        Left = 53
+        Top = 49
+        Width = 35
+        Height = 17
+        Caption = 'Bairro'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label9: TLabel
+        Left = 269
+        Top = 49
+        Width = 41
+        Height = 17
+        Caption = 'Cidade'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object edLogradouro: TEdit
+        Left = 93
+        Top = 13
+        Width = 284
+        Height = 26
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+      end
+      object edNumero: TEdit_Numero_PEDSCI
+        Left = 448
+        Top = 13
+        Width = 73
+        Height = 26
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        Text = '0'
+        Decimal = False
+        DecimalSeparador = ','
+        Codigo = 0
+      end
+      object edBairro: TEdit
+        Left = 93
+        Top = 44
+        Width = 143
+        Height = 26
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+      end
+      object edCidade: TEdit
+        Left = 316
+        Top = 45
+        Width = 205
+        Height = 26
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 3
+      end
+    end
+    object edNome: TEdit
+      Left = 106
+      Top = 43
+      Width = 428
+      Height = 26
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+    end
+  end
+  inherited ImageList1: TImageList
+    Left = 376
+    Top = 1
+  end
+end

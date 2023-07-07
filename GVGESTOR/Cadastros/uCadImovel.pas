@@ -32,8 +32,8 @@ type
     edCodProp: TEdit_Numero_PEDSCI;
     lbNomeProprietario: TLabel;
     procedure edCodPropExit(Sender: TObject);
-    procedure edCodigoExit(Sender: TObject);
     procedure btPesquisarClick(Sender: TObject);
+    procedure edCodigoExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -45,9 +45,9 @@ type
     procedure CarregaCampos; override;
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
-    procedure ConfirmarDados; override;
     function getID: Boolean; override;
-    procedure ExcluirRegistro; override;
+
+    procedure pCarregaProprietario;
   end;
 
 var
@@ -67,14 +67,13 @@ begin
   if ActiveControl = edCodProp then
      TfrConsProprietario.Create(edCodProp)
   else
-  if ActiveControl = edCodigo then
      TfrConsImovel.Create(edCodigo);
 end;
 
 procedure TfrCadImovel.CarregaCampos;
 begin
   inherited;
-  edCodProp.Codigo := FTabela.FieldByName('BDCODIMOVEL').AsInteger;
+  edCodProp.Codigo := FTabela.FieldByName('BDCODPROP').AsInteger;
   cbTipo.Text := FTabela.FieldByName('BDTIPOIMOVEL').AsString;
   seAmbientes.Text := IntToStr(FTabela.FieldByName('BDQUANTAMB').AsInteger);
   dtpData.Date :=  FTabela.FieldByName('BDDATACAD').AsDateTime;
@@ -84,92 +83,50 @@ begin
   edBairro.Text := FTabela.FieldByName('BDBAIRRO').AsString;
 end;
 
-procedure TfrCadImovel.ConfirmarDados;
-begin
-  inherited;
-  if ValidaCampos then// validar conteúdo dos campo
-     begin
-       if Assigned(FTabela) then
-          begin
-            if getID then// verificar se a chave existe
-               FTabela.Edit// caso exista, deve editar
-            else
-               FTabela.Insert;// caso NÃO exista, deve inserir
-          end;
-       SalvarCampos;// salvar os dados dos campos da tela nos campos da tabela, esse evento deve ser implementado nas heranças
-       if Assigned(FTabela) then
-          begin
-            if (FTabela.State in [dsInsert , dsEdit]) then// antes de salvar, verificar se está em modo de edição ou inserção, caso não esteja, algo deu errado em SalvarCampos
-               begin
-                 FTabela.Post;
-                 FTabela.ApplyUpdates(0);
-                 FTabela.Refresh;
-
-                 setLimpaCampos;// limpar campos da tela
-                 if Assigned(edCodigo) and edCodigo.CanFocus then// apos salvar voltar para o campo chave
-                    edCodigo.SetFocus;
-               end
-            else
-               MessageDlg('O cadastro não está em modo de edição ou inserção!', mtInformation, [mbOK], 0);
-          end;
-     end;
-end;
-
 procedure TfrCadImovel.edCodigoExit(Sender: TObject);
 begin
   inherited;
-  if getID then// caso encontre a chave na tabela
-     CarregaCampos// deve carregar os campos da tabela nos campos da tela
-  else
-     setLimpaCampos;
+  pCarregaProprietario;
 end;
 
 procedure TfrCadImovel.edCodPropExit(Sender: TObject);
 begin
   inherited;
+  pCarregaProprietario;
+end;
+
+procedure TfrCadImovel.FormCreate(Sender: TObject);
+begin
+  inherited;
+  if Owner is TfrConsImovel then
+     begin
+       edCodigo.Text := IntToStr(TfrConsImovel(Owner).grConsulta.Columns[0].Field.AsInteger);
+     end;
+
+end;
+
+function TfrCadImovel.getID: Boolean;
+begin
+  //inherited;
+  Result := False;// define padrão false
+  //pLimpaFiltros(FTabela);
+  FTabela.IndexFieldNames := 'BDCODIMOVEL';
+  if Assigned(FTabela) and Assigned(edCodigo) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
+     begin
+       Result := FTabela.FindKey([edCodigo.Text]);
+     end;
+end;
+
+procedure TfrCadImovel.pCarregaProprietario;
+begin
   pLimpaFiltros(dmTabelas.tbProprietario);
   dmTabelas.tbProprietario.IndexFieldNames := 'BDCDPROPR';
-  if dmTabelas.tbProprietario.FindKey([edCodProp.Codigo]) then
+  if dmTabelas.tbProprietario.FindKey([edCodProp.Codigo]) and Assigned(edCodProp) then
      begin
        lbNomeProprietario.Caption := '- ' + dmTabelas.tbProprietario.FieldByName('BDNOME').AsString;
      end
   else
      lbNomeProprietario.Caption := EmptyStr;
-end;
-
-procedure TfrCadImovel.ExcluirRegistro;
-begin
-  if getPodeExcluir and getID then// verificar se o registro existe
-     begin
-       FTabela.Delete;
-       FTabela.ApplyUpdates(0);
-       FTabela.Refresh;
-
-       setLimpaCampos;
-
-       if Assigned(edCodigo) and edCodigo.CanFocus then// voltar ao campo chave
-          edCodigo.SetFocus;
-     end;
-end;
-
-procedure TfrCadImovel.FormCreate(Sender: TObject);
-begin
-  //inherited;
-  setTabela;
-  if Owner is TfrConsImovel then
-     edCodigo.Text := IntToStr(TfrConsImovel(Owner).grConsulta.Columns[0].Field.AsInteger)
-  else
-  if Owner is TfrConsProprietario then
-     edCodProp.Text := IntToStr(TfrConsProprietario(Owner).grConsulta.Columns[0].Field.AsInteger);
-end;
-
-function TfrCadImovel.getID: Boolean;
-begin
-  Result := False;// define padrão false
-  if Assigned(FTabela) and Assigned(edCodigo) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
-     begin
-       Result := FTabela.FindKey([edCodigo.Text]);
-     end;
 end;
 
 procedure TfrCadImovel.SalvarCampos;
@@ -192,7 +149,7 @@ end;
 
 function TfrCadImovel.setLastEdit: TWinControl;
 begin
-  Result := edBairro;
+  Result := edCidade;
 end;
 
 function TfrCadImovel.setTabela: TClientDataSet;

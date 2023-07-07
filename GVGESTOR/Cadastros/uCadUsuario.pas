@@ -27,13 +27,12 @@ type
     Label6: TLabel;
     edUsuario: TEdit;
     procedure FormCreate(Sender: TObject);
-    procedure edRepitaSenhaExit(Sender: TObject);
-    procedure edCpfCnpjExit(Sender: TObject);
     procedure rbCpfClick(Sender: TObject);
     procedure rbCnpjClick(Sender: TObject);
-    procedure edCodigoExit(Sender: TObject);
     procedure btPesquisarClick(Sender: TObject);
-    procedure edNomeKeyPress(Sender: TObject; var Key: Char);
+    procedure edCpfCnpjExit(Sender: TObject);
+    procedure edSenhaKeyPress(Sender: TObject; var Key: Char);
+    procedure edRepitaSenhaKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -44,9 +43,7 @@ type
     procedure CarregaCampos; override;
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
-    procedure ConfirmarDados; override;
     function getID: Boolean; override;
-    procedure ExcluirRegistro; override;
 
   end;
 
@@ -61,7 +58,6 @@ uses udmDadosGVGESTOR, uConsUsuario;
 
 { TfrCadUsuario }
 
-
 procedure TfrCadUsuario.btPesquisarClick(Sender: TObject);
 begin
   TfrConsUsuario.Create(edCodigo);
@@ -71,7 +67,7 @@ procedure TfrCadUsuario.CarregaCampos;
 begin
   inherited;
   edNome.Text        := FTabela.FieldByName('BDUSUARIO').AsString;
-  edCpfCnpj.Text     := fAplicaMascara(FTabela.FieldByName('BDCPFCNPJ').AsString);
+  edCpfCnpj.Text     := FTabela.FieldByName('BDCPFCNPJ').AsString;
   cbPerfil.Text      := FTabela.FieldByName('BDPERFIL').AsString;
   edSenha.Text       := FTabela.FieldByName('BDSENHA').AsString;
   edUsuario.Text     := FTabela.FieldByName('BDUSUARIO').AsString;
@@ -79,94 +75,25 @@ begin
   edNome.Text        := FTabela.FieldByName('BDNOME').AsString;
 end;
 
-procedure TfrCadUsuario.ConfirmarDados;
-begin
-  //inherited;
-  if ValidaCampos then// validar conteúdo dos campo
-     begin
-       if Assigned(FTabela) then
-          begin
-            if getID then// verificar se a chave existe
-               FTabela.Edit// caso exista, deve editar
-            else
-               FTabela.Insert;// caso NÃO exista, deve inserir
-          end;
-       SalvarCampos;// salvar os dados dos campos da tela nos campos da tabela, esse evento deve ser implementado nas heranças
-       if Assigned(FTabela) then
-          begin
-            if (FTabela.State in [dsInsert , dsEdit]) then// antes de salvar, verificar se está em modo de edição ou inserção, caso não esteja, algo deu errado em SalvarCampos
-               begin
-                 FTabela.Post;
-                 FTabela.ApplyUpdates(0);
-                 FTabela.Refresh;
-
-                 setLimpaCampos;// limpar campos da tela
-                 if Assigned(edCodigo) and edCodigo.CanFocus then// apos salvar voltar para o campo chave
-                    edCodigo.SetFocus;
-               end
-            else
-               MessageDlg('O cadastro não está em modo de edição ou inserção!', mtInformation, [mbOK], 0);
-          end;
-     end;
-end;
-
-procedure TfrCadUsuario.edCodigoExit(Sender: TObject);
-begin
-  inherited;
-  if getID then// caso encontre a chave na tabela
-     CarregaCampos// deve carregar os campos da tabela nos campos da tela
-  else
-     setLimpaCampos;
-end;
-
 procedure TfrCadUsuario.edCpfCnpjExit(Sender: TObject);
 begin
   inherited;
-  if rbCpf.Checked then
-     begin
-       edCpfCnpj.MaxLength := 11;
-       fAplicaMascara(edCpfCnpj.Text);
-     end
-  else
-  if rbCnpj.Checked then
-     begin
-       edCpfCnpj.MaxLength := 14;
-       fAplicaMascara(edCpfCnpj.Text);
-     end;
+  edCpfCnpj.Text := fAplicaMascara(edCpfCnpj.Text);
 end;
 
-procedure TfrCadUsuario.edNomeKeyPress(Sender: TObject; var Key: Char);
+procedure TfrCadUsuario.edRepitaSenhaKeyPress(Sender: TObject; var Key: Char);
 begin
-  inherited;
-  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+  Key := Key;
 end;
 
-procedure TfrCadUsuario.edRepitaSenhaExit(Sender: TObject);
+procedure TfrCadUsuario.edSenhaKeyPress(Sender: TObject; var Key: Char);
 begin
-  inherited;
-  ConfirmarDados;
-end;
-
-procedure TfrCadUsuario.ExcluirRegistro;
-begin
-  //inherited;
-  if getPodeExcluir and getID then// verificar se o registro existe
-     begin
-       FTabela.Delete;
-       FTabela.ApplyUpdates(0);
-       FTabela.Refresh;
-
-       setLimpaCampos;
-
-       if Assigned(edCodigo) and edCodigo.CanFocus then// voltar ao campo chave
-          edCodigo.SetFocus;
-     end;
+  Key := Key;
 end;
 
 procedure TfrCadUsuario.FormCreate(Sender: TObject);
 begin
   inherited;
-  setTabela;
   if Owner is TfrConsUsuario then
        edCodigo.Text := IntToStr(TfrConsUsuario(Owner).grConsulta.Columns[0].Field.AsInteger);
 end;
@@ -184,12 +111,14 @@ procedure TfrCadUsuario.rbCnpjClick(Sender: TObject);
 begin
   inherited;
   edCpfCnpj.Enabled := True;
+  edCpfCnpj.MaxLength := 14;
 end;
 
 procedure TfrCadUsuario.rbCpfClick(Sender: TObject);
 begin
   inherited;
   edCpfCnpj.Enabled := True;
+  edCpfCnpj.MaxLength := 11;
 end;
 
 procedure TfrCadUsuario.SalvarCampos;
@@ -197,7 +126,7 @@ begin
   inherited;
   FTabela.FieldByName('BDCODIGO').AsInteger := edCodigo.Codigo;
   FTabela.FieldByName('BDNOME').AsString    := edNome.Text;
-  FTabela.FieldByName('BDCPFCNPJ').AsString := edCpfCnpj.Text;
+  FTabela.FieldByName('BDCPFCNPJ').AsString := validaCnpj(edCpfCnpj.Text);
   FTabela.FieldByName('BDPERFIL').AsString  := cbPerfil.Items[cbPerfil.ItemIndex];
   FTabela.FieldByName('BDSENHA').AsString   := edSenha.Text;
   FTabela.FieldByName('BDUSUARIO').AsString := edUsuario.Text;
@@ -215,7 +144,7 @@ end;
 
 function TfrCadUsuario.setTabela: TClientDataSet;
 begin
-  FTabela := dmTabelas.tbUsuario;
+  Result := dmTabelas.tbUsuario;
 end;
 
 function TfrCadUsuario.ValidaCampos: Boolean;

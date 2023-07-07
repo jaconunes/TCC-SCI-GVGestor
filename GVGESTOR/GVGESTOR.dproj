@@ -138,6 +138,14 @@
             <Form>frConsImovel</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Cadastros\uCadProprietario.pas">
+            <Form>frCadProprietario</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Cadastros\uCadCliente.pas">
+            <Form>frCadCliente</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

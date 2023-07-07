@@ -38,6 +38,8 @@ type
     procedure Imvel1Click(Sender: TObject);
     procedure Proprietrios1Click(Sender: TObject);
     procedure Imveis1Click(Sender: TObject);
+    procedure Proprietrio1Click(Sender: TObject);
+    procedure Cliente1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -54,10 +56,9 @@ implementation
 {$R *.dfm}
 
 uses udmDadosGVGESTOR, uUsuarioLogado, uCadUsuario, uConsUsuario, uCadImovel,
-  uConsProprietario, uConsImovel;
+  uConsProprietario, uConsImovel, uCadProprietario, uCadCliente;
 
 { TfrPrincipal }
-
 
 procedure TfrPrincipal.FormCreate(Sender: TObject);
 begin
@@ -88,6 +89,11 @@ begin
 //        pPerfilPadrao;
 end;
 
+procedure TfrPrincipal.Cliente1Click(Sender: TObject);
+begin
+  TfrCadCliente.Create(self).Show;
+end;
+
 procedure TfrPrincipal.Imveis1Click(Sender: TObject);
 begin
   TfrConsImovel.Create(self).Show;
@@ -111,6 +117,11 @@ end;
 procedure TfrPrincipal.pPerfilPadrao;
 begin
   mUsuario.Enabled := False;
+end;
+
+procedure TfrPrincipal.Proprietrio1Click(Sender: TObject);
+begin
+  TfrCadProprietario.Create(self).Show;
 end;
 
 procedure TfrPrincipal.Proprietrios1Click(Sender: TObject);

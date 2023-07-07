@@ -2,11 +2,15 @@ inherited frConsProprietario: TfrConsProprietario
   Caption = 'Consulta de propriet'#225'rios'
   ClientWidth = 908
   ExplicitWidth = 924
+  ExplicitHeight = 369
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
     Width = 908
     ExplicitWidth = 908
+    inherited btEditar: TToolButton
+      OnClick = btEditarClick
+    end
   end
   inherited grConsulta: TDBGrid
     Width = 908
@@ -80,7 +84,7 @@ inherited frConsProprietario: TfrConsProprietario
   end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C01010700E000A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010700E000AC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

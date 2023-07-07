@@ -10,6 +10,7 @@ uses
 
 type
   TfrConsProprietario = class(TfrPadraoConsultaGVGSTOR)
+    procedure btEditarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -25,9 +26,15 @@ implementation
 
 {$R *.dfm}
 
-uses udmDadosGVGESTOR;
+uses udmDadosGVGESTOR, uCadProprietario;
 
 { TfrConsProprietario }
+
+procedure TfrConsProprietario.btEditarClick(Sender: TObject);
+begin
+  inherited;
+  TfrCadProprietario.Create(self).Show;
+end;
 
 function TfrConsProprietario.setTabela: TClientDataSet;
 begin

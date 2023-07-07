@@ -1,0 +1,45 @@
+unit uCadCliente;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoCadastroGVGESTOR,
+  System.ImageList, Vcl.ImgList, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.ToolWin,
+  Vcl.StdCtrls, EditSCI;
+
+type
+  TfrCadCliente = class(TfrPadraoCadastroGVGESTOR)
+    edCodigo: TEdit_Numero_PEDSCI;
+    edRazaoSocial: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    edCnpj: TEdit;
+    Label3: TLabel;
+    edTelefone: TEdit;
+    Label4: TLabel;
+    edEmail: TEdit;
+    Label5: TLabel;
+    GroupBox1: TGroupBox;
+    edLogradouro: TEdit;
+    Label6: TLabel;
+    edNumero: TEdit_Numero_PEDSCI;
+    Label7: TLabel;
+    edCidade: TEdit;
+    Label8: TLabel;
+    Edit6: TEdit;
+    Label9: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frCadCliente: TfrCadCliente;
+
+implementation
+
+{$R *.dfm}
+
+end.

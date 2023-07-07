@@ -10,6 +10,7 @@ uses
 
 type
   TfrConsImovel = class(TfrPadraoConsultaGVGSTOR)
+    procedure btEditarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -25,9 +26,15 @@ implementation
 
 {$R *.dfm}
 
-uses udmDadosGVGESTOR;
+uses udmDadosGVGESTOR, uCadImovel;
 
 { TfrConsImovel }
+
+procedure TfrConsImovel.btEditarClick(Sender: TObject);
+begin
+  inherited;
+  TfrCadImovel.Create(self).Show;
+end;
 
 function TfrConsImovel.setTabela: TClientDataSet;
 begin

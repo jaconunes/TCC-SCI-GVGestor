@@ -2,6 +2,7 @@ inherited frConsUsuario: TfrConsUsuario
   Caption = 'Consulta de usu'#225'rios'
   ClientWidth = 794
   ExplicitWidth = 810
+  ExplicitHeight = 369
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
@@ -14,8 +15,6 @@ inherited frConsUsuario: TfrConsUsuario
   inherited grConsulta: TDBGrid
     Width = 794
     Font.Charset = ANSI_CHARSET
-    Font.Height = -15
-    Font.Name = 'Segoe UI'
     ParentFont = False
     Columns = <
       item
@@ -61,7 +60,7 @@ inherited frConsUsuario: TfrConsUsuario
   end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C01010700E0009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010700E000A00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -112,7 +112,6 @@ inherited frCadUsuario: TfrCadUsuario
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      OnKeyPress = edNomeKeyPress
     end
     object edCpfCnpj: TEdit
       Left = 135
@@ -142,6 +141,7 @@ inherited frCadUsuario: TfrCadUsuario
       ParentFont = False
       PasswordChar = '*'
       TabOrder = 6
+      OnKeyPress = edSenhaKeyPress
     end
     object GroupBox1: TGroupBox
       Left = 14
@@ -199,7 +199,7 @@ inherited frCadUsuario: TfrCadUsuario
       ParentFont = False
       PasswordChar = '*'
       TabOrder = 7
-      OnExit = edRepitaSenhaExit
+      OnKeyPress = edRepitaSenhaKeyPress
     end
     object edCodigo: TEdit_Numero_PEDSCI
       Left = 135
@@ -214,7 +214,6 @@ inherited frCadUsuario: TfrCadUsuario
       ParentFont = False
       TabOrder = 0
       Text = '0'
-      OnExit = edCodigoExit
       Decimal = False
       DecimalSeparador = ','
       Codigo = 0
@@ -230,7 +229,6 @@ inherited frCadUsuario: TfrCadUsuario
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
-      PasswordChar = '*'
       TabOrder = 5
     end
   end
@@ -238,7 +236,7 @@ inherited frCadUsuario: TfrCadUsuario
     Left = 392
     Top = 113
     Bitmap = {
-      494C010106000800980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800A00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -2,6 +2,11 @@ inherited frConsImovel: TfrConsImovel
   Caption = 'Consulta de im'#243'veis'
   PixelsPerInch = 96
   TextHeight = 13
+  inherited ToolBar1: TToolBar
+    inherited btEditar: TToolButton
+      OnClick = btEditarClick
+    end
+  end
   inherited grConsulta: TDBGrid
     Columns = <
       item
@@ -61,7 +66,7 @@ inherited frConsImovel: TfrConsImovel
   end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C01010700E000A40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010700E000A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

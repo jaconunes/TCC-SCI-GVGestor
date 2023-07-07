@@ -12,7 +12,9 @@ uses
   uConsUsuario in 'Consultas\uConsUsuario.pas' {frConsUsuario},
   uCadImovel in 'Cadastros\uCadImovel.pas' {frCadImovel},
   uConsProprietario in 'Consultas\uConsProprietario.pas' {frConsProprietario},
-  uConsImovel in 'Consultas\uConsImovel.pas' {frConsImovel};
+  uConsImovel in 'Consultas\uConsImovel.pas' {frConsImovel},
+  uCadProprietario in 'Cadastros\uCadProprietario.pas' {frCadProprietario},
+  uCadCliente in 'Cadastros\uCadCliente.pas' {frCadCliente};
 
 {$R *.res}
 
