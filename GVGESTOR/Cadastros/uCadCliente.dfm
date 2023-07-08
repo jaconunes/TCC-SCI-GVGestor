@@ -1,20 +1,23 @@
 inherited frCadCliente: TfrCadCliente
   Caption = 'Cadastro de cliente'
-  ClientHeight = 276
+  ClientHeight = 273
   ClientWidth = 531
   ExplicitWidth = 547
-  ExplicitHeight = 315
+  ExplicitHeight = 312
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
     Width = 531
+    ExplicitWidth = 531
+    inherited btPesquisar: TToolButton
+      OnClick = btPesquisarClick
+    end
   end
   inherited Panel1: TPanel
     Width = 531
-    Height = 243
-    ExplicitTop = 39
-    ExplicitWidth = 571
-    ExplicitHeight = 271
+    Height = 240
+    ExplicitWidth = 531
+    ExplicitHeight = 240
     object Label1: TLabel
       Left = 59
       Top = 20
@@ -58,7 +61,7 @@ inherited frCadCliente: TfrCadCliente
       Left = 53
       Top = 110
       Width = 49
-      Height = 20
+      Height = 17
       Caption = 'Telefone'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -70,7 +73,7 @@ inherited frCadCliente: TfrCadCliente
     object Label5: TLabel
       Left = 258
       Top = 110
-      Width = 39
+      Width = 36
       Height = 17
       Caption = 'E-mail'
       Font.Charset = ANSI_CHARSET
@@ -92,6 +95,7 @@ inherited frCadCliente: TfrCadCliente
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      Text = '0'
       Decimal = False
       DecimalSeparador = ','
       Codigo = 0
@@ -150,10 +154,13 @@ inherited frCadCliente: TfrCadCliente
     end
     object GroupBox1: TGroupBox
       Left = 8
-      Top = 136
+      Top = 138
       Width = 513
-      Height = 97
+      Height = 95
       Caption = 'Endere'#231'o'
+      Color = clSkyBlue
+      ParentBackground = False
+      ParentColor = False
       TabOrder = 5
       object Label6: TLabel
         Left = 24
@@ -171,7 +178,7 @@ inherited frCadCliente: TfrCadCliente
       object Label7: TLabel
         Left = 361
         Top = 27
-        Width = 57
+        Width = 43
         Height = 17
         Caption = 'C'#243'digo'
         Font.Charset = ANSI_CHARSET
@@ -182,7 +189,7 @@ inherited frCadCliente: TfrCadCliente
         ParentFont = False
       end
       object Label8: TLabel
-        Left = 53
+        Left = 277
         Top = 57
         Width = 41
         Height = 17
@@ -195,7 +202,7 @@ inherited frCadCliente: TfrCadCliente
         ParentFont = False
       end
       object Label9: TLabel
-        Left = 297
+        Left = 59
         Top = 59
         Width = 35
         Height = 17
@@ -238,7 +245,7 @@ inherited frCadCliente: TfrCadCliente
         Codigo = 0
       end
       object edCidade: TEdit
-        Left = 100
+        Left = 324
         Top = 53
         Width = 173
         Height = 26
@@ -248,10 +255,10 @@ inherited frCadCliente: TfrCadCliente
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 3
       end
       object edBairro: TEdit
-        Left = 338
+        Left = 100
         Top = 53
         Width = 159
         Height = 26
@@ -261,7 +268,7 @@ inherited frCadCliente: TfrCadCliente
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 2
       end
     end
   end
@@ -269,7 +276,7 @@ inherited frCadCliente: TfrCadCliente
     Left = 304
     Top = 1
     Bitmap = {
-      494C010106000800A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

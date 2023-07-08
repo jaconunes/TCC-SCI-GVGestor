@@ -40,6 +40,7 @@ object frPrincipal: TfrPrincipal
       end
       object Locatrio1: TMenuItem
         Caption = 'Locat'#225'rios'
+        OnClick = Locatrio1Click
       end
       object Vistoria1: TMenuItem
         Caption = 'Vistorias'
@@ -61,9 +62,11 @@ object frPrincipal: TfrPrincipal
       end
       object Clientes1: TMenuItem
         Caption = 'Clientes'
+        OnClick = Clientes1Click
       end
       object Locatrios1: TMenuItem
         Caption = 'Locat'#225'rios'
+        OnClick = Locatrios1Click
       end
       object Vistorias1: TMenuItem
         Caption = 'Vistorias'
