@@ -43,6 +43,8 @@ type
     procedure Clientes1Click(Sender: TObject);
     procedure Locatrio1Click(Sender: TObject);
     procedure Locatrios1Click(Sender: TObject);
+    procedure Vistoria1Click(Sender: TObject);
+    procedure Vistorias1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -60,7 +62,7 @@ implementation
 
 uses udmDadosGVGESTOR, uUsuarioLogado, uCadUsuario, uConsUsuario, uCadImovel,
   uConsProprietario, uConsImovel, uCadProprietario, uCadCliente, uConsCliente,
-  uCadLocatario, uConsLocatario;
+  uCadLocatario, uConsLocatario, uCadVistoria, uConsVistoria;
 
 { TfrPrincipal }
 
@@ -151,6 +153,16 @@ end;
 procedure TfrPrincipal.Usurios1Click(Sender: TObject);
 begin
   TfrConsUsuario.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Vistoria1Click(Sender: TObject);
+begin
+  TfrCadVistoria.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Vistorias1Click(Sender: TObject);
+begin
+  TfrConsVistoria.Create(self).Show;
 end;
 
 end.

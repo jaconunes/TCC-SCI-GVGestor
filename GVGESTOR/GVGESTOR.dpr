@@ -21,7 +21,8 @@ uses
   uCadVistoria in 'Cadastros\uCadVistoria.pas' {frCadVistoria},
   uCadAmbiente in 'Cadastros\uCadAmbiente.pas' {frCadAmbiente},
   uCadFoto in 'Cadastros\uCadFoto.pas' {frCadFoto},
-  uConsVistoria in 'Consultas\uConsVistoria.pas' {frConsVistoria};
+  uConsVistoria in 'Consultas\uConsVistoria.pas' {frConsVistoria},
+  uLogin in 'uLogin.pas' {frLogin};
 
 {$R *.res}
 
@@ -31,8 +32,5 @@ begin
   Application.CreateForm(TdmConnection, dmConnection);
   Application.CreateForm(TdmTabelas, dmTabelas);
   Application.CreateForm(TfrPrincipal, frPrincipal);
-  Application.CreateForm(TfrCadAmbiente, frCadAmbiente);
-  Application.CreateForm(TfrCadFoto, frCadFoto);
-  Application.CreateForm(TfrConsVistoria, frConsVistoria);
   Application.Run;
 end.

@@ -44,6 +44,7 @@ object frPrincipal: TfrPrincipal
       end
       object Vistoria1: TMenuItem
         Caption = 'Vistorias'
+        OnClick = Vistoria1Click
       end
     end
     object Consultas1: TMenuItem
@@ -70,6 +71,7 @@ object frPrincipal: TfrPrincipal
       end
       object Vistorias1: TMenuItem
         Caption = 'Vistorias'
+        OnClick = Vistorias1Click
       end
     end
     object Relatrios1: TMenuItem

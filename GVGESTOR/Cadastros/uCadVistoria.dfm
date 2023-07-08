@@ -9,14 +9,17 @@ inherited frCadVistoria: TfrCadVistoria
   TextHeight = 13
   inherited ToolBar1: TToolBar
     Width = 538
+    ExplicitWidth = 538
     inherited btPesquisar: TToolButton
       OnClick = btPesquisarClick
     end
-    object ToolButton4: TToolButton
+    object btAdAmbiente: TToolButton
       Left = 123
       Top = 0
-      Caption = 'ToolButton4'
+      Caption = 'btAdAmbiente'
+      Enabled = False
       ImageIndex = 6
+      OnClick = btAdAmbienteClick
     end
     object ToolButton5: TToolButton
       Left = 156
@@ -30,9 +33,8 @@ inherited frCadVistoria: TfrCadVistoria
   inherited Panel1: TPanel
     Width = 538
     Height = 317
-    ExplicitTop = 39
-    ExplicitWidth = 577
-    ExplicitHeight = 380
+    ExplicitWidth = 538
+    ExplicitHeight = 317
     object Label5: TLabel
       Left = 75
       Top = 140
@@ -92,9 +94,6 @@ inherited frCadVistoria: TfrCadVistoria
       Height = 122
       Align = alTop
       TabOrder = 0
-      ExplicitLeft = 2
-      ExplicitTop = 6
-      ExplicitWidth = 575
       object Label1: TLabel
         Left = 59
         Top = 8
@@ -171,6 +170,18 @@ inherited frCadVistoria: TfrCadVistoria
         Font.Style = [fsBold]
         ParentFont = False
       end
+      object lbEnderecoImovel: TLabel
+        Left = 176
+        Top = 67
+        Width = 6
+        Height = 15
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clTeal
+        Font.Height = -15
+        Font.Name = 'MS UI Gothic'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
       object edCodigo: TEdit_Numero_PEDSCI
         Left = 106
         Top = 4
@@ -184,6 +195,7 @@ inherited frCadVistoria: TfrCadVistoria
         ParentFont = False
         TabOrder = 0
         Text = '0'
+        OnChange = edCodigoChange
         Decimal = False
         DecimalSeparador = ','
         Codigo = 0
@@ -201,6 +213,7 @@ inherited frCadVistoria: TfrCadVistoria
         ParentFont = False
         TabOrder = 1
         Text = '0'
+        OnChange = edCodClienteChange
         Decimal = False
         DecimalSeparador = ','
         Codigo = 0
@@ -218,6 +231,7 @@ inherited frCadVistoria: TfrCadVistoria
         ParentFont = False
         TabOrder = 2
         Text = '0'
+        OnChange = edCodImovelChange
         Decimal = False
         DecimalSeparador = ','
         Codigo = 0
@@ -235,6 +249,7 @@ inherited frCadVistoria: TfrCadVistoria
         ParentFont = False
         TabOrder = 3
         Text = '0'
+        OnChange = edCodLocatarioChange
         Decimal = False
         DecimalSeparador = ','
         Codigo = 0
@@ -324,7 +339,7 @@ inherited frCadVistoria: TfrCadVistoria
       object Label9: TLabel
         Left = 44
         Top = 19
-        Width = 50
+        Width = 51
         Height = 17
         Caption = 'Medidor'
         Font.Charset = ANSI_CHARSET
@@ -359,6 +374,7 @@ inherited frCadVistoria: TfrCadVistoria
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        Text = '0'
         Decimal = False
         DecimalSeparador = ','
         Codigo = 0
@@ -375,6 +391,7 @@ inherited frCadVistoria: TfrCadVistoria
         Font.Style = []
         ParentFont = False
         TabOrder = 0
+        Text = '0'
         Decimal = False
         DecimalSeparador = ','
         Codigo = 0
@@ -428,6 +445,7 @@ inherited frCadVistoria: TfrCadVistoria
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        Text = '0'
         Decimal = False
         DecimalSeparador = ','
         Codigo = 0
@@ -444,6 +462,7 @@ inherited frCadVistoria: TfrCadVistoria
         Font.Style = []
         ParentFont = False
         TabOrder = 0
+        Text = '0'
         Decimal = False
         DecimalSeparador = ','
         Codigo = 0
@@ -454,7 +473,7 @@ inherited frCadVistoria: TfrCadVistoria
     Left = 288
     Top = 1
     Bitmap = {
-      494C010107005801B40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010107005801B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

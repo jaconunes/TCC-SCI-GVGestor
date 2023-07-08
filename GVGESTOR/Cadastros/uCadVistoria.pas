@@ -39,9 +39,15 @@ type
     Label12: TLabel;
     edLeituraAgua: TEdit_Numero_PEDSCI;
     edNumMedAgua: TEdit_Numero_PEDSCI;
-    ToolButton4: TToolButton;
+    btAdAmbiente: TToolButton;
     ToolButton5: TToolButton;
+    lbEnderecoImovel: TLabel;
     procedure btPesquisarClick(Sender: TObject);
+    procedure btAdAmbienteClick(Sender: TObject);
+    procedure edCodigoChange(Sender: TObject);
+    procedure edCodClienteChange(Sender: TObject);
+    procedure edCodImovelChange(Sender: TObject);
+    procedure edCodLocatarioChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -53,6 +59,10 @@ type
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
     function getID: Boolean; override;
+
+    procedure pCarregaCliente;
+    procedure pCarregaEndImovel;
+    procedure pCarregaLocatario;
   end;
 
 var
@@ -62,16 +72,14 @@ implementation
 
 {$R *.dfm}
 
-uses udmDadosGVGESTOR, uConsVistoria, uConsCliente, uConsImovel, uConsLocatario;
+uses udmDadosGVGESTOR, uConsVistoria, uConsCliente, uConsImovel, uConsLocatario,
+  uCadAmbiente;
 
 { TfrCadVistoria }
 
 procedure TfrCadVistoria.btPesquisarClick(Sender: TObject);
 begin
   inherited;
-  if ActiveControl = edCodigo then
-     TfrConsVistoria.Create(edCodigo)
-  else
   if ActiveControl = edCodCliente then
      TfrConsCliente.Create(edCodCliente)
   else
@@ -79,7 +87,9 @@ begin
      TfrConsImovel.Create(edCodImovel)
   else
   if ActiveControl = edCodLocatario then
-     TfrConsLocatario.Create(edCodLocatario);
+     TfrConsLocatario.Create(edCodLocatario)
+  else
+     TfrConsVistoria.Create(edCodigo);
 end;
 
 procedure TfrCadVistoria.CarregaCampos;
@@ -97,9 +107,75 @@ begin
   edCodLocatario.Codigo := FTabela.FieldByName('BDCODLOCAT').AsInteger;
 end;
 
+procedure TfrCadVistoria.edCodClienteChange(Sender: TObject);
+begin
+  inherited;
+  pCarregaCliente;
+end;
+
+procedure TfrCadVistoria.edCodigoChange(Sender: TObject);
+begin
+  inherited;
+  if getID then
+     btAdAmbiente.Enabled := True
+  else
+     btAdAmbiente.Enabled := False;
+end;
+
+
+procedure TfrCadVistoria.edCodImovelChange(Sender: TObject);
+begin
+  inherited;
+  pCarregaEndImovel;
+end;
+
+procedure TfrCadVistoria.edCodLocatarioChange(Sender: TObject);
+begin
+  inherited;
+  pCarregaLocatario;
+end;
+
 function TfrCadVistoria.getID: Boolean;
 begin
+  Result := False;// define padrão false
+  pLimpaFiltros(FTabela);
+  FTabela.IndexFieldNames := 'BDCODVIST';
+  if Assigned(FTabela) and Assigned(edCodigo) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
+     begin
+       Result := FTabela.FindKey([edCodigo.Text]);
+     end;
+end;
 
+procedure TfrCadVistoria.pCarregaCliente;
+begin
+  pLimpaFiltros(dmTabelas.tbCliente);
+  dmTabelas.tbCliente.IndexFieldNames := 'BDCODCLI';
+  if dmTabelas.tbCliente.FindKey([edCodCliente.Codigo]) and Assigned(edCodCliente) then
+     lbNomeCliente.Caption := '- ' + dmTabelas.tbCliente.FieldByName('BDRASOCIAL').AsString
+  else
+     lbNomeCliente.Caption := EmptyStr;
+end;
+
+procedure TfrCadVistoria.pCarregaEndImovel;
+begin
+  pLimpaFiltros(dmTabelas.tbImovel);
+  dmTabelas.tbImovel.IndexFieldNames := 'BDCODIMOVEL';
+  if dmTabelas.tbImovel.FindKey([edCodImovel.Codigo]) and Assigned(edCodImovel) then
+     lbEnderecoImovel.Caption := '- ' + dmTabelas.tbImovel.FieldByName('BDENDERECO').AsString + ', ' +
+                                        dmTabelas.tbImovel.FieldByName('BDNUMERO').AsString + ', ' +
+                                        dmTabelas.tbImovel.FieldByName('BDCIDADE').AsString
+  else
+     lbEnderecoImovel.Caption := EmptyStr;
+end;
+
+procedure TfrCadVistoria.pCarregaLocatario;
+begin
+  pLimpaFiltros(dmTabelas.tbLocatario);
+  dmTabelas.tbLocatario.IndexFieldNames := 'BDCDLOCAT';
+  if dmTabelas.tbLocatario.FindKey([edCodLocatario.Codigo]) and Assigned(edCodLocatario) then
+     lbNomeLocatario.Caption := '- ' + dmTabelas.tbLocatario.FieldByName('BDNOME').AsString
+  else
+     lbNomeLocatario.Caption := EmptyStr;
 end;
 
 procedure TfrCadVistoria.SalvarCampos;
@@ -113,11 +189,16 @@ begin
   FTabela.FieldByName('BDLEITENERG').AsString  := edLeituraEnergia.Text;
   FTabela.FieldByName('BDNMEDAGUA').AsString   := edNumMedAgua.Text;
   FTabela.FieldByName('BDLEITAGUA').AsString   := edLeituraAgua.Text;
-  // Código Usuário Logado
-  // FTabela.FieldByName('BDCODUSU').AsInteger
+  FTabela.FieldByName('BDCODUSU').AsInteger  := 1; // Código Usuário Logado
   FTabela.FieldByName('BDCODCLT').AsInteger := edCodCliente.Codigo;
   FTabela.FieldByName('BDCODIMOV').AsInteger := edCodImovel.Codigo;
   FTabela.FieldByName('BDCODLOCAT').AsInteger := edCodLocatario.Codigo;
+end;
+
+procedure TfrCadVistoria.btAdAmbienteClick(Sender: TObject);
+begin
+  inherited;
+  TfrCadAmbiente.Create(self);
 end;
 
 function TfrCadVistoria.setIDEdit: TWinControl;
