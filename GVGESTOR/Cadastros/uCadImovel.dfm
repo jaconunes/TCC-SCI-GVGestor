@@ -166,13 +166,15 @@ inherited frCadImovel: TfrCadImovel
       object lbNomeProprietario: TLabel
         Left = 191
         Top = 13
-        Width = 6
-        Height = 15
+        Width = 5
+        Height = 13
+        Color = clActiveCaption
         Font.Charset = ANSI_CHARSET
-        Font.Color = clTeal
-        Font.Height = -15
+        Font.Color = clGray
+        Font.Height = -13
         Font.Name = 'MS UI Gothic'
         Font.Style = [fsBold]
+        ParentColor = False
         ParentFont = False
       end
       object edCodProp: TEdit_Numero_PEDSCI
@@ -318,7 +320,7 @@ inherited frCadImovel: TfrCadImovel
     Left = 560
     Top = 9
     Bitmap = {
-      494C010106000800B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800BC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

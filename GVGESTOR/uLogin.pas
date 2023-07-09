@@ -16,14 +16,17 @@ type
     Image3: TImage;
     btLogin: TButton;
     Image4: TImage;
+    lbAlertaLogin: TLabel;
     procedure btLoginClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormResize(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     function fUsuario_Logado(wUsuario: String; wSenha: String): boolean;
-    function fGetUsuarioLogado : TUsuario;
+    function fSetUsuarioLogado : TUsuario;
 
   end;
 
@@ -41,22 +44,56 @@ uses udmDadosGVGESTOR;
 
 procedure TfrLogin.btLoginClick(Sender: TObject);
 begin
+  if edUsuario.Text = EmptyStr then
+     begin
+       lbAlertaLogin.Caption := 'O campo "Usuário" deve ser preenchido!';
+       edUsuario.SetFocus;
+     end
+  else
+  if edSenha.Text = EmptyStr then
+     begin
+       lbAlertaLogin.Caption := 'O campo "Senha" deve ser preenchido!';
+       edSenha.SetFocus;
+     end
+  else
   if fUsuario_Logado(edUsuario.Text, edSenha.Text) then
      begin
-       frPrincipal := TfrPrincipal.Create(Application);
-       frPrincipal.Show;
-       frLogin.Hide;
+       ModalResult := mrOk;
+     end
+  else
+     begin
+       lbAlertaLogin.Caption := 'O "Usuário" e "Senha" não conferem.' + #13 +
+                                'Tente novamente.';
+       edUsuario.SetFocus;
      end;
 end;
 
-function TfrLogin.fGetUsuarioLogado: TUsuario;
+function TfrLogin.fSetUsuarioLogado: TUsuario;
 begin
   Result := wUsuarioLogado;
 end;
 
+procedure TfrLogin.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+//  if (Owner is TForm) and (not TForm(Owner).Enabled) then
+//     TForm(Owner).Enabled := True;
+end;
+
+procedure TfrLogin.FormResize(Sender: TObject);
+begin
+//  frLogin.Left := frPrincipal.Left + ((frPrincipal.Width - frLogin.Width) div 2);
+//  frLogin.Top  := frPrincipal.Top + ((frPrincipal.Height - frLogin.Height) div 2);
+end;
+
 procedure TfrLogin.FormShow(Sender: TObject);
 begin
-  //TfrPrincipal(Owner).Enabled := False;
+//  if Owner is TfrPrincipal then
+//     begin
+//       TfrPrincipal(Owner).Enabled := False;
+//       edUsuario.SetFocus;
+//     end;
+//  frLogin.Left := frPrincipal.Left + ((frPrincipal.Width - frLogin.Width) div 2);
+//  frLogin.Top  := frPrincipal.Top + ((frPrincipal.Height - frLogin.Height) div 2);
 end;
 
 function TfrLogin.fUsuario_Logado(wUsuario, wSenha: String): boolean;
@@ -69,7 +106,7 @@ begin
           begin
             Result := True;
 
-            wUsuarioLogado.Create;
+            wUsuarioLogado.Create();
             wUsuarioLogado.ID := dmTabelas.tbUsuario.FieldByName('BDCODIGO').AsInteger;
             wUsuarioLogado.Nome := dmTabelas.tbUsuario.FieldByName('BDNOME').AsString;
             wUsuarioLogado.Perfil := dmTabelas.tbUsuario.FieldByName('BDPERFIL').AsString;

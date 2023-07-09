@@ -44,6 +44,7 @@ type
     procedure CarregaCampos; virtual; abstract; // carregar os campos da tabela para os camnpos da tela
     procedure SalvarCampos; virtual; abstract; // salvar os valores dos campos da tela para os campos da tabela
     function fSetFieldName: String; virtual; abstract; //obter o fieldname da PK da tabela
+    procedure pSetHabilitaButton; virtual;
     function ValidaCampos: Boolean; virtual;
     function getID: Boolean; virtual;
     function getPodeExcluir: Boolean; virtual;
@@ -160,14 +161,14 @@ end;
 
 procedure TfrPadraoCadastroGVGESTOR.FormCreate(Sender: TObject);
 begin
-  FFieldName := fSetFieldName;
+  FFieldName := fSetFieldName;// campo primary key da tabela
   FTabela := setTabela;// instanciar a tabela do cadastro
   FIDEdit := setIDEdit;// instanciar o campo da chave
   if Assigned(FIDEdit) then// setar o evento de saida do campo
      begin
        if FIDEdit is TCustomEdit then
           begin
-            TCustomEdit(FIDEdit).Text := IntToStr(fGerarID);
+            TCustomEdit(FIDEdit).Text := IntToStr(fGerarID);//Gera ID para novo registro
             TEdit(FIDEdit).OnExit := IDEditExit;
             TEdit(FIDEdit).OnKeyPress := IDEditKeyPress;
           end;
@@ -227,10 +228,13 @@ end;
 procedure TfrPadraoCadastroGVGESTOR.IDEditExit(Sender: TObject);
 begin
   if getID then// caso encontre a chave na tabela
-     CarregaCampos// deve carregar os campos da tabela nos campos da tela
+     begin
+       pSetHabilitaButton;
+       CarregaCampos;// deve carregar os campos da tabela nos campos da tela
+     end
+
   else
      begin
-       TCustomEdit(FIDEdit).Text := IntToStr(fGerarID); // Gera ID para novo registro
        setLimpaCampos;// caso NÃO encontre, deve limpar os campos da tela
      end;
 
@@ -252,6 +256,11 @@ procedure TfrPadraoCadastroGVGESTOR.pLimpaFiltros(wTabela : TClientDataset);
 begin
   wTabela.Filter   := EmptyStr;
   wTabela.Filtered := False;
+end;
+
+procedure TfrPadraoCadastroGVGESTOR.pSetHabilitaButton;
+begin
+
 end;
 
 procedure TfrPadraoCadastroGVGESTOR.setLimpaCampos;

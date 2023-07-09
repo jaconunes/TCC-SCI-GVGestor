@@ -38,6 +38,8 @@ type
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
     function fSetFieldName: string; override;
+    procedure pSetHabilitaButton; override;
+
 
 
     property CodVistoria : Integer read wCodVistoria write wCodVistoria;
@@ -102,6 +104,13 @@ end;
 function TfrCadAmbiente.fSetFieldName: string;
 begin
   Result := 'BDCODAMB';
+end;
+
+procedure TfrCadAmbiente.pSetHabilitaButton;
+begin
+  inherited;
+  btAdItem.Enabled := True;
+  btAdFoto.Enabled := True;
 end;
 
 procedure TfrCadAmbiente.SalvarCampos;

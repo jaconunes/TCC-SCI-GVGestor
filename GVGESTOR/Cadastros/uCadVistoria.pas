@@ -44,7 +44,6 @@ type
     lbEnderecoImovel: TLabel;
     procedure btPesquisarClick(Sender: TObject);
     procedure btAdAmbienteClick(Sender: TObject);
-    procedure edCodigoChange(Sender: TObject);
     procedure edCodClienteChange(Sender: TObject);
     procedure edCodImovelChange(Sender: TObject);
     procedure edCodLocatarioChange(Sender: TObject);
@@ -59,6 +58,8 @@ type
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
     function fSetFieldName: string; override;
+    procedure pSetHabilitaButton; override;
+
 
     procedure pCarregaCliente;
     procedure pCarregaEndImovel;
@@ -114,14 +115,23 @@ begin
   pCarregaCliente;
 end;
 
-procedure TfrCadVistoria.edCodigoChange(Sender: TObject);
-begin
-  inherited;
-  if getID then
-     btAdAmbiente.Enabled := True
-  else
-     btAdAmbiente.Enabled := False;
-end;
+//procedure TfrCadVistoria.edCodigoClick(Sender: TObject);
+//begin
+//  inherited;
+//  if getID then
+//     btAdAmbiente.Enabled := True
+//  else
+//     btAdAmbiente.Enabled := False;
+//end;
+
+//procedure TfrCadVistoria.edCodigoChange(Sender: TObject);
+//begin
+//  inherited;
+//  if getID then
+//     btAdAmbiente.Enabled := True
+//  else
+//     btAdAmbiente.Enabled := False;
+//end;
 
 
 procedure TfrCadVistoria.edCodImovelChange(Sender: TObject);
@@ -171,6 +181,12 @@ begin
      lbNomeLocatario.Caption := '- ' + dmTabelas.tbLocatario.FieldByName('BDNOME').AsString
   else
      lbNomeLocatario.Caption := EmptyStr;
+end;
+
+procedure TfrCadVistoria.pSetHabilitaButton;
+begin
+  inherited;
+  btAdAmbiente.Enabled := True;
 end;
 
 procedure TfrCadVistoria.SalvarCampos;

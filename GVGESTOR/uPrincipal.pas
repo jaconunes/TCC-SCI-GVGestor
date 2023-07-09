@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ExtCtrls,
+  Vcl.Imaging.jpeg, uUsuarioLogado;
 
 type
   TfrPrincipal = class(TForm)
@@ -32,6 +33,7 @@ type
     Vistorias2: TMenuItem;
     Locatrios2: TMenuItem;
     Gerar1: TMenuItem;
+    Image1: TImage;
     procedure FormCreate(Sender: TObject);
     procedure mUsuarioClick(Sender: TObject);
     procedure Usurios1Click(Sender: TObject);
@@ -47,10 +49,12 @@ type
     procedure Vistorias1Click(Sender: TObject);
   private
     { Private declarations }
+    FUsuarioLogado : TUsuario;
   public
     { Public declarations }
     procedure pPerfilAdm;
     procedure pPerfilPadrao;
+    procedure pGetUsuarioLogado(wUsuario : TUsuario);
   end;
 
 var
@@ -60,19 +64,17 @@ implementation
 
 {$R *.dfm}
 
-uses udmDadosGVGESTOR, uUsuarioLogado, uCadUsuario, uConsUsuario, uCadImovel,
+uses udmDadosGVGESTOR, uCadUsuario, uConsUsuario, uCadImovel,
   uConsProprietario, uConsImovel, uCadProprietario, uCadCliente, uConsCliente,
-  uCadLocatario, uConsLocatario, uCadVistoria, uConsVistoria;
+  uCadLocatario, uConsLocatario, uCadVistoria, uConsVistoria, uLogin;
 
 { TfrPrincipal }
 
-procedure TfrPrincipal.Clientes1Click(Sender: TObject);
-begin
-  TfrConsCliente.Create(self).Show;
-end;
+
 
 procedure TfrPrincipal.FormCreate(Sender: TObject);
 begin
+ TfrConsCliente.Create(self).Show;
   //TfrLogin.Create(self).Show;
 //  if Owner is TfrLogin then
 //     begin
@@ -98,6 +100,11 @@ begin
 //     else
 //     if frLogin.fGetUsuarioLogado.Perfil = 'Padrão' then
 //        pPerfilPadrao;
+end;
+
+procedure TfrPrincipal.Clientes1Click(Sender: TObject);
+begin
+  TfrConsCliente.Create(self).Show;
 end;
 
 procedure TfrPrincipal.Cliente1Click(Sender: TObject);
@@ -128,6 +135,11 @@ end;
 procedure TfrPrincipal.mUsuarioClick(Sender: TObject);
 begin
   TfrCadUsuario.Create(self).Show;
+end;
+
+procedure TfrPrincipal.pGetUsuarioLogado(wUsuario: TUsuario);
+begin
+  FUsuarioLogado := wUsuario;
 end;
 
 procedure TfrPrincipal.pPerfilAdm;

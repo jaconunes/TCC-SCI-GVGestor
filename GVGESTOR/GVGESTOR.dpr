@@ -27,7 +27,8 @@ uses
   uConsVistoria in 'Consultas\uConsVistoria.pas' {frConsVistoria},
   uConsAmbiente in 'Consultas\uConsAmbiente.pas' {frConsAmbiente},
   uConsItem in 'Consultas\uConsItem.pas' {frConsItem},
-  uConsFoto in 'Consultas\uConsFoto.pas' {frConsFoto};
+  uConsFoto in 'Consultas\uConsFoto.pas' {frConsFoto},
+  uUsuarioLogado in 'uUsuarioLogado.pas';
 
 {$R *.res}
 
@@ -37,5 +38,13 @@ begin
   Application.CreateForm(TdmConnection, dmConnection);
   Application.CreateForm(TdmTabelas, dmTabelas);
   Application.CreateForm(TfrPrincipal, frPrincipal);
+  //frLogin := TfrLogin.Create(nil);
+  //frLogin.ShowModal;
+
+  //Application.CreateForm(TfrPrincipal, frPrincipal);
+
+  //frLogin.Hide;
+  //frLogin.Free;
+
   Application.Run;
 end.
