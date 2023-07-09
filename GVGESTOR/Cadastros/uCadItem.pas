@@ -32,7 +32,8 @@ type
     procedure CarregaCampos; override;
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
-    function getID: Boolean; override;
+    function fSetFieldName: string; override;
+
   end;
 
 var
@@ -77,15 +78,9 @@ begin
      end;
 end;
 
-function TfrCadItem.getID: Boolean;
+function TfrCadItem.fSetFieldName: string;
 begin
-  Result := False;// define padrão false
-  pLimpaFiltros(FTabela);
-  FTabela.IndexFieldNames := 'BDCODITEM';
-  if Assigned(FTabela) and Assigned(edCodigo) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
-     begin
-       Result := FTabela.FindKey([edCodigo.Text]);
-     end;
+  Result := 'BDCODITEM';
 end;
 
 procedure TfrCadItem.SalvarCampos;

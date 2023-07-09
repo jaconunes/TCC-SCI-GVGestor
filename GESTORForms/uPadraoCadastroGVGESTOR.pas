@@ -21,6 +21,7 @@ type
     procedure btExcluirClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure IDEditExit(Sender: TObject);
+    procedure IDEditKeyPress(Sender: TObject; var Key: Char);
     procedure LastEditExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -33,6 +34,7 @@ type
     FTeclouEsc : Boolean;
     FValidandoCampos : Boolean;
     FPressionouSalvar : Boolean;
+    FFieldName : String;
   public
     { Public declarations }
     FTabela: TClientDataSet;// essa variável vai manter a tabela do cadastro
@@ -41,6 +43,7 @@ type
     function setLastEdit: TWinControl; virtual; abstract; // informar o último campo da tela para salvar automaticamente
     procedure CarregaCampos; virtual; abstract; // carregar os campos da tabela para os camnpos da tela
     procedure SalvarCampos; virtual; abstract; // salvar os valores dos campos da tela para os campos da tabela
+    function fSetFieldName: String; virtual; abstract; //obter o fieldname da PK da tabela
     function ValidaCampos: Boolean; virtual;
     function getID: Boolean; virtual;
     function getPodeExcluir: Boolean; virtual;
@@ -49,9 +52,11 @@ type
     procedure ConfirmarDados; virtual;
     procedure pLimpaFiltros(wTabela : TClientDataset); virtual;
     function fAplicaMascara(wS : String) : String; virtual;
+    function fAplicaMascaraTelefone(wS : String) : String; virtual;
+    function fGerarID: Integer; virtual;
 
     //valida campo CNPJ
-    function validaCnpj(S: String): String;
+    function fCharacterRemove(S: String): String;
   end;
 
 var
@@ -119,10 +124,31 @@ end;
 function TfrPadraoCadastroGVGESTOR.fAplicaMascara(wS: String): String;
 begin
   if wS.Length = 11 then
-     Result := FormatMaskText('999.999.999-99;0', validaCnpj(wS))
+     Result := FormatMaskText('999.999.999-99;0', fCharacterRemove(wS))
   else
   if wS.Length = 14 then
-     Result := FormatMaskText('99.999.999/9999-99;0', validaCnpj(wS));
+     Result := FormatMaskText('99.999.999/9999-99;0', fCharacterRemove(wS));
+end;
+
+function TfrPadraoCadastroGVGESTOR.fAplicaMascaraTelefone(wS: String): String;
+begin
+   Result := FormatMaskText('(99)99999-9999;0', fCharacterRemove(wS));
+end;
+
+function TfrPadraoCadastroGVGESTOR.fGerarID: Integer;
+var
+  wID : Integer;
+begin
+  wID := Random(1000);
+  FTabela.First;
+  while not FTabela.Eof do
+     begin
+       if FTabela.FieldByName(FFieldName).AsInteger = wID then
+            wID := Random(1000);
+
+       FTabela.Next;
+     end;
+  Result := wID;
 end;
 
 procedure TfrPadraoCadastroGVGESTOR.FormClose(Sender: TObject;
@@ -134,12 +160,17 @@ end;
 
 procedure TfrPadraoCadastroGVGESTOR.FormCreate(Sender: TObject);
 begin
+  FFieldName := fSetFieldName;
   FTabela := setTabela;// instanciar a tabela do cadastro
   FIDEdit := setIDEdit;// instanciar o campo da chave
   if Assigned(FIDEdit) then// setar o evento de saida do campo
      begin
        if FIDEdit is TCustomEdit then
-          TEdit(FIDEdit).OnExit := IDEditExit;
+          begin
+            TCustomEdit(FIDEdit).Text := IntToStr(fGerarID);
+            TEdit(FIDEdit).OnExit := IDEditExit;
+            TEdit(FIDEdit).OnKeyPress := IDEditKeyPress;
+          end;
      end;
 
   FLastEdit := setLastEdit;// instanciar último campo da tela para salvar automaticamente
@@ -173,14 +204,15 @@ end;
 procedure TfrPadraoCadastroGVGESTOR.FormKeyPress(Sender: TObject;
   var Key: Char);
 begin
+
   Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
 end;
 
 function TfrPadraoCadastroGVGESTOR.getID: Boolean;
 begin
   Result := False;// define padrão false
-  //pLimpaFiltros(FTabela);
-  //FTabela.IndexFieldNames := 'BDCODIMOVEL';
+  pLimpaFiltros(FTabela);
+  FTabela.IndexFieldNames := FFieldName;
   if Assigned(FTabela) and Assigned(FIDEdit) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
      begin
        Result := FTabela.FindKey([TCustomEdit(FIDEdit).Text]);
@@ -197,7 +229,17 @@ begin
   if getID then// caso encontre a chave na tabela
      CarregaCampos// deve carregar os campos da tabela nos campos da tela
   else
-     setLimpaCampos;// caso NÃO encontre, deve limpar os campos da tela
+     begin
+       TCustomEdit(FIDEdit).Text := IntToStr(fGerarID); // Gera ID para novo registro
+       setLimpaCampos;// caso NÃO encontre, deve limpar os campos da tela
+     end;
+
+end;
+
+procedure TfrPadraoCadastroGVGESTOR.IDEditKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  Key := #0;
 end;
 
 procedure TfrPadraoCadastroGVGESTOR.LastEditExit(Sender: TObject);
@@ -244,7 +286,7 @@ begin
   Result := True; // o valor deve retornar verdadeiro para poder salvar os dados na tabela
 end;
 
-function TfrPadraoCadastroGVGESTOR.validaCnpj(S: String): String;
+function TfrPadraoCadastroGVGESTOR.fCharacterRemove(S: String): String;
 var
   i: Integer;
 begin

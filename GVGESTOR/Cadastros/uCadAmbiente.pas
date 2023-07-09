@@ -37,7 +37,8 @@ type
     procedure CarregaCampos; override;
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
-    function getID: Boolean; override;
+    function fSetFieldName: string; override;
+
 
     property CodVistoria : Integer read wCodVistoria write wCodVistoria;
   end;
@@ -98,15 +99,9 @@ begin
      end;
 end;
 
-function TfrCadAmbiente.getID: Boolean;
+function TfrCadAmbiente.fSetFieldName: string;
 begin
-  Result := False;// define padrão false
-  pLimpaFiltros(FTabela);
-  FTabela.IndexFieldNames := 'BDCODAMB';
-  if Assigned(FTabela) and Assigned(edCodigo) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
-     begin
-       Result := FTabela.FindKey([edCodigo.Text]);
-     end;
+  Result := 'BDCODAMB';
 end;
 
 procedure TfrCadAmbiente.SalvarCampos;

@@ -31,6 +31,9 @@ type
     edCidade: TEdit;
     procedure btPesquisarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure edCpfCnpjExit(Sender: TObject);
+    procedure cbTipoPessoaChange(Sender: TObject);
+    procedure edTelefoneExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,7 +44,7 @@ type
     procedure CarregaCampos; override;
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
-    function getID: Boolean; override;
+    function fSetFieldName: string; override;
 
   end;
 
@@ -73,6 +76,27 @@ begin
   edCidade.Text := FTabela.FieldByName('BDCIDADE').AsString;
 end;
 
+procedure TfrCadProprietario.cbTipoPessoaChange(Sender: TObject);
+begin
+  inherited;
+  if cbTipoPessoa.ItemIndex = 0 then
+     edCpfCnpj.MaxLength := 11
+  else
+     edCpfCnpj.MaxLength := 14;
+end;
+
+procedure TfrCadProprietario.edCpfCnpjExit(Sender: TObject);
+begin
+  inherited;
+  edCpfCnpj.Text := fAplicaMascara(edCpfCnpj.Text);
+end;
+
+procedure TfrCadProprietario.edTelefoneExit(Sender: TObject);
+begin
+  inherited;
+  edTelefone.Text := fAplicaMascaraTelefone(edTelefone.Text);
+end;
+
 procedure TfrCadProprietario.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -82,16 +106,9 @@ begin
      end;
 end;
 
-function TfrCadProprietario.getID: Boolean;
+function TfrCadProprietario.fSetFieldName: string;
 begin
-  //inherited;
-  Result := False;// define padrão false
-  //pLimpaFiltros(FTabela);
-  FTabela.IndexFieldNames := 'BDCDPROPR';
-  if Assigned(FTabela) and Assigned(edCodProp) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
-     begin
-       Result := FTabela.FindKey([edCodProp.Text]);
-     end;
+  Result := 'BDCDPROPR';
 end;
 
 procedure TfrCadProprietario.SalvarCampos;
@@ -100,8 +117,8 @@ begin
   FTabela.FieldByName('BDCDPROPR').AsInteger := edCodProp.Codigo;
   FTabela.FieldByName('BDNOME').AsString := edNome.Text;
   FTabela.FieldByName('BDTIPOPESSOA').AsString := cbTipoPessoa.Items[cbTipoPessoa.ItemIndex];
-  FTabela.FieldByName('BDCPFCNPJ').AsString := edCpfCnpj.Text;
-  FTabela.FieldByName('BDTELEFONE').AsString := edTelefone.Text;
+  FTabela.FieldByName('BDCPFCNPJ').AsString := fCharacterRemove(edCpfCnpj.Text);
+  FTabela.FieldByName('BDTELEFONE').AsString := fCharacterRemove(edTelefone.Text);
   FTabela.FieldByName('BDENDERECO').AsString := edLogradouro.Text;
   FTabela.FieldByName('BDNUMERO').AsInteger := edNumero.Codigo;
   FTabela.FieldByName('BDBAIRRO').AsString := edBairro.Text;

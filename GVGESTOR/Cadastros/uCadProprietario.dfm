@@ -118,6 +118,7 @@ inherited frCadProprietario: TfrCadProprietario
       ParentFont = False
       TabOrder = 2
       Text = 'F'#237'sica'
+      OnChange = cbTipoPessoaChange
       Items.Strings = (
         'F'#237'sica'
         'Jur'#237'dica')
@@ -134,6 +135,7 @@ inherited frCadProprietario: TfrCadProprietario
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      OnExit = edCpfCnpjExit
     end
     object edTelefone: TEdit
       Left = 106
@@ -147,6 +149,7 @@ inherited frCadProprietario: TfrCadProprietario
       Font.Style = []
       ParentFont = False
       TabOrder = 4
+      OnExit = edTelefoneExit
     end
     object GroupBox1: TGroupBox
       Left = 13
@@ -154,6 +157,9 @@ inherited frCadProprietario: TfrCadProprietario
       Width = 536
       Height = 80
       Caption = 'Endere'#231'o'
+      Color = clActiveCaption
+      ParentBackground = False
+      ParentColor = False
       TabOrder = 5
       object Label6: TLabel
         Left = 18
@@ -282,7 +288,7 @@ inherited frCadProprietario: TfrCadProprietario
     Left = 376
     Top = 1
     Bitmap = {
-      494C010106000800A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800B40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

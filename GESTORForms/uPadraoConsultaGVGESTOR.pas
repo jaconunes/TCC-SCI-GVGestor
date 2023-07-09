@@ -106,7 +106,10 @@ begin
      end
   else
   if Key = VK_DELETE then// tecla de atalho para excluir
-     btExcluir.Click;
+     btExcluir.Click
+  else
+  if Key = VK_ESCAPE then// tecla de atalho para fechar a tela
+     Close;
 end;
 
 function TfrPadraoConsultaGVGSTOR.getPodeExcluir: Boolean;

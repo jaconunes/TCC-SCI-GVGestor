@@ -2,6 +2,10 @@ inherited frCadLocatario: TfrCadLocatario
   Caption = 'Cadastro de locat'#225'rio'
   ClientHeight = 200
   ClientWidth = 359
+  Constraints.MaxHeight = 239
+  Constraints.MaxWidth = 375
+  Constraints.MinHeight = 239
+  Constraints.MinWidth = 375
   ExplicitWidth = 375
   ExplicitHeight = 239
   PixelsPerInch = 96
@@ -17,7 +21,7 @@ inherited frCadLocatario: TfrCadLocatario
     Width = 359
     Height = 167
     ExplicitWidth = 359
-    ExplicitHeight = 169
+    ExplicitHeight = 167
     object Label1: TLabel
       Left = 40
       Top = 18
@@ -123,8 +127,10 @@ inherited frCadLocatario: TfrCadLocatario
       Font.Height = -15
       Font.Name = 'Segoe UI'
       Font.Style = []
+      MaxLength = 14
       ParentFont = False
       TabOrder = 2
+      OnExit = edCpfCnpjExit
     end
     object edEmail: TEdit
       Left = 89
@@ -149,15 +155,17 @@ inherited frCadLocatario: TfrCadLocatario
       Font.Height = -15
       Font.Name = 'Segoe UI'
       Font.Style = []
+      MaxLength = 11
       ParentFont = False
       TabOrder = 4
+      OnExit = edTelefoneExit
     end
   end
   inherited ImageList1: TImageList
     Left = 224
     Top = 9
     Bitmap = {
-      494C010106000800AC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

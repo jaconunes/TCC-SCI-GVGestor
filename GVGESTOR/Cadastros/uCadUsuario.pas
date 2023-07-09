@@ -43,7 +43,7 @@ type
     procedure CarregaCampos; override;
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
-    function getID: Boolean; override;
+    function fSetFieldName: string; override;
 
   end;
 
@@ -98,13 +98,9 @@ begin
        edCodigo.Text := IntToStr(TfrConsUsuario(Owner).grConsulta.Columns[0].Field.AsInteger);
 end;
 
-function TfrCadUsuario.getID: Boolean;
+function TfrCadUsuario.fSetFieldName: string;
 begin
-  Result := False;// define padrão false
-  if Assigned(FTabela) and Assigned(edCodigo) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
-     begin
-       Result := FTabela.FindKey([edCodigo.Text]);
-     end;
+  Result := 'BDCODIGO';
 end;
 
 procedure TfrCadUsuario.rbCnpjClick(Sender: TObject);
@@ -126,7 +122,7 @@ begin
   inherited;
   FTabela.FieldByName('BDCODIGO').AsInteger := edCodigo.Codigo;
   FTabela.FieldByName('BDNOME').AsString    := edNome.Text;
-  FTabela.FieldByName('BDCPFCNPJ').AsString := validaCnpj(edCpfCnpj.Text);
+  FTabela.FieldByName('BDCPFCNPJ').AsString := fCharacterRemove(edCpfCnpj.Text);
   FTabela.FieldByName('BDPERFIL').AsString  := cbPerfil.Items[cbPerfil.ItemIndex];
   FTabela.FieldByName('BDSENHA').AsString   := edSenha.Text;
   FTabela.FieldByName('BDUSUARIO').AsString := edUsuario.Text;

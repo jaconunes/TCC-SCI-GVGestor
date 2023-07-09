@@ -2,6 +2,10 @@
   Caption = 'Cadastro de foto'
   ClientHeight = 472
   ClientWidth = 421
+  Constraints.MaxHeight = 511
+  Constraints.MaxWidth = 437
+  Constraints.MinHeight = 511
+  Constraints.MinWidth = 437
   OnShow = FormShow
   ExplicitWidth = 437
   ExplicitHeight = 511
@@ -12,6 +16,9 @@
     ExplicitWidth = 421
     inherited btSalvar: TToolButton
       ImageIndex = 7
+    end
+    inherited btPesquisar: TToolButton
+      OnClick = btPesquisarClick
     end
     object btAdicionar: TToolButton
       Left = 123
@@ -119,7 +126,7 @@
     Left = 184
     Top = 65534
     Bitmap = {
-      494C010108006001BC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108006001C40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

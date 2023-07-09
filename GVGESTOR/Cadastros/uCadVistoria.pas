@@ -58,11 +58,12 @@ type
     procedure CarregaCampos; override;
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
-    function getID: Boolean; override;
+    function fSetFieldName: string; override;
 
     procedure pCarregaCliente;
     procedure pCarregaEndImovel;
     procedure pCarregaLocatario;
+
   end;
 
 var
@@ -135,15 +136,9 @@ begin
   pCarregaLocatario;
 end;
 
-function TfrCadVistoria.getID: Boolean;
+function TfrCadVistoria.fSetFieldName: string;
 begin
-  Result := False;// define padrão false
-  pLimpaFiltros(FTabela);
-  FTabela.IndexFieldNames := 'BDCODVIST';
-  if Assigned(FTabela) and Assigned(edCodigo) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
-     begin
-       Result := FTabela.FindKey([edCodigo.Text]);
-     end;
+  Result := 'BDCODVIST';
 end;
 
 procedure TfrCadVistoria.pCarregaCliente;

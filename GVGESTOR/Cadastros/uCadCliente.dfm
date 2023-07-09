@@ -2,6 +2,10 @@ inherited frCadCliente: TfrCadCliente
   Caption = 'Cadastro de cliente'
   ClientHeight = 273
   ClientWidth = 531
+  Constraints.MaxHeight = 312
+  Constraints.MaxWidth = 547
+  Constraints.MinHeight = 312
+  Constraints.MinWidth = 547
   ExplicitWidth = 547
   ExplicitHeight = 312
   PixelsPerInch = 96
@@ -123,8 +127,10 @@ inherited frCadCliente: TfrCadCliente
       Font.Height = -15
       Font.Name = 'Segoe UI'
       Font.Style = []
+      MaxLength = 14
       ParentFont = False
       TabOrder = 2
+      OnExit = edCnpjExit
     end
     object edTelefone: TEdit
       Left = 108
@@ -136,8 +142,10 @@ inherited frCadCliente: TfrCadCliente
       Font.Height = -15
       Font.Name = 'Segoe UI'
       Font.Style = []
+      MaxLength = 11
       ParentFont = False
       TabOrder = 3
+      OnExit = edTelefoneExit
     end
     object edEmail: TEdit
       Left = 300
@@ -158,7 +166,7 @@ inherited frCadCliente: TfrCadCliente
       Width = 513
       Height = 95
       Caption = 'Endere'#231'o'
-      Color = clSkyBlue
+      Color = clActiveCaption
       ParentBackground = False
       ParentColor = False
       TabOrder = 5
@@ -276,7 +284,7 @@ inherited frCadCliente: TfrCadCliente
     Left = 304
     Top = 1
     Bitmap = {
-      494C010106000800B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800C40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

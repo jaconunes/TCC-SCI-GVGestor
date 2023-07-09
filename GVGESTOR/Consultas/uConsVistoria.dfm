@@ -2,9 +2,119 @@ inherited frConsVistoria: TfrConsVistoria
   Caption = 'Consulta de vistoria'
   PixelsPerInch = 96
   TextHeight = 13
+  inherited grConsulta: TDBGrid
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'BDCODVIST'
+        Title.Caption = 'CODIGO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDDATAVIST'
+        Title.Caption = 'DATA'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDTIPOLOC'
+        Title.Caption = 'TIPO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDSITUACAO'
+        Title.Caption = 'SITUA'#199#195'O'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDACESSO'
+        Title.Caption = 'ACESSO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDNMEDENE'
+        Title.Caption = 'MEDIDOR ENERGIA'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDLEITENERG'
+        Title.Caption = 'LEITURA ENERGIA'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDNMEDAGUA'
+        Title.Caption = 'MEDIDOR '#193'GUA'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDLEITAGUA'
+        Title.Caption = 'LEITURA '#193'GUA'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDCODUSU'
+        Title.Caption = 'USU'#193'RIO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDCODCLT'
+        Title.Caption = 'CLIENTE'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDCODIMOV'
+        Title.Caption = 'IM'#211'VEL'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDCODLOCAT'
+        Title.Caption = 'LOCAT'#193'RIO'
+        Visible = True
+      end>
+  end
+  inherited Panel1: TPanel
+    inherited grDetalhe: TDBGrid
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'BDCODAMB'
+          Title.Caption = 'C'#211'DIGO'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'BDNOME'
+          Title.Caption = 'NOME'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'BDOBSADC'
+          Title.Caption = 'OBSERVA'#199#195'O'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'BDCODVIST'
+          Title.Caption = 'VISTORIA'
+          Visible = True
+        end>
+    end
+  end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C01010700E000CC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010700E000D00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

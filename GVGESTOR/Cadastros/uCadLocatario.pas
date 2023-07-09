@@ -22,6 +22,8 @@ type
     Label5: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btPesquisarClick(Sender: TObject);
+    procedure edTelefoneExit(Sender: TObject);
+    procedure edCpfCnpjExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,7 +34,8 @@ type
     procedure CarregaCampos; override;
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
-    function getID: Boolean; override;
+    function fSetFieldName: string; override;
+
   end;
 
 var
@@ -61,6 +64,18 @@ begin
   edTelefone.Text := FTabela.FieldByName('BDTELEFONE').AsString;
 end;
 
+procedure TfrCadLocatario.edCpfCnpjExit(Sender: TObject);
+begin
+  inherited;
+  edCpfCnpj.Text := fAplicaMascara(edCpfCnpj.Text);
+end;
+
+procedure TfrCadLocatario.edTelefoneExit(Sender: TObject);
+begin
+  inherited;
+  edTelefone.Text := fAplicaMascaraTelefone(edTelefone.Text);
+end;
+
 procedure TfrCadLocatario.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -70,14 +85,9 @@ begin
      end;
 end;
 
-function TfrCadLocatario.getID: Boolean;
+function TfrCadLocatario.fSetFieldName: string;
 begin
-  Result := False;// define padrão false
-  FTabela.IndexFieldNames := 'BDCDLOCAT';
-  if Assigned(FTabela) and Assigned(edCodigo) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
-     begin
-       Result := FTabela.FindKey([edCodigo.Text]);
-     end;
+  Result := 'BDCDLOCAT';
 end;
 
 procedure TfrCadLocatario.SalvarCampos;
@@ -85,9 +95,9 @@ begin
   inherited;
   FTabela.FieldByName('BDCDLOCAT').AsInteger := edCodigo.Codigo;
   FTabela.FieldByName('BDNOME').AsString    := edNome.Text;
-  FTabela.FieldByName('BDCPFCNPJ').AsString  := edCpfCnpj.Text;
+  FTabela.FieldByName('BDCPFCNPJ').AsString  := fCharacterRemove(edCpfCnpj.Text);
   FTabela.FieldByName('BDEMAIL').AsString    := edEmail.Text;
-  FTabela.FieldByName('BDTELEFONE').AsString := edTelefone.Text;
+  FTabela.FieldByName('BDTELEFONE').AsString := fCharacterRemove(edTelefone.Text);
 end;
 
 function TfrCadLocatario.setIDEdit: TWinControl;

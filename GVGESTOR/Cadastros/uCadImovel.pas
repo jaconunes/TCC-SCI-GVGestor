@@ -31,10 +31,10 @@ type
     Label9: TLabel;
     edCodProp: TEdit_Numero_PEDSCI;
     lbNomeProprietario: TLabel;
-    procedure edCodPropExit(Sender: TObject);
     procedure btPesquisarClick(Sender: TObject);
     procedure edCodigoExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure edCodPropChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,7 +45,7 @@ type
     procedure CarregaCampos; override;
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
-    function getID: Boolean; override;
+    function fSetFieldName: string; override;
 
     procedure pCarregaProprietario;
   end;
@@ -89,7 +89,7 @@ begin
   pCarregaProprietario;
 end;
 
-procedure TfrCadImovel.edCodPropExit(Sender: TObject);
+procedure TfrCadImovel.edCodPropChange(Sender: TObject);
 begin
   inherited;
   pCarregaProprietario;
@@ -105,16 +105,9 @@ begin
 
 end;
 
-function TfrCadImovel.getID: Boolean;
+function TfrCadImovel.fSetFieldName: string;
 begin
-  //inherited;
-  Result := False;// define padrão false
-  //pLimpaFiltros(FTabela);
-  FTabela.IndexFieldNames := 'BDCODIMOVEL';
-  if Assigned(FTabela) and Assigned(edCodigo) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
-     begin
-       Result := FTabela.FindKey([edCodigo.Text]);
-     end;
+  Result := 'BDCODIMOVEL';
 end;
 
 procedure TfrCadImovel.pCarregaProprietario;

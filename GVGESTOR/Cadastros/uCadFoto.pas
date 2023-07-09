@@ -22,6 +22,9 @@ type
     Label2: TLabel;
     procedure btAdicionarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btPesquisarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     wCodAmbiente : Integer;
@@ -33,9 +36,8 @@ type
     procedure CarregaCampos; override;
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
-    function getID: Boolean; override;
-
     function fGetImageFileName(Sender: TOpenPictureDialog): string;
+    function fSetFieldName: string; override;
   end;
 
 var
@@ -47,7 +49,7 @@ implementation
 
 { TfrCadFoto }
 
-uses jpeg, uCadAmbiente, udmDadosGVGESTOR;
+uses jpeg, uCadAmbiente, udmDadosGVGESTOR, uConsFoto;
 
 procedure TfrCadFoto.btAdicionarClick(Sender: TObject);
 begin
@@ -58,10 +60,32 @@ begin
      end;
 end;
 
+procedure TfrCadFoto.btPesquisarClick(Sender: TObject);
+begin
+  inherited;
+  TfrConsFoto.Create(edCodigo);
+end;
+
 procedure TfrCadFoto.CarregaCampos;
 begin
   edDescricao.Text := FTabela.FieldByName('BDDESC').AsString;
   iImagem.Picture.LoadFromFile(FTabela.FieldByName('BDURL').AsString);
+end;
+
+procedure TfrCadFoto.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  if (Owner is TForm) and (not TForm(Owner).Enabled) then
+     TForm(Owner).Enabled := True;
+end;
+
+procedure TfrCadFoto.FormCreate(Sender: TObject);
+begin
+  inherited;
+  if Owner is TfrConsFoto then
+     begin
+       edCodigo.Text := IntToStr(TfrConsFoto(Owner).grConsulta.Columns[0].Field.AsInteger);
+     end;
 end;
 
 procedure TfrCadFoto.FormShow(Sender: TObject);
@@ -75,15 +99,9 @@ begin
      end;
 end;
 
-function TfrCadFoto.getID: Boolean;
+function TfrCadFoto.fSetFieldName: string;
 begin
-  Result := False;// define padrão false
-  pLimpaFiltros(FTabela);
-  FTabela.IndexFieldNames := 'BDCODFOTO';
-  if Assigned(FTabela) and Assigned(edCodigo) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
-     begin
-       Result := FTabela.FindKey([edCodigo.Text]);
-     end;
+  Result := 'BDCODFOTO';
 end;
 
 function TfrCadFoto.fGetImageFileName(Sender: TOpenPictureDialog): string;
@@ -95,7 +113,7 @@ begin
        wUrlImagem := 'C:\TCC - Gestor de Vistorias\GVGESTOR\images\Vistoria_' +
                      IntToStr(TfrCadAmbiente(Owner).CodVistoria) + '_' +
                      TfrCadAmbiente(Owner).edNome.Text + '_' +
-                     TfrCadAmbiente(Owner).edCodigo.Text + '_' +
+                     TfrCadAmbiente(Owner).edCodigo.Text + '_' + 'Foto_' +
                      edCodigo.Text + '.jpg';
        CopyFile(PChar(Sender.FileName), PChar(wUrlImagem), True);
        Result := wUrlImagem;

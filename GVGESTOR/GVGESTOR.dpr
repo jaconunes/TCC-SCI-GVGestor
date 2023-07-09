@@ -26,7 +26,8 @@ uses
   uPadraoConsultaDetalheGVGESTOR in '..\GESTORForms\uPadraoConsultaDetalheGVGESTOR.pas' {frPadraoConsultaDetalheGVGSTOR},
   uConsVistoria in 'Consultas\uConsVistoria.pas' {frConsVistoria},
   uConsAmbiente in 'Consultas\uConsAmbiente.pas' {frConsAmbiente},
-  uConsItem in 'Consultas\uConsItem.pas' {frConsItem};
+  uConsItem in 'Consultas\uConsItem.pas' {frConsItem},
+  uConsFoto in 'Consultas\uConsFoto.pas' {frConsFoto};
 
 {$R *.res}
 

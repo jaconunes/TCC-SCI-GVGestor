@@ -7,9 +7,42 @@ inherited frConsItem: TfrConsItem
       OnClick = btEditarClick
     end
   end
+  inherited grConsulta: TDBGrid
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'BDCODITEM'
+        Title.Caption = 'CODIGO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDDESCRICAO'
+        Title.Caption = 'DESCRI'#199#195'O'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDESTADO'
+        Title.Caption = 'ESTADO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDOBSADC'
+        Title.Caption = 'OBSERVA'#199#195'O'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDCODAMB'
+        Title.Caption = 'AMBIENTE'
+        Visible = True
+      end>
+  end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C01010700E000A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010700E000AC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -31,6 +31,8 @@ type
     Label9: TLabel;
     procedure btPesquisarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure edTelefoneExit(Sender: TObject);
+    procedure edCnpjExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,7 +43,8 @@ type
     procedure CarregaCampos; override;
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
-    function getID: Boolean; override;
+    function fSetFieldName: string; override;
+
   end;
 
 var
@@ -74,6 +77,18 @@ begin
   edTelefone.Text    := FTabela.FieldByName('BDTELEFONE').AsString;
 end;
 
+procedure TfrCadCliente.edCnpjExit(Sender: TObject);
+begin
+  inherited;
+  edCnpj.Text := fAplicaMascara(edCnpj.Text);
+end;
+
+procedure TfrCadCliente.edTelefoneExit(Sender: TObject);
+begin
+  inherited;
+  edTelefone.Text := fAplicaMascaraTelefone(edTelefone.Text);
+end;
+
 procedure TfrCadCliente.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -83,27 +98,22 @@ begin
      end;
 end;
 
-function TfrCadCliente.getID: Boolean;
+function TfrCadCliente.fSetFieldName: string;
 begin
-  Result := False;// define padrão false
-  FTabela.IndexFieldNames := 'BDCODCLI';
-  if Assigned(FTabela) and Assigned(edCodigo) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
-     begin
-       Result := FTabela.FindKey([edCodigo.Text]);
-     end;
+  Result := 'BDCODCLI';
 end;
 
 procedure TfrCadCliente.SalvarCampos;
 begin
   FTabela.FieldByName('BDCODCLI').AsInteger  := edCodigo.Codigo;
   FTabela.FieldByName('BDRASOCIAL').AsString := edRazaoSocial.Text;
-  FTabela.FieldByName('BDCNPJ').AsString     := edCnpj.Text;
+  FTabela.FieldByName('BDCNPJ').AsString     := fCharacterRemove(edCnpj.Text);
   FTabela.FieldByName('BDENDERECO').AsString := edLogradouro.Text;
   FTabela.FieldByName('BDNUMERO').AsInteger  := edNumero.Codigo;
   FTabela.FieldByName('BDBAIRRO').AsString   := edBairro.Text;
   FTabela.FieldByName('BDCIDADE').AsString   := edCidade.Text;
   FTabela.FieldByName('BDEMAIL').AsString    := edEmail.Text;
-  FTabela.FieldByName('BDTELEFONE').AsString := edTelefone.Text;
+  FTabela.FieldByName('BDTELEFONE').AsString := fCharacterRemove(edTelefone.Text);
 end;
 
 function TfrCadCliente.setIDEdit: TWinControl;

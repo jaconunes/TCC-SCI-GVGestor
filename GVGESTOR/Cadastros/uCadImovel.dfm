@@ -188,7 +188,7 @@ inherited frCadImovel: TfrCadImovel
         ParentFont = False
         TabOrder = 0
         Text = '0'
-        OnExit = edCodPropExit
+        OnChange = edCodPropChange
         Decimal = False
         DecimalSeparador = ','
         Codigo = 0
@@ -200,6 +200,9 @@ inherited frCadImovel: TfrCadImovel
       Width = 600
       Height = 88
       Caption = 'Endere'#231'o'
+      Color = clActiveCaption
+      ParentBackground = False
+      ParentColor = False
       TabOrder = 5
       object Label2: TLabel
         Left = 28
@@ -315,7 +318,7 @@ inherited frCadImovel: TfrCadImovel
     Left = 560
     Top = 9
     Bitmap = {
-      494C010106000800B00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

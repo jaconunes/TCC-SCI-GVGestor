@@ -1,0 +1,160 @@
+unit uCadAmbiente;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoCadastroGVGESTOR,
+  System.ImageList, Vcl.ImgList, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.ToolWin,
+  Vcl.StdCtrls, EditSCI, Datasnap.DBClient, Data.Db;
+
+type
+  TfrCadAmbiente = class(TfrPadraoCadastroGVGESTOR)
+    btAdItem: TToolButton;
+    btAdFoto: TToolButton;
+    ToolButton6: TToolButton;
+    ToolButton7: TToolButton;
+    edCodigo: TEdit_Numero_PEDSCI;
+    Label1: TLabel;
+    edNome: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    edObs: TEdit;
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btPesquisarClick(Sender: TObject);
+    procedure btAdItemClick(Sender: TObject);
+    procedure btAdFotoClick(Sender: TObject);
+    procedure edCodigoChange(Sender: TObject);
+  private
+    { Private declarations }
+    wCodVistoria : Integer;
+  public
+    { Public declarations }
+    function setTabela: TClientDataSet; override;
+    function setIDEdit: TWinControl; override;
+    function setLastEdit: TWinControl; override;
+    procedure CarregaCampos; override;
+    procedure SalvarCampos; override;
+    function ValidaCampos: Boolean; override;
+    //function getID: Boolean; override;
+    function fSetFieldName: string; override;
+
+
+    property CodVistoria : Integer read wCodVistoria write wCodVistoria;
+  end;
+
+var
+  frCadAmbiente: TfrCadAmbiente;
+
+implementation
+
+{$R *.dfm}
+
+uses udmDadosGVGESTOR, uCadVistoria, uConsAmbiente, uCadItem, uCadFoto;
+
+{ TfrCadAmbiente }
+
+procedure TfrCadAmbiente.btPesquisarClick(Sender: TObject);
+begin
+  inherited;
+  TfrConsAmbiente.Create(edCodigo);
+end;
+
+procedure TfrCadAmbiente.CarregaCampos;
+begin
+  edNome.Text := FTabela.FieldByName('BDNOME').AsString;
+  edObs.Text  := FTabela.FieldByName('BDOBSADC').AsString;
+end;
+
+procedure TfrCadAmbiente.edCodigoChange(Sender: TObject);
+begin
+  inherited;
+  if getID then
+     begin
+       btAdItem.Enabled := True;
+       btAdFoto.Enabled := True;
+     end
+  else
+     begin
+       btAdItem.Enabled := False;
+       btAdFoto.Enabled := False;
+     end;
+end;
+
+procedure TfrCadAmbiente.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  if (Owner is TForm) and (not TForm(Owner).Enabled) then
+     TForm(Owner).Enabled := True;
+end;
+
+procedure TfrCadAmbiente.FormShow(Sender: TObject);
+begin
+  inherited;
+  if Owner is TfrCadVistoria then
+     begin
+       TfrCadVistoria(Owner).Enabled := False;
+       CodVistoria := TfrCadVistoria(Owner).edCodigo.Codigo;
+       edCodigo.SetFocus;
+     end;
+end;
+
+function TfrCadAmbiente.fSetFieldName: string;
+begin
+  Result := 'BDCODAMB';
+end;
+
+//function TfrCadAmbiente.getID: Boolean;
+//begin
+//  inherited;
+////  Result := False;// define padrão false
+////  pLimpaFiltros(FTabela);
+////  FTabela.IndexFieldNames := 'BDCODAMB';
+////  if Assigned(FTabela) and Assigned(edCodigo) then // verificar se a tabela e o campo chave foi informado para não dar erro ao tentar acessar as variáveis
+////     begin
+////       Result := FTabela.FindKey([edCodigo.Text]);
+////     end;
+//end;
+
+procedure TfrCadAmbiente.SalvarCampos;
+begin
+  FTabela.FieldByName('BDCODAMB').AsInteger   := edCodigo.Codigo;
+  FTabela.FieldByName('BDNOME').AsString      := edNome.Text;
+  FTabela.FieldByName('BDOBSADC').AsString    := edObs.Text;
+  FTabela.FieldByName('BDCODVIST').AsInteger  := CodVistoria; //Código da vistoria
+end;
+
+function TfrCadAmbiente.setIDEdit: TWinControl;
+begin
+  Result := edCodigo;
+end;
+
+function TfrCadAmbiente.setLastEdit: TWinControl;
+begin
+  Result := edObs;
+end;
+
+function TfrCadAmbiente.setTabela: TClientDataSet;
+begin
+  Result := dmTabelas.tbAmbiente;
+end;
+
+procedure TfrCadAmbiente.btAdItemClick(Sender: TObject);
+begin
+  inherited;
+  TfrCadItem.Create(self);
+end;
+
+procedure TfrCadAmbiente.btAdFotoClick(Sender: TObject);
+begin
+  inherited;
+  TfrCadFoto.Create(self);
+end;
+
+function TfrCadAmbiente.ValidaCampos: Boolean;
+begin
+  Result := True;
+end;
+
+end.

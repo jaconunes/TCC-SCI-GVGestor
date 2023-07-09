@@ -1,64 +1,29 @@
 ﻿[Closed Files]
-File_0=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsVistoria.pas',0,1,1,37,15,0,0,,
-File_1=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\uLogin.pas',0,1,1,1,1,0,0,,
-File_2=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadCliente.pas',0,1,54,28,120,0,0,,
-File_3=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadLocatario.pas',0,1,43,51,57,0,0,,
-File_4=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsLocatario.pas',0,1,33,36,36,0,0,,
-File_5=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsCliente.pas',0,1,1,33,9,0,0,,
-File_6=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\VCL\Vcl.Controls.pas',0,1,10808,29,10819,0,0,,
-File_7=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\source\rtl\common\System.Classes.pas',0,1,16868,1,16882,0,0,,
-File_8=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\VCL\Vcl.Forms.pas',0,1,5819,1,5845,0,0,{{1729,4}
-File_9=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\VCL\Vcl.StdCtrls.pas',0,1,3198,1,3212,0,0,{{1651,4}
-File_10=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\source\data\Data.DB.pas',0,1,3250,1,3264,0,0,,
-File_11=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadUsuario.pas',0,1,27,5,40,0,0,,
-File_12=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadProprietario.pas',0,1,76,22,85,0,0,,
-File_13=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsUsuario.pas',0,1,19,32,40,0,0,,
+File_0=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadAmbiente.pas',0,1,66,54,74,0,0,,
+File_1=TSourceModule,'C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoConsultaDetalheGVGESTOR.pas',0,1,37,61,63,0,0,,
+File_2=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsImovel.pas',0,1,10,33,9,0,0,,
+File_3=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadImovel.pas',0,1,34,35,111,0,0,,
+File_4=TSourceModule,'C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas',0,1,178,3,197,0,0,,
+File_5=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\uPrincipal.pas',0,1,130,30,168,0,0,,
+File_6=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsAmbiente.pas',0,1,19,22,40,0,0,,
+File_7=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\uLogin.pas',0,1,1,1,1,0,0,,
+File_8=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadCliente.pas',0,1,54,28,120,0,0,,
+File_9=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadLocatario.pas',0,1,43,51,57,0,0,,
+File_10=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsLocatario.pas',0,1,33,36,36,0,0,,
+File_11=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsCliente.pas',0,1,1,33,9,0,0,,
+File_12=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\SOURCE\VCL\Vcl.Controls.pas',0,1,10808,29,10819,0,0,,
+File_13=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\source\rtl\common\System.Classes.pas',0,1,16868,1,16882,0,0,,
 
 [Modules]
-Module0=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsVistoria.pas
-Module1=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoConsultaDetalheGVGESTOR.pas
-Module2=C:\TCC - Gestor de Vistorias\GVGESTOR\uPrincipal.pas
-Module3=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadVistoria.pas
-Module4=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas
-Module5=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadAmbiente.pas
-Module6=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadImovel.pas
-Module7=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadItem.pas
-Module8=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadFoto.pas
-Module9=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsImovel.pas
-Count=10
+Module0=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadFoto.pas
+Module1=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadItem.pas
+Module2=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadVistoria.pas
+Module3=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsVistoria.pas
+Module4=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsItem.pas
+Count=5
 EditWindowCount=1
 
-[C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsVistoria.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=1
-
-[C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoConsultaDetalheGVGESTOR.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=1
-
-[C:\TCC - Gestor de Vistorias\GVGESTOR\uPrincipal.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadVistoria.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadAmbiente.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadImovel.pas]
+[C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadFoto.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
@@ -68,13 +33,26 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadFoto.pas]
+[C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadVistoria.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsImovel.pas]
+[C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsVistoria.pas]
 ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsItem.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoConsultaDetalheGVGESTOR.pas]
+FormState=1
+FormOnTop=0
+
+[C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas]
 FormState=1
 FormOnTop=0
 
@@ -83,18 +61,13 @@ FormState=1
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=10
-CurrentEditView=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsVistoria.pas
+ViewCount=5
+CurrentEditView=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadFoto.pas
 View0=0
 View1=1
 View2=2
 View3=3
 View4=4
-View5=5
-View6=6
-View7=7
-View8=8
-View9=9
 PercentageSizes=1
 Create=1
 Visible=1
@@ -126,113 +99,58 @@ BottomMiddelPanelData=0000080001020200000009000000446F636B5369746530100000004772
 
 [View0]
 CustomEditViewType=TEditView
-Module=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadImovel.pas
-CursorX=35
-CursorY=111
-TopLine=34
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadImovel.pas
-
-[View1]
-CustomEditViewType=TEditView
 Module=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadVistoria.pas
-CursorX=43
-CursorY=88
-TopLine=68
+CursorX=35
+CursorY=126
+TopLine=127
 LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadVistoria.pas
 
-[View2]
+[View1]
 CustomEditViewType=TEditView
 Module=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsVistoria.pas
-CursorX=30
-CursorY=33
-TopLine=14
+CursorX=43
+CursorY=29
+TopLine=17
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=Borland.FormDesignerView
+EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsVistoria.pas
+
+[View2]
+CustomEditViewType=TEditView
+Module=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadItem.pas
+CursorX=101
+CursorY=8
+TopLine=4
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadItem.pas
 
 [View3]
 CustomEditViewType=TEditView
-Module=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoConsultaDetalheGVGESTOR.pas
-CursorX=24
-CursorY=6
-TopLine=40
+Module=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsItem.pas
+CursorX=33
+CursorY=37
+TopLine=12
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=Borland.FormDesignerView
+EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsItem.pas
 
 [View4]
 CustomEditViewType=TEditView
-Module=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas
-CursorX=3
-CursorY=197
-TopLine=178
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas
-
-[View5]
-CustomEditViewType=TEditView
-Module=C:\TCC - Gestor de Vistorias\GVGESTOR\uPrincipal.pas
-CursorX=30
-CursorY=168
-TopLine=124
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\uPrincipal.pas
-
-[View6]
-CustomEditViewType=TEditView
-Module=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsImovel.pas
-CursorX=33
-CursorY=9
-TopLine=1
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsImovel.pas
-
-[View7]
-CustomEditViewType=TEditView
-Module=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadAmbiente.pas
-CursorX=33
-CursorY=93
-TopLine=74
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=Borland.FormDesignerView
-
-[View8]
-CustomEditViewType=TEditView
-Module=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadItem.pas
-CursorX=1
-CursorY=1
-TopLine=1
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=Borland.FormDesignerView
-
-[View9]
-CustomEditViewType=TEditView
 Module=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadFoto.pas
-CursorX=1
-CursorY=1
-TopLine=1
+CursorX=26
+CursorY=63
+TopLine=45
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=Borland.FormDesignerView
+EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadFoto.pas
 
 [Watches]
 Count=0
@@ -462,8 +380,8 @@ SplitPos=126
 
 [PropInspDesignerSelection]
 ArrangeBy=Name
-SelectedItem=DataSource,Action
-ExpandedItems=GlassFrame=0,HorzScrollBar=0,LiveBindings=0,"LiveBindings Designer=0",Margins=0,Anchors=0,BevelEdges=0,BorderIcons=0,Constraints=0,Options=0,ActiveControl=0,Font=0,StyleElements=0,Touch=0,DisabledImages=0,DataSource=0,Padding=0
+SelectedItem=Center,Action
+ExpandedItems=GlassFrame=0,HorzScrollBar=0,LiveBindings=0,"LiveBindings Designer=0",Margins=0,Anchors=0,BevelEdges=0,BorderIcons=0,Constraints=0,Options=0,ActiveControl=0,Font=0,StyleElements=0,Touch=0,DisabledImages=0,DataSource=0,Padding=0,OptionsEx=0
 
 [frmDesignPreview]
 PercentageSizes=1
