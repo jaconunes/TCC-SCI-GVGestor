@@ -21,8 +21,12 @@ uses
   uCadVistoria in 'Cadastros\uCadVistoria.pas' {frCadVistoria},
   uCadAmbiente in 'Cadastros\uCadAmbiente.pas' {frCadAmbiente},
   uCadFoto in 'Cadastros\uCadFoto.pas' {frCadFoto},
+  uLogin in 'uLogin.pas' {frLogin},
+  uCadItem in 'Cadastros\uCadItem.pas' {frCadItem},
+  uPadraoConsultaDetalheGVGESTOR in '..\GESTORForms\uPadraoConsultaDetalheGVGESTOR.pas' {frPadraoConsultaDetalheGVGSTOR},
   uConsVistoria in 'Consultas\uConsVistoria.pas' {frConsVistoria},
-  uLogin in 'uLogin.pas' {frLogin};
+  uConsAmbiente in 'Consultas\uConsAmbiente.pas' {frConsAmbiente},
+  uConsItem in 'Consultas\uConsItem.pas' {frConsItem};
 
 {$R *.res}
 

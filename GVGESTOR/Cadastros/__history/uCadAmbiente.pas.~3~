@@ -1,0 +1,36 @@
+unit uCadAmbiente;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoCadastroGVGESTOR,
+  System.ImageList, Vcl.ImgList, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.ToolWin,
+  Vcl.StdCtrls, EditSCI;
+
+type
+  TfrCadAmbiente = class(TfrPadraoCadastroGVGESTOR)
+    ToolButton4: TToolButton;
+    ToolButton5: TToolButton;
+    ToolButton6: TToolButton;
+    ToolButton7: TToolButton;
+    edCodigo: TEdit_Numero_PEDSCI;
+    Label1: TLabel;
+    edNome: TEdit;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Label3: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frCadAmbiente: TfrCadAmbiente;
+
+implementation
+
+{$R *.dfm}
+
+end.

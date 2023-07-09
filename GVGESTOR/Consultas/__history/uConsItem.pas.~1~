@@ -1,0 +1,26 @@
+unit uConsItem;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoConsultaGVGESTOR, Data.DB,
+  System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls,
+  Vcl.ToolWin;
+
+type
+  TfrPadraoConsultaGVGSTOR1 = class(TfrPadraoConsultaGVGSTOR)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frPadraoConsultaGVGSTOR1: TfrPadraoConsultaGVGSTOR1;
+
+implementation
+
+{$R *.dfm}
+
+end.
