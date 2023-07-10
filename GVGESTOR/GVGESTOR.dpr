@@ -6,7 +6,6 @@ uses
   udmDadosGVGESTOR in '..\GESTORForms\DataModule\udmDadosGVGESTOR.pas' {dmTabelas: TDataModule},
   uPadraoCadastroGVGESTOR in '..\GESTORForms\uPadraoCadastroGVGESTOR.pas' {frPadraoCadastroGVGESTOR},
   uPadraoConsultaGVGESTOR in '..\GESTORForms\uPadraoConsultaGVGESTOR.pas' {frPadraoConsultaGVGSTOR},
-  uPadraoRelatorioGVGESTOR in '..\GESTORForms\uPadraoRelatorioGVGESTOR.pas' {frPadraoRelatorioGVGESTOR},
   uPrincipal in 'uPrincipal.pas' {frPrincipal},
   uCadUsuario in 'Cadastros\uCadUsuario.pas' {frCadUsuario},
   uConsUsuario in 'Consultas\uConsUsuario.pas' {frConsUsuario},
@@ -28,13 +27,19 @@ uses
   uConsAmbiente in 'Consultas\uConsAmbiente.pas' {frConsAmbiente},
   uConsItem in 'Consultas\uConsItem.pas' {frConsItem},
   uConsFoto in 'Consultas\uConsFoto.pas' {frConsFoto},
-  uUsuarioLogado in 'uUsuarioLogado.pas';
+  uUsuarioLogado in 'uUsuarioLogado.pas',
+  Vcl.Themes,
+  Vcl.Styles,
+  uPadraoRelatorioGVGESTOR in '..\GESTORForms\uPadraoRelatorioGVGESTOR.pas' {frPadraoRelatorioGVGESTOR},
+  uRelImovel in 'Relatorios\uRelImovel.pas' {frRelImovel},
+  uRelProprietario in 'Relatorios\uRelProprietario.pas' {frRelProprietario};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Metropolis UI Blue');
   Application.CreateForm(TdmConnection, dmConnection);
   Application.CreateForm(TdmTabelas, dmTabelas);
   Application.CreateForm(TfrPrincipal, frPrincipal);

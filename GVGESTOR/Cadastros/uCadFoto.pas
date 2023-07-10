@@ -111,8 +111,8 @@ begin
   if Owner is TfrCadAmbiente then
      begin
        wUrlImagem := 'C:\TCC - Gestor de Vistorias\GVGESTOR\images\Vistoria_' +
-                     IntToStr(TfrCadAmbiente(Owner).CodVistoria) + '_Ambiente' +
-                     TfrCadAmbiente(Owner).edCodigo.Text + '_' + 'Foto_' +
+                     IntToStr(TfrCadAmbiente(Owner).CodVistoria) + '_Ambiente_' +
+                     TfrCadAmbiente(Owner).edCodigo.Text + '_Foto_' +
                      edCodigo.Text + '.jpg';
        CopyFile(PChar(Sender.FileName), PChar(wUrlImagem), True);
        Result := wUrlImagem;

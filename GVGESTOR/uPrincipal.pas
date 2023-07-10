@@ -47,6 +47,8 @@ type
     procedure Locatrios1Click(Sender: TObject);
     procedure Vistoria1Click(Sender: TObject);
     procedure Vistorias1Click(Sender: TObject);
+    procedure Imovis1Click(Sender: TObject);
+    procedure Proprietrios2Click(Sender: TObject);
   private
     { Private declarations }
     FUsuarioLogado : TUsuario;
@@ -66,7 +68,8 @@ implementation
 
 uses udmDadosGVGESTOR, uCadUsuario, uConsUsuario, uCadImovel,
   uConsProprietario, uConsImovel, uCadProprietario, uCadCliente, uConsCliente,
-  uCadLocatario, uConsLocatario, uCadVistoria, uConsVistoria, uLogin;
+  uCadLocatario, uConsLocatario, uCadVistoria, uConsVistoria, uLogin,
+  uRelImovel, uRelProprietario;
 
 { TfrPrincipal }
 
@@ -74,7 +77,7 @@ uses udmDadosGVGESTOR, uCadUsuario, uConsUsuario, uCadImovel,
 
 procedure TfrPrincipal.FormCreate(Sender: TObject);
 begin
- TfrConsCliente.Create(self).Show;
+ //TfrConsCliente.Create(self).Show;
   //TfrLogin.Create(self).Show;
 //  if Owner is TfrLogin then
 //     begin
@@ -110,6 +113,11 @@ end;
 procedure TfrPrincipal.Cliente1Click(Sender: TObject);
 begin
   TfrCadCliente.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Imovis1Click(Sender: TObject);
+begin
+  TfrRelImovel.Create(self).Show;
 end;
 
 procedure TfrPrincipal.Imveis1Click(Sender: TObject);
@@ -160,6 +168,11 @@ end;
 procedure TfrPrincipal.Proprietrios1Click(Sender: TObject);
 begin
   TfrConsProprietario.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Proprietrios2Click(Sender: TObject);
+begin
+  TfrRelProprietario.Create(self).Show;
 end;
 
 procedure TfrPrincipal.Usurios1Click(Sender: TObject);

@@ -1,0 +1,104 @@
+unit uPadraoRelatorioGVGESTOR;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ToolWin, Vcl.ComCtrls,
+  System.ImageList, Vcl.ImgList, Data.FMTBcd, frxExportDOCX, frxClass,
+  frxExportPDF, Data.DB, Data.SqlExpr, frxDBSet, frxDesgn, udmConnectionGVGestor;
+
+type
+  TfrPadraoRelatorioGVGESTOR = class(TForm)
+    ToolBar1: TToolBar;
+    GroupBox1: TGroupBox;
+    btVisualizar: TToolButton;
+    btSalvarComo: TToolButton;
+    btEditarReport: TToolButton;
+    ImageList1: TImageList;
+    frxReportPadrao: TfrxReport;
+    frxDesigner1: TfrxDesigner;
+    frxDBDataset1: TfrxDBDataset;
+    SQLQueryPadrao: TSQLQuery;
+    PrintDialog1: TPrintDialog;
+    frxPDFExport1: TfrxPDFExport;
+    frxDOCXExport1: TfrxDOCXExport;
+    SaveDialog1: TSaveDialog;
+    btEditar: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
+    ToolButton4: TToolButton;
+    ToolButton5: TToolButton;
+    procedure FormCreate(Sender: TObject);
+    procedure btSalvarComoClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+
+  public
+    { Public declarations }
+     procedure pGetConsultaSql; virtual; abstract;
+     procedure fCarregaFrxPadrao(wName: String); virtual;
+  end;
+
+var
+  frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrPadraoRelatorioGVGESTOR }
+
+procedure TfrPadraoRelatorioGVGESTOR.btSalvarComoClick(Sender: TObject);
+var
+  wSaveDialog : TSaveDialog;
+  wPDFFile : TfrxPDFExport;
+  wDOCFile : TfrxDOCXExport;
+  wReport: TfrxReport;
+begin
+  wSaveDialog.FileName := Caption;
+  if wSaveDialog.Execute then
+    begin
+      if MessageDlg('Deseja abrir o arquivo exportado para visualização?', mtInformation, [mbYes,mbNo], 0) = mrYes then
+      begin
+        wPDFFile.OpenAfterExport := True;
+        wDOCFile.OpenAfterExport := True;
+      end
+      else
+      begin
+        wPDFFile.OpenAfterExport := False;
+        wDOCFile.OpenAfterExport := False;
+      end;
+      wPDFFile.FileName := StringReplace(wSaveDialog.FileName, ExtractFileExt(wSaveDialog.FileName), EmptyStr, [rfIgnoreCase]) + '.pdf';
+      wDOCFile.FileName := StringReplace(wSaveDialog.FileName, ExtractFileExt(wSaveDialog.FileName), EmptyStr, [rfIgnoreCase]) + '.docx';
+
+      wReport.PrepareReport;
+
+      case wSaveDialog.FilterIndex of
+      1: wReport.Export(wPDFFile);
+      2: wReport.Export(wDOCFile);
+      end;
+    end;
+end;
+
+procedure TfrPadraoRelatorioGVGESTOR.fCarregaFrxPadrao(
+  wName: String);
+var
+  wReport :  TfrxReport;
+begin
+  wReport.LoadFromFile('C:\TCC - Gestor de Vistorias\Reports\' + wName + '.fr3');
+end;
+
+procedure TfrPadraoRelatorioGVGESTOR.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+procedure TfrPadraoRelatorioGVGESTOR.FormCreate(Sender: TObject);
+begin
+  SQLQueryPadrao.SQLConnection := dmConnection.SQLConnectionGVGESTOR;
+end;
+
+end.
