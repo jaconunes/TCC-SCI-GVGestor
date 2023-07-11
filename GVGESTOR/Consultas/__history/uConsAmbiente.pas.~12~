@@ -6,10 +6,11 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoConsultaDetalheGVGESTOR, Data.DB,
   System.ImageList, Vcl.ImgList, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids,
-  Vcl.ComCtrls, Vcl.ToolWin, Datasnap.DBClient;
+  Vcl.ComCtrls, Vcl.ToolWin, Datasnap.DBClient, Data.FMTBcd, Data.SqlExpr,
+  Datasnap.Provider;
 
 type
-  TfrConsAmbiente = class(TfrPadraoConsultaGVGSTOR1)
+  TfrConsAmbiente = class(TfrPadraoConsultaDetalheGVGSTOR)
   private
     { Private declarations }
   public
@@ -17,6 +18,8 @@ type
     function setTabela: TClientDataSet; override;
     function setTabelaDetalhe: TClientDataSet; override;
     function setCamposChaveDetalhe: string; override;
+
+
   end;
 
 var

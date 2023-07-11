@@ -19,9 +19,6 @@ type
     function setTabela: TClientDataSet; override;
     function setTabelaDetalhe: TClientDataSet; override;
     function setCamposChaveDetalhe: string; override;
-
-
-
   end;
 
 var
@@ -39,6 +36,7 @@ procedure TfrConsVistoria.FormCreate(Sender: TObject);
 begin
   inherited;
   dmTabelas.tbVistoria.Filter := EmptyStr;
+  dmTabelas.tbAmbiente.IndexFieldNames := 'BDPKCODVIST';
 end;
 
 function TfrConsVistoria.setCamposChaveDetalhe: string;

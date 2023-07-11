@@ -11,6 +11,7 @@ uses
 
 type
   TfrConsAmbiente = class(TfrPadraoConsultaDetalheGVGSTOR)
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,6 +33,13 @@ implementation
 uses udmDadosGVGESTOR;
 
 { TfrConsAmbiente }
+
+procedure TfrConsAmbiente.FormCreate(Sender: TObject);
+begin
+  inherited;
+  dmTabelas.tbAmbiente.Filter := EmptyStr;
+  dmTabelas.tbItem.IndexFieldNames := 'BDPKCODAMB';
+end;
 
 function TfrConsAmbiente.setCamposChaveDetalhe: string;
 begin

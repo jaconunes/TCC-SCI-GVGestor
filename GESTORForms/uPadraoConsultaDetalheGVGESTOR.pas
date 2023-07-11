@@ -12,19 +12,21 @@ uses
 type
   TfrPadraoConsultaDetalheGVGSTOR = class(TfrPadraoConsultaGVGSTOR)
     ToolBar2: TToolBar;
-    ToolButton5: TToolButton;
     ToolButton6: TToolButton;
-    ToolButton7: TToolButton;
     ToolButton8: TToolButton;
     ToolButton10: TToolButton;
-    ToolButton11: TToolButton;
     ToolButton12: TToolButton;
     Splitter1: TSplitter;
     Panel1: TPanel;
     grDetalhe: TDBGrid;
     dsDetalhe: TDataSource;
+    btAnteriorDetalhe: TToolButton;
+    btProximoDetalhe: TToolButton;
+    btExcluirDetalhe: TToolButton;
     procedure FormCreate(Sender: TObject);
-    procedure btExcluirClick(Sender: TObject);
+    procedure btExcluirDetalheClick(Sender: TObject);
+    procedure btAnteriorDetalheClick(Sender: TObject);
+    procedure btProximoDetalheClick(Sender: TObject);
   private
     { Private declarations }
     FTabelaDetalhe : TClientDataSet;
@@ -47,7 +49,13 @@ uses udmConnectionGVGestor;
 
 { TfrPadraoConsultaGVGSTOR1 }
 
-procedure TfrPadraoConsultaDetalheGVGSTOR.btExcluirClick(Sender: TObject);
+procedure TfrPadraoConsultaDetalheGVGSTOR.btAnteriorDetalheClick(Sender: TObject);
+begin
+  inherited;
+  FTabelaDetalhe.Prior;
+end;
+
+procedure TfrPadraoConsultaDetalheGVGSTOR.btExcluirDetalheClick(Sender: TObject);
 begin
   inherited;
   if getPodeExcluirDetalhe and Assigned(FTabelaDetalhe) and (not FTabelaDetalhe.IsEmpty) then
@@ -56,6 +64,12 @@ begin
       FTabelaDetalhe.ApplyUpdates(0);
       FTabelaDetalhe.Refresh;
     end;
+end;
+
+procedure TfrPadraoConsultaDetalheGVGSTOR.btProximoDetalheClick(Sender: TObject);
+begin
+  inherited;
+  FTabelaDetalhe.Next;
 end;
 
 procedure TfrPadraoConsultaDetalheGVGSTOR.FormCreate(Sender: TObject);
