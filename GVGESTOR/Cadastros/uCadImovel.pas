@@ -73,7 +73,7 @@ end;
 procedure TfrCadImovel.CarregaCampos;
 begin
   inherited;
-  edCodProp.Codigo := FTabela.FieldByName('BDCODPROP').AsInteger;
+  edCodProp.Codigo := FTabela.FieldByName('BDPKCODPROP').AsInteger;
   cbTipo.Text := FTabela.FieldByName('BDTIPOIMOVEL').AsString;
   seAmbientes.Text := IntToStr(FTabela.FieldByName('BDQUANTAMB').AsInteger);
   dtpData.Date :=  FTabela.FieldByName('BDDATACAD').AsDateTime;
@@ -125,14 +125,14 @@ end;
 procedure TfrCadImovel.SalvarCampos;
 begin
   FTabela.FieldByName('BDCODIMOVEL').AsInteger := edCodigo.Codigo;
-  FTabela.FieldByName('BDCODPROP').AsInteger := edCodProp.Codigo;
   FTabela.FieldByName('BDTIPOIMOVEL').AsString := cbTipo.Items[cbTipo.ItemIndex];
   FTabela.FieldByName('BDQUANTAMB').AsInteger := StrToInt(seAmbientes.Text);
   FTabela.FieldByName('BDDATACAD').AsDateTime :=  dtpData.Date;
   FTabela.FieldByName('BDENDERECO').AsString :=  edLogradouro.Text;
   FTabela.FieldByName('BDNUMERO').AsInteger := edNumero.Codigo;
-  FTabela.FieldByName('BDCIDADE').AsString := edCidade.Text;
   FTabela.FieldByName('BDBAIRRO').AsString := edBairro.Text;
+  FTabela.FieldByName('BDCIDADE').AsString := edCidade.Text;
+  FTabela.FieldByName('BDPKCODPROP').AsInteger := StrToInt(edCodProp.Text);
 end;
 
 function TfrCadImovel.setIDEdit: TWinControl;
@@ -151,8 +151,55 @@ begin
 end;
 
 function TfrCadImovel.ValidaCampos: Boolean;
+var
+  wMessage: String;
 begin
-
+  Result := True;
+  if (edCodProp.Text = EmptyStr) or (edCodProp.Codigo = 0) then
+     begin
+       edCodProp.SetFocus;
+       Result := False;
+       wMessage := 'Selecione um código do proprietário!' + #13;
+     end
+  else
+  if (seAmbientes.Text = EmptyStr) or (seAmbientes.Text = IntToStr(0)) then
+     begin
+       seAmbientes.SetFocus;
+       Result := False;
+       wMessage := 'Informe o número de ambientes do imóvel!' + #13;
+     end
+  else
+  if edLogradouro.Text = EmptyStr then
+     begin
+       edLogradouro.SetFocus;
+       Result := False;
+       wMessage := 'Informe o logradouro do imóvel!' + #13;
+     end
+  else
+  if edNumero.Text = EmptyStr then
+     begin
+       edNumero.SetFocus;
+       Result := False;
+       wMessage := 'Informe o número do endereço do imóvel!' + #13;
+     end
+  else
+  if edBairro.Text = EmptyStr then
+     begin
+       edBairro.SetFocus;
+       Result := False;
+       wMessage := 'Informe o bairro do imóvel!' + #13;
+     end
+  else
+  if edCidade.Text = EmptyStr then
+     begin
+       edCidade.SetFocus;
+       Result := False;
+       wMessage := 'Informe a cidade do imóvel!' + #13;
+     end
+  else
+  if Result then
+     wMessage := 'Registro salvo com sucesso!';
+  ShowMessage(wMessage);
 end;
 
 end.

@@ -32,7 +32,10 @@ uses
   Vcl.Styles,
   uPadraoRelatorioGVGESTOR in '..\GESTORForms\uPadraoRelatorioGVGESTOR.pas' {frPadraoRelatorioGVGESTOR},
   uRelImovel in 'Relatorios\uRelImovel.pas' {frRelImovel},
-  uRelProprietario in 'Relatorios\uRelProprietario.pas' {frRelProprietario};
+  uRelProprietario in 'Relatorios\uRelProprietario.pas' {frRelProprietario},
+  uRelCliente in 'Relatorios\uRelCliente.pas' {frRelCliente},
+  uRelLocatario in 'Relatorios\uRelLocatario.pas' {frRelLocatario},
+  uRelVistoria in 'Relatorios\uRelVistoria.pas' {frRelVistoria};
 
 {$R *.res}
 

@@ -1,55 +1,56 @@
 ﻿[Closed Files]
-File_0=TSourceModule,'C:\Projeto Fiscal\PEDSCI\Relatorios\uRelCliente.dfm',0,1,1,1,1,0,0,,
-File_1=TSourceModule,'c:\program files (x86)\fastreports\fastreport 5\libd23\frxClass.pas',0,1,10556,1,10570,0,0,,
-File_2=TSourceModule,'C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas',0,1,145,44,22,0,0,,
-File_3=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsVistoria.pas',0,1,1,1,1,0,0,,
-File_4=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadVistoria.pas',0,1,169,34,189,0,0,,
-File_5=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadUsuario.pas',0,1,97,64,125,0,0,,
-File_6=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsAmbiente.pas',0,1,1,1,1,0,0,,
-File_7=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsCliente.pas',0,1,1,1,1,0,0,,
-File_8=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsFoto.pas',0,1,1,1,1,0,0,,
-File_9=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsImovel.pas',0,1,1,1,1,0,0,,
-File_10=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsItem.pas',0,1,1,1,1,0,0,,
-File_11=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsLocatario.pas',0,1,1,1,1,0,0,,
-File_12=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsProprietario.pas',0,1,1,1,1,0,0,,
-File_13=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsUsuario.pas',0,1,1,1,1,0,0,,
-File_14=TSourceModule,'C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoConsultaGVGESTOR.pas',0,1,1,1,1,0,0,,
+File_0=TSourceModule,'C:\TCC - Gestor de Vistorias\GESTORForms\DataModule\udmDadosGVGESTOR.pas',0,1,64,1,1,0,0,,
+File_1=TSourceModule,'C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas',0,1,73,1,97,0,0,,
+File_2=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadProprietario.pas',0,1,116,28,137,0,0,,
+File_3=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadAmbiente.pas',0,1,99,28,121,0,0,,
+File_4=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsAmbiente.pas',0,1,15,16,38,0,0,,
+File_5=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadFoto.pas',0,1,60,28,126,0,0,,
+File_6=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsFoto.pas',0,1,7,1,1,0,0,,
+File_7=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadImovel.pas',0,1,69,45,84,0,0,,
+File_8=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsImovel.pas',0,1,16,30,32,0,0,,
+File_9=TSourceModule,'C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoConsultaGVGESTOR.pas',0,1,42,1,89,0,0,,
+File_10=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadItem.pas',0,1,79,37,87,0,0,,
+File_11=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsItem.pas',0,1,1,1,1,0,0,,
+File_12=TSourceModule,'C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadUsuario.pas',0,1,75,40,25,0,0,,
+File_13=TSourceModule,'c:\program files (x86)\embarcadero\studio\17.0\source\data\dbx\Data.DBXCommon.pas',0,1,10990,25,11000,0,0,,
 
 [Modules]
-Module0=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoRelatorioGVGESTOR.pas
-Module1=C:\TCC - Gestor de Vistorias\GVGESTOR\Relatorios\uRelImovel.pas
-Module2=C:\TCC - Gestor de Vistorias\GESTORForms\DataModule\udmConnectionGVGestor.pas
-Module3=C:\TCC - Gestor de Vistorias\GVGESTOR\uPrincipal.pas
-Count=4
+Module0=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsVistoria.pas
+Module1=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadVistoria.pas
+Count=2
 EditWindowCount=1
 
-[C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoRelatorioGVGESTOR.pas]
+[C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsVistoria.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[C:\TCC - Gestor de Vistorias\GVGESTOR\Relatorios\uRelImovel.pas]
+[C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadVistoria.pas]
 ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas]
+FormState=1
+FormOnTop=0
+
+[C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoConsultaGVGESTOR.pas]
 FormState=1
 FormOnTop=0
 
 [C:\TCC - Gestor de Vistorias\GESTORForms\DataModule\udmConnectionGVGestor.pas]
-ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[C:\TCC - Gestor de Vistorias\GVGESTOR\uPrincipal.pas]
-ModuleType=TSourceModule
+[C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoConsultaDetalheGVGESTOR.pas]
 FormState=1
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=4
-CurrentEditView=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoRelatorioGVGESTOR.pas
+ViewCount=2
+CurrentEditView=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsVistoria.pas
 View0=0
 View1=1
-View2=2
-View3=3
 PercentageSizes=1
 Create=1
 Visible=1
@@ -68,60 +69,38 @@ BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
 LeftPanelSize=1894
 LeftPanelClients=PropertyInspector,DockSite3
-LeftPanelData=00000800010100000000620F0000000000000166070000000000000100000000B005000009000000446F636B53697465330100000000581B00001100000050726F7065727479496E73706563746F72FFFFFFFF
+LeftPanelData=00000800010100000000DF120000000000000166070000000000000100000000530E000009000000446F636B536974653301000000008D2100001100000050726F7065727479496E73706563746F72FFFFFFFF
 RightPanelSize=2000
 RightPanelClients=DockSite2,DockSite4
-RightPanelData=00000800010100000000620F00000000000001D00700000000000001000000004612000009000000446F636B53697465320100000000581B000009000000446F636B5369746534FFFFFFFF
-BottomPanelSize=1522
+RightPanelData=00000800010100000000DF1200000000000001D00700000000000001000000004612000009000000446F636B536974653201000000008D21000009000000446F636B5369746534FFFFFFFF
+BottomPanelSize=0
 BottomPanelClients=DockSite1,MessageView
-BottomPanelData=0000080001020100000009000000446F636B5369746531724500000000000002F2050000000000000100000000724500000F0000004D65737361676556696577466F726DFFFFFFFF
+BottomPanelData=0000080001020200000009000000446F636B53697465310F0000004D65737361676556696577466F726D1534000000000000022A06000000000000FFFFFFFF
 BottomMiddlePanelSize=0
 BottomMiddlePanelClients=DockSite0,GraphDrawingModel
 BottomMiddelPanelData=0000080001020200000009000000446F636B536974653010000000477261706844726177696E67566965779A1D00000000000002F206000000000000FFFFFFFF
 
 [View0]
 CustomEditViewType=TEditView
-Module=C:\TCC - Gestor de Vistorias\GVGESTOR\Relatorios\uRelImovel.pas
-CursorX=39
-CursorY=61
-TopLine=33
+Module=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadVistoria.pas
+CursorX=54
+CursorY=203
+TopLine=185
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\Relatorios\uRelImovel.pas
+EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadVistoria.pas
 
 [View1]
 CustomEditViewType=TEditView
-Module=C:\TCC - Gestor de Vistorias\GVGESTOR\uPrincipal.pas
-CursorX=1
-CursorY=119
-TopLine=63
+Module=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsVistoria.pas
+CursorX=28
+CursorY=42
+TopLine=26
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\uPrincipal.pas
-
-[View2]
-CustomEditViewType=TEditView
-Module=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoRelatorioGVGESTOR.pas
-CursorX=40
-CursorY=78
-TopLine=57
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoRelatorioGVGESTOR.pas
-
-[View3]
-CustomEditViewType=TEditView
-Module=C:\TCC - Gestor de Vistorias\GESTORForms\DataModule\udmConnectionGVGestor.pas
-CursorX=26
-CursorY=46
-TopLine=31
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\TCC - Gestor de Vistorias\GESTORForms\DataModule\udmConnectionGVGestor.pas
+EditViewName=C:\TCC - Gestor de Vistorias\GVGESTOR\Consultas\uConsVistoria.pas
 
 [Watches]
 Count=0
@@ -137,20 +116,22 @@ State=0
 Left=0
 Top=0
 Width=3825
-Height=1021
+Height=1103
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3825
-ClientHeight=1021
+ClientHeight=1103
 TBDockHeight=211
 LRDockWidth=13600
 Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=2
+Count=4
 Breakpoint0='C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadFoto.pas',124,'',0,1,'',1,0,0,'',1,'','','',0,''
 Breakpoint1='C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadFoto.pas',71,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint2='C:\TCC - Gestor de Vistorias\GESTORForms\uPadraoCadastroGVGESTOR.pas',82,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint3='C:\TCC - Gestor de Vistorias\GVGESTOR\Cadastros\uCadVistoria.pas',99,'',0,1,'',1,0,0,'',1,'','','',0,''
 
 [EmbarcaderoWin32Debugger_AddressBreakpoints]
 Count=0
@@ -200,18 +181,18 @@ StayOnTop=0
 [MessageView]
 PercentageSizes=1
 Create=1
-Visible=1
+Visible=0
 Docked=1
 State=0
 Left=0
-Top=23
-Width=10000
-Height=1338
+Top=0
+Width=2769
+Height=1420
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=10000
-ClientHeight=1338
-TBDockHeight=1338
+ClientWidth=2769
+ClientHeight=1420
+TBDockHeight=1420
 LRDockWidth=2769
 Dockable=1
 StayOnTop=0
@@ -225,11 +206,11 @@ State=0
 Left=0
 Top=0
 Width=2000
-Height=2183
+Height=3862
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2000
-ClientHeight=2183
+ClientHeight=3862
 TBDockHeight=7148
 LRDockWidth=2000
 Dockable=1
@@ -337,13 +318,13 @@ Visible=1
 Docked=1
 State=0
 Left=0
-Top=154
+Top=353
 Width=1894
-Height=5587
+Height=4930
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1894
-ClientHeight=5587
+ClientHeight=4930
 TBDockHeight=6702
 LRDockWidth=1894
 Dockable=1
@@ -352,8 +333,8 @@ SplitPos=111
 
 [PropInspDesignerSelection]
 ArrangeBy=Name
-SelectedItem=Caption,
-ExpandedItems="LiveBindings Designer=0",Anchors=0,EngineOptions=0,DataSet=0,BorderIcons=0
+SelectedItem=AlignWithMargins,
+ExpandedItems=Anchors=0,BorderIcons=0,Constraints=1,BevelEdges=0,ActiveControl=0
 
 [frmDesignPreview]
 PercentageSizes=1
@@ -424,11 +405,11 @@ State=0
 Left=0
 Top=0
 Width=3825
-Height=1021
+Height=1103
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3825
-ClientHeight=1021
+ClientHeight=1103
 TBDockHeight=411
 LRDockWidth=4950
 Dockable=1
@@ -443,11 +424,11 @@ State=0
 Left=0
 Top=0
 Width=3825
-Height=1021
+Height=1103
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3825
-ClientHeight=1021
+ClientHeight=1103
 TBDockHeight=211
 LRDockWidth=7406
 Dockable=1
@@ -466,11 +447,11 @@ State=0
 Left=0
 Top=0
 Width=3825
-Height=1021
+Height=1103
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3825
-ClientHeight=1021
+ClientHeight=1103
 TBDockHeight=1538
 LRDockWidth=3481
 Dockable=1
@@ -485,11 +466,11 @@ State=0
 Left=0
 Top=0
 Width=3825
-Height=1021
+Height=1103
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3825
-ClientHeight=1021
+ClientHeight=1103
 TBDockHeight=2066
 LRDockWidth=3481
 Dockable=1
@@ -607,11 +588,11 @@ State=0
 Left=0
 Top=0
 Width=3825
-Height=1021
+Height=1103
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3825
-ClientHeight=1021
+ClientHeight=1103
 TBDockHeight=1549
 LRDockWidth=8744
 Dockable=1
@@ -633,11 +614,11 @@ State=0
 Left=0
 Top=0
 Width=1894
-Height=1221
+Height=3556
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1894
-ClientHeight=1221
+ClientHeight=3556
 TBDockHeight=3674
 LRDockWidth=1894
 Dockable=1
@@ -719,12 +700,12 @@ State=0
 Left=0
 Top=23
 Width=3825
-Height=1338
+Height=1420
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3825
-ClientHeight=1338
-TBDockHeight=1338
+ClientHeight=1420
+TBDockHeight=1420
 LRDockWidth=3825
 Dockable=1
 StayOnTop=0
@@ -767,11 +748,11 @@ State=0
 Left=0
 Top=23
 Width=1894
-Height=1221
+Height=3556
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1894
-ClientHeight=1221
+ClientHeight=3556
 TBDockHeight=6702
 LRDockWidth=1894
 Dockable=1
@@ -791,11 +772,11 @@ State=0
 Left=0
 Top=444
 Width=2000
-Height=2183
+Height=3862
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2000
-ClientHeight=2183
+ClientHeight=3862
 TBDockHeight=6702
 LRDockWidth=2000
 Dockable=1

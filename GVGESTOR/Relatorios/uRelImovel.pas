@@ -21,8 +21,6 @@ type
     Label4: TLabel;
     Label5: TLabel;
     edEndereco: TEdit;
-    procedure btEditarClick(Sender: TObject);
-    procedure btVisualizarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,21 +37,6 @@ implementation
 {$R *.dfm}
 
 { TfrPadraoRelatorioGVGESTOR1 }
-
-procedure TfrRelImovel.btEditarClick(Sender: TObject);
-begin
-  inherited;
-  pGetConsultaSql;
-  fCarregaFrxPadrao(Screen.ActiveForm.Name);
-  frxReportPadrao.DesignReport;
-end;
-
-procedure TfrRelImovel.btVisualizarClick(Sender: TObject);
-begin
-  pGetConsultaSql;
-  fCarregaFrxPadrao(Screen.ActiveForm.Name);
-  frxReportPadrao.ShowReport;
-end;
 
 procedure TfrRelImovel.pGetConsultaSql;
 begin
@@ -75,8 +58,8 @@ begin
   else
   if edEndereco.Text <> EmptyStr then// filtro por endereço
      begin
-       SQLQueryPadrao.SQL.Add('where BDENDERECO like ''%partend%''');
-       SQLQueryPadrao.ParamByName('partend').AsString := edEndereco.Text;
+       SQLQueryPadrao.SQL.Add('where BDENDERECO like ''%' + edEndereco.Text + '%''');
+       //SQLQueryPadrao.ParamByName('partend').AsString := edEndereco.Text;
      end;
 
   SQLQueryPadrao.Open;

@@ -132,8 +132,41 @@ begin
 end;
 
 function TfrCadCliente.ValidaCampos: Boolean;
+var
+  wMessage: String;
 begin
   Result := True;
+  if edRazaoSocial.Text = EmptyStr then
+     begin
+       edRazaoSocial.SetFocus;
+       Result := False;
+       wMessage := 'Informe a razão social do cliente!' + #13;
+     end
+  else
+  if edCnpj.Text = EmptyStr then
+     begin
+       edCnpj.SetFocus;
+       Result := False;
+       wMessage := 'Informe o CNPJ do cliente!' + #13;
+     end
+  else
+  if edTelefone.Text = EmptyStr then
+     begin
+       edTelefone.SetFocus;
+       Result := False;
+       wMessage := 'Informe o telefone do cliente!' + #13;
+     end
+  else
+  if edEmail.Text = EmptyStr then
+     begin
+       edEmail.SetFocus;
+       Result := False;
+       wMessage := 'Informe o e-mail do cliente!' + #13;
+     end
+  else
+  if Result then
+     wMessage := 'Registro salvo com sucesso!';
+  ShowMessage(wMessage);
 end;
 
 end.

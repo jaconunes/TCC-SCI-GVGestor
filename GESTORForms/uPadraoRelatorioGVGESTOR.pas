@@ -33,6 +33,9 @@ type
     procedure btSalvarComoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btEditarReportClick(Sender: TObject);
+    procedure btEditarClick(Sender: TObject);
+    procedure btVisualizarClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
 
@@ -51,12 +54,26 @@ implementation
 
 { TfrPadraoRelatorioGVGESTOR }
 
+procedure TfrPadraoRelatorioGVGESTOR.btEditarClick(Sender: TObject);
+begin
+  pGetConsultaSql;
+  fCarregaFrxPadrao(Screen.ActiveForm.Name);
+  frxReportPadrao.DesignReport;
+end;
+
 procedure TfrPadraoRelatorioGVGESTOR.btEditarReportClick(Sender: TObject);
 begin
   frxReportPadrao.PrepareReport;
   frxReportPadrao.PrintOptions.ShowDialog := False;
   if PrintDialog1.Execute then
      frxReportPadrao.Print;
+end;
+
+procedure TfrPadraoRelatorioGVGESTOR.btVisualizarClick(Sender: TObject);
+begin
+  pGetConsultaSql;
+  fCarregaFrxPadrao(Screen.ActiveForm.Name);
+  frxReportPadrao.ShowReport;
 end;
 
 procedure TfrPadraoRelatorioGVGESTOR.btSalvarComoClick(Sender: TObject);
@@ -101,6 +118,14 @@ end;
 procedure TfrPadraoRelatorioGVGESTOR.FormCreate(Sender: TObject);
 begin
   SQLQueryPadrao.SQLConnection := dmConnection.SQLConnectionGVGESTOR;
+  frxDBDataset1.DataSet        := SQLQueryPadrao;
+end;
+
+procedure TfrPadraoRelatorioGVGESTOR.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_ESCAPE then// tecla de atalho para fechar a tela
+     Close;
 end;
 
 end.

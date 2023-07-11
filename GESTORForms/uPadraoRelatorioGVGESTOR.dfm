@@ -2,8 +2,8 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
   Left = 0
   Top = 0
   Caption = 'frPadraoRelatorioGVGESTOR'
-  ClientHeight = 332
-  ClientWidth = 644
+  ClientHeight = 204
+  ClientWidth = 360
   Color = clGradientInactiveCaption
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -88,21 +88,24 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
     FF00FFFFFF00FFFFFF0080007F0000003F0000001F0000001F0000000F000000
     0700000007000000030000000100000001000000000000000000000000000000
     00000000000080000000C0004000FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
+  KeyPreview = True
   OldCreateOrder = False
   OnClose = FormClose
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 644
+    Width = 360
     Height = 33
     ButtonHeight = 33
     ButtonWidth = 33
     Caption = 'ToolBar1'
     Images = ImageList1
     TabOrder = 0
+    ExplicitWidth = 644
     object btVisualizar: TToolButton
       Left = 0
       Top = 0
@@ -111,6 +114,7 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
       ImageIndex = 0
       ParentShowHint = False
       ShowHint = True
+      OnClick = btVisualizarClick
     end
     object ToolButton2: TToolButton
       Left = 33
@@ -164,6 +168,7 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
       ImageIndex = 3
       ParentShowHint = False
       ShowHint = True
+      OnClick = btEditarClick
     end
     object ToolButton5: TToolButton
       Left = 156
@@ -186,7 +191,7 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
     Left = 376
     Top = 56
     Bitmap = {
-      494C010104000800500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

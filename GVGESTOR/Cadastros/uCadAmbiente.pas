@@ -118,7 +118,7 @@ begin
   FTabela.FieldByName('BDCODAMB').AsInteger   := edCodigo.Codigo;
   FTabela.FieldByName('BDNOME').AsString      := edNome.Text;
   FTabela.FieldByName('BDOBSADC').AsString    := edObs.Text;
-  FTabela.FieldByName('BDCODVIST').AsInteger  := CodVistoria; //Código da vistoria
+  FTabela.FieldByName('BDPKCODVIST').AsInteger  := CodVistoria; //Código da vistoria
 end;
 
 function TfrCadAmbiente.setIDEdit: TWinControl;
@@ -149,8 +149,20 @@ begin
 end;
 
 function TfrCadAmbiente.ValidaCampos: Boolean;
+var
+  wMessage: String;
 begin
   Result := True;
+  if edNome.Text = EmptyStr then
+     begin
+       wMessage := 'Informe a descrição do ambiente!';
+       Result := False;
+       edNome.SetFocus;
+     end
+  else
+  if Result then
+       wMessage := 'Registro salvo com sucesso!';
+  ShowMessage(wMessage);
 end;
 
 end.

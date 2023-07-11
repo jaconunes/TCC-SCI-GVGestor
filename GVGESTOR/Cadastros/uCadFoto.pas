@@ -123,7 +123,7 @@ procedure TfrCadFoto.SalvarCampos;
 begin
   FTabela.FieldByName('BDCODFOTO').AsInteger := edCodigo.Codigo;
   FTabela.FieldByName('BDDESC').AsString := edDescricao.Text;
-  FTabela.FieldByName('BDCODAMB').AsInteger := wCodAmbiente;
+  FTabela.FieldByName('BDPKCODAMB').AsInteger := wCodAmbiente;
   FTabela.FieldByName('BDURL').AsString := fGetImageFileName(opdImagem);
 end;
 
@@ -143,8 +143,30 @@ begin
 end;
 
 function TfrCadFoto.ValidaCampos: Boolean;
+var
+  wMessage: String;
 begin
   Result := True;
+  if edDescricao.Text = EmptyStr then
+     begin
+       edDescricao.SetFocus;
+       Result := False;
+       wMessage := 'Informe a descrição da imagem!' + #13;
+     end
+  else
+  if iImagem.Picture = nil then
+     begin
+       Result := False;
+       ShowMessage('Selecione uma imagem!');
+       if opdImagem.Execute = True then
+          begin
+            iImagem.Picture.LoadFromFile(opdImagem.FileName);
+          end;
+     end
+  else
+  if Result then
+     wMessage := 'Registro salvo com sucesso!';
+  ShowMessage(wMessage);
 end;
 
 end.

@@ -116,8 +116,41 @@ begin
 end;
 
 function TfrCadLocatario.ValidaCampos: Boolean;
+var
+  wMessage: String;
 begin
   Result := True;
+  if edNome.Text = EmptyStr then
+     begin
+       edNome.SetFocus;
+       Result := False;
+       wMessage := 'Informe o nome do locatário!' + #13;
+     end
+  else
+  if edCpfCnpj.Text = EmptyStr then
+     begin
+       edCpfCnpj.SetFocus;
+       Result := False;
+       wMessage := 'Informe o CPF/CNPJ do locatário!' + #13;
+     end
+  else
+  if edEmail.Text = EmptyStr then
+     begin
+       edEmail.SetFocus;
+       Result := False;
+       wMessage := 'Informe o e-mail do locatário!' + #13;
+     end
+  else
+  if edTelefone.Text = EmptyStr then
+     begin
+       edTelefone.SetFocus;
+       Result := False;
+       wMessage := 'Informe o telefone do locatário!' + #13;
+     end
+  else
+  if Result then
+     wMessage := 'Registro salvo com sucesso!';
+  ShowMessage(wMessage);
 end;
 
 end.

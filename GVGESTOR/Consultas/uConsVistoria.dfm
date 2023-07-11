@@ -61,25 +61,25 @@ inherited frConsVistoria: TfrConsVistoria
       end
       item
         Expanded = False
-        FieldName = 'BDCODUSU'
+        FieldName = 'BDPKCODUSU'
         Title.Caption = 'USU'#193'RIO'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'BDCODCLT'
+        FieldName = 'BDPKCODCLT'
         Title.Caption = 'CLIENTE'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'BDCODIMOV'
+        FieldName = 'BDPKCODIMOV'
         Title.Caption = 'IM'#211'VEL'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'BDCODLOCAT'
+        FieldName = 'BDPKCODLOCAT'
         Title.Caption = 'LOCAT'#193'RIO'
         Visible = True
       end>
@@ -107,7 +107,7 @@ inherited frConsVistoria: TfrConsVistoria
         end
         item
           Expanded = False
-          FieldName = 'BDCODVIST'
+          FieldName = 'BDPKCODVIST'
           Title.Caption = 'VISTORIA'
           Visible = True
         end>
@@ -115,7 +115,7 @@ inherited frConsVistoria: TfrConsVistoria
   end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C01010700E000E00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010700E000F00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

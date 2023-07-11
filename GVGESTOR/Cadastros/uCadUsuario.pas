@@ -162,6 +162,13 @@ begin
        wMessage := wMessage + 'O campo CPF/CNPJ não deve ser vazio!' + #13;
      end
   else
+  if edUsuario.Text = EmptyStr then
+     begin
+       edUsuario.SetFocus;
+       Result := False;
+       wMessage := wMessage + 'O campo usuário não deve ser vazio!' + #13;
+     end
+  else
   if edSenha.Text = EmptyStr then
      begin
        edSenha.SetFocus;
@@ -183,10 +190,11 @@ begin
        edSenha.SetFocus;
        Result := False;
        wMessage := wMessage + 'As senhas não correspondem!' + #13;
-     end;
-
-  if wMessage <> EmptyStr then
-     ShowMessage(wMessage);
+     end
+  else
+  if Result then
+       wMessage := 'Registro salvo com sucesso!';
+  ShowMessage(wMessage);
 end;
 
 end.

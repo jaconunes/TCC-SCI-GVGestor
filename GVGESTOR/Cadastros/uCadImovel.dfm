@@ -1,13 +1,13 @@
 inherited frCadImovel: TfrCadImovel
   Caption = 'Cadastro de im'#243'vel'
-  ClientHeight = 256
+  ClientHeight = 279
   ClientWidth = 634
-  Constraints.MaxHeight = 295
+  Constraints.MaxHeight = 318
   Constraints.MaxWidth = 650
-  Constraints.MinHeight = 295
+  Constraints.MinHeight = 318
   Constraints.MinWidth = 650
   ExplicitWidth = 650
-  ExplicitHeight = 295
+  ExplicitHeight = 318
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
@@ -20,26 +20,13 @@ inherited frCadImovel: TfrCadImovel
   end
   inherited Panel1: TPanel
     Width = 634
-    Height = 223
+    Height = 246
     TabOrder = 1
     ExplicitWidth = 634
-    ExplicitHeight = 223
-    object Label1: TLabel
-      Left = 72
-      Top = 57
-      Width = 43
-      Height = 17
-      Caption = 'C'#243'digo'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-    end
+    ExplicitHeight = 246
     object Label3: TLabel
       Left = 383
-      Top = 93
+      Top = 87
       Width = 27
       Height = 17
       Caption = 'Data'
@@ -52,7 +39,7 @@ inherited frCadImovel: TfrCadImovel
     end
     object Label4: TLabel
       Left = 54
-      Top = 92
+      Top = 87
       Width = 61
       Height = 17
       Caption = 'Ambientes'
@@ -64,8 +51,8 @@ inherited frCadImovel: TfrCadImovel
       ParentFont = False
     end
     object Label5: TLabel
-      Left = 384
-      Top = 58
+      Left = 89
+      Top = 121
       Width = 26
       Height = 17
       Caption = 'Tipo'
@@ -76,27 +63,9 @@ inherited frCadImovel: TfrCadImovel
       Font.Style = []
       ParentFont = False
     end
-    object edCodigo: TEdit_Numero_PEDSCI
-      Left = 121
-      Top = 53
-      Width = 65
-      Height = 26
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 1
-      Text = '0'
-      OnExit = edCodigoExit
-      Decimal = False
-      DecimalSeparador = ','
-      Codigo = 0
-    end
     object cbTipo: TComboBox
-      Left = 416
-      Top = 53
+      Left = 121
+      Top = 116
       Width = 161
       Height = 28
       Font.Charset = ANSI_CHARSET
@@ -106,7 +75,7 @@ inherited frCadImovel: TfrCadImovel
       Font.Style = []
       ItemIndex = 0
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 3
       Text = 'Residencial'
       Items.Strings = (
         'Residencial'
@@ -114,7 +83,7 @@ inherited frCadImovel: TfrCadImovel
     end
     object seAmbientes: TSpinEdit
       Left = 121
-      Top = 85
+      Top = 80
       Width = 65
       Height = 30
       Font.Charset = ANSI_CHARSET
@@ -125,12 +94,12 @@ inherited frCadImovel: TfrCadImovel
       MaxValue = 0
       MinValue = 0
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 1
       Value = 0
     end
     object dtpData: TDateTimePicker
       Left = 416
-      Top = 87
+      Top = 81
       Width = 161
       Height = 28
       Date = 45113.678175763890000000
@@ -141,18 +110,31 @@ inherited frCadImovel: TfrCadImovel
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 2
     end
     object Panel2: TPanel
       Left = 1
       Top = 1
       Width = 632
-      Height = 41
+      Height = 72
       Align = alTop
       TabOrder = 0
-      object Label9: TLabel
-        Left = 43
+      object Label1: TLabel
+        Left = 70
         Top = 12
+        Width = 43
+        Height = 17
+        Caption = 'C'#243'digo'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label9: TLabel
+        Left = 44
+        Top = 42
         Width = 70
         Height = 17
         Caption = 'Propriet'#225'rio'
@@ -164,8 +146,8 @@ inherited frCadImovel: TfrCadImovel
         ParentFont = False
       end
       object lbNomeProprietario: TLabel
-        Left = 191
-        Top = 13
+        Left = 192
+        Top = 45
         Width = 5
         Height = 13
         Color = clActiveCaption
@@ -177,9 +159,9 @@ inherited frCadImovel: TfrCadImovel
         ParentColor = False
         ParentFont = False
       end
-      object edCodProp: TEdit_Numero_PEDSCI
+      object edCodigo: TEdit_Numero_PEDSCI
         Left = 120
-        Top = 8
+        Top = 7
         Width = 65
         Height = 26
         Font.Charset = ANSI_CHARSET
@@ -190,6 +172,24 @@ inherited frCadImovel: TfrCadImovel
         ParentFont = False
         TabOrder = 0
         Text = '0'
+        OnExit = edCodigoExit
+        Decimal = False
+        DecimalSeparador = ','
+        Codigo = 0
+      end
+      object edCodProp: TEdit_Numero_PEDSCI
+        Left = 120
+        Top = 39
+        Width = 65
+        Height = 26
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        Text = '0'
         OnChange = edCodPropChange
         Decimal = False
         DecimalSeparador = ','
@@ -198,14 +198,14 @@ inherited frCadImovel: TfrCadImovel
     end
     object GroupBox1: TGroupBox
       Left = 17
-      Top = 121
+      Top = 150
       Width = 600
       Height = 88
       Caption = 'Endere'#231'o'
       Color = clActiveCaption
       ParentBackground = False
       ParentColor = False
-      TabOrder = 5
+      TabOrder = 4
       object Label2: TLabel
         Left = 28
         Top = 21
@@ -299,7 +299,7 @@ inherited frCadImovel: TfrCadImovel
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 3
       end
       object edBairro: TEdit
         Left = 104
@@ -312,7 +312,7 @@ inherited frCadImovel: TfrCadImovel
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 2
       end
     end
   end
@@ -320,7 +320,7 @@ inherited frCadImovel: TfrCadImovel
     Left = 560
     Top = 9
     Bitmap = {
-      494C010106000800DC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800EC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

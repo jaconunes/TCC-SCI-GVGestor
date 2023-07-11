@@ -104,9 +104,9 @@ begin
   edLeituraEnergia.Text := FTabela.FieldByName('BDLEITENERG').AsString;
   edNumMedAgua.Text     := FTabela.FieldByName('BDNMEDAGUA').AsString;
   edLeituraAgua.Text    := FTabela.FieldByName('BDLEITAGUA').AsString;
-  edCodCliente.Codigo   := FTabela.FieldByName('BDCODCLT').AsInteger;
-  edCodImovel.Codigo    := FTabela.FieldByName('BDCODIMOV').AsInteger;
-  edCodLocatario.Codigo := FTabela.FieldByName('BDCODLOCAT').AsInteger;
+  edCodCliente.Codigo   := FTabela.FieldByName('BDPKCODCLT').AsInteger;
+  edCodImovel.Codigo    := FTabela.FieldByName('BDPKCODIMOV').AsInteger;
+  edCodLocatario.Codigo := FTabela.FieldByName('BDPKCODLOCAT').AsInteger;
 end;
 
 procedure TfrCadVistoria.edCodClienteChange(Sender: TObject);
@@ -200,10 +200,10 @@ begin
   FTabela.FieldByName('BDLEITENERG').AsString  := edLeituraEnergia.Text;
   FTabela.FieldByName('BDNMEDAGUA').AsString   := edNumMedAgua.Text;
   FTabela.FieldByName('BDLEITAGUA').AsString   := edLeituraAgua.Text;
-  FTabela.FieldByName('BDCODUSU').AsInteger  := 1; // Código Usuário Logado
-  FTabela.FieldByName('BDCODCLT').AsInteger := edCodCliente.Codigo;
-  FTabela.FieldByName('BDCODIMOV').AsInteger := edCodImovel.Codigo;
-  FTabela.FieldByName('BDCODLOCAT').AsInteger := edCodLocatario.Codigo;
+  FTabela.FieldByName('BDPKCODUSU').AsInteger  := 853; // Código Usuário Logado
+  FTabela.FieldByName('BDPKCODCLT').AsInteger := edCodCliente.Codigo;
+  FTabela.FieldByName('BDPKCODIMOV').AsInteger := edCodImovel.Codigo;
+  FTabela.FieldByName('BDPKCODLOCAT').AsInteger := edCodLocatario.Codigo;
 end;
 
 procedure TfrCadVistoria.btAdAmbienteClick(Sender: TObject);
@@ -228,8 +228,34 @@ begin
 end;
 
 function TfrCadVistoria.ValidaCampos: Boolean;
+var
+  wMessage: String;
 begin
   Result := True;
+  if (edCodCliente.Text = EmptyStr) or (edCodCliente.Codigo = 0) then
+     begin
+       edCodCliente.SetFocus;
+       Result := False;
+       wMessage := 'Selecione um código do cliente!' + #13;
+     end
+  else
+  if (edCodImovel.Text = EmptyStr) or (edCodImovel.Codigo = 0) then
+     begin
+       edCodImovel.SetFocus;
+       Result := False;
+       wMessage := 'Selecione um código do imóvel!' + #13;
+     end
+  else
+  if (edCodLocatario.Text = EmptyStr) or (edCodLocatario.Codigo = 0) then
+     begin
+       edCodLocatario.SetFocus;
+       Result := False;
+       wMessage := 'Selecione um código do locatário!' + #13;
+     end
+  else
+  if Result then
+     wMessage := 'Registro salvo com sucesso!';
+  ShowMessage(wMessage);
 end;
 
 end.

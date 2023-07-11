@@ -8,13 +8,7 @@ inherited frRelImovel: TfrRelImovel
   TextHeight = 13
   inherited ToolBar1: TToolBar
     Width = 450
-    ExplicitWidth = 452
-    inherited btVisualizar: TToolButton
-      OnClick = btVisualizarClick
-    end
-    inherited btEditar: TToolButton
-      OnClick = btEditarClick
-    end
+    ExplicitWidth = 450
   end
   inherited GroupBox1: TGroupBox
     Left = 10
@@ -162,7 +156,7 @@ inherited frRelImovel: TfrRelImovel
     Left = 400
     Top = 8
     Bitmap = {
-      494C0101040008005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

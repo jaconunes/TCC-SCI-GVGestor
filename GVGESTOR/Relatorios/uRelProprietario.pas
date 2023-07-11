@@ -15,8 +15,6 @@ type
     Label1: TLabel;
     Label2: TLabel;
     edNome: TEdit;
-    procedure btVisualizarClick(Sender: TObject);
-    procedure btEditarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,22 +32,6 @@ implementation
 
 { TfrRelProprietario }
 
-procedure TfrRelProprietario.btEditarClick(Sender: TObject);
-begin
-  inherited;
-  pGetConsultaSql;
-  fCarregaFrxPadrao(Screen.ActiveForm.Name);
-  frxReportPadrao.DesignReport;
-end;
-
-procedure TfrRelProprietario.btVisualizarClick(Sender: TObject);
-begin
-  inherited;
-  pGetConsultaSql;
-  fCarregaFrxPadrao(Screen.ActiveForm.Name);
-  frxReportPadrao.ShowReport;
-end;
-
 procedure TfrRelProprietario.pGetConsultaSql;
 begin
   inherited;
@@ -65,8 +47,8 @@ begin
   else
   if edNome.Text <> EmptyStr then// filtro por endereço
      begin
-       SQLQueryPadrao.SQL.Add('where BDNOME like ''%partnome%''');
-       SQLQueryPadrao.ParamByName('partnome').AsString := edNome.Text;
+       SQLQueryPadrao.SQL.Add('where BDNOME like ''%' + edNome.Text + '%''');
+       //SQLQueryPadrao.ParamByName('partnome').AsString := edNome.Text;
      end;
 
   SQLQueryPadrao.Open;

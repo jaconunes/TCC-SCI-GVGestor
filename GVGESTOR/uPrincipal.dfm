@@ -9554,12 +9554,15 @@ object frPrincipal: TfrPrincipal
       end
       object Clientes2: TMenuItem
         Caption = 'Clientes'
+        OnClick = Clientes2Click
       end
       object Locatrios2: TMenuItem
         Caption = 'Locat'#225'rios'
+        OnClick = Locatrios2Click
       end
       object Vistorias2: TMenuItem
         Caption = 'Vistorias'
+        OnClick = Vistorias2Click
       end
     end
     object Laudo1: TMenuItem

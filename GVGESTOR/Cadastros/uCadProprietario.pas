@@ -141,8 +141,62 @@ begin
 end;
 
 function TfrCadProprietario.ValidaCampos: Boolean;
+var
+  wMessage: String;
 begin
-
+  Result := True;
+  if edNome.Text = EmptyStr then
+     begin
+       edNome.SetFocus;
+       Result := False;
+       wMessage := 'Informe o nome do proprietário!' + #13;
+     end
+  else
+  if edCpfCnpj.Text = EmptyStr then
+     begin
+       edCpfCnpj.SetFocus;
+       Result := False;
+       wMessage := 'Informe o CPF/CNPJ do proprietário!' + #13;
+     end
+  else
+  if edTelefone.Text = EmptyStr then
+     begin
+       edTelefone.SetFocus;
+       Result := False;
+       wMessage := 'Informe o telefone do proprietário!' + #13;
+     end
+  else
+  if edLogradouro.Text = EmptyStr then
+     begin
+       edLogradouro.SetFocus;
+       Result := False;
+       wMessage := 'Informe o logradouro do proprietário!' + #13;
+     end
+  else
+  if edNumero.Text = EmptyStr then
+     begin
+       edNumero.SetFocus;
+       Result := False;
+       wMessage := 'Informe o número do logradouro do proprietário!' + #13;
+     end
+  else
+  if edBairro.Text = EmptyStr then
+     begin
+       edBairro.SetFocus;
+       Result := False;
+       wMessage := 'Informe o bairro do proprietário!' + #13;
+     end
+  else
+  if edCidade.Text = EmptyStr then
+     begin
+       edCidade.SetFocus;
+       Result := False;
+       wMessage := 'Informe a cidade do proprietário!' + #13;
+     end
+  else
+  if Result then
+     wMessage := 'Registro salvo com sucesso!';
+  ShowMessage(wMessage);
 end;
 
 end.

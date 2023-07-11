@@ -1,0 +1,27 @@
+unit uRelVistoria;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoRelatorioGVGESTOR, Data.FMTBcd,
+  frxExportDOCX, frxClass, frxExportPDF, Data.DB, Data.SqlExpr, frxDBSet,
+  frxDesgn, System.ImageList, Vcl.ImgList, Vcl.StdCtrls, Vcl.ComCtrls,
+  Vcl.ToolWin;
+
+type
+  TfrPadraoRelatorioGVGESTOR1 = class(TfrPadraoRelatorioGVGESTOR)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frPadraoRelatorioGVGESTOR1: TfrPadraoRelatorioGVGESTOR1;
+
+implementation
+
+{$R *.dfm}
+
+end.

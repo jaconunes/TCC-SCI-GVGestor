@@ -8,12 +8,7 @@ inherited frRelProprietario: TfrRelProprietario
   TextHeight = 13
   inherited ToolBar1: TToolBar
     Width = 395
-    inherited btVisualizar: TToolButton
-      OnClick = btVisualizarClick
-    end
-    inherited btEditar: TToolButton
-      OnClick = btEditarClick
-    end
+    ExplicitWidth = 395
   end
   inherited GroupBox1: TGroupBox
     Left = 13
@@ -62,6 +57,7 @@ inherited frRelProprietario: TfrRelProprietario
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      Text = '0'
       Decimal = False
       DecimalSeparador = ','
       Codigo = 0
@@ -82,7 +78,7 @@ inherited frRelProprietario: TfrRelProprietario
   end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C010104000800540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101040008005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

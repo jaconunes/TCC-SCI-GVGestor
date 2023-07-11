@@ -89,7 +89,7 @@ begin
   FTabela.FieldByName('BDDESCRICAO').AsString := edDescricao.Text;
   FTabela.FieldByName('BDESTADO').AsString := cbEstado.Items[cbEstado.ItemIndex];
   FTabela.FieldByName('BDOBSADC').AsString := edObs.Text;
-  FTabela.FieldByName('BDCODAMB').AsInteger := wCodAmbiente; //código do ambiente
+  FTabela.FieldByName('BDPKCODAMB').AsInteger := wCodAmbiente; //código do ambiente
 end;
 
 function TfrCadItem.setIDEdit: TWinControl;
@@ -108,9 +108,27 @@ begin
 end;
 
 function TfrCadItem.ValidaCampos: Boolean;
+var
+  wMessage: String;
 begin
   Result := True;
-  // validações dos campos
+  if edDescricao.Text = EmptyStr then
+     begin
+       edDescricao.SetFocus;
+       Result := False;
+       wMessage := 'Informe a descrição do item!' + #13;
+     end
+  else
+  if edObs.Text = EmptyStr then
+     begin
+       edObs.SetFocus;
+       Result := False;
+       wMessage := 'Informe a observação do item!' + #13;
+     end
+  else
+  if Result then
+     wMessage := 'Registro salvo com sucesso!';
+  ShowMessage(wMessage);
 end;
 
 end.
