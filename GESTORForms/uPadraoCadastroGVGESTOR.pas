@@ -26,7 +26,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btSalvarClick(Sender: TObject);
-    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormResize(Sender: TObject);
   private
     { Private declarations }
     FIDEdit: TWinControl;// variável do campo chave
@@ -55,9 +55,10 @@ type
     function fAplicaMascara(wS : String) : String; virtual;
     function fAplicaMascaraTelefone(wS : String) : String; virtual;
     function fGerarID: Integer; virtual;
-
-    //valida campo CNPJ
+    procedure pCentralizaForms(wFrPai, wFrFilho: TForm);
+    //remove caracteres
     function fCharacterRemove(S: String): String;
+
   end;
 
 var
@@ -202,11 +203,9 @@ begin
      self.Perform(WM_NEXTDLGCTL,0,0);
 end;
 
-procedure TfrPadraoCadastroGVGESTOR.FormKeyPress(Sender: TObject;
-  var Key: Char);
+procedure TfrPadraoCadastroGVGESTOR.FormResize(Sender: TObject);
 begin
-
-  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+  pCentralizaForms(Application.MainForm, self);
 end;
 
 function TfrPadraoCadastroGVGESTOR.getID: Boolean;
@@ -250,6 +249,14 @@ procedure TfrPadraoCadastroGVGESTOR.LastEditExit(Sender: TObject);
 begin
   if (not FTeclouEsc) and (not FValidandoCampos) and (not FPressionouSalvar) then
      ConfirmarDados;// ao sair do último campo da tela, executar o click no botão ok/salvar
+end;
+
+procedure TfrPadraoCadastroGVGESTOR.pCentralizaForms(wFrPai, wFrFilho: TForm);
+begin
+  wFrFilho.Left := (wFrPai.ClientWidth div 2) - (wFrFilho.Width div 2);
+  wFrFilho.Top := (wFrPai.ClientHeight div 2) - (wFrFilho.Height div 2);
+  wFrPai.Update;
+  wFrFilho.Update;
 end;
 
 procedure TfrPadraoCadastroGVGESTOR.pLimpaFiltros(wTabela : TClientDataset);

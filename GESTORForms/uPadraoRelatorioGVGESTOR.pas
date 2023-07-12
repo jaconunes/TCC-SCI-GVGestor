@@ -36,6 +36,7 @@ type
     procedure btEditarClick(Sender: TObject);
     procedure btVisualizarClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormResize(Sender: TObject);
   private
     { Private declarations }
 
@@ -126,6 +127,14 @@ procedure TfrPadraoRelatorioGVGESTOR.FormKeyDown(Sender: TObject; var Key: Word;
 begin
   if Key = VK_ESCAPE then// tecla de atalho para fechar a tela
      Close;
+end;
+
+procedure TfrPadraoRelatorioGVGESTOR.FormResize(Sender: TObject);
+begin
+  self.Left := (Application.MainForm.ClientWidth div 2) - (self.Width div 2);
+  self.Top := (Application.MainForm.ClientHeight div 2) - (self.Height div 2);
+  Application.MainForm.Update;
+  self.Update;
 end;
 
 end.

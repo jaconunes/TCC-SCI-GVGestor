@@ -35,6 +35,9 @@ type
     procedure edCodigoExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure edCodPropChange(Sender: TObject);
+    procedure edLogradouroKeyPress(Sender: TObject; var Key: Char);
+    procedure edBairroKeyPress(Sender: TObject; var Key: Char);
+    procedure edCidadeKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -83,6 +86,18 @@ begin
   edBairro.Text := FTabela.FieldByName('BDBAIRRO').AsString;
 end;
 
+procedure TfrCadImovel.edBairroKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+end;
+
+procedure TfrCadImovel.edCidadeKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+end;
+
 procedure TfrCadImovel.edCodigoExit(Sender: TObject);
 begin
   inherited;
@@ -93,6 +108,12 @@ procedure TfrCadImovel.edCodPropChange(Sender: TObject);
 begin
   inherited;
   pCarregaProprietario;
+end;
+
+procedure TfrCadImovel.edLogradouroKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
 end;
 
 procedure TfrCadImovel.FormCreate(Sender: TObject);

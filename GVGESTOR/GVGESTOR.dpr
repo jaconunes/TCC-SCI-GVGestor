@@ -20,14 +20,12 @@ uses
   uCadVistoria in 'Cadastros\uCadVistoria.pas' {frCadVistoria},
   uCadAmbiente in 'Cadastros\uCadAmbiente.pas' {frCadAmbiente},
   uCadFoto in 'Cadastros\uCadFoto.pas' {frCadFoto},
-  uLogin in 'uLogin.pas' {frLogin},
   uCadItem in 'Cadastros\uCadItem.pas' {frCadItem},
   uPadraoConsultaDetalheGVGESTOR in '..\GESTORForms\uPadraoConsultaDetalheGVGESTOR.pas' {frPadraoConsultaDetalheGVGSTOR},
   uConsVistoria in 'Consultas\uConsVistoria.pas' {frConsVistoria},
   uConsAmbiente in 'Consultas\uConsAmbiente.pas' {frConsAmbiente},
   uConsItem in 'Consultas\uConsItem.pas' {frConsItem},
   uConsFoto in 'Consultas\uConsFoto.pas' {frConsFoto},
-  uUsuarioLogado in 'uUsuarioLogado.pas',
   Vcl.Themes,
   Vcl.Styles,
   uPadraoRelatorioGVGESTOR in '..\GESTORForms\uPadraoRelatorioGVGESTOR.pas' {frPadraoRelatorioGVGESTOR},
@@ -35,7 +33,8 @@ uses
   uRelProprietario in 'Relatorios\uRelProprietario.pas' {frRelProprietario},
   uRelCliente in 'Relatorios\uRelCliente.pas' {frRelCliente},
   uRelLocatario in 'Relatorios\uRelLocatario.pas' {frRelLocatario},
-  uRelVistoria in 'Relatorios\uRelVistoria.pas' {frRelVistoria};
+  uRelVistoria in 'Relatorios\uRelVistoria.pas' {frRelVistoria},
+  uUsuarioLogado in 'uUsuarioLogado.pas';
 
 {$R *.res}
 

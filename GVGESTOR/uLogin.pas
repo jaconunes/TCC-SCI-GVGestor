@@ -23,16 +23,16 @@ type
     procedure FormResize(Sender: TObject);
   private
     { Private declarations }
+    FUsuario : TUsuario;
   public
     { Public declarations }
     function fUsuario_Logado(wUsuario: String; wSenha: String): boolean;
-    function fSetUsuarioLogado : TUsuario;
+    function fGetUsuario: TUsuario;
 
   end;
 
 var
   frLogin: TfrLogin;
-  wUsuarioLogado: TUsuario;
 
 implementation
 
@@ -68,9 +68,10 @@ begin
      end;
 end;
 
-function TfrLogin.fSetUsuarioLogado: TUsuario;
+
+function TfrLogin.fGetUsuario: TUsuario;
 begin
-  Result := wUsuarioLogado;
+  Result := FUsuario;
 end;
 
 procedure TfrLogin.FormClose(Sender: TObject; var Action: TCloseAction);

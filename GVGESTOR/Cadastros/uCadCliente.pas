@@ -33,6 +33,10 @@ type
     procedure FormCreate(Sender: TObject);
     procedure edTelefoneExit(Sender: TObject);
     procedure edCnpjExit(Sender: TObject);
+    procedure edRazaoSocialKeyPress(Sender: TObject; var Key: Char);
+    procedure edLogradouroKeyPress(Sender: TObject; var Key: Char);
+    procedure edBairroKeyPress(Sender: TObject; var Key: Char);
+    procedure edCidadeKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -77,10 +81,34 @@ begin
   edTelefone.Text    := FTabela.FieldByName('BDTELEFONE').AsString;
 end;
 
+procedure TfrCadCliente.edBairroKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+end;
+
+procedure TfrCadCliente.edCidadeKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+end;
+
 procedure TfrCadCliente.edCnpjExit(Sender: TObject);
 begin
   inherited;
   edCnpj.Text := fAplicaMascara(edCnpj.Text);
+end;
+
+procedure TfrCadCliente.edLogradouroKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+end;
+
+procedure TfrCadCliente.edRazaoSocialKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
 end;
 
 procedure TfrCadCliente.edTelefoneExit(Sender: TObject);

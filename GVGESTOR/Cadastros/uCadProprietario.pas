@@ -34,6 +34,10 @@ type
     procedure edCpfCnpjExit(Sender: TObject);
     procedure cbTipoPessoaChange(Sender: TObject);
     procedure edTelefoneExit(Sender: TObject);
+    procedure edNomeKeyPress(Sender: TObject; var Key: Char);
+    procedure edLogradouroKeyPress(Sender: TObject; var Key: Char);
+    procedure edBairroKeyPress(Sender: TObject; var Key: Char);
+    procedure edCidadeKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -85,10 +89,35 @@ begin
      edCpfCnpj.MaxLength := 14;
 end;
 
+procedure TfrCadProprietario.edBairroKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+end;
+
+procedure TfrCadProprietario.edCidadeKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+end;
+
 procedure TfrCadProprietario.edCpfCnpjExit(Sender: TObject);
 begin
   inherited;
   edCpfCnpj.Text := fAplicaMascara(edCpfCnpj.Text);
+end;
+
+procedure TfrCadProprietario.edLogradouroKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  inherited;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+end;
+
+procedure TfrCadProprietario.edNomeKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
 end;
 
 procedure TfrCadProprietario.edTelefoneExit(Sender: TObject);

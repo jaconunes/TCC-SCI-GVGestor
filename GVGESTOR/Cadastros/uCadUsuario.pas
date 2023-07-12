@@ -33,6 +33,7 @@ type
     procedure edCpfCnpjExit(Sender: TObject);
     procedure edSenhaKeyPress(Sender: TObject; var Key: Char);
     procedure edRepitaSenhaKeyPress(Sender: TObject; var Key: Char);
+    procedure edNomeKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -79,6 +80,12 @@ procedure TfrCadUsuario.edCpfCnpjExit(Sender: TObject);
 begin
   inherited;
   edCpfCnpj.Text := fAplicaMascara(edCpfCnpj.Text);
+end;
+
+procedure TfrCadUsuario.edNomeKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
 end;
 
 procedure TfrCadUsuario.edRepitaSenhaKeyPress(Sender: TObject; var Key: Char);

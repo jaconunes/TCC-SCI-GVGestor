@@ -27,6 +27,7 @@ type
     procedure btAnteriorClick(Sender: TObject);
     procedure btProximoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormResize(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,6 +36,7 @@ type
     function setTabela: TClientDataSet; virtual; abstract;
     function getPodeExcluir: Boolean; virtual;
     function fGetID: Integer; virtual;
+    procedure pCentralizaForms(wFrPai, wFrFilho: TForm);
   end;
 
 var
@@ -112,9 +114,22 @@ begin
      Close;
 end;
 
+procedure TfrPadraoConsultaGVGSTOR.FormResize(Sender: TObject);
+begin
+  pCentralizaForms(Application.MainForm, self);
+end;
+
 function TfrPadraoConsultaGVGSTOR.getPodeExcluir: Boolean;
 begin
   Result := MessageDlg('Deseja realmente excluir esse registro?', mtWarning, [mbYes,mbNo], 0) = mrYes;
+end;
+
+procedure TfrPadraoConsultaGVGSTOR.pCentralizaForms(wFrPai, wFrFilho: TForm);
+begin
+  wFrFilho.Left := (wFrPai.ClientWidth div 2) - (wFrFilho.Width div 2);
+  wFrFilho.Top := (wFrPai.ClientHeight div 2) - (wFrFilho.Height div 2);
+  wFrPai.Update;
+  wFrFilho.Update;
 end;
 
 end.

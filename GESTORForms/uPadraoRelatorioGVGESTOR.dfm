@@ -93,6 +93,7 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
   OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
+  OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
   object ToolBar1: TToolBar
@@ -105,7 +106,6 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
     Caption = 'ToolBar1'
     Images = ImageList1
     TabOrder = 0
-    ExplicitWidth = 644
     object btVisualizar: TToolButton
       Left = 0
       Top = 0
@@ -191,7 +191,7 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
     Left = 376
     Top = 56
     Bitmap = {
-      494C010104000800540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

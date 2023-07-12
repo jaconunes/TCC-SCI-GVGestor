@@ -24,6 +24,7 @@ type
     procedure btPesquisarClick(Sender: TObject);
     procedure edTelefoneExit(Sender: TObject);
     procedure edCpfCnpjExit(Sender: TObject);
+    procedure edNomeKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -68,6 +69,12 @@ procedure TfrCadLocatario.edCpfCnpjExit(Sender: TObject);
 begin
   inherited;
   edCpfCnpj.Text := fAplicaMascara(edCpfCnpj.Text);
+end;
+
+procedure TfrCadLocatario.edNomeKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
 end;
 
 procedure TfrCadLocatario.edTelefoneExit(Sender: TObject);
