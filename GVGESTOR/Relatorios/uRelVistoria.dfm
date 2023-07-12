@@ -1,134 +1,142 @@
 inherited frRelVistoria: TfrRelVistoria
   Caption = 'Relat'#243'rio de vistoria'
-  ClientHeight = 152
-  ClientWidth = 441
-  ExplicitWidth = 457
-  ExplicitHeight = 191
+  ClientHeight = 173
+  ClientWidth = 462
+  ExplicitWidth = 478
+  ExplicitHeight = 212
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
-    Width = 441
+    Width = 462
+    ExplicitWidth = 441
   end
-  inherited GroupBox1: TGroupBox
-    Left = 8
-    Top = 39
-    Width = 425
-    Height = 106
-    ExplicitLeft = 8
-    ExplicitTop = 39
-    ExplicitWidth = 425
-    ExplicitHeight = 106
-    object Label1: TLabel
-      Left = 17
-      Top = 29
-      Width = 43
-      Height = 17
-      Caption = 'C'#243'digo'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
+  inherited Panel1: TPanel
+    Width = 462
+    Height = 140
+    ExplicitLeft = 0
+    ExplicitTop = 33
+    ExplicitWidth = 441
+    ExplicitHeight = 119
+    inherited GroupBox1: TGroupBox
+      Left = 8
+      Top = 14
+      Width = 441
+      Height = 115
+      ExplicitLeft = 8
+      ExplicitTop = 14
+      ExplicitWidth = 441
+      ExplicitHeight = 115
+      object Label1: TLabel
+        Left = 25
+        Top = 29
+        Width = 43
+        Height = 17
+        Caption = 'C'#243'digo'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label2: TLabel
+        Left = 41
+        Top = 62
+        Width = 27
+        Height = 17
+        Caption = 'Data'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label3: TLabel
+        Left = 102
+        Top = 62
+        Width = 30
+        Height = 17
+        Caption = 'In'#237'cio'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 278
+        Top = 62
+        Width = 20
+        Height = 17
+        Caption = 'Fim'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object edCodigo: TEdit_Numero_PEDSCI
+        Left = 74
+        Top = 24
+        Width = 89
+        Height = 28
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        Decimal = False
+        DecimalSeparador = ','
+        Codigo = 0
+      end
     end
-    object Label2: TLabel
-      Left = 33
-      Top = 64
-      Width = 27
-      Height = 17
-      Caption = 'Data'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label3: TLabel
-      Left = 95
-      Top = 64
-      Width = 30
-      Height = 17
-      Caption = 'In'#237'cio'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label4: TLabel
-      Left = 267
-      Top = 64
-      Width = 20
-      Height = 17
-      Caption = 'Fim'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-    end
-    object edCodigo: TEdit_Numero_PEDSCI
-      Left = 66
-      Top = 24
-      Width = 67
-      Height = 28
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      Text = '0'
-      Decimal = False
-      DecimalSeparador = ','
-      Codigo = 0
-    end
-    object dtpDataInicio: TDateTimePicker
-      Left = 128
-      Top = 58
-      Width = 121
-      Height = 28
-      Date = 45117.957547303240000000
-      Time = 45117.957547303240000000
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 1
-    end
-    object dtpDataFim: TDateTimePicker
-      Left = 293
-      Top = 58
-      Width = 121
-      Height = 28
-      Date = 45117.957547303240000000
-      Time = 45117.957547303240000000
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 2
-    end
-    object ckData: TCheckBox
-      Left = 66
-      Top = 64
-      Width = 17
-      Height = 17
-      TabOrder = 3
-    end
+  end
+  object dtpDataInicio: TDateTimePicker [2]
+    Left = 146
+    Top = 105
+    Width = 119
+    Height = 28
+    Date = 45119.596904259260000000
+    Time = 45119.596904259260000000
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+  end
+  object dtpDataFim: TDateTimePicker [3]
+    Left = 312
+    Top = 105
+    Width = 119
+    Height = 28
+    Date = 45119.596904259260000000
+    Time = 45119.596904259260000000
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+  end
+  object ckData: TCheckBox [4]
+    Left = 82
+    Top = 111
+    Width = 17
+    Height = 17
+    TabOrder = 4
   end
   inherited ImageList1: TImageList
     Top = 8
     Bitmap = {
-      494C0101040008005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

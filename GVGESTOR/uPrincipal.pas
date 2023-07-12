@@ -189,6 +189,64 @@ begin
      end;
 end;
 
+procedure TfrPrincipal.pCentralizarPanel(AForm: TForm; APanel: TPanel);
+begin
+  APanel.Left := (AForm.ClientWidth div 2) - (APanel.Width div 2);
+  APanel.Top := (AForm.ClientHeight div 2) - (APanel.Height div 2);
+
+  APanel.Update;
+  AForm.Update;
+end;
+
+procedure TfrPrincipal.pPerfilAdm;
+begin
+  Cadastros1.Enabled := True;
+  Consultas1.Enabled := True;
+  Relatrios1.Enabled := True;
+  Laudo1.Enabled     := True;
+  mUsuario.Enabled   := True;
+  Sair1.Enabled      := True;
+end;
+
+procedure TfrPrincipal.pPerfilPadrao;
+begin
+  Cadastros1.Enabled := True;
+  Consultas1.Enabled := True;
+  Relatrios1.Enabled := True;
+  Laudo1.Enabled     := True;
+  mUsuario.Enabled   := False;
+  Sair1.Enabled      := True;
+end;
+
+procedure TfrPrincipal.pSemUsuario;
+begin
+  Cadastros1.Enabled      := False;
+  Consultas1.Enabled      := False;
+  Relatrios1.Enabled      := False;
+  Laudo1.Enabled          := False;
+  Sair1.Enabled           := False;
+  lbUsuarioLogado.Caption := EmptyStr;
+end;
+
+procedure TfrPrincipal.Sair1Click(Sender: TObject);
+var
+  wI: integer;
+begin
+  if MessageDlg('Deseja mesmo fazer logoff?', mtConfirmation, mbOKCancel, 0) = mrOk then
+     begin
+       for wI := 0 to Self.MDIChildCount - 1 do
+          Self.MDIChildren[wI].Close;
+
+       pSemUsuario;
+       lbUsuarioLogado.Caption := EmptyStr;
+       FreeAndNil(FUsuarioLogado);
+       pnLoginFilho.Visible := True;
+       edUsuario.Clear;
+       edSenha.Clear;
+       edUsuario.SetFocus;
+     end;
+end;
+
 procedure TfrPrincipal.Cliente1Click(Sender: TObject);
 begin
   TfrCadCliente.Create(self).Show;
@@ -229,45 +287,6 @@ begin
   TfrCadUsuario.Create(self).Show;
 end;
 
-procedure TfrPrincipal.pCentralizarPanel(AForm: TForm; APanel: TPanel);
-begin
-  APanel.Left := (AForm.ClientWidth div 2) - (APanel.Width div 2);
-  APanel.Top := (AForm.ClientHeight div 2) - (APanel.Height div 2);
-
-  APanel.Update;
-  AForm.Update;
-end;
-
-procedure TfrPrincipal.pPerfilAdm;
-begin
-  Cadastros1.Enabled := True;
-  Consultas1.Enabled := True;
-  Relatrios1.Enabled := True;
-  Laudo1.Enabled     := True;
-  mUsuario.Enabled   := True;
-  Sair1.Enabled      := True;
-end;
-
-procedure TfrPrincipal.pPerfilPadrao;
-begin
-  Cadastros1.Enabled := True;
-  Consultas1.Enabled := True;
-  Relatrios1.Enabled := True;
-  Laudo1.Enabled     := True;
-  mUsuario.Enabled   := False;
-  Sair1.Enabled      := True;
-end;
-
-procedure TfrPrincipal.pSemUsuario;
-begin
-  Cadastros1.Enabled      := False;
-  Consultas1.Enabled      := False;
-  Relatrios1.Enabled      := False;
-  Laudo1.Enabled          := False;
-  Sair1.Enabled           := False;
-  lbUsuarioLogado.Caption := EmptyStr;
-end;
-
 procedure TfrPrincipal.Proprietrio1Click(Sender: TObject);
 begin
   TfrCadProprietario.Create(self).Show;
@@ -281,17 +300,6 @@ end;
 procedure TfrPrincipal.Proprietrios2Click(Sender: TObject);
 begin
   TfrRelProprietario.Create(self).Show;
-end;
-
-procedure TfrPrincipal.Sair1Click(Sender: TObject);
-begin
-  pSemUsuario;
-  lbUsuarioLogado.Caption := EmptyStr;
-  FreeAndNil(FUsuarioLogado);
-  pnLoginFilho.Visible := True;
-  edUsuario.Clear;
-  edSenha.Clear;
-  edUsuario.SetFocus;
 end;
 
 procedure TfrPrincipal.Usurios1Click(Sender: TObject);

@@ -1,84 +1,92 @@
 inherited frRelProprietario: TfrRelProprietario
   Caption = 'Relat'#243'rio de propriet'#225'rios'
-  ClientHeight = 158
+  ClientHeight = 159
   ClientWidth = 395
   ExplicitWidth = 411
-  ExplicitHeight = 197
+  ExplicitHeight = 198
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
     Width = 395
     ExplicitWidth = 395
   end
-  inherited GroupBox1: TGroupBox
-    Left = 13
-    Top = 45
-    Width = 369
-    Height = 104
-    ExplicitLeft = 13
-    ExplicitTop = 45
-    ExplicitWidth = 369
-    ExplicitHeight = 104
-    object Label1: TLabel
-      Left = 33
-      Top = 29
-      Width = 43
-      Height = 17
-      Caption = 'C'#243'digo'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label2: TLabel
-      Left = 40
-      Top = 58
-      Width = 36
-      Height = 17
-      Caption = 'Nome'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-    end
-    object edCodigo: TEdit_Numero_PEDSCI
-      Left = 82
-      Top = 24
-      Width = 82
-      Height = 28
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      Text = '0'
-      Decimal = False
-      DecimalSeparador = ','
-      Codigo = 0
-    end
-    object edNome: TEdit
-      Left = 82
-      Top = 55
-      Width = 263
-      Height = 28
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 1
+  inherited Panel1: TPanel
+    Width = 395
+    Height = 126
+    ExplicitLeft = 0
+    ExplicitTop = 33
+    ExplicitWidth = 395
+    ExplicitHeight = 125
+    inherited GroupBox1: TGroupBox
+      Left = 13
+      Top = 13
+      Width = 369
+      Height = 104
+      ExplicitLeft = 13
+      ExplicitTop = 13
+      ExplicitWidth = 369
+      ExplicitHeight = 104
+      object Label1: TLabel
+        Left = 33
+        Top = 29
+        Width = 43
+        Height = 17
+        Caption = 'C'#243'digo'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label2: TLabel
+        Left = 40
+        Top = 58
+        Width = 36
+        Height = 17
+        Caption = 'Nome'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object edCodigo: TEdit_Numero_PEDSCI
+        Left = 82
+        Top = 24
+        Width = 82
+        Height = 28
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        Text = '0'
+        Decimal = False
+        DecimalSeparador = ','
+        Codigo = 0
+      end
+      object edNome: TEdit
+        Left = 82
+        Top = 55
+        Width = 263
+        Height = 28
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+      end
     end
   end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C0101040008005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

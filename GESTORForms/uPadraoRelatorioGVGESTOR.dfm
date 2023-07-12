@@ -10,6 +10,7 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  FormStyle = fsMDIChild
   Icon.Data = {
     0000010001001818000001002000880900001600000028000000180000003000
     0000010020000000000000090000000000000000000000000000000000000000
@@ -90,6 +91,7 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
     00000000000080000000C0004000FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
   KeyPreview = True
   OldCreateOrder = False
+  Visible = True
   OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
@@ -179,19 +181,31 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
       Style = tbsSeparator
     end
   end
-  object GroupBox1: TGroupBox
-    Left = 16
-    Top = 56
-    Width = 329
-    Height = 137
-    Caption = 'Filtros'
+  object Panel1: TPanel
+    Left = 0
+    Top = 33
+    Width = 360
+    Height = 171
+    Align = alClient
     TabOrder = 1
+    ExplicitLeft = 96
+    ExplicitTop = 80
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object GroupBox1: TGroupBox
+      Left = 9
+      Top = 11
+      Width = 337
+      Height = 147
+      Caption = 'Filtros'
+      TabOrder = 0
+    end
   end
   object ImageList1: TImageList
     Left = 376
     Top = 56
     Bitmap = {
-      494C010104000800580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101040008005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -75,7 +75,7 @@ implementation
 {$R *.dfm}
 
 uses udmDadosGVGESTOR, uConsVistoria, uConsCliente, uConsImovel, uConsLocatario,
-  uCadAmbiente;
+  uCadAmbiente, uPrincipal;
 
 { TfrCadVistoria }
 
@@ -191,6 +191,7 @@ end;
 
 procedure TfrCadVistoria.SalvarCampos;
 begin
+
   FTabela.FieldByName('BDCODVIST').AsInteger   := edCodigo.Codigo;
   FTabela.FieldByName('BDDATAVIST').AsDateTime := dtpDataVistoria.Date;
   FTabela.FieldByName('BDTIPOLOC').AsString    := cbTipoLocacao.Items[cbTipoLocacao.ItemIndex];
@@ -200,7 +201,7 @@ begin
   FTabela.FieldByName('BDLEITENERG').AsString  := edLeituraEnergia.Text;
   FTabela.FieldByName('BDNMEDAGUA').AsString   := edNumMedAgua.Text;
   FTabela.FieldByName('BDLEITAGUA').AsString   := edLeituraAgua.Text;
-  FTabela.FieldByName('BDPKCODUSU').AsInteger  := 853; // Código Usuário Logado
+  FTabela.FieldByName('BDPKCODUSU').AsInteger  := frPrincipal.fGetUsuarioLogado.ID; // Código Usuário Logado
   FTabela.FieldByName('BDPKCODCLT').AsInteger := edCodCliente.Codigo;
   FTabela.FieldByName('BDPKCODIMOV').AsInteger := edCodImovel.Codigo;
   FTabela.FieldByName('BDPKCODLOCAT').AsInteger := edCodLocatario.Codigo;

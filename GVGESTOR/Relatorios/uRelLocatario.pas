@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoRelatorioGVGESTOR, Data.FMTBcd,
   frxExportDOCX, frxClass, frxExportPDF, Data.DB, Data.SqlExpr, frxDBSet,
   frxDesgn, System.ImageList, Vcl.ImgList, Vcl.StdCtrls, Vcl.ComCtrls,
-  Vcl.ToolWin, EditSCI;
+  Vcl.ToolWin, EditSCI, Vcl.ExtCtrls;
 
 type
   TfrRelLocatario = class(TfrPadraoRelatorioGVGESTOR)

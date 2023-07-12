@@ -7,15 +7,15 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoRelatorioGVGESTOR, Data.FMTBcd,
   frxExportDOCX, frxClass, frxExportPDF, Data.DB, Data.SqlExpr, frxDBSet,
   frxDesgn, System.ImageList, Vcl.ImgList, Vcl.StdCtrls, Vcl.ComCtrls,
-  Vcl.ToolWin, EditSCI;
+  Vcl.ToolWin, EditSCI, Vcl.ExtCtrls;
 
 type
   TfrRelVistoria = class(TfrPadraoRelatorioGVGESTOR)
     edCodigo: TEdit_Numero_PEDSCI;
+    Label1: TLabel;
     dtpDataInicio: TDateTimePicker;
     dtpDataFim: TDateTimePicker;
     ckData: TCheckBox;
-    Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -42,12 +42,13 @@ begin
   SQLQueryPadrao.Close;
   SQLQueryPadrao.SQL.Clear;
   SQLQueryPadrao.SQL.Add('select v.bdcodvist, v.bddatavist, v.bdtipoloc,');
-  SQLQueryPadrao.SQL.Add(' i.bdendereco, i.bdnumero, i.bdbairro, l.bdnome from tvistoria v ');
+  SQLQueryPadrao.SQL.Add(' i.BDCODIMOVEL, i.bdendereco, i.bdnumero, i.bdbairro, l.bdnome ');
+  SQLQueryPadrao.SQL.Add(' from tvistoria v ');
   SQLQueryPadrao.SQL.Add(' join timovel i on (i.bdcodimovel = v.bdpkcodimov) ');
   SQLQueryPadrao.SQL.Add(' join tlocatario l on (l.bdcdlocat = v.bdpkcodlocat) ');
 
   if edCodigo.Codigo > 0 then // filtro por codigo
-     SQLQueryPadrao.SQL.Add('where v.BDCODIMOVEL = ' + edCodigo.Text)
+     SQLQueryPadrao.SQL.Add('where v.BDCODVIST = ' + edCodigo.Text)
   else
   if ckData.Checked then // filtro por data
      begin

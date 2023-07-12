@@ -29,6 +29,8 @@ type
     edBairro: TEdit;
     Label9: TLabel;
     edCidade: TEdit;
+    edEmail: TEdit;
+    Label10: TLabel;
     procedure btPesquisarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure edCpfCnpjExit(Sender: TObject);
@@ -70,14 +72,15 @@ end;
 procedure TfrCadProprietario.CarregaCampos;
 begin
   inherited;
-  edNome.Text := FTabela.FieldByName('BDNOME').AsString;
+  edNome.Text       := FTabela.FieldByName('BDNOME').AsString;
   cbTipoPessoa.Text := FTabela.FieldByName('BDTIPOPESSOA').AsString;
-  edCpfCnpj.Text  := FTabela.FieldByName('BDCPFCNPJ').AsString;
-  edTelefone.Text := FTabela.FieldByName('BDTELEFONE').AsString;
-  edLogradouro.Text  := FTabela.FieldByName('BDENDERECO').AsString;
-  edNumero.Codigo  := FTabela.FieldByName('BDNUMERO').AsInteger;
-  edBairro.Text := FTabela.FieldByName('BDBAIRRO').AsString;
-  edCidade.Text := FTabela.FieldByName('BDCIDADE').AsString;
+  edCpfCnpj.Text    := FTabela.FieldByName('BDCPFCNPJ').AsString;
+  edTelefone.Text   := FTabela.FieldByName('BDTELEFONE').AsString;
+  edEmail.Text      := FTabela.FieldByName('BDEMAIL').AsString;
+  edLogradouro.Text := FTabela.FieldByName('BDENDERECO').AsString;
+  edNumero.Codigo   := FTabela.FieldByName('BDNUMERO').AsInteger;
+  edBairro.Text     := FTabela.FieldByName('BDBAIRRO').AsString;
+  edCidade.Text     := FTabela.FieldByName('BDCIDADE').AsString;
 end;
 
 procedure TfrCadProprietario.cbTipoPessoaChange(Sender: TObject);
@@ -143,15 +146,16 @@ end;
 procedure TfrCadProprietario.SalvarCampos;
 begin
   inherited;
-  FTabela.FieldByName('BDCDPROPR').AsInteger := edCodProp.Codigo;
-  FTabela.FieldByName('BDNOME').AsString := edNome.Text;
+  FTabela.FieldByName('BDCDPROPR').AsInteger   := edCodProp.Codigo;
+  FTabela.FieldByName('BDNOME').AsString       := edNome.Text;
   FTabela.FieldByName('BDTIPOPESSOA').AsString := cbTipoPessoa.Items[cbTipoPessoa.ItemIndex];
-  FTabela.FieldByName('BDCPFCNPJ').AsString := fCharacterRemove(edCpfCnpj.Text);
-  FTabela.FieldByName('BDTELEFONE').AsString := fCharacterRemove(edTelefone.Text);
-  FTabela.FieldByName('BDENDERECO').AsString := edLogradouro.Text;
-  FTabela.FieldByName('BDNUMERO').AsInteger := edNumero.Codigo;
-  FTabela.FieldByName('BDBAIRRO').AsString := edBairro.Text;
-  FTabela.FieldByName('BDCIDADE').AsString := edCidade.Text;
+  FTabela.FieldByName('BDCPFCNPJ').AsString    := fCharacterRemove(edCpfCnpj.Text);
+  FTabela.FieldByName('BDTELEFONE').AsString   := fCharacterRemove(edTelefone.Text);
+  FTabela.FieldByName('BDEMAIL').AsString      := edEmail.Text;
+  FTabela.FieldByName('BDENDERECO').AsString   := edLogradouro.Text;
+  FTabela.FieldByName('BDNUMERO').AsInteger    := edNumero.Codigo;
+  FTabela.FieldByName('BDBAIRRO').AsString     := edBairro.Text;
+  FTabela.FieldByName('BDCIDADE').AsString     := edCidade.Text;
 end;
 
 function TfrCadProprietario.setIDEdit: TWinControl;

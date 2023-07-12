@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ToolWin, Vcl.ComCtrls,
   System.ImageList, Vcl.ImgList, Data.FMTBcd, frxExportDOCX, frxClass,
-  frxExportPDF, Data.DB, Data.SqlExpr, frxDBSet, frxDesgn, udmConnectionGVGestor;
+  frxExportPDF, Data.DB, Data.SqlExpr, frxDBSet, frxDesgn, udmConnectionGVGestor,
+  Vcl.ExtCtrls;
 
 type
   TfrPadraoRelatorioGVGESTOR = class(TForm)
@@ -29,6 +30,7 @@ type
     ToolButton3: TToolButton;
     ToolButton4: TToolButton;
     ToolButton5: TToolButton;
+    Panel1: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure btSalvarComoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

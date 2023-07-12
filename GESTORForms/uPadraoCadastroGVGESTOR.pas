@@ -57,7 +57,7 @@ type
     function fGerarID: Integer; virtual;
     procedure pCentralizaForms(wFrPai, wFrFilho: TForm);
     //remove caracteres
-    function fCharacterRemove(S: String): String;
+    function fCharacterRemove(wS: String): String;
 
   end;
 
@@ -302,18 +302,18 @@ begin
   Result := True; // o valor deve retornar verdadeiro para poder salvar os dados na tabela
 end;
 
-function TfrPadraoCadastroGVGESTOR.fCharacterRemove(S: String): String;
+function TfrPadraoCadastroGVGESTOR.fCharacterRemove(wS: String): String;
 var
-  i: Integer;
+  wI: Integer;
 begin
-  i := Length(S);
-  while (Length(S) > 0) and (i > 0) do
+  wI := Length(wS);
+  while (Length(wS) > 0) and (wI > 0) do
     begin
-      if (S[i] = '.') or (S[i] = '/') or (S[i] = '-') then
-      Delete(S,i,1);
-      Dec(i);
+      if (wS[wI] = '.') or (wS[wI] = '/') or (wS[wI] = '-') or (wS[wI] = '(') or (wS[wI] = ')') then
+      Delete(wS,wI,1);
+      Dec(wI);
     end;
-  Result := S;
+  Result := wS;
 end;
 
 end.
