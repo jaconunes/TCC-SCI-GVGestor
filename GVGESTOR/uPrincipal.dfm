@@ -14691,8 +14691,8 @@ object frPrincipal: TfrPrincipal
     end
   end
   object MainMenu1: TMainMenu
-    Left = 104
-    Top = 72
+    Left = 144
+    Top = 48
     object Cadastros1: TMenuItem
       Caption = 'Cadastros'
       Enabled = False
@@ -14779,6 +14779,7 @@ object frPrincipal: TfrPrincipal
       Enabled = False
       object Gerar1: TMenuItem
         Caption = 'Gerar'
+        OnClick = Gerar1Click
       end
     end
     object Sobre1: TMenuItem

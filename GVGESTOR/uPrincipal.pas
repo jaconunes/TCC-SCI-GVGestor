@@ -68,6 +68,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure Gerar1Click(Sender: TObject);
   private
     { Private declarations }
     FUsuarioLogado : TUsuario;
@@ -91,7 +92,7 @@ implementation
 uses udmDadosGVGESTOR, uCadUsuario, uConsUsuario, uCadImovel,
   uConsProprietario, uConsImovel, uCadProprietario, uCadCliente, uConsCliente,
   uCadLocatario, uConsLocatario, uCadVistoria, uConsVistoria, uRelImovel,
-  uRelProprietario, uRelCliente, uRelLocatario, uRelVistoria;
+  uRelProprietario, uRelCliente, uRelLocatario, uRelVistoria, uLaudo;
 
 { TfrPrincipal }
 
@@ -141,6 +142,11 @@ begin
             FUsuarioLogado.Perfil := dmTabelas.tbUsuario.FieldByName('BDPERFIL').AsString;
           end;
      end;
+end;
+
+procedure TfrPrincipal.Gerar1Click(Sender: TObject);
+begin
+  TfrLaudo.Create(self).Show;
 end;
 
 procedure TfrPrincipal.Clientes1Click(Sender: TObject);

@@ -34,7 +34,8 @@ uses
   uRelCliente in 'Relatorios\uRelCliente.pas' {frRelCliente},
   uRelLocatario in 'Relatorios\uRelLocatario.pas' {frRelLocatario},
   uRelVistoria in 'Relatorios\uRelVistoria.pas' {frRelVistoria},
-  uUsuarioLogado in 'uUsuarioLogado.pas';
+  uUsuarioLogado in 'uUsuarioLogado.pas',
+  uLaudo in 'Relatorios\uLaudo.pas' {frLaudo};
 
 {$R *.res}
 
