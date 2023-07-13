@@ -76,10 +76,12 @@ inherited frCadImovel: TfrCadImovel
       ItemIndex = 0
       ParentFont = False
       TabOrder = 3
-      Text = 'Residencial'
+      Text = 'Casa'
       Items.Strings = (
-        'Residencial'
-        'Comercial')
+        'Casa'
+        'Apartamento'
+        'Sala Comercial'
+        'Galp'#227'o')
     end
     object seAmbientes: TSpinEdit
       Left = 121
@@ -323,7 +325,7 @@ inherited frCadImovel: TfrCadImovel
     Left = 560
     Top = 9
     Bitmap = {
-      494C010106000800F00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800F40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
