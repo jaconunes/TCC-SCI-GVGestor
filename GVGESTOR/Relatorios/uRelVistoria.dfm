@@ -1,22 +1,24 @@
 inherited frRelVistoria: TfrRelVistoria
   Caption = 'Relat'#243'rio de vistoria'
-  ClientHeight = 173
-  ClientWidth = 462
-  ExplicitWidth = 478
-  ExplicitHeight = 212
+  ClientHeight = 171
+  ClientWidth = 459
+  Constraints.MaxHeight = 210
+  Constraints.MaxWidth = 475
+  Constraints.MinHeight = 210
+  Constraints.MinWidth = 475
+  ExplicitWidth = 475
+  ExplicitHeight = 210
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
-    Width = 462
-    ExplicitWidth = 441
+    Width = 459
+    ExplicitWidth = 462
   end
   inherited Panel1: TPanel
-    Width = 462
-    Height = 140
-    ExplicitLeft = 0
-    ExplicitTop = 33
-    ExplicitWidth = 441
-    ExplicitHeight = 119
+    Width = 459
+    Height = 138
+    ExplicitWidth = 462
+    ExplicitHeight = 140
     inherited GroupBox1: TGroupBox
       Left = 8
       Top = 14
@@ -90,6 +92,7 @@ inherited frRelVistoria: TfrRelVistoria
         Font.Style = []
         ParentFont = False
         TabOrder = 0
+        Text = '0'
         Decimal = False
         DecimalSeparador = ','
         Codigo = 0
@@ -136,7 +139,7 @@ inherited frRelVistoria: TfrRelVistoria
   inherited ImageList1: TImageList
     Top = 8
     Bitmap = {
-      494C010104000800600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

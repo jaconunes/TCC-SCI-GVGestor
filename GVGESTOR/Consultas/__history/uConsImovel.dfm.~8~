@@ -1,0 +1,86 @@
+inherited frConsImovel: TfrConsImovel
+  Caption = 'Consulta de im'#243'veis'
+  ExplicitWidth = 883
+  ExplicitHeight = 369
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited ToolBar1: TToolBar
+    inherited btEditar: TToolButton
+      OnClick = btEditarClick
+    end
+  end
+  inherited grConsulta: TDBGrid
+    Left = 185
+    Width = 682
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'BDCODIMOVEL'
+        Title.Caption = 'C'#211'DIGO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDTIPOIMOVEL'
+        Title.Caption = 'TIPO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDQUANTAMB'
+        Title.Caption = 'AMBIENTES'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDDATACAD'
+        Title.Caption = 'DATA'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDENDERECO'
+        Title.Caption = 'LOGRADOURO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDNUMERO'
+        Title.Caption = 'NUMERO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDBAIRRO'
+        Title.Caption = 'BAIRRO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDCIDADE'
+        Title.Caption = 'CIDADE'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDPKCODPROP'
+        Title.Caption = 'PROPRIETARIO'
+        Visible = True
+      end>
+  end
+  object Panel1: TPanel [2]
+    Left = 0
+    Top = 33
+    Width = 185
+    Height = 297
+    Align = alLeft
+    Caption = 'Panel1'
+    TabOrder = 2
+    ExplicitLeft = 240
+    ExplicitTop = 152
+    ExplicitHeight = 41
+  end
+  inherited dsConsulta: TDataSource
+    DataSet = dmTabelas.tbImovel
+  end
+end

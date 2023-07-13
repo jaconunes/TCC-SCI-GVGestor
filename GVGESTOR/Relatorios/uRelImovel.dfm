@@ -1,7 +1,13 @@
 inherited frRelImovel: TfrRelImovel
   Caption = 'Relat'#243'rio de im'#243'veis'
+  ClientHeight = 198
   ClientWidth = 450
+  Constraints.MaxHeight = 237
+  Constraints.MaxWidth = 466
+  Constraints.MinHeight = 237
+  Constraints.MinWidth = 466
   ExplicitWidth = 466
+  ExplicitHeight = 237
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
@@ -10,10 +16,8 @@ inherited frRelImovel: TfrRelImovel
   end
   inherited Panel1: TPanel
     Width = 450
-    ExplicitLeft = 0
-    ExplicitTop = 33
+    Height = 165
     ExplicitWidth = 450
-    ExplicitHeight = 165
     inherited GroupBox1: TGroupBox
       Left = 10
       Top = 13
@@ -161,7 +165,7 @@ inherited frRelImovel: TfrRelImovel
     Left = 400
     Top = 8
     Bitmap = {
-      494C010104000800680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101040008006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

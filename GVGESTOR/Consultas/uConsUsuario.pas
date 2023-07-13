@@ -11,6 +11,7 @@ uses
 type
   TfrConsUsuario = class(TfrPadraoConsultaGVGSTOR)
     procedure btEditarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -26,13 +27,24 @@ implementation
 
 {$R *.dfm}
 
-uses uCadUsuario;
+uses uCadUsuario, uPrincipal;
 
 { TfrConsUsuario }
 
 procedure TfrConsUsuario.btEditarClick(Sender: TObject);
 begin
   TfrCadUsuario.Create(self).Show;
+end;
+
+procedure TfrConsUsuario.FormCreate(Sender: TObject);
+begin
+  inherited;
+  if frPrincipal.fGetUsuarioLogado.Perfil = 'Administrador' then
+     begin
+       btEditar.Enabled := True;
+       btExcluir.Enabled := True;
+     end;
+
 end;
 
 function TfrConsUsuario.setTabela: TClientDataSet;

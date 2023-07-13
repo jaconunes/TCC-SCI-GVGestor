@@ -1,0 +1,205 @@
+inherited frConsImovel: TfrConsImovel
+  Caption = 'Consulta de im'#243'veis'
+  ClientWidth = 887
+  ExplicitWidth = 903
+  ExplicitHeight = 369
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited ToolBar1: TToolBar
+    Width = 887
+    inherited btEditar: TToolButton
+      OnClick = btEditarClick
+    end
+  end
+  inherited grConsulta: TDBGrid
+    Top = 73
+    Width = 887
+    Height = 257
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'BDCODIMOVEL'
+        Title.Caption = 'C'#211'DIGO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDTIPOIMOVEL'
+        Title.Caption = 'TIPO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDQUANTAMB'
+        Title.Caption = 'AMBIENTES'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDDATACAD'
+        Title.Caption = 'DATA'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDENDERECO'
+        Title.Caption = 'LOGRADOURO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDNUMERO'
+        Title.Caption = 'NUMERO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDBAIRRO'
+        Title.Caption = 'BAIRRO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDCIDADE'
+        Title.Caption = 'CIDADE'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BDPKCODPROP'
+        Title.Caption = 'PROPRIETARIO'
+        Visible = True
+      end>
+  end
+  object Panel1: TPanel [2]
+    Left = 0
+    Top = 33
+    Width = 887
+    Height = 40
+    Align = alTop
+    TabOrder = 2
+    ExplicitWidth = 867
+    object Label1: TLabel
+      Left = 22
+      Top = 12
+      Width = 54
+      Height = 17
+      Caption = 'Filtro por'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 443
+      Top = 12
+      Width = 30
+      Height = 17
+      Caption = 'Inicio'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 619
+      Top = 12
+      Width = 20
+      Height = 17
+      Caption = 'Fim'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object cbFiltro: TComboBox
+      Left = 82
+      Top = 6
+      Width = 145
+      Height = 28
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ItemIndex = 0
+      ParentFont = False
+      TabOrder = 0
+      Text = 'C'#243'digo'
+      OnChange = cbFiltroChange
+      Items.Strings = (
+        'C'#243'digo'
+        'Data'
+        'Endere'#231'o')
+    end
+    object btFiltrar: TButton
+      Left = 778
+      Top = 6
+      Width = 75
+      Height = 28
+      Caption = 'Filtrar'
+      TabOrder = 4
+    end
+    object edTextFiltro: TEdit
+      Left = 233
+      Top = 6
+      Width = 184
+      Height = 28
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+    end
+    object dtpInicio: TDateTimePicker
+      Left = 479
+      Top = 6
+      Width = 121
+      Height = 28
+      Date = 45119.982287418980000000
+      Time = 45119.982287418980000000
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+    end
+    object dtpFim: TDateTimePicker
+      Left = 647
+      Top = 6
+      Width = 121
+      Height = 28
+      Date = 45119.982287418980000000
+      Time = 45119.982287418980000000
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+    end
+  end
+  inherited ImageList1: TImageList
+    Left = 816
+    Top = 105
+  end
+  inherited dsConsulta: TDataSource
+    DataSet = dmTabelas.tbImovel
+    Left = 816
+    Top = 160
+  end
+end

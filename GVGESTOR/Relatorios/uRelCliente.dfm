@@ -1,20 +1,22 @@
 inherited frRelCliente: TfrRelCliente
   Caption = 'Relat'#243'rio de clientes'
-  ClientHeight = 152
-  ClientWidth = 359
-  ExplicitWidth = 375
-  ExplicitHeight = 191
+  ClientHeight = 148
+  ClientWidth = 354
+  Constraints.MaxHeight = 187
+  Constraints.MaxWidth = 370
+  Constraints.MinHeight = 187
+  Constraints.MinWidth = 370
+  ExplicitWidth = 370
+  ExplicitHeight = 187
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
-    Width = 359
+    Width = 354
     ExplicitWidth = 359
   end
   inherited Panel1: TPanel
-    Width = 359
-    Height = 119
-    ExplicitLeft = 0
-    ExplicitTop = 33
+    Width = 354
+    Height = 115
     ExplicitWidth = 359
     ExplicitHeight = 119
     inherited GroupBox1: TGroupBox
@@ -84,7 +86,7 @@ inherited frRelCliente: TfrRelCliente
   end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C010104000800600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -68,6 +68,8 @@ implementation
 
 {$R *.dfm}
 
+uses uPrincipal;
+
 procedure TfrPadraoCadastroGVGESTOR.btExcluirClick(Sender: TObject);
 begin
   ExcluirRegistro;
@@ -98,9 +100,17 @@ begin
                  FTabela.ApplyUpdates(0);
                  FTabela.Refresh;
 
-                 setLimpaCampos;// limpar campos da tela
-                 if Assigned(FIDEdit) and FIDEdit.CanFocus then// apos salvar voltar para o campo chave
-                    FIDEdit.SetFocus;
+                 if (frPrincipal.fGetUsuarioLogado = nil) and (Self.Name = 'frCadUsuario')  then
+                    begin
+                      frPrincipal.pnLoginFilho.Visible := True;
+                      Close;
+                    end
+                 else
+                    begin
+                      setLimpaCampos;// limpar campos da tela
+                      if Assigned(FIDEdit) and FIDEdit.CanFocus then// apos salvar voltar para o campo chave
+                         FIDEdit.SetFocus;
+                    end;
                end
             else
                MessageDlg('O cadastro não está em modo de edição ou inserção!', mtInformation, [mbOK], 0);
@@ -197,7 +207,15 @@ begin
     btPesquisar.Click
   else
   if Key = VK_ESCAPE then// tecla de atalho para fechar a tela
-     Close
+     begin
+       if (frPrincipal.fGetUsuarioLogado = nil) and (Self.Name = 'frCadUsuario')  then
+          begin
+            Close;
+            frPrincipal.pnLoginFilho.Visible := True;
+          end
+       else
+          Close;
+     end
   else
   if (Key = VK_RETURN) then// tecla de atalho para seguir para o próximo campo com <enter>
      self.Perform(WM_NEXTDLGCTL,0,0);

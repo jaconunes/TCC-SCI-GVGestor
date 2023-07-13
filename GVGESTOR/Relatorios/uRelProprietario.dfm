@@ -1,29 +1,31 @@
 inherited frRelProprietario: TfrRelProprietario
   Caption = 'Relat'#243'rio de propriet'#225'rios'
-  ClientHeight = 159
-  ClientWidth = 395
-  ExplicitWidth = 411
-  ExplicitHeight = 198
+  ClientHeight = 151
+  ClientWidth = 390
+  Constraints.MaxHeight = 190
+  Constraints.MaxWidth = 406
+  Constraints.MinHeight = 190
+  Constraints.MinWidth = 406
+  ExplicitWidth = 406
+  ExplicitHeight = 190
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
-    Width = 395
+    Width = 390
     ExplicitWidth = 395
   end
   inherited Panel1: TPanel
-    Width = 395
-    Height = 126
-    ExplicitLeft = 0
-    ExplicitTop = 33
+    Width = 390
+    Height = 118
     ExplicitWidth = 395
-    ExplicitHeight = 125
+    ExplicitHeight = 126
     inherited GroupBox1: TGroupBox
-      Left = 13
-      Top = 13
+      Left = 10
+      Top = 6
       Width = 369
       Height = 104
-      ExplicitLeft = 13
-      ExplicitTop = 13
+      ExplicitLeft = 10
+      ExplicitTop = 6
       ExplicitWidth = 369
       ExplicitHeight = 104
       object Label1: TLabel
@@ -86,7 +88,7 @@ inherited frRelProprietario: TfrRelProprietario
   end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C010104000800600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

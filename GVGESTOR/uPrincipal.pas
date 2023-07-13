@@ -45,6 +45,7 @@ type
     btLogin: TButton;
     lbUsuarioLogado: TLabel;
     Sair1: TMenuItem;
+    lbCadastrar: TLabel;
     procedure mUsuarioClick(Sender: TObject);
     procedure Usurios1Click(Sender: TObject);
     procedure Imvel1Click(Sender: TObject);
@@ -69,6 +70,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Gerar1Click(Sender: TObject);
+    procedure lbCadastrarClick(Sender: TObject);
   private
     { Private declarations }
     FUsuarioLogado : TUsuario;
@@ -271,6 +273,12 @@ end;
 procedure TfrPrincipal.Imvel1Click(Sender: TObject);
 begin
   TfrCadImovel.Create(self).Show;
+end;
+
+procedure TfrPrincipal.lbCadastrarClick(Sender: TObject);
+begin
+  pnLoginFilho.Visible := False;
+  TfrCadUsuario.Create(self);
 end;
 
 procedure TfrPrincipal.Locatrio1Click(Sender: TObject);

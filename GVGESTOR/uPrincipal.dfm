@@ -9487,11 +9487,11 @@ object frPrincipal: TfrPrincipal
     ExplicitLeft = -1
   end
   object lbUsuarioLogado: TLabel
-    Left = 694
-    Top = 24
-    Width = 4
+    Left = 385
+    Top = 22
+    Width = 715
     Height = 21
-    Alignment = taCenter
+    Alignment = taRightJustify
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
     Font.Height = -16
@@ -14647,6 +14647,20 @@ object frPrincipal: TfrPrincipal
       Font.Style = []
       ParentFont = False
     end
+    object lbCadastrar: TLabel
+      Left = 430
+      Top = 448
+      Width = 175
+      Height = 13
+      Caption = 'N'#227'o tem um usu'#225'rio? Cadastre-se!'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      OnClick = lbCadastrarClick
+    end
     object edUsuario: TEdit
       Left = 420
       Top = 215
@@ -14676,7 +14690,7 @@ object frPrincipal: TfrPrincipal
     end
     object btLogin: TButton
       Left = 388
-      Top = 343
+      Top = 354
       Width = 251
       Height = 41
       Caption = 'Login'

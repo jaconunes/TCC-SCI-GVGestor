@@ -1,18 +1,48 @@
 inherited frLaudo: TfrLaudo
   Caption = 'Laudo vistoria'
-  ClientHeight = 132
-  ClientWidth = 359
-  ExplicitWidth = 375
-  ExplicitHeight = 171
+  ClientHeight = 131
+  ClientWidth = 354
+  Constraints.MaxHeight = 170
+  Constraints.MaxWidth = 370
+  Constraints.MinHeight = 170
+  Constraints.MinWidth = 370
+  ExplicitWidth = 370
+  ExplicitHeight = 170
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
-    Width = 359
-    Enabled = False
+    Width = 354
+    ExplicitWidth = 359
+    inherited btVisualizar: TToolButton
+      Enabled = False
+    end
+    inherited ToolButton2: TToolButton
+      Enabled = False
+    end
+    inherited btSalvarComo: TToolButton
+      Enabled = False
+    end
+    inherited ToolButton3: TToolButton
+      Enabled = False
+    end
+    inherited btImprimir: TToolButton
+      Enabled = False
+    end
+    inherited ToolButton4: TToolButton
+      Enabled = False
+    end
+    inherited btEditar: TToolButton
+      Enabled = False
+    end
+    inherited ToolButton5: TToolButton
+      Enabled = False
+    end
   end
   inherited Panel1: TPanel
-    Width = 359
-    Height = 99
+    Width = 354
+    Height = 98
+    ExplicitWidth = 359
+    ExplicitHeight = 99
     inherited GroupBox1: TGroupBox
       Left = 8
       Top = 6
@@ -21,13 +51,13 @@ inherited frLaudo: TfrLaudo
       ExplicitLeft = 8
       ExplicitTop = 6
       ExplicitHeight = 83
-      object SpeedButton1: TSpeedButton
+      object btSelecionar: TSpeedButton
         Left = 183
         Top = 32
         Width = 82
         Height = 28
         Caption = 'Selecionar'
-        OnClick = SpeedButton1Click
+        OnClick = btSelecionarClick
       end
       object edCodigo: TEdit_Numero_PEDSCI
         Left = 82
@@ -41,6 +71,7 @@ inherited frLaudo: TfrLaudo
         Font.Style = []
         ParentFont = False
         TabOrder = 0
+        Text = '0'
         OnChange = edCodigoChange
         Decimal = False
         DecimalSeparador = ','
@@ -50,7 +81,7 @@ inherited frLaudo: TfrLaudo
   end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C010105000800700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

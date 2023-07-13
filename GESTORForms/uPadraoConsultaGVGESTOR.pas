@@ -82,6 +82,8 @@ end;
 procedure TfrPadraoConsultaGVGSTOR.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+  FTabela.Filter := EmptyStr;
+  FTabela.Filtered := False;
   // para tela do tipo MDI (Multi device interface), deve implementar para finalizar a tela
   Action := caFree;
 end;

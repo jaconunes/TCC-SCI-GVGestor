@@ -55,7 +55,7 @@ implementation
 
 {$R *.dfm}
 
-uses udmDadosGVGESTOR, uConsUsuario;
+uses udmDadosGVGESTOR, uConsUsuario, uPrincipal;
 
 { TfrCadUsuario }
 
@@ -102,7 +102,15 @@ procedure TfrCadUsuario.FormCreate(Sender: TObject);
 begin
   inherited;
   if Owner is TfrConsUsuario then
-       edCodigo.Text := IntToStr(TfrConsUsuario(Owner).grConsulta.Columns[0].Field.AsInteger);
+     edCodigo.Text := IntToStr(TfrConsUsuario(Owner).grConsulta.Columns[0].Field.AsInteger)
+  else
+  if frPrincipal.fGetUsuarioLogado = nil then
+     begin
+       cbPerfil.Text := 'Padrão';
+       cbPerfil.Enabled := False;
+       btPesquisar.Enabled := False;
+       btExcluir.Enabled := False;
+     end;
 end;
 
 function TfrCadUsuario.fSetFieldName: string;
@@ -130,7 +138,11 @@ begin
   FTabela.FieldByName('BDCODIGO').AsInteger := edCodigo.Codigo;
   FTabela.FieldByName('BDNOME').AsString    := edNome.Text;
   FTabela.FieldByName('BDCPFCNPJ').AsString := fCharacterRemove(edCpfCnpj.Text);
-  FTabela.FieldByName('BDPERFIL').AsString  := cbPerfil.Items[cbPerfil.ItemIndex];
+
+  if frPrincipal.fGetUsuarioLogado = nil then
+     FTabela.FieldByName('BDPERFIL').AsString  := 'Padrão'
+  else
+     FTabela.FieldByName('BDPERFIL').AsString  := cbPerfil.Items[cbPerfil.ItemIndex];
   FTabela.FieldByName('BDSENHA').AsString   := edSenha.Text;
   FTabela.FieldByName('BDUSUARIO').AsString := edUsuario.Text;
 end;
@@ -200,7 +212,15 @@ begin
      end
   else
   if Result then
+     begin
        wMessage := 'Registro salvo com sucesso!';
+//       if frPrincipal.fGetUsuarioLogado = nil then
+//          begin
+//            frPrincipal.pnLoginFilho.Visible := True;
+//            Close;
+//          end;
+     end;
+
   ShowMessage(wMessage);
 end;
 

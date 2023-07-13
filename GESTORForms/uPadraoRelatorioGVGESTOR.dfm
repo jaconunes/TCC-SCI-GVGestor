@@ -111,7 +111,7 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
     object btVisualizar: TToolButton
       Left = 0
       Top = 0
-      Hint = 'Visualizar'
+      Hint = 'Visualizar (F3)'
       Caption = 'btVisualizar'
       ImageIndex = 0
       ParentShowHint = False
@@ -129,7 +129,7 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
     object btSalvarComo: TToolButton
       Left = 41
       Top = 0
-      Hint = 'Salvar'
+      Hint = 'Salvar (F5)'
       Caption = 'btSalvarComo'
       ImageIndex = 1
       ParentShowHint = False
@@ -144,15 +144,15 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
       ImageIndex = 4
       Style = tbsSeparator
     end
-    object btEditarReport: TToolButton
+    object btImprimir: TToolButton
       Left = 82
       Top = 0
-      Hint = 'Imprimir'
-      Caption = 'btEditarReport'
+      Hint = 'Imprimir (F6)'
+      Caption = 'btImprimir'
       ImageIndex = 2
       ParentShowHint = False
       ShowHint = True
-      OnClick = btEditarReportClick
+      OnClick = btImprimirClick
     end
     object ToolButton4: TToolButton
       Left = 115
@@ -165,7 +165,7 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
     object btEditar: TToolButton
       Left = 123
       Top = 0
-      Hint = 'Editar'
+      Hint = 'Editar (F7)'
       Caption = 'btEditar'
       ImageIndex = 3
       ParentShowHint = False
@@ -188,10 +188,6 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
     Height = 171
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = 96
-    ExplicitTop = 80
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object GroupBox1: TGroupBox
       Left = 9
       Top = 11
@@ -205,7 +201,7 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
     Left = 376
     Top = 56
     Bitmap = {
-      494C0101040008005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

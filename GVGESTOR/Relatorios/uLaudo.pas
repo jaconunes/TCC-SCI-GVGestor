@@ -12,9 +12,10 @@ uses
 type
   TfrLaudo = class(TfrPadraoRelatorioGVGESTOR)
     edCodigo: TEdit_Numero_PEDSCI;
-    SpeedButton1: TSpeedButton;
-    procedure SpeedButton1Click(Sender: TObject);
+    btSelecionar: TSpeedButton;
+    procedure btSelecionarClick(Sender: TObject);
     procedure edCodigoChange(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -37,8 +38,20 @@ begin
   inherited;
   if dmTabelas.tbVistoria.FindKey([edCodigo.Text]) then
      begin
-       ToolBar1.Enabled := True;
+       btVisualizar.Enabled := True;
+       btSalvarComo.Enabled := True;
+       btImprimir.Enabled := True;
+       btEditar.Enabled := True;
      end;
+end;
+
+procedure TfrLaudo.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  if (Key = VK_F3) then// tecla de atalho para consulta
+    btSelecionar.Click;
+
 end;
 
 procedure TfrLaudo.pGetConsultaSql;
@@ -83,7 +96,7 @@ begin
      //end;
 end;
 
-procedure TfrLaudo.SpeedButton1Click(Sender: TObject);
+procedure TfrLaudo.btSelecionarClick(Sender: TObject);
 begin
   inherited;
   TfrConsVistoria.Create(edCodigo);

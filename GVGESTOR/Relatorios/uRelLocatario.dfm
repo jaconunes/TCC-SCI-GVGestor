@@ -1,22 +1,24 @@
 inherited frRelLocatario: TfrRelLocatario
   Caption = 'Relat'#243'rio de locat'#225'rios'
-  ClientHeight = 154
-  ClientWidth = 355
-  ExplicitWidth = 371
-  ExplicitHeight = 193
+  ClientHeight = 161
+  ClientWidth = 354
+  Constraints.MaxHeight = 200
+  Constraints.MaxWidth = 370
+  Constraints.MinHeight = 200
+  Constraints.MinWidth = 370
+  ExplicitWidth = 370
+  ExplicitHeight = 200
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
-    Width = 355
+    Width = 354
     ExplicitWidth = 355
   end
   inherited Panel1: TPanel
-    Width = 355
-    Height = 121
-    ExplicitLeft = 0
-    ExplicitTop = 33
+    Width = 354
+    Height = 128
     ExplicitWidth = 355
-    ExplicitHeight = 130
+    ExplicitHeight = 121
     inherited GroupBox1: TGroupBox
       Left = 8
       Top = 6
@@ -70,7 +72,7 @@ inherited frRelLocatario: TfrRelLocatario
       object edNome: TEdit
         Left = 64
         Top = 58
-        Width = 225
+        Width = 257
         Height = 28
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -84,7 +86,7 @@ inherited frRelLocatario: TfrRelLocatario
   end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C010104000800600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

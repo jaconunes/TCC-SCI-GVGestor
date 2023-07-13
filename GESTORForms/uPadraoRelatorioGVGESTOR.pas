@@ -15,7 +15,7 @@ type
     GroupBox1: TGroupBox;
     btVisualizar: TToolButton;
     btSalvarComo: TToolButton;
-    btEditarReport: TToolButton;
+    btImprimir: TToolButton;
     ImageList1: TImageList;
     frxReportPadrao: TfrxReport;
     frxDesigner1: TfrxDesigner;
@@ -34,7 +34,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btSalvarComoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure btEditarReportClick(Sender: TObject);
+    procedure btImprimirClick(Sender: TObject);
     procedure btEditarClick(Sender: TObject);
     procedure btVisualizarClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -64,7 +64,7 @@ begin
   frxReportPadrao.DesignReport;
 end;
 
-procedure TfrPadraoRelatorioGVGESTOR.btEditarReportClick(Sender: TObject);
+procedure TfrPadraoRelatorioGVGESTOR.btImprimirClick(Sender: TObject);
 begin
   frxReportPadrao.PrepareReport;
   frxReportPadrao.PrintOptions.ShowDialog := False;
@@ -128,7 +128,19 @@ procedure TfrPadraoRelatorioGVGESTOR.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if Key = VK_ESCAPE then// tecla de atalho para fechar a tela
-     Close;
+     Close
+  else
+  if Key = VK_F4 then
+     btVisualizar.Click
+  else
+  if Key = VK_F5 then
+     btSalvarComo.Click
+  else
+  if Key = VK_F6 then
+     btImprimir.Click
+  else
+  if Key = VK_F7 then
+     btEditar.Click;
 end;
 
 procedure TfrPadraoRelatorioGVGESTOR.FormResize(Sender: TObject);
