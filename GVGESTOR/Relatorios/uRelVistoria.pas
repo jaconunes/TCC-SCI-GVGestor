@@ -23,7 +23,9 @@ type
     { Private declarations }
   public
     procedure pGetConsultaSql; override;
+    procedure pGetConsultaMasterSource; override;
     { Public declarations }
+
 
   end;
 
@@ -35,6 +37,12 @@ implementation
 {$R *.dfm}
 
 { TfrRelVistoria }
+
+procedure TfrRelVistoria.pGetConsultaMasterSource;
+begin
+  inherited;
+
+end;
 
 procedure TfrRelVistoria.pGetConsultaSql;
 begin

@@ -20,6 +20,8 @@ type
   public
     { Public declarations }
      procedure pGetConsultaSql; override;
+    procedure pGetConsultaMasterSource; override;
+
   end;
 
 var
@@ -30,6 +32,12 @@ implementation
 {$R *.dfm}
 
 { TfrRelCliente }
+
+procedure TfrRelCliente.pGetConsultaMasterSource;
+begin
+  inherited;
+
+end;
 
 procedure TfrRelCliente.pGetConsultaSql;
 begin
@@ -49,6 +57,7 @@ begin
        SQLQueryPadrao.SQL.Add('where BDNOME like ''%' + edNome.Text + '%''');
        //SQLQueryPadrao.ParamByName('partnome').AsString := edNome.Text;
      end;
+  SQLQueryPadrao.SQL.Add(' order by BDRASOCIAL ASC');
 
   SQLQueryPadrao.Open;
   frxDBDataset1.UserName := 'Consulta de Cliente';

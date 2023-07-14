@@ -19,7 +19,9 @@ type
     { Private declarations }
   public
     procedure pGetConsultaSql; override;
+    procedure pGetConsultaMasterSource; override;
     { Public declarations }
+
 
   end;
 
@@ -31,6 +33,12 @@ implementation
 {$R *.dfm}
 
 { TfrRelLocatario }
+
+procedure TfrRelLocatario.pGetConsultaMasterSource;
+begin
+  inherited;
+
+end;
 
 procedure TfrRelLocatario.pGetConsultaSql;
 begin
@@ -50,6 +58,7 @@ begin
        SQLQueryPadrao.SQL.Add('where BDNOME like ''%' + edNome.Text + '%''');
        //SQLQueryPadrao.ParamByName('partnome').AsString := edNome.Text;
      end;
+  SQLQueryPadrao.SQL.Add(' order by BDNOME ASC');
 
   SQLQueryPadrao.Open;
   frxDBDataset1.UserName := 'Consulta de Locatário';

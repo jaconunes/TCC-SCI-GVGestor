@@ -19,7 +19,9 @@ type
     { Private declarations }
   public
     procedure pGetConsultaSql; override;
+    procedure pGetConsultaMasterSource; override;
     { Public declarations }
+
 
   end;
 
@@ -32,6 +34,12 @@ implementation
 
 { TfrRelProprietario }
 
+procedure TfrRelProprietario.pGetConsultaMasterSource;
+begin
+  inherited;
+
+end;
+
 procedure TfrRelProprietario.pGetConsultaSql;
 begin
   inherited;
@@ -41,15 +49,16 @@ begin
 
   if edCodigo.Codigo > 0 then // filtro por codigo
      begin
-       SQLQueryPadrao.SQL.Add('where BDCDPROPR = :codprop');
+       SQLQueryPadrao.SQL.Add(' where BDCDPROPR = :codprop');
        SQLQueryPadrao.ParamByName('codprop').AsInteger := edCodigo.Codigo;
      end
   else
   if edNome.Text <> EmptyStr then// filtro por endereço
      begin
-       SQLQueryPadrao.SQL.Add('where BDNOME like ''%' + edNome.Text + '%''');
+       SQLQueryPadrao.SQL.Add(' where BDNOME like ''%' + edNome.Text + '%''');
        //SQLQueryPadrao.ParamByName('partnome').AsString := edNome.Text;
      end;
+  SQLQueryPadrao.SQL.Add(' order by BDNOME ASC');
 
   SQLQueryPadrao.Open;
   frxDBDataset1.UserName := 'Consulta de Proprietário';

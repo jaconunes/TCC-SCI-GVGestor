@@ -26,6 +26,8 @@ type
   public
     { Public declarations }
     procedure pGetConsultaSql; override;
+    procedure pGetConsultaMasterSource; override;
+
 
   end;
 
@@ -37,6 +39,12 @@ implementation
 {$R *.dfm}
 
 { TfrPadraoRelatorioGVGESTOR1 }
+
+procedure TfrRelImovel.pGetConsultaMasterSource;
+begin
+  inherited;
+
+end;
 
 procedure TfrRelImovel.pGetConsultaSql;
 begin
