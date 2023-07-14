@@ -23,9 +23,6 @@ uses
   uCadItem in 'Cadastros\uCadItem.pas' {frCadItem},
   uPadraoConsultaDetalheGVGESTOR in '..\GESTORForms\uPadraoConsultaDetalheGVGESTOR.pas' {frPadraoConsultaDetalheGVGSTOR},
   uConsVistoria in 'Consultas\uConsVistoria.pas' {frConsVistoria},
-  uConsAmbiente in 'Consultas\uConsAmbiente.pas' {frConsAmbiente},
-  uConsItem in 'Consultas\uConsItem.pas' {frConsItem},
-  uConsFoto in 'Consultas\uConsFoto.pas' {frConsFoto},
   Vcl.Themes,
   Vcl.Styles,
   uPadraoRelatorioGVGESTOR in '..\GESTORForms\uPadraoRelatorioGVGESTOR.pas' {frPadraoRelatorioGVGESTOR},
@@ -35,7 +32,10 @@ uses
   uRelLocatario in 'Relatorios\uRelLocatario.pas' {frRelLocatario},
   uRelVistoria in 'Relatorios\uRelVistoria.pas' {frRelVistoria},
   uUsuarioLogado in 'uUsuarioLogado.pas',
-  uLaudo in 'Relatorios\uLaudo.pas' {frLaudo};
+  uLaudo in 'Relatorios\uLaudo.pas' {frLaudo},
+  uConsAmbiente in 'Consultas\uConsAmbiente.pas' {frConsAmbiente},
+  uConsItem in 'Consultas\uConsItem.pas' {frConsItem},
+  uConsFoto in 'Consultas\uConsFoto.pas' {frConsFoto};
 
 {$R *.res}
 

@@ -2,41 +2,9 @@ inherited frConsFoto: TfrConsFoto
   Caption = 'Consulta de fotos'
   PixelsPerInch = 96
   TextHeight = 13
-  inherited ToolBar1: TToolBar
-    inherited btEditar: TToolButton
-      OnClick = btEditarClick
-    end
-  end
-  inherited grConsulta: TDBGrid
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'BDCODFOTO'
-        Title.Caption = 'CODIGO'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'BDDESC'
-        Title.Caption = 'DESCRI'#199#195'O'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'BDPKCODAMB'
-        Title.Caption = 'AMBIENTE'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'BDURL'
-        Title.Caption = 'URL'
-        Visible = True
-      end>
-  end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C01010700E000C00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010700E000CC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -306,5 +274,9 @@ inherited frConsFoto: TfrConsFoto
       F81FFE7FE067E247FC3FFE7FE047E007FE7FFE7FE00FE007FFFFFFFFE01FFC3F
       FFFFFFFFE03FFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000
       000000000000}
+  end
+  object dsTabelaPai: TDataSource
+    Left = 712
+    Top = 248
   end
 end

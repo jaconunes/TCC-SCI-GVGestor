@@ -46,6 +46,7 @@ type
     { Public declarations }
      procedure pGetConsultaSql; virtual; abstract;
      procedure fCarregaFrxPadrao(wName: String); virtual;
+     procedure pGetConsultaMasterSource; virtual; abstract;
   end;
 
 var
@@ -59,6 +60,7 @@ implementation
 
 procedure TfrPadraoRelatorioGVGESTOR.btEditarClick(Sender: TObject);
 begin
+  pGetConsultaMasterSource;
   pGetConsultaSql;
   fCarregaFrxPadrao(Screen.ActiveForm.Name);
   frxReportPadrao.DesignReport;
@@ -74,6 +76,7 @@ end;
 
 procedure TfrPadraoRelatorioGVGESTOR.btVisualizarClick(Sender: TObject);
 begin
+  pGetConsultaMasterSource;
   pGetConsultaSql;
   fCarregaFrxPadrao(Screen.ActiveForm.Name);
   frxReportPadrao.ShowReport;

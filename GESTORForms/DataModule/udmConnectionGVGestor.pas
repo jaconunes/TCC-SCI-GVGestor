@@ -9,7 +9,6 @@ uses
 type
   TdmConnection = class(TDataModule)
     SQLConnectionGVGESTOR: TSQLConnection;
-    odSelecionaBanco: TOpenDialog;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private

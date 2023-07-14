@@ -38,6 +38,7 @@ type
     function ValidaCampos: Boolean; override;
     function fGetImageFileName(Sender: TOpenPictureDialog): string;
     function fSetFieldName: string; override;
+    function fGetIDAmbiente: Integer;
   end;
 
 var
@@ -102,6 +103,11 @@ end;
 function TfrCadFoto.fSetFieldName: string;
 begin
   Result := 'BDCODFOTO';
+end;
+
+function TfrCadFoto.fGetIDAmbiente: Integer;
+begin
+  Result := wCodAmbiente;
 end;
 
 function TfrCadFoto.fGetImageFileName(Sender: TOpenPictureDialog): string;

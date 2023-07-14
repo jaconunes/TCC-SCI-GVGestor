@@ -1,18 +1,14 @@
 inherited frLaudo: TfrLaudo
   Caption = 'Laudo vistoria'
-  ClientHeight = 131
-  ClientWidth = 354
-  Constraints.MaxHeight = 170
-  Constraints.MaxWidth = 370
-  Constraints.MinHeight = 170
-  Constraints.MinWidth = 370
-  ExplicitWidth = 370
-  ExplicitHeight = 170
+  ClientHeight = 368
+  ClientWidth = 642
+  ExplicitWidth = 658
+  ExplicitHeight = 407
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
-    Width = 354
-    ExplicitWidth = 359
+    Width = 642
+    ExplicitWidth = 642
     inherited btVisualizar: TToolButton
       Enabled = False
     end
@@ -39,10 +35,10 @@ inherited frLaudo: TfrLaudo
     end
   end
   inherited Panel1: TPanel
-    Width = 354
-    Height = 98
-    ExplicitWidth = 359
-    ExplicitHeight = 99
+    Width = 642
+    Height = 335
+    ExplicitWidth = 642
+    ExplicitHeight = 335
     inherited GroupBox1: TGroupBox
       Left = 8
       Top = 6
@@ -80,8 +76,9 @@ inherited frLaudo: TfrLaudo
     end
   end
   inherited ImageList1: TImageList
+    Top = 0
     Bitmap = {
-      494C010105000800740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800940010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -353,6 +350,166 @@ inherited frLaudo: TfrLaudo
       000000000000}
   end
   inherited frxReportPadrao: TfrxReport
+    Left = 510
+    Datasets = <>
+    Variables = <>
+    Style = <>
+  end
+  inherited frxDesigner1: TfrxDesigner
+    Left = 510
+  end
+  inherited frxDBDataset1: TfrxDBDataset
+    Left = 510
+  end
+  inherited SQLQueryPadrao: TSQLQuery
+    Left = 510
+  end
+  inherited PrintDialog1: TPrintDialog
+    Left = 582
+  end
+  inherited frxPDFExport1: TfrxPDFExport
+    Left = 582
+  end
+  inherited frxDOCXExport1: TfrxDOCXExport
+    Left = 582
+  end
+  inherited SaveDialog1: TSaveDialog
+    Left = 582
+  end
+  object frxDBDatasetVistoria: TfrxDBDataset
+    UserName = 'frxDBDataset2'
+    CloseDataSource = False
+    DataSource = dsVistoria
+    BCDToCurrency = False
+    Left = 24
+    Top = 137
+  end
+  object dsVistoria: TDataSource
+    DataSet = dmTabelas.tbVistoria
+    Left = 24
+    Top = 191
+  end
+  object frxDBDatasetUsuario: TfrxDBDataset
+    UserName = 'frxDBDataset2'
+    CloseDataSource = False
+    DataSource = dsUsuario
+    BCDToCurrency = False
+    Left = 120
+    Top = 137
+  end
+  object dsUsuario: TDataSource
+    DataSet = dmTabelas.tbUsuario
+    Left = 120
+    Top = 191
+  end
+  object dsProprietario: TDataSource
+    DataSet = dmTabelas.tbProprietario
+    Left = 216
+    Top = 191
+  end
+  object frxDBDatasetProprietario: TfrxDBDataset
+    UserName = 'frxDBDataset2'
+    CloseDataSource = False
+    DataSource = dsProprietario
+    BCDToCurrency = False
+    Left = 216
+    Top = 137
+  end
+  object frxDBDatasetLocatario: TfrxDBDataset
+    UserName = 'frxDBDataset2'
+    CloseDataSource = False
+    DataSource = dsLocatario
+    BCDToCurrency = False
+    Left = 320
+    Top = 137
+  end
+  object dsLocatario: TDataSource
+    DataSet = dmTabelas.tbLocatario
+    Left = 320
+    Top = 191
+  end
+  object frxDBDatasetItem: TfrxDBDataset
+    UserName = 'frxDBDataset2'
+    CloseDataSource = False
+    DataSource = dsItem
+    BCDToCurrency = False
+    Left = 24
+    Top = 257
+  end
+  object dsItem: TDataSource
+    DataSet = dmTabelas.tbItem
+    Left = 24
+    Top = 311
+  end
+  object dsImovel: TDataSource
+    DataSet = dmTabelas.tbImovel
+    Left = 120
+    Top = 311
+  end
+  object frxDBDatasetImovel: TfrxDBDataset
+    UserName = 'frxDBDataset2'
+    CloseDataSource = False
+    DataSource = dsImovel
+    BCDToCurrency = False
+    Left = 120
+    Top = 257
+  end
+  object dsFoto: TDataSource
+    DataSet = dmTabelas.tbFoto
+    Left = 216
+    Top = 311
+  end
+  object frxDBDatasetFoto: TfrxDBDataset
+    UserName = 'frxDBDataset2'
+    CloseDataSource = False
+    DataSource = dsFoto
+    BCDToCurrency = False
+    Left = 216
+    Top = 257
+  end
+  object dsCliente: TDataSource
+    DataSet = dmTabelas.tbCliente
+    Left = 320
+    Top = 311
+  end
+  object frxDBDatasetCliente: TfrxDBDataset
+    UserName = 'frxDBDataset2'
+    CloseDataSource = False
+    DataSource = dsCliente
+    BCDToCurrency = False
+    Left = 320
+    Top = 257
+  end
+  object dsAmbiente: TDataSource
+    DataSet = dmTabelas.tbAmbiente
+    Left = 416
+    Top = 311
+  end
+  object frxDBDatasetAmbiente: TfrxDBDataset
+    UserName = 'frxDBDataset2'
+    CloseDataSource = False
+    DataSource = dsAmbiente
+    BCDToCurrency = False
+    Left = 416
+    Top = 257
+  end
+  object frxReportMasterSource: TfrxReport
+    Version = '5.6.2'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 45120.893905277780000000
+    ReportOptions.LastChange = 45120.893905277780000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 400
+    Top = 57
     Datasets = <>
     Variables = <>
     Style = <>

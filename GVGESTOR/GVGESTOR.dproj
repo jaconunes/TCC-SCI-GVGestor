@@ -181,18 +181,6 @@
             <Form>frConsVistoria</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Consultas\uConsAmbiente.pas">
-            <Form>frConsAmbiente</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Consultas\uConsItem.pas">
-            <Form>frConsItem</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Consultas\uConsFoto.pas">
-            <Form>frConsFoto</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="..\GESTORForms\uPadraoRelatorioGVGESTOR.pas">
             <Form>frPadraoRelatorioGVGESTOR</Form>
             <FormType>dfm</FormType>
@@ -220,6 +208,18 @@
         <DCCReference Include="uUsuarioLogado.pas"/>
         <DCCReference Include="Relatorios\uLaudo.pas">
             <Form>frLaudo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Consultas\uConsAmbiente.pas">
+            <Form>frConsAmbiente</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Consultas\uConsItem.pas">
+            <Form>frConsItem</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Consultas\uConsFoto.pas">
+            <Form>frConsFoto</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

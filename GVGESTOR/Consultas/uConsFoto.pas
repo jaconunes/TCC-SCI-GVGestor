@@ -10,7 +10,8 @@ uses
 
 type
   TfrConsFoto = class(TfrPadraoConsultaGVGSTOR)
-    procedure btEditarClick(Sender: TObject);
+    dsTabelaPai: TDataSource;
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -26,12 +27,18 @@ implementation
 
 {$R *.dfm}
 
-uses uCadFoto, udmDadosGVGESTOR;
+uses udmDadosGVGESTOR, uCadAmbiente, uCadFoto;
 
-procedure TfrConsFoto.btEditarClick(Sender: TObject);
+{ TfrConsFoto }
+
+procedure TfrConsFoto.FormCreate(Sender: TObject);
 begin
   inherited;
-  TfrCadFoto.Create(self);
+  FTabela.Filter := EmptyStr;
+  FTabela.Filtered := False;
+  FTabela.IndexFieldNames := 'BDPKCODAMB';
+  FTabela.Filter := 'BDPKCODAMB = ' + IntToStr(TfrCadFoto(Owner).fGetIDAmbiente);
+  FTabela.Filtered := True;
 end;
 
 function TfrConsFoto.setTabela: TClientDataSet;

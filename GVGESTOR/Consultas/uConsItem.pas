@@ -10,12 +10,13 @@ uses
 
 type
   TfrConsItem = class(TfrPadraoConsultaGVGSTOR)
-    procedure btEditarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
     function setTabela: TClientDataSet; override;
     { Public declarations }
+
 
   end;
 
@@ -26,14 +27,16 @@ implementation
 
 {$R *.dfm}
 
-uses udmDadosGVGESTOR, uCadItem;
+uses udmDadosGVGESTOR, uCadAmbiente, uCadItem;
 
-{ TfrConsItem }
-
-procedure TfrConsItem.btEditarClick(Sender: TObject);
+procedure TfrConsItem.FormCreate(Sender: TObject);
 begin
   inherited;
-  TfrCadItem.Create(self);
+  FTabela.Filter := EmptyStr;
+  FTabela.Filtered := False;
+  FTabela.IndexFieldNames := 'BDPKCODAMB';
+  FTabela.Filter := 'BDPKCODAMB = ' + IntToStr(TfrCadItem(Owner).fGetIDAmbiente);
+  FTabela.Filtered := True;
 end;
 
 function TfrConsItem.setTabela: TClientDataSet;

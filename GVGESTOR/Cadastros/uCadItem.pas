@@ -33,6 +33,7 @@ type
     procedure SalvarCampos; override;
     function ValidaCampos: Boolean; override;
     function fSetFieldName: string; override;
+    function fGetIDAmbiente: Integer;
 
   end;
 
@@ -58,6 +59,11 @@ begin
   edDescricao.Text := FTabela.FieldByName('BDDESCRICAO').AsString;
   cbEstado.Text := FTabela.FieldByName('BDESTADO').AsString;
   edObs.Text := FTabela.FieldByName('BDOBSADC').AsString;
+end;
+
+function TfrCadItem.fGetIDAmbiente: Integer;
+begin
+  Result := wCodAmbiente;
 end;
 
 procedure TfrCadItem.FormClose(Sender: TObject; var Action: TCloseAction);

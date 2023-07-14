@@ -1,0 +1,58 @@
+﻿program GVGESTOR;
+
+uses
+  Vcl.Forms,
+  udmConnectionGVGestor in '..\GESTORForms\DataModule\udmConnectionGVGestor.pas' {dmConnection: TDataModule},
+  udmDadosGVGESTOR in '..\GESTORForms\DataModule\udmDadosGVGESTOR.pas' {dmTabelas: TDataModule},
+  uPadraoCadastroGVGESTOR in '..\GESTORForms\uPadraoCadastroGVGESTOR.pas' {frPadraoCadastroGVGESTOR},
+  uPadraoConsultaGVGESTOR in '..\GESTORForms\uPadraoConsultaGVGESTOR.pas' {frPadraoConsultaGVGSTOR},
+  uPrincipal in 'uPrincipal.pas' {frPrincipal},
+  uCadUsuario in 'Cadastros\uCadUsuario.pas' {frCadUsuario},
+  uConsUsuario in 'Consultas\uConsUsuario.pas' {frConsUsuario},
+  uCadImovel in 'Cadastros\uCadImovel.pas' {frCadImovel},
+  uConsProprietario in 'Consultas\uConsProprietario.pas' {frConsProprietario},
+  uConsImovel in 'Consultas\uConsImovel.pas' {frConsImovel},
+  uCadProprietario in 'Cadastros\uCadProprietario.pas' {frCadProprietario},
+  uCadCliente in 'Cadastros\uCadCliente.pas' {frCadCliente},
+  uConsCliente in 'Consultas\uConsCliente.pas' {frConsCliente},
+  uCadLocatario in 'Cadastros\uCadLocatario.pas' {frCadLocatario},
+  uConsLocatario in 'Consultas\uConsLocatario.pas' {frConsLocatario},
+  uCadVistoria in 'Cadastros\uCadVistoria.pas' {frCadVistoria},
+  uCadAmbiente in 'Cadastros\uCadAmbiente.pas' {frCadAmbiente},
+  uCadFoto in 'Cadastros\uCadFoto.pas' {frCadFoto},
+  uCadItem in 'Cadastros\uCadItem.pas' {frCadItem},
+  uPadraoConsultaDetalheGVGESTOR in '..\GESTORForms\uPadraoConsultaDetalheGVGESTOR.pas' {frPadraoConsultaDetalheGVGSTOR},
+  uConsVistoria in 'Consultas\uConsVistoria.pas' {frConsVistoria},
+  Vcl.Themes,
+  Vcl.Styles,
+  uPadraoRelatorioGVGESTOR in '..\GESTORForms\uPadraoRelatorioGVGESTOR.pas' {frPadraoRelatorioGVGESTOR},
+  uRelImovel in 'Relatorios\uRelImovel.pas' {frRelImovel},
+  uRelProprietario in 'Relatorios\uRelProprietario.pas' {frRelProprietario},
+  uRelCliente in 'Relatorios\uRelCliente.pas' {frRelCliente},
+  uRelLocatario in 'Relatorios\uRelLocatario.pas' {frRelLocatario},
+  uRelVistoria in 'Relatorios\uRelVistoria.pas' {frRelVistoria},
+  uUsuarioLogado in 'uUsuarioLogado.pas',
+  uLaudo in 'Relatorios\uLaudo.pas' {frLaudo},
+  uConsAmbiente in 'Consultas\uConsAmbiente.pas' {frConsAmbiente},
+  uConsItem in 'Consultas\uConsItem.pas' {frConsItem};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Metropolis UI Blue');
+  Application.CreateForm(TdmConnection, dmConnection);
+  Application.CreateForm(TdmTabelas, dmTabelas);
+  Application.CreateForm(TfrPrincipal, frPrincipal);
+  Application.CreateForm(TfrConsItem, frConsItem);
+  //frLogin := TfrLogin.Create(nil);
+  //frLogin.ShowModal;
+
+  //Application.CreateForm(TfrPrincipal, frPrincipal);
+
+  //frLogin.Hide;
+  //frLogin.Free;
+
+  Application.Run;
+end.

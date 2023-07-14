@@ -25,9 +25,4 @@ object dmConnection: TdmConnection
     Left = 104
     Top = 64
   end
-  object odSelecionaBanco: TOpenDialog
-    Filter = 'Firebird|*.fdb'
-    Left = 272
-    Top = 160
-  end
 end
