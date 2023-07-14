@@ -1,5 +1,7 @@
 inherited frConsLocatario: TfrConsLocatario
   Caption = 'Consulta de locat'#225'rios'
+  ExplicitWidth = 883
+  ExplicitHeight = 369
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
@@ -8,6 +10,8 @@ inherited frConsLocatario: TfrConsLocatario
     end
   end
   inherited grConsulta: TDBGrid
+    Top = 74
+    Height = 256
     Columns = <
       item
         Expanded = False
@@ -40,9 +44,81 @@ inherited frConsLocatario: TfrConsLocatario
         Visible = True
       end>
   end
+  object Panel1: TPanel [2]
+    Left = 0
+    Top = 33
+    Width = 867
+    Height = 41
+    Align = alTop
+    TabOrder = 2
+    ExplicitLeft = 432
+    ExplicitTop = 120
+    ExplicitWidth = 185
+    object Label1: TLabel
+      Left = 46
+      Top = 12
+      Width = 54
+      Height = 17
+      Caption = 'Filtro por'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object edCodigoNome: TEdit
+      Left = 264
+      Top = 6
+      Width = 193
+      Height = 28
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+    end
+    object cbFiltro: TComboBox
+      Left = 106
+      Top = 6
+      Width = 145
+      Height = 28
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = 'C'#243'digo'
+      Items.Strings = (
+        'C'#243'digo'
+        'Nome')
+    end
+    object btLimpar: TButton
+      Left = 544
+      Top = 6
+      Width = 75
+      Height = 28
+      Caption = 'Limpar'
+      TabOrder = 2
+      OnClick = btLimparClick
+    end
+    object btFiltrar: TButton
+      Left = 463
+      Top = 6
+      Width = 75
+      Height = 28
+      Caption = 'Filtrar'
+      TabOrder = 3
+      OnClick = btFiltrarClick
+    end
+  end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C01010700E000BC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010700E000C00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

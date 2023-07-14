@@ -24,6 +24,7 @@ type
     procedure cbFiltroChange(Sender: TObject);
     procedure btFiltrarClick(Sender: TObject);
     procedure btLimparClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -98,6 +99,12 @@ begin
   else
   if cbFiltro.ItemIndex = 2 then
      edTextFiltro.Enabled := True;
+end;
+
+procedure TfrConsImovel.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  FTabela.Filtered := False;
 end;
 
 function TfrConsImovel.setTabela: TClientDataSet;

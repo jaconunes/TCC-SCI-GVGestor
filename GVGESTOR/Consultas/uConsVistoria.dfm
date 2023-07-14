@@ -1,8 +1,19 @@
 inherited frConsVistoria: TfrConsVistoria
   Caption = 'Consulta de vistoria'
+  ClientWidth = 918
+  ExplicitWidth = 934
   PixelsPerInch = 96
   TextHeight = 13
+  inherited Splitter1: TSplitter
+    Width = 918
+  end
+  inherited ToolBar1: TToolBar
+    Width = 918
+  end
   inherited grConsulta: TDBGrid
+    Top = 74
+    Width = 918
+    Height = 193
     Columns = <
       item
         Expanded = False
@@ -84,7 +95,12 @@ inherited frConsVistoria: TfrConsVistoria
       end>
   end
   inherited Panel1: TPanel
+    Width = 918
+    inherited ToolBar2: TToolBar
+      Width = 916
+    end
     inherited grDetalhe: TDBGrid
+      Width = 916
       Columns = <
         item
           Expanded = False
@@ -112,9 +128,138 @@ inherited frConsVistoria: TfrConsVistoria
         end>
     end
   end
+  object Panel2: TPanel [4]
+    Left = 0
+    Top = 33
+    Width = 918
+    Height = 41
+    Align = alTop
+    TabOrder = 3
+    ExplicitLeft = -1
+    ExplicitTop = 27
+    object Label1: TLabel
+      Left = 14
+      Top = 12
+      Width = 54
+      Height = 17
+      Caption = 'Filtro por'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 379
+      Top = 12
+      Width = 30
+      Height = 17
+      Caption = 'Inicio'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 555
+      Top = 12
+      Width = 20
+      Height = 17
+      Caption = 'Fim'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object edCodigoNome: TEdit
+      Left = 199
+      Top = 6
+      Width = 154
+      Height = 28
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+    end
+    object cbFiltro: TComboBox
+      Left = 74
+      Top = 6
+      Width = 119
+      Height = 28
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = 'C'#243'digo'
+      Items.Strings = (
+        'C'#243'digo'
+        'Data'
+        'C'#243'digo do im'#243'vel'
+        'C'#243'digo do cliente')
+    end
+    object btLimpar: TButton
+      Left = 824
+      Top = 6
+      Width = 75
+      Height = 28
+      Caption = 'Limpar'
+      TabOrder = 2
+      OnClick = btLimparClick
+    end
+    object btFiltrar: TButton
+      Left = 743
+      Top = 6
+      Width = 75
+      Height = 28
+      Caption = 'Filtrar'
+      TabOrder = 3
+      OnClick = btFiltrarClick
+    end
+    object dtpInicio: TDateTimePicker
+      Left = 415
+      Top = 6
+      Width = 121
+      Height = 28
+      Date = 45119.982287418980000000
+      Time = 45119.982287418980000000
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+    end
+    object dtpFim: TDateTimePicker
+      Left = 583
+      Top = 6
+      Width = 121
+      Height = 28
+      Date = 45119.982287418980000000
+      Time = 45119.982287418980000000
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+    end
+  end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C01010700E000F40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010700E000F80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

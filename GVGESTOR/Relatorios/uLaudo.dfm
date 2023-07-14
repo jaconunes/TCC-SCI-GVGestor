@@ -1,13 +1,13 @@
 inherited frLaudo: TfrLaudo
   Caption = 'Laudo vistoria'
-  ClientHeight = 368
-  ClientWidth = 642
-  ExplicitWidth = 658
-  ExplicitHeight = 407
+  ClientHeight = 131
+  ClientWidth = 357
+  ExplicitWidth = 373
+  ExplicitHeight = 170
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
-    Width = 642
+    Width = 357
     ExplicitWidth = 642
     inherited btVisualizar: TToolButton
       Enabled = False
@@ -35,8 +35,8 @@ inherited frLaudo: TfrLaudo
     end
   end
   inherited Panel1: TPanel
-    Width = 642
-    Height = 335
+    Width = 357
+    Height = 98
     ExplicitWidth = 642
     ExplicitHeight = 335
     inherited GroupBox1: TGroupBox
@@ -78,7 +78,7 @@ inherited frLaudo: TfrLaudo
   inherited ImageList1: TImageList
     Top = 0
     Bitmap = {
-      494C010105000800940010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

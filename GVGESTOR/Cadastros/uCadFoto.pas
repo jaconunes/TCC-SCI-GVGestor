@@ -39,6 +39,7 @@ type
     function fGetImageFileName(Sender: TOpenPictureDialog): string;
     function fSetFieldName: string; override;
     function fGetIDAmbiente: Integer;
+    procedure fConvertToBmp(wOrigem: String);
   end;
 
 var
@@ -105,6 +106,32 @@ begin
   Result := 'BDCODFOTO';
 end;
 
+procedure TfrCadFoto.fConvertToBmp(wOrigem: String);
+var
+  BMP: TBitmap;
+  JPG: TJPegImage;
+begin
+  if ExtractFileExt(wOrigem) <> '.jpg' then
+     begin
+       ShowMessage('Formato diferente de jpg' + #13 +
+                   'Formato atual : ' + ExtractFileExt(wOrigem));
+       Exit;
+     end;
+  JPG := TJPegImage.Create;
+  try
+    JPG.LoadFromFile(wOrigem);
+    BMP := TBitmap.Create;
+    try
+      BMP.Assign(JPG);
+      BMP.SaveToFile(wOrigem);
+    finally
+      FreeAndNil(BMP);
+    end;
+  finally
+    FreeAndNil(JPG);
+  end
+end;
+
 function TfrCadFoto.fGetIDAmbiente: Integer;
 begin
   Result := wCodAmbiente;
@@ -119,8 +146,9 @@ begin
        wUrlImagem := 'C:\TCC - Gestor de Vistorias\GVGESTOR\images\Vistoria_' +
                      IntToStr(TfrCadAmbiente(Owner).CodVistoria) + '_Ambiente_' +
                      TfrCadAmbiente(Owner).edCodigo.Text + '_Foto_' +
-                     edCodigo.Text + '.jpg';
-       CopyFile(PChar(Sender.FileName), PChar(wUrlImagem), True);
+                     edCodigo.Text + '.bmp';
+       //CopyFile(PChar(Sender.FileName), PChar(wUrlImagem), True);
+       fConvertToBmp(wUrlImagem);
        Result := wUrlImagem;
      end;
 end;
