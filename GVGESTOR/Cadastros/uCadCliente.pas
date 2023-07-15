@@ -36,6 +36,7 @@ type
     procedure edLogradouroKeyPress(Sender: TObject; var Key: Char);
     procedure edBairroKeyPress(Sender: TObject; var Key: Char);
     procedure edCidadeKeyPress(Sender: TObject; var Key: Char);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -119,6 +120,13 @@ begin
   edTelefone.Text := fAplicaMascaraTelefone(edTelefone.Text); // aplica mascara telefone
 end;
 
+procedure TfrCadCliente.FormCreate(Sender: TObject);
+begin
+  inherited;
+  if Owner is TfrConsCliente then
+     edCodigo.Text := TfrConsCliente(Owner).grConsulta.Columns[0].Field.AsString;
+end;
+
 function TfrCadCliente.fSetFieldName: string;
 begin
   // Retorna campo ID na tabela
@@ -195,9 +203,8 @@ begin
        wMessage := 'Informe o e-mail do cliente!' + #13;
      end
   else
-  if Result then
-     wMessage := 'Registro salvo com sucesso!';
-  ShowMessage(wMessage);
+  if wMessage <> EmptyStr then
+     ShowMessage(wMessage);
 end;
 
 end.

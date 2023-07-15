@@ -1,12 +1,16 @@
 inherited frConsCliente: TfrConsCliente
   Caption = 'Consulta de clientes'
-  ExplicitWidth = 883
-  ExplicitHeight = 369
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
-    inherited btEditar: TToolButton
+    inherited btEditar: TToolButton [3]
+      Left = 74
       OnClick = btEditarClick
+      ExplicitLeft = 74
+    end
+    inherited ToolButton2: TToolButton [4]
+      Left = 107
+      ExplicitLeft = 107
     end
   end
   inherited grConsulta: TDBGrid
@@ -146,7 +150,7 @@ inherited frConsCliente: TfrConsCliente
   end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C01010700E000C40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010700E000CC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

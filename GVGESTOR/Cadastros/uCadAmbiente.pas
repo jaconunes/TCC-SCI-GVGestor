@@ -19,13 +19,14 @@ type
     edNome: TEdit;
     Label2: TLabel;
     Label3: TLabel;
-    edObs: TEdit;
+    mmObs: TMemo;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btPesquisarClick(Sender: TObject);
     procedure btAdItemClick(Sender: TObject);
     procedure btAdFotoClick(Sender: TObject);
     procedure edCodigoChange(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     wCodVistoria : Integer;
@@ -63,8 +64,8 @@ end;
 procedure TfrCadAmbiente.CarregaCampos;
 begin
   // carrega campos na tela
-  edNome.Text := FTabela.FieldByName('BDNOME').AsString;
-  edObs.Text  := FTabela.FieldByName('BDOBSADC').AsString;
+  edNome.Text       := FTabela.FieldByName('BDNOME').AsString;
+  mmObs.Lines.Text  := FTabela.FieldByName('BDOBSADC').AsString;
 end;
 
 procedure TfrCadAmbiente.edCodigoChange(Sender: TObject);
@@ -89,6 +90,13 @@ begin
   // habilita o owner do form owner
   if (Owner is TForm) and (not TForm(Owner).Enabled) then
      TForm(Owner).Enabled := True;
+end;
+
+procedure TfrCadAmbiente.FormCreate(Sender: TObject);
+begin
+  inherited;
+  if Owner is TfrConsAmbiente then
+     edCodigo.Text := TfrConsAmbiente(Owner).grConsulta.Columns[0].Field.AsString;
 end;
 
 procedure TfrCadAmbiente.FormShow(Sender: TObject);
@@ -122,7 +130,7 @@ begin
   // salva os campos na tabela
   FTabela.FieldByName('BDCODAMB').AsInteger   := edCodigo.Codigo;
   FTabela.FieldByName('BDNOME').AsString      := edNome.Text;
-  FTabela.FieldByName('BDOBSADC').AsString    := edObs.Text;
+  FTabela.FieldByName('BDOBSADC').AsString    := mmObs.Lines.Text;
   FTabela.FieldByName('BDPKCODVIST').AsInteger  := CodVistoria; //Código da vistoria
 end;
 
@@ -135,7 +143,7 @@ end;
 function TfrCadAmbiente.setLastEdit: TWinControl;
 begin
   // seta último campo da tela
-  Result := edObs;
+  Result := mmObs;
 end;
 
 function TfrCadAmbiente.setTabela: TClientDataSet;
@@ -170,9 +178,8 @@ begin
        edNome.SetFocus;
      end
   else
-  if Result then
-       wMessage := 'Registro salvo com sucesso!';
-  ShowMessage(wMessage);
+  if wMessage <> EmptyStr then
+     ShowMessage(wMessage);
 end;
 
 end.

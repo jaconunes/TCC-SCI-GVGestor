@@ -33,11 +33,11 @@ type
     lbNomeProprietario: TLabel;
     procedure btPesquisarClick(Sender: TObject);
     procedure edCodigoExit(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure edCodPropChange(Sender: TObject);
     procedure edLogradouroKeyPress(Sender: TObject; var Key: Char);
     procedure edBairroKeyPress(Sender: TObject; var Key: Char);
     procedure edCidadeKeyPress(Sender: TObject; var Key: Char);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -118,6 +118,13 @@ procedure TfrCadImovel.edLogradouroKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
   Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo logradouro
+end;
+
+procedure TfrCadImovel.FormCreate(Sender: TObject);
+begin
+  inherited;
+  if Owner is TfrConsImovel then
+     edCodigo.Text := TfrConsImovel(Owner).grConsulta.Columns[0].Field.AsString;
 end;
 
 function TfrCadImovel.fSetFieldName: string;
@@ -223,9 +230,8 @@ begin
        wMessage := 'Informe a cidade do imóvel!' + #13;
      end
   else
-  if Result then
-     wMessage := 'Registro salvo com sucesso!';
-  ShowMessage(wMessage);
+  if wMessage <> EmptyStr then
+     ShowMessage(wMessage);
 end;
 
 end.

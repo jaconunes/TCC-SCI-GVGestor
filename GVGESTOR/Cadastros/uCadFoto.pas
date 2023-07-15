@@ -24,6 +24,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btPesquisarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     wCodAmbiente : Integer;
@@ -83,6 +84,13 @@ begin
   // devolve owner para a tela owner
   if (Owner is TForm) and (not TForm(Owner).Enabled) then
      TForm(Owner).Enabled := True;
+end;
+
+procedure TfrCadFoto.FormCreate(Sender: TObject);
+begin
+  inherited;
+  if Owner is TfrConsFoto then
+     edCodigo.Text := TfrConsFoto(Owner).grConsulta.Columns[0].Field.AsString;
 end;
 
 procedure TfrCadFoto.FormShow(Sender: TObject);
@@ -200,9 +208,8 @@ begin
           end;
      end
   else
-  if Result then
-     wMessage := 'Registro salvo com sucesso!';
-  ShowMessage(wMessage);
+  if wMessage <> EmptyStr then
+     ShowMessage(wMessage);
 end;
 
 end.

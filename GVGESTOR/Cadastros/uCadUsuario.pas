@@ -31,8 +31,6 @@ type
     procedure rbCnpjClick(Sender: TObject);
     procedure btPesquisarClick(Sender: TObject);
     procedure edCpfCnpjExit(Sender: TObject);
-    procedure edSenhaKeyPress(Sender: TObject; var Key: Char);
-    procedure edRepitaSenhaKeyPress(Sender: TObject; var Key: Char);
     procedure edNomeKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
@@ -99,7 +97,10 @@ begin
        cbPerfil.Enabled := False;
        btPesquisar.Enabled := False;
        btExcluir.Enabled := False;
-     end;
+     end
+  else
+  if Owner is TfrConsUsuario then
+     edCodigo.Text := TfrConsUsuario(Owner).grConsulta.Columns[0].Field.AsString;
 end;
 
 function TfrCadUsuario.fSetFieldName: string;
@@ -212,11 +213,8 @@ begin
        wMessage := wMessage + 'As senhas não correspondem!' + #13;
      end
   else
-  if Result then
-     begin
-       wMessage := 'Registro salvo com sucesso!';
-     end;
-  ShowMessage(wMessage);
+  if wMessage <> EmptyStr then
+     ShowMessage(wMessage);
 end;
 
 end.

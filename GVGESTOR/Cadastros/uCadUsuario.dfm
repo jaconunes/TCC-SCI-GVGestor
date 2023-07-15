@@ -141,7 +141,6 @@ inherited frCadUsuario: TfrCadUsuario
       ParentFont = False
       PasswordChar = '*'
       TabOrder = 5
-      OnKeyPress = edSenhaKeyPress
     end
     object GroupBox1: TGroupBox
       Left = 14
@@ -201,7 +200,6 @@ inherited frCadUsuario: TfrCadUsuario
       ParentFont = False
       PasswordChar = '*'
       TabOrder = 6
-      OnKeyPress = edRepitaSenhaKeyPress
     end
     object edCodigo: TEdit_Numero_PEDSCI
       Left = 135
@@ -238,7 +236,7 @@ inherited frCadUsuario: TfrCadUsuario
     Left = 392
     Top = 113
     Bitmap = {
-      494C010106000800E80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800FC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -47,6 +47,7 @@ type
     procedure edCodClienteChange(Sender: TObject);
     procedure edCodImovelChange(Sender: TObject);
     procedure edCodLocatarioChange(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -128,6 +129,13 @@ begin
   inherited;
   // Carrega nome do locatário na tela
   pCarregaLocatario;
+end;
+
+procedure TfrCadVistoria.FormCreate(Sender: TObject);
+begin
+  inherited;
+  if Owner is TfrConsVistoria then
+     edCodigo.Text := TfrConsVistoria(Owner).grConsulta.Columns[0].Field.AsString;
 end;
 
 function TfrCadVistoria.fSetFieldName: string;
@@ -251,10 +259,8 @@ begin
        wMessage := 'Selecione um código do locatário!' + #13;
      end
   else
-  // Mensagem de sucesso
-  if Result then
-     wMessage := 'Registro salvo com sucesso!';
-  ShowMessage(wMessage);
+  if wMessage <> EmptyStr then
+     ShowMessage(wMessage);
 end;
 
 end.

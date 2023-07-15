@@ -12,6 +12,7 @@ type
   TfrConsItem = class(TfrPadraoConsultaGVGSTOR)
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btEditarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,6 +28,12 @@ implementation
 {$R *.dfm}
 
 uses udmDadosGVGESTOR, uCadAmbiente, uCadItem;
+
+procedure TfrConsItem.btEditarClick(Sender: TObject);
+begin
+  inherited;
+  TfrCadItem.Create(self).Show;
+end;
 
 procedure TfrConsItem.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);

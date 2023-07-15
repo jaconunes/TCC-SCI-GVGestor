@@ -13,6 +13,7 @@ type
     dsTabelaPai: TDataSource;
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btEditarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,6 +31,12 @@ implementation
 uses udmDadosGVGESTOR, uCadAmbiente, uCadFoto;
 
 { TfrConsFoto }
+
+procedure TfrConsFoto.btEditarClick(Sender: TObject);
+begin
+  inherited;
+  TfrCadFoto.Create(self).Show;
+end;
 
 procedure TfrConsFoto.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);

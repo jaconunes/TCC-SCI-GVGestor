@@ -32,7 +32,6 @@ type
     edEmail: TEdit;
     Label10: TLabel;
     procedure btPesquisarClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure edCpfCnpjExit(Sender: TObject);
     procedure cbTipoPessoaChange(Sender: TObject);
     procedure edTelefoneExit(Sender: TObject);
@@ -40,6 +39,7 @@ type
     procedure edLogradouroKeyPress(Sender: TObject; var Key: Char);
     procedure edBairroKeyPress(Sender: TObject; var Key: Char);
     procedure edCidadeKeyPress(Sender: TObject; var Key: Char);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -130,6 +130,13 @@ procedure TfrCadProprietario.edTelefoneExit(Sender: TObject);
 begin
   inherited;
   edTelefone.Text := fAplicaMascaraTelefone(edTelefone.Text); // aplica mascara de telefone
+end;
+
+procedure TfrCadProprietario.FormCreate(Sender: TObject);
+begin
+  inherited;
+  if Owner is TfrConsProprietario then
+     edCodProp.Text := TfrConsProprietario(Owner).grConsulta.Columns[0].Field.AsString;
 end;
 
 function TfrCadProprietario.fSetFieldName: string;
@@ -230,9 +237,8 @@ begin
        wMessage := 'Informe a cidade do proprietário!' + #13;
      end
   else
-  if Result then
-     wMessage := 'Registro salvo com sucesso!';
-  ShowMessage(wMessage);
+  if wMessage <> EmptyStr then
+     ShowMessage(wMessage);
 end;
 
 end.

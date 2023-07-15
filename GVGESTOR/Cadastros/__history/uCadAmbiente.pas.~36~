@@ -1,0 +1,187 @@
+unit uCadAmbiente;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoCadastroGVGESTOR,
+  System.ImageList, Vcl.ImgList, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.ToolWin,
+  Vcl.StdCtrls, EditSCI, Datasnap.DBClient, Data.Db;
+
+type
+  TfrCadAmbiente = class(TfrPadraoCadastroGVGESTOR)
+    btAdItem: TToolButton;
+    btAdFoto: TToolButton;
+    ToolButton6: TToolButton;
+    ToolButton7: TToolButton;
+    edCodigo: TEdit_Numero_PEDSCI;
+    Label1: TLabel;
+    edNome: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    edObs: TEdit;
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btPesquisarClick(Sender: TObject);
+    procedure btAdItemClick(Sender: TObject);
+    procedure btAdFotoClick(Sender: TObject);
+    procedure edCodigoChange(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+    wCodVistoria : Integer;
+  public
+    { Public declarations }
+    function setTabela: TClientDataSet; override; // deve informar qual tabela será usada
+    function setIDEdit: TWinControl; override;  // informar qual o campo chave da tela
+    function setLastEdit: TWinControl; override;  // informar o último campo da tela para salvar automaticamente
+    procedure CarregaCampos; override; // carregar os campos da tabela para os camnpos da tela
+    procedure SalvarCampos; override; // salvar os valores dos campos da tela para os campos da tabela
+    function ValidaCampos: Boolean; override; // Reescrito nas heranças para a validar os campos
+    function fSetFieldName: string; override; //obter o fieldname da PK da tabela
+    procedure pSetHabilitaButton; override;  // Habilita botões nas heranças
+    property CodVistoria : Integer read wCodVistoria write wCodVistoria; // leitura e escrita do código da vistoria
+  end;
+
+var
+  frCadAmbiente: TfrCadAmbiente;
+
+implementation
+
+{$R *.dfm}
+
+uses udmDadosGVGESTOR, uCadVistoria, uConsAmbiente, uCadItem, uCadFoto;
+
+{ TfrCadAmbiente }
+
+procedure TfrCadAmbiente.btPesquisarClick(Sender: TObject);
+begin
+  inherited;
+  // cria form de consulta de ambiente
+  TfrConsAmbiente.Create(self);
+end;
+
+procedure TfrCadAmbiente.CarregaCampos;
+begin
+  // carrega campos na tela
+  edNome.Text := FTabela.FieldByName('BDNOME').AsString;
+  edObs.Text  := FTabela.FieldByName('BDOBSADC').AsString;
+end;
+
+procedure TfrCadAmbiente.edCodigoChange(Sender: TObject);
+begin
+  inherited;
+  // verifica ID e habilita botões de adicionar itens e fotos
+  if getID then
+     begin
+       btAdItem.Enabled := True;
+       btAdFoto.Enabled := True;
+     end
+  else
+     begin
+       btAdItem.Enabled := False;
+       btAdFoto.Enabled := False;
+     end;
+end;
+
+procedure TfrCadAmbiente.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  // habilita o owner do form owner
+  if (Owner is TForm) and (not TForm(Owner).Enabled) then
+     TForm(Owner).Enabled := True;
+end;
+
+procedure TfrCadAmbiente.FormCreate(Sender: TObject);
+begin
+  inherited;
+  if Owner is TfrConsAmbiente then
+     edCodigo.Text := TfrConsAmbiente(Owner).grConsulta.Columns[0].Field.AsString;
+     edCodigo.SetFocus;
+end;
+
+procedure TfrCadAmbiente.FormShow(Sender: TObject);
+begin
+  inherited;
+  // obtem ID da vistoria
+  if Owner is TfrCadVistoria then
+     begin
+       TfrCadVistoria(Owner).Enabled := False;
+       CodVistoria := TfrCadVistoria(Owner).edCodigo.Codigo;
+       edCodigo.SetFocus;
+     end;
+end;
+
+function TfrCadAmbiente.fSetFieldName: string;
+begin
+  // seta campo ID da tabela
+  Result := 'BDCODAMB';
+end;
+
+procedure TfrCadAmbiente.pSetHabilitaButton;
+begin
+  inherited;
+  // habilita botões adicionar itens e fotos
+  btAdItem.Enabled := True;
+  btAdFoto.Enabled := True;
+end;
+
+procedure TfrCadAmbiente.SalvarCampos;
+begin
+  // salva os campos na tabela
+  FTabela.FieldByName('BDCODAMB').AsInteger   := edCodigo.Codigo;
+  FTabela.FieldByName('BDNOME').AsString      := edNome.Text;
+  FTabela.FieldByName('BDOBSADC').AsString    := edObs.Text;
+  FTabela.FieldByName('BDPKCODVIST').AsInteger  := CodVistoria; //Código da vistoria
+end;
+
+function TfrCadAmbiente.setIDEdit: TWinControl;
+begin
+  // seta campo ID da tela
+  Result := edCodigo;
+end;
+
+function TfrCadAmbiente.setLastEdit: TWinControl;
+begin
+  // seta último campo da tela
+  Result := edObs;
+end;
+
+function TfrCadAmbiente.setTabela: TClientDataSet;
+begin
+  // seta tabela do BD
+  Result := dmTabelas.tbAmbiente;
+end;
+
+procedure TfrCadAmbiente.btAdItemClick(Sender: TObject);
+begin
+  inherited;
+  // cria form de cadastro de itens
+  TfrCadItem.Create(self);
+end;
+
+procedure TfrCadAmbiente.btAdFotoClick(Sender: TObject);
+begin
+  inherited;
+  // cria form de cadastro de fotos
+  TfrCadFoto.Create(self);
+end;
+
+function TfrCadAmbiente.ValidaCampos: Boolean;
+var
+  wMessage: String;
+begin
+  Result := True;
+  if edNome.Text = EmptyStr then // verifica campo de descrição do ambiente
+     begin
+       wMessage := 'Informe a descrição do ambiente!';
+       Result := False;
+       edNome.SetFocus;
+     end
+  else
+  if Result then
+       wMessage := 'Registro salvo com sucesso!';
+  ShowMessage(wMessage);
+end;
+
+end.

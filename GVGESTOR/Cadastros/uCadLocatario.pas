@@ -20,11 +20,11 @@ type
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
-    procedure FormCreate(Sender: TObject);
     procedure btPesquisarClick(Sender: TObject);
     procedure edTelefoneExit(Sender: TObject);
     procedure edCpfCnpjExit(Sender: TObject);
     procedure edNomeKeyPress(Sender: TObject; var Key: Char);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -84,6 +84,13 @@ begin
   inherited;
   // aplica mascara de telefone
   edTelefone.Text := fAplicaMascaraTelefone(edTelefone.Text);
+end;
+
+procedure TfrCadLocatario.FormCreate(Sender: TObject);
+begin
+  inherited;
+  if Owner is TfrConsLocatario then
+     edCodigo.Text := TfrConsLocatario(Owner).grConsulta.Columns[0].Field.AsString;
 end;
 
 function TfrCadLocatario.fSetFieldName: string;
@@ -158,9 +165,8 @@ begin
        wMessage := 'Informe o telefone do locatário!' + #13;
      end
   else
-  if Result then
-     wMessage := 'Registro salvo com sucesso!';
-  ShowMessage(wMessage);
+  if wMessage <> EmptyStr then
+     ShowMessage(wMessage);
 end;
 
 end.

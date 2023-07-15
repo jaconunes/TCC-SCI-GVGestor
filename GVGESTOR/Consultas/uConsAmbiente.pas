@@ -13,6 +13,7 @@ type
     dsTabelaPai: TDataSource;
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btEditarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,6 +29,12 @@ implementation
 {$R *.dfm}
 
 uses udmDadosGVGESTOR, uCadAmbiente;
+
+procedure TfrConsAmbiente.btEditarClick(Sender: TObject);
+begin
+  inherited;
+  TfrCadAmbiente.Create(self).Show;
+end;
 
 procedure TfrConsAmbiente.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);

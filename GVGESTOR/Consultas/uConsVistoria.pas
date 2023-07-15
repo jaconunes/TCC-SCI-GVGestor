@@ -25,6 +25,7 @@ type
     procedure btFiltrarClick(Sender: TObject);
     procedure btLimparClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btEditarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,9 +42,14 @@ implementation
 
 {$R *.dfm}
 
-uses udmDadosGVGESTOR;
+uses udmDadosGVGESTOR, uCadVistoria;
 
 { TfrPadraoConsultaGVGSTOR2 }
+
+procedure TfrConsVistoria.btEditarClick(Sender: TObject);
+begin
+  TfrCadVistoria.Create(self).Show;
+end;
 
 procedure TfrConsVistoria.btFiltrarClick(Sender: TObject);
 begin

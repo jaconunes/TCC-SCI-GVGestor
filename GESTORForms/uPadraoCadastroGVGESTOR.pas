@@ -98,6 +98,7 @@ begin
                  FTabela.Post;
                  FTabela.ApplyUpdates(0);
                  FTabela.Refresh;
+                 ShowMessage('Registro salvo com sucesso!');
 
                  if (frPrincipal.fGetUsuarioLogado = nil) and (Self.Name = 'frCadUsuario')  then
                     begin   // Verifica se o usuário está logado e oculta o panel de login
@@ -108,7 +109,11 @@ begin
                     begin
                       setLimpaCampos;// limpar campos da tela
                       if Assigned(FIDEdit) and FIDEdit.CanFocus then// apos salvar voltar para o campo chave
-                         FIDEdit.SetFocus;
+                         begin
+                           TCustomEdit(FIDEdit).Text := IntToStr(fGerarID);//Gera ID para novo registro
+                           FIDEdit.SetFocus;
+                         end;
+
                     end;
                end
             else
@@ -308,7 +313,11 @@ begin
               TDateTimePicker(Self.Components[I]).Date := Now
            else
            if Self.Components[I] is TImage then
-              TImage(Self.Components[I]).Picture.LoadFromFile('');
+              begin
+                TImage(Self.Components[I]).Picture.Bitmap.Assign(Nil);
+                TImage(Self.Components[I]).Parent.Repaint;
+              end;
+
         end;// verificar a classe para acessar o método que limpa o conteúdo do campo
   end;
 end;
