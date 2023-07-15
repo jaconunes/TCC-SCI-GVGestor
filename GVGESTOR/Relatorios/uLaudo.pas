@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoRelatorioGVGESTOR, Data.FMTBcd,
   frxExportDOCX, frxClass, frxExportPDF, Data.DB, Data.SqlExpr, frxDBSet,
   frxDesgn, System.ImageList, Vcl.ImgList, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.ComCtrls, Vcl.ToolWin, Vcl.Buttons, EditSCI, Datasnap.DBClient, udmDadosGVGESTOR;
+  Vcl.ComCtrls, Vcl.ToolWin, Vcl.Buttons, EditSCI, Datasnap.DBClient, udmDadosGVGESTOR, MaskUtils;
 
 type
   TfrLaudo = class(TfrPadraoRelatorioGVGESTOR)
@@ -37,6 +37,8 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    function frxReportMasterSourceUserFunction(const MethodName: string; var Params: Variant): Variant;
+    procedure btVisualizarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,6 +46,7 @@ type
     procedure pGetConsultaSql; override;  // obtem consulta SQL se houver
     procedure pGetConsultaMasterSource; override;  // obtem consulta MasterSource se houver
     function fGetNomeArquivo: string; override; // obtem nome do arquivo para salvar como
+    function fAplicaMascara(wS : String) : String; virtual; //Aplica máscara de CNPJ
   end;
 
 var
@@ -53,7 +56,13 @@ implementation
 
 {$R *.dfm}
 
-uses uConsVistoria, uPrincipal;
+uses uConsVistoria, uPrincipal, uPadraoCadastroGVGESTOR;
+
+procedure TfrLaudo.btVisualizarClick(Sender: TObject);
+begin
+  inherited;
+  frxReportMasterSource.AddFunction('fAplicaMascara(wS: String): String;', 'GVGestor', 'Retorna numero com Mascara');
+end;
 
 procedure TfrLaudo.edCodigoChange(Sender: TObject);
 begin
@@ -68,6 +77,15 @@ begin
        if frPrincipal.fGetUsuarioLogado.Perfil = 'Administrador' then
           btEditar.Enabled := True;
      end;
+end;
+
+function TfrLaudo.fAplicaMascara(wS: String): String;
+begin
+    if wS.Length = 11 then
+     Result := FormatMaskText('999.999.999-99;0', wS) // Aplica máscara de CPF
+  else
+  if wS.Length = 14 then
+     Result := FormatMaskText('99.999.999/9999-99;0', wS); // Aplica máscara de CNPJ
 end;
 
 function TfrLaudo.fGetNomeArquivo: string;
@@ -120,6 +138,13 @@ begin
   inherited;
   if (Key = VK_F3) then// tecla de atalho para consulta
     btSelecionar.Click;
+end;
+
+function TfrLaudo.frxReportMasterSourceUserFunction(const MethodName: string;
+  var Params: Variant): Variant;
+begin
+    if MethodName = 'APLICAMASCARA' then
+       Result := fAplicaMascara(Params[0]);
 end;
 
 procedure TfrLaudo.pGetConsultaMasterSource;
