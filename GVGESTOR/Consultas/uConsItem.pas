@@ -10,7 +10,8 @@ uses
 
 type
   TfrConsItem = class(TfrPadraoConsultaGVGSTOR)
-    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -29,14 +30,33 @@ implementation
 
 uses udmDadosGVGESTOR, uCadAmbiente, uCadItem;
 
-procedure TfrConsItem.FormCreate(Sender: TObject);
+procedure TfrConsItem.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  if Key = VK_RETURN then// tecla de atalho para retornar o valor para o campo do cadastro
+     begin
+       if (Owner is TfrCadItem) and (grConsulta.Columns.Count > 0) then
+          begin
+            // por padrão definimos que o primairo campo da grid é a chave da tabela
+            TfrCadItem(Owner).edCodigo.Text := grConsulta.Columns[0].Field.AsString;
+            TfrCadItem(Owner).edCodigo.SetFocus;
+            Close;
+          end;
+     end;
+end;
+
+procedure TfrConsItem.FormShow(Sender: TObject);
 begin
   inherited;
   FTabela.Filter := EmptyStr;
   FTabela.Filtered := False;
   FTabela.IndexFieldNames := 'BDPKCODAMB';
-  FTabela.Filter := 'BDPKCODAMB = ' + IntToStr(TfrCadItem(Owner).fGetIDAmbiente);
-  FTabela.Filtered := True;
+  if Owner is TfrCadItem then
+     begin
+       FTabela.Filter := 'BDPKCODAMB = ' + IntToStr(TfrCadItem(Owner).fGetIDAmbiente);
+       FTabela.Filtered := True;
+     end;
 end;
 
 function TfrConsItem.setTabela: TClientDataSet;

@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoCadastroGVGESTOR,
   System.ImageList, Vcl.ImgList, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.ToolWin,
-  Vcl.StdCtrls, EditSCI, Datasnap.DBClient, Data.Db, Vcl.ExtDlgs;
+  Vcl.StdCtrls, EditSCI, Datasnap.DBClient, Data.Db, Vcl.ExtDlgs, jpeg;
 
 type
   TfrCadFoto = class(TfrPadraoCadastroGVGESTOR)
@@ -39,7 +39,7 @@ type
     function fGetImageFileName(Sender: TOpenPictureDialog): string;
     function fSetFieldName: string; override;
     function fGetIDAmbiente: Integer;
-    procedure fConvertToBmp(wOrigem: String);
+    function fConvertToBmp(Jpeg : TJpegImage) : TBitmap;
   end;
 
 var
@@ -51,7 +51,7 @@ implementation
 
 { TfrCadFoto }
 
-uses jpeg, uCadAmbiente, udmDadosGVGESTOR, uConsFoto;
+uses uCadAmbiente, udmDadosGVGESTOR, uConsFoto;
 
 procedure TfrCadFoto.btAdicionarClick(Sender: TObject);
 begin
@@ -65,7 +65,7 @@ end;
 procedure TfrCadFoto.btPesquisarClick(Sender: TObject);
 begin
   inherited;
-  TfrConsFoto.Create(edCodigo);
+  TfrConsFoto.Create(self);
 end;
 
 procedure TfrCadFoto.CarregaCampos;
@@ -84,10 +84,10 @@ end;
 procedure TfrCadFoto.FormCreate(Sender: TObject);
 begin
   inherited;
-  if Owner is TfrConsFoto then
-     begin
-       edCodigo.Text := IntToStr(TfrConsFoto(Owner).grConsulta.Columns[0].Field.AsInteger);
-     end;
+//  if Owner is TfrConsFoto then
+//     begin
+//       edCodigo.Text := IntToStr(TfrConsFoto(Owner).grConsulta.Columns[0].Field.AsInteger);
+//     end;
 end;
 
 procedure TfrCadFoto.FormShow(Sender: TObject);
@@ -106,30 +106,15 @@ begin
   Result := 'BDCODFOTO';
 end;
 
-procedure TfrCadFoto.fConvertToBmp(wOrigem: String);
+function TfrCadFoto.fConvertToBmp(Jpeg : TJPEGImage) : TBitmap;
 var
-  BMP: TBitmap;
-  JPG: TJPegImage;
+  vBmp: TBitmap;
 begin
-  if ExtractFileExt(wOrigem) <> '.jpg' then
-     begin
-       ShowMessage('Formato diferente de jpg' + #13 +
-                   'Formato atual : ' + ExtractFileExt(wOrigem));
-       Exit;
-     end;
-  JPG := TJPegImage.Create;
-  try
-    JPG.LoadFromFile(wOrigem);
-    BMP := TBitmap.Create;
-    try
-      BMP.Assign(JPG);
-      BMP.SaveToFile(wOrigem);
-    finally
-      FreeAndNil(BMP);
-    end;
-  finally
-    FreeAndNil(JPG);
-  end
+  // Recebe um arquivo Jpeg e converte em Bmp
+  vBmp := TBitmap.Create;
+  vBmp.Assign(Jpeg);
+
+  Result := vBmp;
 end;
 
 function TfrCadFoto.fGetIDAmbiente: Integer;
@@ -140,21 +125,32 @@ end;
 function TfrCadFoto.fGetImageFileName(Sender: TOpenPictureDialog): string;
 var
   wUrlImagem : String;
+  wJpg : TJPEGImage;
+  wBmp: TBitmap;
 begin
   if Owner is TfrCadAmbiente then
      begin
-       wUrlImagem := 'C:\TCC - Gestor de Vistorias\GVGESTOR\images\Vistoria_' +
-                     IntToStr(TfrCadAmbiente(Owner).CodVistoria) + '_Ambiente_' +
+       // Cria o nome do arquivo no local específico na pasta da Aplicação
+       wUrlImagem := 'C:\TCC - Gestor de Vistorias\GVGESTOR\images\Vist_' +
+                     IntToStr(TfrCadAmbiente(Owner).CodVistoria) + '_Amb_' +
                      TfrCadAmbiente(Owner).edCodigo.Text + '_Foto_' +
                      edCodigo.Text + '.bmp';
-       //CopyFile(PChar(Sender.FileName), PChar(wUrlImagem), True);
-       fConvertToBmp(wUrlImagem);
+       wJpg := TJPEGImage.Create;
+       wJpg.LoadFromFile(Sender.FileName);
+       // Converte o Jpeg em Bmp e retora o Bmp
+       wBmp := fConvertToBmp(wJpg);
+       // salva o Bmp no local especificado
+       wBmp.SaveToFile(wUrlImagem);
+       wBmp.Free;
+       wJpg.Free;
+       // Retorna o caminho da imagem
        Result := wUrlImagem;
      end;
 end;
 
 procedure TfrCadFoto.SalvarCampos;
 begin
+  // Carrega os componentes da tela
   FTabela.FieldByName('BDCODFOTO').AsInteger := edCodigo.Codigo;
   FTabela.FieldByName('BDDESC').AsString := edDescricao.Text;
   FTabela.FieldByName('BDPKCODAMB').AsInteger := wCodAmbiente;

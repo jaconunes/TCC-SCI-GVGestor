@@ -91,7 +91,7 @@ begin
   if ActiveControl = edCodLocatario then
      TfrConsLocatario.Create(edCodLocatario)
   else
-     TfrConsVistoria.Create(edCodigo);
+     TfrConsVistoria.Create(self.edCodigo);
 end;
 
 procedure TfrCadVistoria.CarregaCampos;
@@ -114,25 +114,6 @@ begin
   inherited;
   pCarregaCliente;
 end;
-
-//procedure TfrCadVistoria.edCodigoClick(Sender: TObject);
-//begin
-//  inherited;
-//  if getID then
-//     btAdAmbiente.Enabled := True
-//  else
-//     btAdAmbiente.Enabled := False;
-//end;
-
-//procedure TfrCadVistoria.edCodigoChange(Sender: TObject);
-//begin
-//  inherited;
-//  if getID then
-//     btAdAmbiente.Enabled := True
-//  else
-//     btAdAmbiente.Enabled := False;
-//end;
-
 
 procedure TfrCadVistoria.edCodImovelChange(Sender: TObject);
 begin
@@ -191,7 +172,6 @@ end;
 
 procedure TfrCadVistoria.SalvarCampos;
 begin
-
   FTabela.FieldByName('BDCODVIST').AsInteger   := edCodigo.Codigo;
   FTabela.FieldByName('BDDATAVIST').AsDateTime := dtpDataVistoria.Date;
   FTabela.FieldByName('BDTIPOLOC').AsString    := cbTipoLocacao.Items[cbTipoLocacao.ItemIndex];

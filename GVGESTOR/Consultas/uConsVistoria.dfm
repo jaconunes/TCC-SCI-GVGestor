@@ -2,13 +2,16 @@ inherited frConsVistoria: TfrConsVistoria
   Caption = 'Consulta de vistoria'
   ClientWidth = 918
   ExplicitWidth = 934
+  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 13
   inherited Splitter1: TSplitter
     Width = 918
+    ExplicitWidth = 918
   end
   inherited ToolBar1: TToolBar
     Width = 918
+    ExplicitWidth = 918
   end
   inherited grConsulta: TDBGrid
     Top = 74
@@ -96,8 +99,10 @@ inherited frConsVistoria: TfrConsVistoria
   end
   inherited Panel1: TPanel
     Width = 918
+    ExplicitWidth = 918
     inherited ToolBar2: TToolBar
       Width = 916
+      ExplicitWidth = 916
     end
     inherited grDetalhe: TDBGrid
       Width = 916
@@ -259,7 +264,7 @@ inherited frConsVistoria: TfrConsVistoria
   end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C01010700E000F80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010700E000FC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

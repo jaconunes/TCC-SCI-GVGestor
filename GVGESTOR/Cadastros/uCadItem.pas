@@ -51,7 +51,7 @@ uses udmDadosGVGESTOR, uConsItem, uCadAmbiente;
 procedure TfrCadItem.btPesquisarClick(Sender: TObject);
 begin
   inherited;
-  TfrConsItem.Create(edCodigo);
+  TfrConsItem.Create(self);
 end;
 
 procedure TfrCadItem.CarregaCampos;

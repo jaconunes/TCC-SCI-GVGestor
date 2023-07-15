@@ -41,8 +41,6 @@ type
   public
     procedure pGetConsultaSql; override;
     procedure pGetConsultaMasterSource; override;
-    procedure setResetMasterSource(wTabela: TClientDataset);
-    procedure setLimpaFiltros(wTabela: TClientDataset);
     { Public declarations }
 
   end;
@@ -195,47 +193,34 @@ end;
 procedure TfrLaudo.pGetConsultaSql;
 begin
   inherited;
-  SQLQueryPadrao.Close;
-  SQLQueryPadrao.SQL.Clear;
-  SQLQueryPadrao.SQL.Add('select v.*,');
-  SQLQueryPadrao.SQL.Add(' i.bdcodimovel, i.bdtipoimovel, i.bdquantamb, i.bdendereco as ENDIMOVEL,');
-  SQLQueryPadrao.SQL.Add(' i.bdnumero as NUMIMOVEL, I.bdbairro AS BAIRROIMOVEL, I.bdcidade AS CIDADEIMOVEL,');
-  SQLQueryPadrao.SQL.Add(' P.bdnome as NOMEPROP, P.bdcpfcnpj AS CPFCNPJPROP,');
-  SQLQueryPadrao.SQL.Add(' L.bdnome AS NOMELOCAT, L.bdcpfcnpj AS CPFCNPJLOCAT,');
-  SQLQueryPadrao.SQL.Add(' U.bdnome AS NOMEUSUARIO, U.bdcpfcnpj AS CPFCNPJUSUARIO,');
-  SQLQueryPadrao.SQL.Add(' C.bdrasocial AS RAZAOSOCIALCLI, C.bdcnpj AS CNPJCLIENTE,');
-  SQLQueryPadrao.SQL.Add(' A.bdnome AS NOMEAMBIENTE, A.bdobsadc AS OBSADAMBIENTE,');
-  SQLQueryPadrao.SQL.Add(' TI.bddescricao AS DESCITEM, TI.bdestado AS ESTADOITEM, TI.bdobsadc AS OBSADITEM,');
-  SQLQueryPadrao.SQL.Add(' F.bddesc AS DESCFOTO, F.bdurl AS URLFOTO');
-
-  SQLQueryPadrao.SQL.Add(' from  tvistoria v');
-
-  SQLQueryPadrao.SQL.Add(' join timovel i on (i.bdcodimovel = v.bdpkcodimov)');
-  SQLQueryPadrao.SQL.Add(' join tproprietario p on (p.bdcdpropr = i.bdpkcodprop)');
-  SQLQueryPadrao.SQL.Add(' join tlocatario l on (l.bdcdlocat = v.bdpkcodlocat)');
-  SQLQueryPadrao.SQL.Add(' join tusuario u on (u.bdcodigo = v.bdpkcodusu)');
-  SQLQueryPadrao.SQL.Add(' join tcliente c on (c.bdcodcli = v.bdpkcodclt)');
-  SQLQueryPadrao.SQL.Add(' join tambiente a on(a.bdpkcodvist = v.bdcodvist)');
-  SQLQueryPadrao.SQL.Add(' join titem ti on (ti.bdpkcodamb = a.bdcodamb)');
-  SQLQueryPadrao.SQL.Add(' join tfoto f on (f.bdpkcodamb = a.bdcodamb)');
-
-  SQLQueryPadrao.SQL.Add('where v.bdcodvist = ' + edCodigo.Text);
-
-  SQLQueryPadrao.Open;
-  frxDBDataset1.UserName := 'Consulta de Laudo';
-end;
-
-procedure TfrLaudo.setLimpaFiltros(wTabela: TClientDataset);
-begin
-  wTabela.Filtered := False;
-  wTabela.Filter := EmptyStr;
-end;
-
-procedure TfrLaudo.setResetMasterSource(wTabela: TClientDataset);
-begin
-  wTabela.MasterSource := nil;
-  wTabela.IndexFieldNames := EmptyStr;
-  wTabela.MasterFields := EmptyStr;
+//  SQLQueryPadrao.Close;
+//  SQLQueryPadrao.SQL.Clear;
+//  SQLQueryPadrao.SQL.Add('select v.*,');
+//  SQLQueryPadrao.SQL.Add(' i.bdcodimovel, i.bdtipoimovel, i.bdquantamb, i.bdendereco as ENDIMOVEL,');
+//  SQLQueryPadrao.SQL.Add(' i.bdnumero as NUMIMOVEL, I.bdbairro AS BAIRROIMOVEL, I.bdcidade AS CIDADEIMOVEL,');
+//  SQLQueryPadrao.SQL.Add(' P.bdnome as NOMEPROP, P.bdcpfcnpj AS CPFCNPJPROP,');
+//  SQLQueryPadrao.SQL.Add(' L.bdnome AS NOMELOCAT, L.bdcpfcnpj AS CPFCNPJLOCAT,');
+//  SQLQueryPadrao.SQL.Add(' U.bdnome AS NOMEUSUARIO, U.bdcpfcnpj AS CPFCNPJUSUARIO,');
+//  SQLQueryPadrao.SQL.Add(' C.bdrasocial AS RAZAOSOCIALCLI, C.bdcnpj AS CNPJCLIENTE,');
+//  SQLQueryPadrao.SQL.Add(' A.bdnome AS NOMEAMBIENTE, A.bdobsadc AS OBSADAMBIENTE,');
+//  SQLQueryPadrao.SQL.Add(' TI.bddescricao AS DESCITEM, TI.bdestado AS ESTADOITEM, TI.bdobsadc AS OBSADITEM,');
+//  SQLQueryPadrao.SQL.Add(' F.bddesc AS DESCFOTO, F.bdurl AS URLFOTO');
+//
+//  SQLQueryPadrao.SQL.Add(' from  tvistoria v');
+//
+//  SQLQueryPadrao.SQL.Add(' join timovel i on (i.bdcodimovel = v.bdpkcodimov)');
+//  SQLQueryPadrao.SQL.Add(' join tproprietario p on (p.bdcdpropr = i.bdpkcodprop)');
+//  SQLQueryPadrao.SQL.Add(' join tlocatario l on (l.bdcdlocat = v.bdpkcodlocat)');
+//  SQLQueryPadrao.SQL.Add(' join tusuario u on (u.bdcodigo = v.bdpkcodusu)');
+//  SQLQueryPadrao.SQL.Add(' join tcliente c on (c.bdcodcli = v.bdpkcodclt)');
+//  SQLQueryPadrao.SQL.Add(' join tambiente a on(a.bdpkcodvist = v.bdcodvist)');
+//  SQLQueryPadrao.SQL.Add(' join titem ti on (ti.bdpkcodamb = a.bdcodamb)');
+//  SQLQueryPadrao.SQL.Add(' join tfoto f on (f.bdpkcodamb = a.bdcodamb)');
+//
+//  SQLQueryPadrao.SQL.Add('where v.bdcodvist = ' + edCodigo.Text);
+//
+//  SQLQueryPadrao.Open;
+//  frxDBDataset1.UserName := 'Consulta de Laudo';
 end;
 
 procedure TfrLaudo.btSelecionarClick(Sender: TObject);

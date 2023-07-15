@@ -31,16 +31,19 @@ implementation
 
 procedure TdmConnection.DataModuleCreate(Sender: TObject);
 begin
+  // Chama o método de conexão
   setConnection;
 end;
 
 procedure TdmConnection.DataModuleDestroy(Sender: TObject);
 begin
+  // Encerra a conexão quando a aplicação é encerrada
   SQLConnectionGVGESTOR.Close;
 end;
 
 procedure TdmConnection.setConnection;
 begin
+  // Configura e abre a conexão com o banco de dados
   SQLConnectionGVGESTOR.Close;
   SQLConnectionGVGESTOR.ConnectionName := 'FBConnection';
   SQLConnectionGVGESTOR.DriverName := 'Firebird';

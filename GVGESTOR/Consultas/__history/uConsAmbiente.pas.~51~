@@ -1,0 +1,62 @@
+unit uConsAmbiente;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoConsultaGVGESTOR, Data.DB,
+  System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls,
+  Vcl.ToolWin, Datasnap.DBClient;
+
+type
+  TfrConsAmbiente = class(TfrPadraoConsultaGVGSTOR)
+    dsTabelaPai: TDataSource;
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    function setTabela: TClientDataSet; override;
+    { Public declarations }
+
+  end;
+
+var
+  frConsAmbiente: TfrConsAmbiente;
+
+implementation
+
+{$R *.dfm}
+
+uses udmDadosGVGESTOR, uCadAmbiente;
+
+procedure TfrConsAmbiente.FormCreate(Sender: TObject);
+begin
+  inherited;
+  FTabela.Filter := EmptyStr;
+  FTabela.Filtered := False;
+  FTabela.IndexFieldNames := 'BDPKCODVIST';
+  if Owner is TfrCadAmbiente then
+     begin
+       FTabela.Filter := 'BDPKCODVIST = ' + IntToStr(TfrCadAmbiente(Owner).fGetCodVistoria);
+       FTabela.Filtered := True;
+     end;
+end;
+
+procedure TfrConsAmbiente.FormShow(Sender: TObject);
+begin
+  inherited;
+  if Owner is TfrCadAmbiente then
+     begin
+       //TfrCadVistoria(Owner).Enabled := False;
+       TfrCadAmbiente(Owner).edCodigo.Text := FTabela.FieldByName('BDCODAMB').AsString;
+       TfrCadAmbiente(Owner).edCodigo.SetFocus;
+     end;
+end;
+
+function TfrConsAmbiente.setTabela: TClientDataSet;
+begin
+  Result := dmTabelas.tbAmbiente;
+end;
+
+end.

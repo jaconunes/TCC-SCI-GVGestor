@@ -57,7 +57,7 @@ uses udmDadosGVGESTOR, uCadVistoria, uConsAmbiente, uCadItem, uCadFoto;
 procedure TfrCadAmbiente.btPesquisarClick(Sender: TObject);
 begin
   inherited;
-  TfrConsAmbiente.Create(edCodigo);
+  TfrConsAmbiente.Create(self);
 end;
 
 procedure TfrCadAmbiente.CarregaCampos;

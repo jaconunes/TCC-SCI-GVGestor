@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ToolWin, Vcl.ComCtrls,
   System.ImageList, Vcl.ImgList, Data.FMTBcd, frxExportDOCX, frxClass,
   frxExportPDF, Data.DB, Data.SqlExpr, frxDBSet, frxDesgn, udmConnectionGVGestor,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, Datasnap.DBClient;
 
 type
   TfrPadraoRelatorioGVGESTOR = class(TForm)
@@ -47,6 +47,8 @@ type
      procedure pGetConsultaSql; virtual; abstract;
      procedure fCarregaFrxPadrao(wName: String); virtual;
      procedure pGetConsultaMasterSource; virtual; abstract;
+     procedure setLimpaFiltros(wTabela: TClientDataset); virtual;
+     procedure setResetMasterSource(wTabela: TClientDataset); virtual;
   end;
 
 var
@@ -144,6 +146,19 @@ begin
   else
   if Key = VK_F7 then
      btEditar.Click;
+end;
+
+procedure TfrPadraoRelatorioGVGESTOR.setLimpaFiltros(wTabela: TClientDataset);
+begin
+  wTabela.Filtered := False;
+  wTabela.Filter := EmptyStr;
+end;
+
+procedure TfrPadraoRelatorioGVGESTOR.setResetMasterSource(wTabela: TClientDataset);
+begin
+  wTabela.MasterSource := nil;
+  wTabela.IndexFieldNames := EmptyStr;
+  wTabela.MasterFields := EmptyStr;
 end;
 
 procedure TfrPadraoRelatorioGVGESTOR.FormResize(Sender: TObject);

@@ -51,14 +51,14 @@ begin
   FTabela.Filtered := False;
   FTabela.Filter :=  EmptyStr;
 
-  if cbFiltro.ItemIndex = 0 then
+  if cbFiltro.ItemIndex = 0 then // Verifica se selecionado o filtro por código
      begin
        FTabela.IndexFieldNames := 'BDCODVIST';
        FTabela.Filter := ' BDCODVIST =' + Trim(edCodigoNome.Text);
        FTabela.Filtered := True;
      end
   else
-  if cbFiltro.ItemIndex = 1 then
+  if cbFiltro.ItemIndex = 1 then // Verifica se selecionado o filtro por data
      begin
        FTabela.IndexFieldNames := 'BDDATAVIST';
        FTabela.Filter := ' BDDATAVIST >= ' + QuotedStr(FormatDateTime('yyyy-mm-dd', dtpInicio.Date)) +
@@ -66,14 +66,14 @@ begin
        FTabela.Filtered := True;
      end
   else
-  if cbFiltro.ItemIndex = 2 then
+  if cbFiltro.ItemIndex = 2 then // Verifica se selecionado o filtro por código do imóvel
      begin
        FTabela.IndexFieldNames := 'BDPKCODIMOV';
        FTabela.Filter := ' BDPKCODIMOV =' + Trim(edCodigoNome.Text);
        FTabela.Filtered := True;
      end
   else
-  if cbFiltro.ItemIndex = 3 then
+  if cbFiltro.ItemIndex = 3 then  //  Verifica se selecionado o filtro por código do cliente
      begin
        FTabela.IndexFieldNames := 'BDPKCODCLT';
        FTabela.Filter := ' BDPKCODCLT =' + Trim(edCodigoNome.Text);

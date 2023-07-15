@@ -8,7 +8,7 @@ inherited frLaudo: TfrLaudo
   TextHeight = 13
   inherited ToolBar1: TToolBar
     Width = 357
-    ExplicitWidth = 642
+    ExplicitWidth = 357
     inherited btVisualizar: TToolButton
       Enabled = False
     end
@@ -37,8 +37,8 @@ inherited frLaudo: TfrLaudo
   inherited Panel1: TPanel
     Width = 357
     Height = 98
-    ExplicitWidth = 642
-    ExplicitHeight = 335
+    ExplicitWidth = 357
+    ExplicitHeight = 98
     inherited GroupBox1: TGroupBox
       Left = 8
       Top = 6
@@ -78,7 +78,7 @@ inherited frLaudo: TfrLaudo
   inherited ImageList1: TImageList
     Top = 0
     Bitmap = {
-      494C010105000800980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050008009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

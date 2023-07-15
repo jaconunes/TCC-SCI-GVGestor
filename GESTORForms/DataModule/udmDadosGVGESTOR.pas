@@ -97,7 +97,7 @@ begin
     begin
        MessageDlg(wMSG, mtError, [mbOK], 0);
     end;
-
+    // Seta os índices de todas as tabelas
     setIndexDefs(tbAmbiente,'BDCODAMB');
     setIndexDefs(tbCliente,'BDCODCLI');
     setIndexDefs(tbFoto,'BDCODFOTO');

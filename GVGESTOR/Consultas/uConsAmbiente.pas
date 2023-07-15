@@ -11,8 +11,8 @@ uses
 type
   TfrConsAmbiente = class(TfrPadraoConsultaGVGSTOR)
     dsTabelaPai: TDataSource;
-    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -30,34 +30,32 @@ implementation
 
 uses udmDadosGVGESTOR, uCadAmbiente;
 
-procedure TfrConsAmbiente.FormCreate(Sender: TObject);
+procedure TfrConsAmbiente.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
 begin
   inherited;
-//  FTabela.Filter := EmptyStr;
-//  dmTabelas.tbVistoria.IndexFieldNames := 'BDCODVIST';
-//  FTabela.IndexFieldNames := 'BDPKCODVIST';
-//  FTabela.MasterFields := 'BDCODVIST';
-//  dsTabelaPai.DataSet := dmTabelas.tbVistoria;
-//  FTabela.MasterSource := dsTabelaPai;
-
-
-  FTabela.Filter := EmptyStr;
-  FTabela.Filtered := False;
-  FTabela.IndexFieldNames := 'BDPKCODVIST';
-  //if Owner is TForm then
-
-  //FTabela.Filter := 'BDPKCODVIST = ' + IntToStr(frCadAmbiente.edCodigo(Owner).co;
-  FTabela.Filtered := True;
+  if Key = VK_RETURN then// tecla de atalho para retornar o valor para o campo do cadastro
+     begin
+       if (Owner is TfrCadAmbiente) and (grConsulta.Columns.Count > 0) then
+          begin
+            // por padrão definimos que o primairo campo da grid é a chave da tabela
+            TfrCadAmbiente(Owner).edCodigo.Text := grConsulta.Columns[0].Field.AsString;
+            TfrCadAmbiente(Owner).edCodigo.SetFocus;
+            Close;
+          end;
+     end;
 end;
 
 procedure TfrConsAmbiente.FormShow(Sender: TObject);
 begin
   inherited;
+  FTabela.Filter := EmptyStr;
+  FTabela.Filtered := False;
+  FTabela.IndexFieldNames := 'BDPKCODVIST';
   if Owner is TfrCadAmbiente then
      begin
-       //TfrCadVistoria(Owner).Enabled := False;
-       TfrCadAmbiente(Owner).edCodigo.Text := FTabela.FieldByName('BDCODAMB').AsString;
-       TfrCadAmbiente(Owner).edCodigo.SetFocus;
+       FTabela.Filter := 'BDPKCODVIST = ' + IntToStr(TfrCadAmbiente(Owner).CodVistoria);
+       FTabela.Filtered := True;
      end;
 end;
 
