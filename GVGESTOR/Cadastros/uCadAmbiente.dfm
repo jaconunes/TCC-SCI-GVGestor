@@ -59,6 +59,7 @@ inherited frCadAmbiente: TfrCadAmbiente
   inherited Panel1: TPanel
     Width = 400
     Height = 115
+    ExplicitTop = 39
     ExplicitWidth = 400
     ExplicitHeight = 115
     object Label1: TLabel
@@ -134,7 +135,7 @@ inherited frCadAmbiente: TfrCadAmbiente
   end
   object mmObs: TMemo [2]
     Left = 92
-    Top = 81
+    Top = 78
     Width = 297
     Height = 59
     Font.Charset = ANSI_CHARSET
@@ -149,7 +150,7 @@ inherited frCadAmbiente: TfrCadAmbiente
     Left = 336
     Top = 9
     Bitmap = {
-      494C010108005801600110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108005801640110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

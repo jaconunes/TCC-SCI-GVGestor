@@ -13,7 +13,7 @@ inherited frCadItem: TfrCadItem
   TextHeight = 13
   inherited ToolBar1: TToolBar
     Width = 351
-    ExplicitWidth = 346
+    ExplicitWidth = 351
     inherited btPesquisar: TToolButton
       OnClick = btPesquisarClick
     end
@@ -21,8 +21,8 @@ inherited frCadItem: TfrCadItem
   inherited Panel1: TPanel
     Width = 351
     Height = 165
-    ExplicitWidth = 346
-    ExplicitHeight = 161
+    ExplicitWidth = 351
+    ExplicitHeight = 165
     object Label1: TLabel
       Left = 43
       Top = 12
@@ -142,7 +142,7 @@ inherited frCadItem: TfrCadItem
     Left = 280
     Top = 1
     Bitmap = {
-      494C010106000800F40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800F80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -1,50 +1,32 @@
-inherited frCadVistoria: TfrCadVistoria
-  ActiveControl = edCodigo
-  Caption = 'Cadastro de vistoria'
-  ClientHeight = 350
-  ClientWidth = 538
-  Constraints.MaxHeight = 389
-  Constraints.MaxWidth = 554
-  Constraints.MinHeight = 389
-  Constraints.MinWidth = 554
-  ExplicitWidth = 554
-  ExplicitHeight = 389
+inherited frCadImovel: TfrCadImovel
+  Caption = 'Cadastro de im'#243'vel'
+  ClientHeight = 279
+  ClientWidth = 634
+  Constraints.MaxHeight = 318
+  Constraints.MaxWidth = 650
+  Constraints.MinHeight = 318
+  Constraints.MinWidth = 650
+  ExplicitWidth = 650
+  ExplicitHeight = 318
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
-    Width = 538
-    ExplicitWidth = 538
+    Width = 634
+    TabOrder = 0
+    ExplicitWidth = 634
     inherited btPesquisar: TToolButton
       OnClick = btPesquisarClick
     end
-    object btAdAmbiente: TToolButton
-      Left = 123
-      Top = 0
-      Hint = 'Adicionar Ambiente (F5)'
-      Caption = 'btAdAmbiente'
-      Enabled = False
-      ImageIndex = 6
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = btAdAmbienteClick
-    end
-    object ToolButton5: TToolButton
-      Left = 156
-      Top = 0
-      Width = 8
-      Caption = 'ToolButton5'
-      ImageIndex = 7
-      Style = tbsSeparator
-    end
   end
   inherited Panel1: TPanel
-    Width = 538
-    Height = 317
-    ExplicitWidth = 538
-    ExplicitHeight = 317
-    object Label5: TLabel
-      Left = 75
-      Top = 139
+    Width = 634
+    Height = 246
+    TabOrder = 1
+    ExplicitWidth = 634
+    ExplicitHeight = 246
+    object Label3: TLabel
+      Left = 383
+      Top = 87
       Width = 27
       Height = 17
       Caption = 'Data'
@@ -55,25 +37,12 @@ inherited frCadVistoria: TfrCadVistoria
       Font.Style = []
       ParentFont = False
     end
-    object Label6: TLabel
-      Left = 309
-      Top = 139
-      Width = 48
-      Height = 17
-      Caption = 'Loca'#231#227'o'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label7: TLabel
+    object Label4: TLabel
       Left = 54
-      Top = 170
-      Width = 49
+      Top = 87
+      Width = 61
       Height = 17
-      Caption = 'Situa'#231#227'o'
+      Caption = 'Ambientes'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -81,29 +50,80 @@ inherited frCadVistoria: TfrCadVistoria
       Font.Style = []
       ParentFont = False
     end
-    object Label8: TLabel
-      Left = 316
-      Top = 170
-      Width = 41
+    object Label5: TLabel
+      Left = 89
+      Top = 121
+      Width = 26
       Height = 17
-      Caption = 'Acesso'
+      Caption = 'Tipo'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
+    end
+    object cbTipo: TComboBox
+      Left = 121
+      Top = 116
+      Width = 161
+      Height = 28
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ItemIndex = 0
+      ParentFont = False
+      TabOrder = 3
+      Text = 'Casa'
+      Items.Strings = (
+        'Casa'
+        'Apartamento'
+        'Sala Comercial'
+        'Galp'#227'o')
+    end
+    object seAmbientes: TSpinEdit
+      Left = 121
+      Top = 80
+      Width = 65
+      Height = 30
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      MaxValue = 0
+      MinValue = 0
+      ParentFont = False
+      TabOrder = 1
+      Value = 0
+    end
+    object dtpData: TDateTimePicker
+      Left = 416
+      Top = 81
+      Width = 161
+      Height = 28
+      Date = 45113.678175763890000000
+      Time = 45113.678175763890000000
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
     end
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 536
-      Height = 122
+      Width = 632
+      Height = 72
       Align = alTop
       TabOrder = 0
       object Label1: TLabel
-        Left = 59
-        Top = 8
+        Left = 70
+        Top = 12
         Width = 43
         Height = 17
         Caption = 'C'#243'digo'
@@ -114,12 +134,12 @@ inherited frCadVistoria: TfrCadVistoria
         Font.Style = []
         ParentFont = False
       end
-      object Label2: TLabel
-        Left = 63
-        Top = 37
-        Width = 39
+      object Label9: TLabel
+        Left = 44
+        Top = 42
+        Width = 70
         Height = 17
-        Caption = 'Cliente'
+        Caption = 'Propriet'#225'rio'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -127,63 +147,9 @@ inherited frCadVistoria: TfrCadVistoria
         Font.Style = []
         ParentFont = False
       end
-      object Label3: TLabel
-        Left = 64
-        Top = 66
-        Width = 38
-        Height = 17
-        Caption = 'Im'#243'vel'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label4: TLabel
-        Left = 48
-        Top = 94
-        Width = 54
-        Height = 17
-        Caption = 'Locat'#225'rio'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lbNomeCliente: TLabel
-        Left = 176
-        Top = 39
-        Width = 5
-        Height = 13
-        Color = clActiveCaption
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clGray
-        Font.Height = -13
-        Font.Name = 'MS UI Gothic'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lbNomeLocatario: TLabel
-        Left = 175
-        Top = 97
-        Width = 5
-        Height = 13
-        Color = clActiveCaption
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clGray
-        Font.Height = -13
-        Font.Name = 'MS UI Gothic'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object lbEnderecoImovel: TLabel
-        Left = 176
-        Top = 67
+      object lbNomeProprietario: TLabel
+        Left = 192
+        Top = 45
         Width = 5
         Height = 13
         Color = clActiveCaption
@@ -196,9 +162,9 @@ inherited frCadVistoria: TfrCadVistoria
         ParentFont = False
       end
       object edCodigo: TEdit_Numero_PEDSCI
-        Left = 106
-        Top = 4
-        Width = 63
+        Left = 120
+        Top = 7
+        Width = 65
         Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -208,14 +174,15 @@ inherited frCadVistoria: TfrCadVistoria
         ParentFont = False
         TabOrder = 0
         Text = '0'
+        OnExit = edCodigoExit
         Decimal = False
         DecimalSeparador = ','
         Codigo = 0
       end
-      object edCodCliente: TEdit_Numero_PEDSCI
-        Left = 106
-        Top = 33
-        Width = 63
+      object edCodProp: TEdit_Numero_PEDSCI
+        Left = 120
+        Top = 39
+        Width = 65
         Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -225,15 +192,78 @@ inherited frCadVistoria: TfrCadVistoria
         ParentFont = False
         TabOrder = 1
         Text = '0'
-        OnChange = edCodClienteChange
+        OnChange = edCodPropChange
         Decimal = False
         DecimalSeparador = ','
         Codigo = 0
       end
-      object edCodImovel: TEdit_Numero_PEDSCI
-        Left = 106
-        Top = 62
-        Width = 63
+    end
+    object GroupBox1: TGroupBox
+      Left = 17
+      Top = 150
+      Width = 600
+      Height = 88
+      Caption = 'Endere'#231'o'
+      Color = clActiveCaption
+      ParentBackground = False
+      ParentColor = False
+      TabOrder = 4
+      object Label2: TLabel
+        Left = 28
+        Top = 21
+        Width = 70
+        Height = 17
+        Caption = 'Logradouro'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label6: TLabel
+        Left = 345
+        Top = 21
+        Width = 48
+        Height = 17
+        Caption = 'N'#250'mero'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label7: TLabel
+        Left = 352
+        Top = 53
+        Width = 41
+        Height = 17
+        Caption = 'Cidade'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label8: TLabel
+        Left = 63
+        Top = 53
+        Width = 35
+        Height = 17
+        Caption = 'Bairro'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object edNumero: TEdit_Numero_PEDSCI
+        Left = 399
+        Top = 17
+        Width = 65
         Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -241,17 +271,30 @@ inherited frCadVistoria: TfrCadVistoria
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 1
         Text = '0'
-        OnChange = edCodImovelChange
         Decimal = False
         DecimalSeparador = ','
         Codigo = 0
       end
-      object edCodLocatario: TEdit_Numero_PEDSCI
-        Left = 106
-        Top = 91
-        Width = 63
+      object edLogradouro: TEdit
+        Left = 104
+        Top = 17
+        Width = 217
+        Height = 26
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnKeyPress = edLogradouroKeyPress
+      end
+      object edCidade: TEdit
+        Left = 399
+        Top = 49
+        Width = 161
         Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -260,124 +303,12 @@ inherited frCadVistoria: TfrCadVistoria
         Font.Style = []
         ParentFont = False
         TabOrder = 3
-        Text = '0'
-        OnChange = edCodLocatarioChange
-        Decimal = False
-        DecimalSeparador = ','
-        Codigo = 0
+        OnKeyPress = edCidadeKeyPress
       end
-    end
-    object dtpDataVistoria: TDateTimePicker
-      Left = 107
-      Top = 133
-      Width = 153
-      Height = 28
-      Date = 45115.430436053240000000
-      Time = 45115.430436053240000000
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 1
-    end
-    object cbTipoLocacao: TComboBox
-      Left = 363
-      Top = 133
-      Width = 153
-      Height = 28
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ItemIndex = 0
-      ParentFont = False
-      TabOrder = 2
-      Text = 'Residencial'
-      Items.Strings = (
-        'Residencial'
-        'Comercial')
-    end
-    object cbSituacao: TComboBox
-      Left = 107
-      Top = 164
-      Width = 153
-      Height = 28
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ItemIndex = 0
-      ParentFont = False
-      TabOrder = 3
-      Text = 'Limpo'
-      Items.Strings = (
-        'Limpo'
-        'Sujo'
-        'Reforma')
-    end
-    object cbAcesso: TComboBox
-      Left = 363
-      Top = 164
-      Width = 153
-      Height = 28
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ItemIndex = 0
-      ParentFont = False
-      TabOrder = 4
-      Text = 'Chaves'
-      Items.Strings = (
-        'Chaves'
-        'Tag'
-        'Senha')
-    end
-    object GroupBox1: TGroupBox
-      Left = 8
-      Top = 199
-      Width = 521
-      Height = 49
-      Caption = 'Energia'
-      Color = clActiveCaption
-      ParentBackground = False
-      ParentColor = False
-      TabOrder = 5
-      object Label9: TLabel
-        Left = 44
-        Top = 19
-        Width = 51
-        Height = 17
-        Caption = 'Medidor'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label10: TLabel
-        Left = 310
-        Top = 19
-        Width = 39
-        Height = 17
-        Caption = 'Leitura'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object edLeituraEnergia: TEdit_Numero_PEDSCI
-        Left = 355
-        Top = 15
-        Width = 153
+      object edBairro: TEdit
+        Left = 104
+        Top = 49
+        Width = 145
         Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -385,107 +316,16 @@ inherited frCadVistoria: TfrCadVistoria
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        TabOrder = 1
-        Text = '0'
-        Decimal = False
-        DecimalSeparador = ','
-        Codigo = 0
-      end
-      object edNumMedEnergia: TEdit_Numero_PEDSCI
-        Left = 99
-        Top = 15
-        Width = 153
-        Height = 26
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-        Text = '0'
-        Decimal = False
-        DecimalSeparador = ','
-        Codigo = 0
-      end
-    end
-    object GroupBox2: TGroupBox
-      Left = 8
-      Top = 257
-      Width = 521
-      Height = 49
-      Caption = #193'gua'
-      Color = clActiveCaption
-      ParentBackground = False
-      ParentColor = False
-      TabOrder = 6
-      object Label11: TLabel
-        Left = 44
-        Top = 19
-        Width = 51
-        Height = 17
-        Caption = 'Medidor'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label12: TLabel
-        Left = 310
-        Top = 19
-        Width = 39
-        Height = 17
-        Caption = 'Leitura'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-      end
-      object edLeituraAgua: TEdit_Numero_PEDSCI
-        Left = 355
-        Top = 15
-        Width = 153
-        Height = 26
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 1
-        Text = '0'
-        Decimal = False
-        DecimalSeparador = ','
-        Codigo = 0
-      end
-      object edNumMedAgua: TEdit_Numero_PEDSCI
-        Left = 99
-        Top = 15
-        Width = 153
-        Height = 26
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-        Text = '0'
-        Decimal = False
-        DecimalSeparador = ','
-        Codigo = 0
+        TabOrder = 2
+        OnKeyPress = edBairroKeyPress
       end
     end
   end
   inherited ImageList1: TImageList
-    Left = 288
-    Top = 1
+    Left = 560
+    Top = 9
     Bitmap = {
-      494C0101070058011C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101060008000C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -500,7 +340,7 @@ inherited frCadVistoria: TfrCadVistoria
       000000000000000000000000000000000000000000000000000000000000FFFF
       FFDBFFFFFFFFFFFFFFFFFFFFFFFF00000000FFFFFFFFFFFFFFFFFFFFFF8E0000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000FFFFFF2BFFFFFF6AFFFFFFE6FFFFFFE1FFFFFF68FFFFFF2A0000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000FFFF
@@ -508,103 +348,103 @@ inherited frCadVistoria: TfrCadVistoria
       FFD8FFFFFF54000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000FFFFFF87FFFFFFFFFFFFFFFF0000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000FFFFFF1DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FF1A000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFF000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9600000000FFFFFF8FFFFFFFFFFFFF
-      FFFFFFFFFF80000000000000000000000000000000000000000000000000FFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFF0000000000000000000000000000000000000000000000000000
+      FFFFFFFFFF800000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFF000000000000000000000000000000000000000000000000FFFF
       FFFF000000000000000000000000000000000000000000000000FFFFFF96FFFF
-      FFFFFFFFFFFF0000000000000000000000000000000000000000FFFFFF2CFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFF2B00000000000000000000000000000000000000000000
+      FFFFFFFFFFFF0000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFF00000000FFFFFFFFFFFFFFFF00000000FFFFFFFFFFFF
       FFFFFFFFFFFF000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9500000000FFFF
-      FF9AFFFFFFD3FFFFFFDBFFFFFF900000000000000000FFFFFF57FFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000FFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFF54000000000000000000000000000000000000
+      FF9AFFFFFFD3FFFFFFDBFFFFFF90000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFF00000000FFFFFFFFFFFFFFFF00000000FFFFFFFFFFFF
       FFFFFFFFFFFF000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF94FFFF
-      FF01FFFFFF22FFFFFFFFFFFFFFBD0000000000000000FFFFFF87FFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000FFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFF85000000000000000000000000000000000000
+      FF01FFFFFF22FFFFFFFFFFFFFFBD000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFF00000000FFFFFFFFFFFFFFFF00000000FFFFFFFFFFFF
       FFFFFFFFFFFF000000000000000000000000000000000000000000000000FFFF
       FFFF000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000FFFFFFE7FFFFFFFFFFFF
-      FFFFFFFFFFFF000000000000000000000000000000000000000000000000FFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFE7000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFF00000000FFFFFFFFFFFFFFFF00000000FFFFFFFFFFFF
       FFFFFFFFFFFF000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFF9300000000000000000000000000000000FFFFFFE3FFFFFFFFFFFF
-      FFFFFFFFFFFF000000000000000000000000000000000000000000000000FFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFE3000000000000000000000000000000000000
+      FFFFFFFFFF930000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFF00000000FFFFFFFFFFFFFFFF00000000FFFFFFFFFFFF
       FFFFFFFFFFFF000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFF00000000000000000000000000000000FFFFFF74FFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000FFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFF71000000000000000000000000000000000000
+      FFFFFFFFFFFF0000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFF00000000FFFFFFFFFFFFFFFF00000000FFFFFFFFFFFF
       FFFFFFFFFFFF000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000FFFF
-      FF1FFFFFFFE400000000000000000000000000000000FFFFFF3CFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000FFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFF38000000000000000000000000000000000000
+      FF1FFFFFFFE40000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFF000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000FFFFFF1FFFFF
-      FFFFFFFFFF740000000000000000000000000000000000000000FFFFFF23FFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFF1F00000000000000000000000000000000000000000000
+      FFFFFFFFFF740000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFF000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1FFFFFFFE4FFFF
-      FF7400000000000000000000000000000000000000000000000000000000FFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFF0000000000000000000000000000000000000000000000000000
+      FF74000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000
       000000000000000000000000000000000000000000000000000000000000FFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7B0000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000FFFFFF22FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FF1F000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000FFFF
       FFD8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7D000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000FFFFFF4FFFFFFF84FFFFFFE8FFFFFFE8FFFFFF83FFFFFF4D0000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -745,11 +585,11 @@ inherited frCadVistoria: TfrCadVistoria
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000424D3E000000000000003E000000
       2800000040000000200000000100010000000000000100000000000000000000
-      000000000000000000000000FFFFFF00FFFFFFFFFFFF0000FFFFE11FF81F0000
-      E007E11FF00F0000E007E087E0070000E007EFC7C0030000E247E02181810000
-      E247E00181810000E247EFFF87E10000E247E00787E10000E247E00781810000
-      E247E06781810000E007E047C0030000E007E00FE0070000FC3FE01FF00F0000
-      FFFFE03FF81F0000FFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFE007
+      000000000000000000000000FFFFFF00FFFFFFFF00000000FFFFE11F00000000
+      E007E11F00000000E007E08700000000E007EFC700000000E247E02100000000
+      E247E00100000000E247EFFF00000000E247E00700000000E247E00700000000
+      E247E06700000000E007E04700000000E007E00F00000000FC3FE01F00000000
+      FFFFE03F00000000FFFFFFFF00000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFE007
       FFFFFFFFF9FFE007FE7FFE7FF0FFE017FC3FFE7FE07FE007F81FFE7FC03FE427
       F00FF66F801FE427E007E247E60FE427E247E007E607E427F66FF00FFF83E3C7
       FE7FF81FFF81E007FE7FFC3FFFE3E007FE7FFE7FFFE7E00FFFFFFFFFFFFFE01F

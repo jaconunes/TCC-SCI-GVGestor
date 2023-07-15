@@ -37,7 +37,7 @@ inherited frCadProprietario: TfrCadProprietario
     end
     object Label2: TLabel
       Left = 64
-      Top = 46
+      Top = 44
       Width = 36
       Height = 17
       Caption = 'Nome'
@@ -50,7 +50,7 @@ inherited frCadProprietario: TfrCadProprietario
     end
     object Label3: TLabel
       Left = 268
-      Top = 78
+      Top = 74
       Width = 55
       Height = 17
       Caption = 'CPF/CNPJ'
@@ -63,7 +63,7 @@ inherited frCadProprietario: TfrCadProprietario
     end
     object Label4: TLabel
       Left = 59
-      Top = 79
+      Top = 75
       Width = 41
       Height = 17
       Caption = 'Pessoa'
@@ -76,7 +76,7 @@ inherited frCadProprietario: TfrCadProprietario
     end
     object Label5: TLabel
       Left = 51
-      Top = 111
+      Top = 105
       Width = 49
       Height = 17
       Caption = 'Telefone'
@@ -89,7 +89,7 @@ inherited frCadProprietario: TfrCadProprietario
     end
     object Label10: TLabel
       Left = 287
-      Top = 110
+      Top = 104
       Width = 36
       Height = 17
       Caption = 'E-mail'
@@ -119,7 +119,7 @@ inherited frCadProprietario: TfrCadProprietario
     end
     object cbTipoPessoa: TComboBox
       Left = 106
-      Top = 74
+      Top = 70
       Width = 143
       Height = 28
       Font.Charset = ANSI_CHARSET
@@ -138,7 +138,7 @@ inherited frCadProprietario: TfrCadProprietario
     end
     object edCpfCnpj: TEdit
       Left = 329
-      Top = 74
+      Top = 70
       Width = 205
       Height = 26
       Font.Charset = ANSI_CHARSET
@@ -152,7 +152,7 @@ inherited frCadProprietario: TfrCadProprietario
     end
     object edTelefone: TEdit
       Left = 106
-      Top = 107
+      Top = 101
       Width = 143
       Height = 26
       Font.Charset = ANSI_CHARSET
@@ -176,7 +176,7 @@ inherited frCadProprietario: TfrCadProprietario
       TabOrder = 6
       object Label6: TLabel
         Left = 18
-        Top = 17
+        Top = 19
         Width = 70
         Height = 17
         Caption = 'Logradouro'
@@ -189,7 +189,7 @@ inherited frCadProprietario: TfrCadProprietario
       end
       object Label7: TLabel
         Left = 393
-        Top = 17
+        Top = 19
         Width = 48
         Height = 17
         Caption = 'N'#250'mero'
@@ -228,7 +228,7 @@ inherited frCadProprietario: TfrCadProprietario
       end
       object edLogradouro: TEdit
         Left = 93
-        Top = 13
+        Top = 15
         Width = 284
         Height = 26
         Font.Charset = ANSI_CHARSET
@@ -242,7 +242,7 @@ inherited frCadProprietario: TfrCadProprietario
       end
       object edNumero: TEdit_Numero_PEDSCI
         Left = 448
-        Top = 13
+        Top = 15
         Width = 73
         Height = 26
         Font.Charset = ANSI_CHARSET
@@ -288,7 +288,7 @@ inherited frCadProprietario: TfrCadProprietario
     end
     object edNome: TEdit
       Left = 106
-      Top = 43
+      Top = 41
       Width = 428
       Height = 26
       Font.Charset = ANSI_CHARSET
@@ -302,7 +302,7 @@ inherited frCadProprietario: TfrCadProprietario
     end
     object edEmail: TEdit
       Left = 329
-      Top = 106
+      Top = 100
       Width = 205
       Height = 26
       Font.Charset = ANSI_CHARSET
@@ -319,7 +319,7 @@ inherited frCadProprietario: TfrCadProprietario
     Left = 376
     Top = 1
     Bitmap = {
-      494C010106000800FC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800000110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

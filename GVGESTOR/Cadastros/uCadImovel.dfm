@@ -52,7 +52,7 @@ inherited frCadImovel: TfrCadImovel
     end
     object Label5: TLabel
       Left = 89
-      Top = 121
+      Top = 118
       Width = 26
       Height = 17
       Caption = 'Tipo'
@@ -65,7 +65,7 @@ inherited frCadImovel: TfrCadImovel
     end
     object cbTipo: TComboBox
       Left = 121
-      Top = 116
+      Top = 113
       Width = 161
       Height = 28
       Font.Charset = ANSI_CHARSET
@@ -136,7 +136,7 @@ inherited frCadImovel: TfrCadImovel
       end
       object Label9: TLabel
         Left = 44
-        Top = 42
+        Top = 39
         Width = 70
         Height = 17
         Caption = 'Propriet'#225'rio'
@@ -181,7 +181,7 @@ inherited frCadImovel: TfrCadImovel
       end
       object edCodProp: TEdit_Numero_PEDSCI
         Left = 120
-        Top = 39
+        Top = 36
         Width = 65
         Height = 26
         Font.Charset = ANSI_CHARSET
@@ -199,9 +199,9 @@ inherited frCadImovel: TfrCadImovel
       end
     end
     object GroupBox1: TGroupBox
-      Left = 17
-      Top = 150
-      Width = 600
+      Left = 9
+      Top = 147
+      Width = 616
       Height = 88
       Caption = 'Endere'#231'o'
       Color = clActiveCaption
@@ -209,7 +209,7 @@ inherited frCadImovel: TfrCadImovel
       ParentColor = False
       TabOrder = 4
       object Label2: TLabel
-        Left = 28
+        Left = 36
         Top = 21
         Width = 70
         Height = 17
@@ -222,7 +222,7 @@ inherited frCadImovel: TfrCadImovel
         ParentFont = False
       end
       object Label6: TLabel
-        Left = 345
+        Left = 353
         Top = 21
         Width = 48
         Height = 17
@@ -235,8 +235,8 @@ inherited frCadImovel: TfrCadImovel
         ParentFont = False
       end
       object Label7: TLabel
-        Left = 352
-        Top = 53
+        Left = 360
+        Top = 50
         Width = 41
         Height = 17
         Caption = 'Cidade'
@@ -248,8 +248,8 @@ inherited frCadImovel: TfrCadImovel
         ParentFont = False
       end
       object Label8: TLabel
-        Left = 63
-        Top = 53
+        Left = 71
+        Top = 50
         Width = 35
         Height = 17
         Caption = 'Bairro'
@@ -261,7 +261,7 @@ inherited frCadImovel: TfrCadImovel
         ParentFont = False
       end
       object edNumero: TEdit_Numero_PEDSCI
-        Left = 399
+        Left = 407
         Top = 17
         Width = 65
         Height = 26
@@ -278,7 +278,7 @@ inherited frCadImovel: TfrCadImovel
         Codigo = 0
       end
       object edLogradouro: TEdit
-        Left = 104
+        Left = 111
         Top = 17
         Width = 217
         Height = 26
@@ -292,8 +292,8 @@ inherited frCadImovel: TfrCadImovel
         OnKeyPress = edLogradouroKeyPress
       end
       object edCidade: TEdit
-        Left = 399
-        Top = 49
+        Left = 407
+        Top = 46
         Width = 161
         Height = 26
         Font.Charset = ANSI_CHARSET
@@ -306,8 +306,8 @@ inherited frCadImovel: TfrCadImovel
         OnKeyPress = edCidadeKeyPress
       end
       object edBairro: TEdit
-        Left = 104
-        Top = 49
+        Left = 111
+        Top = 46
         Width = 145
         Height = 26
         Font.Charset = ANSI_CHARSET
@@ -325,7 +325,7 @@ inherited frCadImovel: TfrCadImovel
     Left = 560
     Top = 9
     Bitmap = {
-      494C0101060008000C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800100110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

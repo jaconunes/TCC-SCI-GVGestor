@@ -20,11 +20,12 @@ inherited frCadUsuario: TfrCadUsuario
     Constraints.MaxWidth = 444
     Constraints.MinHeight = 250
     Constraints.MinWidth = 444
+    ExplicitLeft = -8
     ExplicitWidth = 444
     ExplicitHeight = 250
     object Label1: TLabel
       Left = 94
-      Top = 54
+      Top = 65
       Width = 33
       Height = 16
       Caption = 'Nome'
@@ -37,7 +38,7 @@ inherited frCadUsuario: TfrCadUsuario
     end
     object Label2: TLabel
       Left = 98
-      Top = 117
+      Top = 123
       Width = 29
       Height = 16
       Caption = 'Perfil'
@@ -50,7 +51,7 @@ inherited frCadUsuario: TfrCadUsuario
     end
     object Label3: TLabel
       Left = 91
-      Top = 180
+      Top = 181
       Width = 36
       Height = 16
       Caption = 'Senha'
@@ -63,7 +64,7 @@ inherited frCadUsuario: TfrCadUsuario
     end
     object Label4: TLabel
       Left = 88
-      Top = 22
+      Top = 35
       Width = 39
       Height = 16
       Caption = 'C'#243'digo'
@@ -89,7 +90,7 @@ inherited frCadUsuario: TfrCadUsuario
     end
     object Label6: TLabel
       Left = 84
-      Top = 149
+      Top = 152
       Width = 43
       Height = 16
       Caption = 'Usu'#225'rio'
@@ -102,7 +103,7 @@ inherited frCadUsuario: TfrCadUsuario
     end
     object edNome: TEdit
       Left = 135
-      Top = 47
+      Top = 58
       Width = 281
       Height = 26
       Font.Charset = ANSI_CHARSET
@@ -116,7 +117,7 @@ inherited frCadUsuario: TfrCadUsuario
     end
     object edCpfCnpj: TEdit
       Left = 135
-      Top = 78
+      Top = 87
       Width = 146
       Height = 26
       Font.Charset = ANSI_CHARSET
@@ -130,7 +131,7 @@ inherited frCadUsuario: TfrCadUsuario
     end
     object edSenha: TEdit
       Left = 135
-      Top = 174
+      Top = 176
       Width = 193
       Height = 26
       Font.Charset = ANSI_CHARSET
@@ -144,7 +145,7 @@ inherited frCadUsuario: TfrCadUsuario
     end
     object GroupBox1: TGroupBox
       Left = 14
-      Top = 77
+      Top = 86
       Width = 113
       Height = 31
       TabOrder = 7
@@ -171,7 +172,7 @@ inherited frCadUsuario: TfrCadUsuario
     end
     object cbPerfil: TComboBox
       Left = 135
-      Top = 109
+      Top = 116
       Width = 146
       Height = 28
       Font.Charset = ANSI_CHARSET
@@ -203,7 +204,7 @@ inherited frCadUsuario: TfrCadUsuario
     end
     object edCodigo: TEdit_Numero_PEDSCI
       Left = 135
-      Top = 16
+      Top = 29
       Width = 74
       Height = 26
       Font.Charset = ANSI_CHARSET
@@ -220,7 +221,7 @@ inherited frCadUsuario: TfrCadUsuario
     end
     object edUsuario: TEdit
       Left = 135
-      Top = 143
+      Top = 147
       Width = 193
       Height = 26
       Font.Charset = ANSI_CHARSET
@@ -236,7 +237,7 @@ inherited frCadUsuario: TfrCadUsuario
     Left = 392
     Top = 113
     Bitmap = {
-      494C010106000800FC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800000110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
