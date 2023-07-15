@@ -48,6 +48,7 @@ type
     procedure edCodImovelChange(Sender: TObject);
     procedure edCodLocatarioChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -136,6 +137,14 @@ begin
   inherited;
   if Owner is TfrConsVistoria then
      edCodigo.Text := TfrConsVistoria(Owner).grConsulta.Columns[0].Field.AsString;
+end;
+
+procedure TfrCadVistoria.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  if (Key = VK_F5) and (btAdAmbiente.Enabled) then// tecla de atalho para adicionar ambiente
+     btAdAmbiente.Click;
 end;
 
 function TfrCadVistoria.fSetFieldName: string;

@@ -20,9 +20,12 @@ inherited frCadAmbiente: TfrCadAmbiente
     object btAdItem: TToolButton
       Left = 123
       Top = 0
+      Hint = 'Adicionar Item (F4)'
       Caption = 'btAdItem'
       Enabled = False
       ImageIndex = 6
+      ParentShowHint = False
+      ShowHint = True
       OnClick = btAdItemClick
     end
     object ToolButton6: TToolButton
@@ -36,9 +39,12 @@ inherited frCadAmbiente: TfrCadAmbiente
     object btAdFoto: TToolButton
       Left = 164
       Top = 0
+      Hint = 'Adicionar Foto (F5)'
       Caption = 'btAdFoto'
       Enabled = False
       ImageIndex = 7
+      ParentShowHint = False
+      ShowHint = True
       OnClick = btAdFotoClick
     end
     object ToolButton7: TToolButton
@@ -143,7 +149,7 @@ inherited frCadAmbiente: TfrCadAmbiente
     Left = 336
     Top = 9
     Bitmap = {
-      494C0101080058015C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108005801600110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -25,6 +25,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btPesquisarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
     wCodAmbiente : Integer;
@@ -91,6 +92,14 @@ begin
   inherited;
   if Owner is TfrConsFoto then
      edCodigo.Text := TfrConsFoto(Owner).grConsulta.Columns[0].Field.AsString;
+end;
+
+procedure TfrCadFoto.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  if (Key = VK_F4) and (btAdicionar.Enabled) then // tecla de atalho para adicionar foto
+     btAdicionar.Click;
 end;
 
 procedure TfrCadFoto.FormShow(Sender: TObject);

@@ -27,6 +27,7 @@ type
     procedure btAdFotoClick(Sender: TObject);
     procedure edCodigoChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
     wCodVistoria : Integer;
@@ -97,6 +98,17 @@ begin
   inherited;
   if Owner is TfrConsAmbiente then
      edCodigo.Text := TfrConsAmbiente(Owner).grConsulta.Columns[0].Field.AsString;
+end;
+
+procedure TfrCadAmbiente.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  if (Key = VK_F4) and (btAdItem.Enabled) then // tecla de atalho para adicionar item
+     btAdItem.Click
+  else
+  if (Key = VK_F5) and (btAdFoto.Enabled) then // tecla de atalho para adicionar foto
+     btAdFoto.Click;
 end;
 
 procedure TfrCadAmbiente.FormShow(Sender: TObject);
