@@ -35,7 +35,8 @@ uses
   uLaudo in 'Relatorios\uLaudo.pas' {frLaudo},
   uConsAmbiente in 'Consultas\uConsAmbiente.pas' {frConsAmbiente},
   uConsItem in 'Consultas\uConsItem.pas' {frConsItem},
-  uConsFoto in 'Consultas\uConsFoto.pas' {frConsFoto};
+  uConsFoto in 'Consultas\uConsFoto.pas' {frConsFoto},
+  uSobre in 'uSobre.pas' {frSobre};
 
 {$R *.res}
 

@@ -14798,6 +14798,7 @@ object frPrincipal: TfrPrincipal
     end
     object Sobre1: TMenuItem
       Caption = 'Sobre'
+      OnClick = Sobre1Click
     end
     object Sair1: TMenuItem
       Caption = 'Sair'

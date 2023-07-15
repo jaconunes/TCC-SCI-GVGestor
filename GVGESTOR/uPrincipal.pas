@@ -71,6 +71,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Gerar1Click(Sender: TObject);
     procedure lbCadastrarClick(Sender: TObject);
+    procedure Sobre1Click(Sender: TObject);
   private
     { Private declarations }
     FUsuarioLogado : TUsuario;
@@ -94,7 +95,7 @@ implementation
 uses udmDadosGVGESTOR, uCadUsuario, uConsUsuario, uCadImovel,
   uConsProprietario, uConsImovel, uCadProprietario, uCadCliente, uConsCliente,
   uCadLocatario, uConsLocatario, uCadVistoria, uConsVistoria, uRelImovel,
-  uRelProprietario, uRelCliente, uRelLocatario, uRelVistoria, uLaudo;
+  uRelProprietario, uRelCliente, uRelLocatario, uRelVistoria, uLaudo, uSobre;
 
 { TfrPrincipal }
 
@@ -255,6 +256,11 @@ begin
        edSenha.Clear;
        edUsuario.SetFocus;
      end;
+end;
+
+procedure TfrPrincipal.Sobre1Click(Sender: TObject);
+begin
+  TfrSobre.Create(self).Show;
 end;
 
 procedure TfrPrincipal.lbCadastrarClick(Sender: TObject);
