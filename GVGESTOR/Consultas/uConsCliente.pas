@@ -24,9 +24,7 @@ type
     { Private declarations }
   public
     { Public declarations }
-    function setTabela: TClientDataSet; override;
-
-
+    function setTabela: TClientDataSet; override; // carrega tabela no BD
   end;
 
 var
@@ -43,6 +41,7 @@ uses udmDadosGVGESTOR, uCadCliente;
 procedure TfrConsCliente.btEditarClick(Sender: TObject);
 begin
   inherited;
+  // cria form de cadastro de cliente
   TfrCadCliente.Create(self).Show;
 end;
 
@@ -52,14 +51,14 @@ begin
   FTabela.Filtered := False;
   FTabela.Filter :=  EmptyStr;
 
-  if cbFiltro.ItemIndex = 0 then
+  if cbFiltro.ItemIndex = 0 then // filtro por código
      begin
        FTabela.IndexFieldNames := 'BDCODCLI';
        FTabela.Filter := ' BDCODCLI = ' + Trim(edCodigoNome.Text);
        FTabela.Filtered := True;
      end
   else
-  if cbFiltro.ItemIndex = 1 then
+  if cbFiltro.ItemIndex = 1 then // filtro por razão social
      begin
        FTabela.IndexFieldNames := 'BDRASOCIAL';
        FTabela.Filter := ' BDRASOCIAL like ''%' + edCodigoNome.Text + '%''';
@@ -70,17 +69,20 @@ end;
 procedure TfrConsCliente.btLimparClick(Sender: TObject);
 begin
   inherited;
+  // limpa filtro do grid
   FTabela.Filtered := False;
 end;
 
 procedure TfrConsCliente.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
+  // desativa filtros da tabela
   FTabela.Filtered := False;
 end;
 
 function TfrConsCliente.setTabela: TClientDataSet;
 begin
+  // retorna tabela no BD
   Result := dmTabelas.tbCliente;
 end;
 

@@ -76,12 +76,12 @@ type
     FUsuarioLogado : TUsuario;
   public
     { Public declarations }
-    procedure pPerfilAdm;
-    procedure pPerfilPadrao;
-    procedure pSemUsuario;
-    procedure pCentralizarPanel(AForm: TForm; APanel: TPanel);
-    function fUsuario_Logado(wUsuario: String; wSenha: String): boolean;
-    function fGetUsuarioLogado: TUsuario;
+    procedure pPerfilAdm; // Configurações para perfil admin
+    procedure pPerfilPadrao; // Configurações para perfil padrão
+    procedure pSemUsuario;  // Configurações quando nenhum usuário logado
+    procedure pCentralizarPanel(AForm: TForm; APanel: TPanel); // Centraliza panel login
+    function fUsuario_Logado(wUsuario: String; wSenha: String): boolean; // Verifica autenticação do usuário
+    function fGetUsuarioLogado: TUsuario;  // Retrona o usuário logado
   end;
 
 var
@@ -100,11 +100,13 @@ uses udmDadosGVGESTOR, uCadUsuario, uConsUsuario, uCadImovel,
 
 procedure TfrPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  // Limpa o objeto usuário da memória
   FreeAndNil(FUsuarioLogado);
 end;
 
 procedure TfrPrincipal.FormCreate(Sender: TObject);
 begin
+  // Carrega o form com o panel de login
   pSemUsuario;
 end;
 
@@ -125,19 +127,22 @@ end;
 
 procedure TfrPrincipal.FormResize(Sender: TObject);
 begin
+  // Centraliza o panel de login
   pCentralizarPanel(self, pnLoginFilho);
 end;
 
 function TfrPrincipal.fUsuario_Logado(wUsuario, wSenha: String): boolean;
 begin
-  Result := False;
+  Result := False; // Retrona false por padrão
   dmTabelas.tbUsuario.IndexFieldNames := 'BDUSUARIO';
+  // Verifica se o usuário informado existe
   if dmTabelas.tbUsuario.FindKey([wUsuario]) then
      begin
+       // se o usuário existe, verifica se a senha informada é igual a do usuário encontrado
        if wSenha = dmTabelas.tbUsuario.FieldByName('BDSENHA').AsString then
           begin
             Result := True;
-
+            // Cria um objeto com os dados do usuário encontrado
             FUsuarioLogado := TUsuario.Create;
             FUsuarioLogado.ID := dmTabelas.tbUsuario.FieldByName('BDCODIGO').AsInteger;
             FUsuarioLogado.Nome := dmTabelas.tbUsuario.FieldByName('BDNOME').AsString;
@@ -146,6 +151,120 @@ begin
      end;
 end;
 
+function TfrPrincipal.fGetUsuarioLogado: TUsuario;
+begin
+  // Retorna o objeto de usuário criado
+  Result := FUsuarioLogado;
+end;
+
+// Validações do form de login
+procedure TfrPrincipal.btLoginClick(Sender: TObject);
+begin
+  if edUsuario.Text = EmptyStr then // se o campo usuário for vazio
+     begin
+       lbAlertaLogin.Caption := 'O campo "Usuário" deve ser preenchido!';
+       edUsuario.SetFocus;
+     end
+  else
+  if edSenha.Text = EmptyStr then // se o campo senha for vazio
+     begin
+       lbAlertaLogin.Caption := 'O campo "Senha" deve ser preenchido!';
+       edSenha.SetFocus;
+     end
+  else
+  // se os campos forem preenchidos, verifica a autenticação
+  if fUsuario_Logado(edUsuario.Text, edSenha.Text) then
+     begin
+       if FUsuarioLogado.Perfil = 'Administrador' then // verifica se o usuário tem perfil admin ou padrão
+          pPerfilAdm
+       else
+          pPerfilPadrao;
+       // Carrega nome do usuário na tela inicial e fecha o painel de login
+       lbUsuarioLogado.Caption := 'Olá, ' + FUsuarioLogado.Nome + '! Seja bem-vindo!';
+       pnLoginFilho.Visible := False;
+     end
+  else
+     begin
+       // se não solicita ao usuário tentar novamente
+       lbAlertaLogin.Caption := 'O "Usuário" e "Senha" não conferem.' + #13 +
+                                'Tente novamente.';
+       edUsuario.SetFocus;
+     end;
+end;
+
+procedure TfrPrincipal.pCentralizarPanel(AForm: TForm; APanel: TPanel);
+begin
+  // Procedure para centralizar o panel de login
+  APanel.Left := (AForm.ClientWidth div 2) - (APanel.Width div 2);
+  APanel.Top := (AForm.ClientHeight div 2) - (APanel.Height div 2);
+
+  APanel.Update;
+  AForm.Update;
+end;
+
+procedure TfrPrincipal.pPerfilAdm;
+begin
+  // Carrega configurações do perfil admin
+  Cadastros1.Enabled := True;
+  Consultas1.Enabled := True;
+  Relatrios1.Enabled := True;
+  Laudo1.Enabled     := True;
+  mUsuario.Enabled   := True;
+  Sair1.Enabled      := True;
+end;
+
+procedure TfrPrincipal.pPerfilPadrao;
+begin
+  // Carrega configurações do perfil padrão
+  Cadastros1.Enabled := True;
+  Consultas1.Enabled := True;
+  Relatrios1.Enabled := True;
+  Laudo1.Enabled     := True;
+  mUsuario.Enabled   := False;
+  Sair1.Enabled      := True;
+end;
+
+procedure TfrPrincipal.pSemUsuario;
+begin
+  // Carrega configurações para aguardar login de usuário
+  Cadastros1.Enabled      := False;
+  Consultas1.Enabled      := False;
+  Relatrios1.Enabled      := False;
+  Laudo1.Enabled          := False;
+  Sair1.Enabled           := False;
+  lbUsuarioLogado.Caption := EmptyStr;
+end;
+
+procedure TfrPrincipal.Sair1Click(Sender: TObject);
+var
+  wI: integer;
+begin
+  // Questiona o usuário se deseja fazer logoff
+  if MessageDlg('Deseja mesmo fazer logoff?', mtConfirmation, mbOKCancel, 0) = mrOk then
+     begin
+       // Fecha todos os forms filhos abertos
+       for wI := 0 to Self.MDIChildCount - 1 do
+          Self.MDIChildren[wI].Close;
+
+       pSemUsuario; // Carrega perfil aguardando usuário
+       lbUsuarioLogado.Caption := EmptyStr;
+       FreeAndNil(FUsuarioLogado);
+       // Exibe o painel de login
+       pnLoginFilho.Visible := True;
+       edUsuario.Clear;
+       edSenha.Clear;
+       edUsuario.SetFocus;
+     end;
+end;
+
+procedure TfrPrincipal.lbCadastrarClick(Sender: TObject);
+begin
+  // fecha painel de login e abre cadastro de usuário padrão
+  pnLoginFilho.Visible := False;
+  TfrCadUsuario.Create(self);
+end;
+
+// ******** Botões do Menu Principal ****************
 procedure TfrPrincipal.Gerar1Click(Sender: TObject);
 begin
   TfrLaudo.Create(self).Show;
@@ -159,100 +278,6 @@ end;
 procedure TfrPrincipal.Clientes2Click(Sender: TObject);
 begin
   TfrRelCliente.Create(self).Show;
-end;
-
-function TfrPrincipal.fGetUsuarioLogado: TUsuario;
-begin
-  Result := FUsuarioLogado;
-end;
-
-procedure TfrPrincipal.btLoginClick(Sender: TObject);
-begin
-  if edUsuario.Text = EmptyStr then
-     begin
-       lbAlertaLogin.Caption := 'O campo "Usuário" deve ser preenchido!';
-       edUsuario.SetFocus;
-     end
-  else
-  if edSenha.Text = EmptyStr then
-     begin
-       lbAlertaLogin.Caption := 'O campo "Senha" deve ser preenchido!';
-       edSenha.SetFocus;
-     end
-  else
-  if fUsuario_Logado(edUsuario.Text, edSenha.Text) then
-     begin
-       if FUsuarioLogado.Perfil = 'Administrador' then
-          pPerfilAdm
-       else
-          pPerfilPadrao;
-       lbUsuarioLogado.Caption := 'Olá, ' + FUsuarioLogado.Nome + '! Seja bem-vindo!';
-       pnLoginFilho.Visible := False;
-     end
-  else
-     begin
-       lbAlertaLogin.Caption := 'O "Usuário" e "Senha" não conferem.' + #13 +
-                                'Tente novamente.';
-       edUsuario.SetFocus;
-     end;
-end;
-
-procedure TfrPrincipal.pCentralizarPanel(AForm: TForm; APanel: TPanel);
-begin
-  APanel.Left := (AForm.ClientWidth div 2) - (APanel.Width div 2);
-  APanel.Top := (AForm.ClientHeight div 2) - (APanel.Height div 2);
-
-  APanel.Update;
-  AForm.Update;
-end;
-
-procedure TfrPrincipal.pPerfilAdm;
-begin
-  Cadastros1.Enabled := True;
-  Consultas1.Enabled := True;
-  Relatrios1.Enabled := True;
-  Laudo1.Enabled     := True;
-  mUsuario.Enabled   := True;
-  Sair1.Enabled      := True;
-end;
-
-procedure TfrPrincipal.pPerfilPadrao;
-begin
-  Cadastros1.Enabled := True;
-  Consultas1.Enabled := True;
-  Relatrios1.Enabled := True;
-  Laudo1.Enabled     := True;
-  mUsuario.Enabled   := False;
-  Sair1.Enabled      := True;
-end;
-
-procedure TfrPrincipal.pSemUsuario;
-begin
-  Cadastros1.Enabled      := False;
-  Consultas1.Enabled      := False;
-  Relatrios1.Enabled      := False;
-  Laudo1.Enabled          := False;
-  Sair1.Enabled           := False;
-  lbUsuarioLogado.Caption := EmptyStr;
-end;
-
-procedure TfrPrincipal.Sair1Click(Sender: TObject);
-var
-  wI: integer;
-begin
-  if MessageDlg('Deseja mesmo fazer logoff?', mtConfirmation, mbOKCancel, 0) = mrOk then
-     begin
-       for wI := 0 to Self.MDIChildCount - 1 do
-          Self.MDIChildren[wI].Close;
-
-       pSemUsuario;
-       lbUsuarioLogado.Caption := EmptyStr;
-       FreeAndNil(FUsuarioLogado);
-       pnLoginFilho.Visible := True;
-       edUsuario.Clear;
-       edSenha.Clear;
-       edUsuario.SetFocus;
-     end;
 end;
 
 procedure TfrPrincipal.Cliente1Click(Sender: TObject);
@@ -273,12 +298,6 @@ end;
 procedure TfrPrincipal.Imvel1Click(Sender: TObject);
 begin
   TfrCadImovel.Create(self).Show;
-end;
-
-procedure TfrPrincipal.lbCadastrarClick(Sender: TObject);
-begin
-  pnLoginFilho.Visible := False;
-  TfrCadUsuario.Create(self);
 end;
 
 procedure TfrPrincipal.Locatrio1Click(Sender: TObject);

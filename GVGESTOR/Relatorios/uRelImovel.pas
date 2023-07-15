@@ -25,12 +25,10 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure pGetConsultaSql; override;
-    procedure pGetConsultaMasterSource; override;
-
-
+    procedure pGetConsultaSql; override; // obtem consulta SQL se houver
+    procedure pGetConsultaMasterSource; override; // obtem consulta MasterSource se houver
+    function fGetNomeArquivo: string; override; // obtem nome do arquivo para salvar como
   end;
-
 var
   frRelImovel: TfrRelImovel;
 
@@ -40,15 +38,21 @@ implementation
 
 { TfrPadraoRelatorioGVGESTOR1 }
 
+function TfrRelImovel.fGetNomeArquivo: string;
+begin
+  // REtorna o nome do arquivo no "Salvar Como"
+  Result := Caption;
+end;
+
 procedure TfrRelImovel.pGetConsultaMasterSource;
 begin
   inherited;
-
 end;
 
 procedure TfrRelImovel.pGetConsultaSql;
 begin
   inherited;
+  // Consulta na tabela de imóveis
   SQLQueryPadrao.Close;
   SQLQueryPadrao.SQL.Clear;
   SQLQueryPadrao.SQL.Add('select * from timovel');
@@ -67,7 +71,6 @@ begin
   if edEndereco.Text <> EmptyStr then// filtro por endereço
      begin
        SQLQueryPadrao.SQL.Add('where BDENDERECO like ''%' + edEndereco.Text + '%''');
-       //SQLQueryPadrao.ParamByName('partend').AsString := edEndereco.Text;
      end;
 
   SQLQueryPadrao.Open;

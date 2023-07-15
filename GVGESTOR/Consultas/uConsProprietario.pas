@@ -23,9 +23,8 @@ type
   private
     { Private declarations }
   public
-    function setTabela: TClientDataSet; override;
     { Public declarations }
-
+    function setTabela: TClientDataSet; override;  // seta tabela no BD
   end;
 
 var
@@ -42,6 +41,7 @@ uses udmDadosGVGESTOR, uCadProprietario;
 procedure TfrConsProprietario.btEditarClick(Sender: TObject);
 begin
   inherited;
+  // cria form de cadastro de proprietários
   TfrCadProprietario.Create(self).Show;
 end;
 
@@ -51,14 +51,14 @@ begin
   FTabela.Filtered := False;
   FTabela.Filter :=  EmptyStr;
 
-  if cbFiltro.ItemIndex = 0 then
+  if cbFiltro.ItemIndex = 0 then  // filtro por código
      begin
        FTabela.IndexFieldNames := 'BDCDPROPR';
        FTabela.Filter := ' BDCDPROPR = ' + Trim(edCodigoNome.Text);
        FTabela.Filtered := True;
      end
   else
-  if cbFiltro.ItemIndex = 1 then
+  if cbFiltro.ItemIndex = 1 then // filtro por nome
      begin
        FTabela.IndexFieldNames := 'BDNOME';
        FTabela.Filter := ' BDNOME like ''%' + edCodigoNome.Text + '%''';
@@ -69,6 +69,7 @@ end;
 procedure TfrConsProprietario.btLimparClick(Sender: TObject);
 begin
   inherited;
+  // desabilita filtros na tabela
   FTabela.Filtered := False;
 end;
 
@@ -76,11 +77,13 @@ procedure TfrConsProprietario.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   inherited;
+  // desabilita filtros na tabela
   FTabela.Filtered := False;
 end;
 
 function TfrConsProprietario.setTabela: TClientDataSet;
 begin
+  // seta tabela no BD
   Result := dmTabelas.tbProprietario;
 end;
 

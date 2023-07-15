@@ -26,15 +26,15 @@ type
     wCodAmbiente : Integer;
   public
     { Public declarations }
-    function setTabela: TClientDataSet; override;
-    function setIDEdit: TWinControl; override;
-    function setLastEdit: TWinControl; override;
-    procedure CarregaCampos; override;
-    procedure SalvarCampos; override;
-    function ValidaCampos: Boolean; override;
-    function fSetFieldName: string; override;
-    function fGetIDAmbiente: Integer;
-
+    function setTabela: TClientDataSet; override; // deve informar qual tabela será usada
+    function setIDEdit: TWinControl; override;  // informar qual o campo chave da tela
+    function setLastEdit: TWinControl; override; // informar o último campo da tela para salvar automaticamente
+    procedure CarregaCampos; override; // carregar os campos da tabela para os camnpos da tela
+    procedure SalvarCampos; override;  // salvar os valores dos campos da tela para os campos da tabela
+    function ValidaCampos: Boolean; override; // Reescrito nas heranças para a validar os campos
+    function fSetFieldName: string; override;  //obter o fieldname da PK da tabela
+    function fGetIDAmbiente: Integer; // obtem ID do ambiente
+    procedure pSetHabilitaButton; override; // Habilita botões nas heranças
   end;
 
 var
@@ -51,11 +51,13 @@ uses udmDadosGVGESTOR, uConsItem, uCadAmbiente;
 procedure TfrCadItem.btPesquisarClick(Sender: TObject);
 begin
   inherited;
+  // cria form de consulta de itens
   TfrConsItem.Create(self);
 end;
 
 procedure TfrCadItem.CarregaCampos;
 begin
+  // carrega campos na tela
   edDescricao.Text := FTabela.FieldByName('BDDESCRICAO').AsString;
   cbEstado.Text := FTabela.FieldByName('BDESTADO').AsString;
   edObs.Text := FTabela.FieldByName('BDOBSADC').AsString;
@@ -63,12 +65,14 @@ end;
 
 function TfrCadItem.fGetIDAmbiente: Integer;
 begin
+  // retorna ID do ambiente
   Result := wCodAmbiente;
 end;
 
 procedure TfrCadItem.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
+  // devolve owner para form owner
   if (Owner is TForm) and (not TForm(Owner).Enabled) then
      TForm(Owner).Enabled := True;
 end;
@@ -76,6 +80,7 @@ end;
 procedure TfrCadItem.FormShow(Sender: TObject);
 begin
   inherited;
+  // obtem o ID do ambiente
   if Owner is TfrCadAmbiente then
      begin
        TfrCadAmbiente(Owner).Enabled := False;
@@ -86,11 +91,18 @@ end;
 
 function TfrCadItem.fSetFieldName: string;
 begin
+  // retorna o campo ID na tabela
   Result := 'BDCODITEM';
+end;
+
+procedure TfrCadItem.pSetHabilitaButton;
+begin
+  inherited;
 end;
 
 procedure TfrCadItem.SalvarCampos;
 begin
+  // salva campos no BD
   FTabela.FieldByName('BDCODITEM').AsInteger := edCodigo.Codigo;
   FTabela.FieldByName('BDDESCRICAO').AsString := edDescricao.Text;
   FTabela.FieldByName('BDESTADO').AsString := cbEstado.Items[cbEstado.ItemIndex];
@@ -100,16 +112,19 @@ end;
 
 function TfrCadItem.setIDEdit: TWinControl;
 begin
+  // retorna campo ID da tela
   Result := edCodigo;
 end;
 
 function TfrCadItem.setLastEdit: TWinControl;
 begin
+  // retorna ultimo campo da tela
   Result := edObs;
 end;
 
 function TfrCadItem.setTabela: TClientDataSet;
 begin
+  // retorna a tabela no BD
   Result := dmTabelas.tbItem;
 end;
 
@@ -118,14 +133,14 @@ var
   wMessage: String;
 begin
   Result := True;
-  if edDescricao.Text = EmptyStr then
+  if edDescricao.Text = EmptyStr then // valida campo descrição
      begin
        edDescricao.SetFocus;
        Result := False;
        wMessage := 'Informe a descrição do item!' + #13;
      end
   else
-  if edObs.Text = EmptyStr then
+  if edObs.Text = EmptyStr then  // valida campo observação
      begin
        edObs.SetFocus;
        Result := False;

@@ -2,7 +2,6 @@ inherited frConsVistoria: TfrConsVistoria
   Caption = 'Consulta de vistoria'
   ClientWidth = 918
   ExplicitWidth = 934
-  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 13
   inherited Splitter1: TSplitter
@@ -140,8 +139,6 @@ inherited frConsVistoria: TfrConsVistoria
     Height = 41
     Align = alTop
     TabOrder = 3
-    ExplicitLeft = -1
-    ExplicitTop = 27
     object Label1: TLabel
       Left = 14
       Top = 12
@@ -264,7 +261,7 @@ inherited frConsVistoria: TfrConsVistoria
   end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C01010700E000FC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010700E000000110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

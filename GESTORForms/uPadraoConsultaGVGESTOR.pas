@@ -33,10 +33,10 @@ type
   public
     { Public declarations }
     FTabela: TClientDataSet;
-    function setTabela: TClientDataSet; virtual; abstract;
-    function getPodeExcluir: Boolean; virtual;
-    function fGetID: Integer; virtual;
-    procedure pCentralizaForms(wFrPai, wFrFilho: TForm);
+    function setTabela: TClientDataSet; virtual; abstract; // Carrega tabela
+    function getPodeExcluir: Boolean; virtual; // Confirma exclusão de registro
+    function fGetID: Integer; virtual; // Obtem ID do registro
+    procedure pCentralizaForms(wFrPai, wFrFilho: TForm); // Centraliza form filho
   end;
 
 var
@@ -52,16 +52,17 @@ uses uCadUsuario;
 
 procedure TfrPadraoConsultaGVGSTOR.btAnteriorClick(Sender: TObject);
 begin
-  FTabela.Prior;
+  FTabela.Prior; // navega para registro anterior
 end;
 
 procedure TfrPadraoConsultaGVGSTOR.btProximoClick(Sender: TObject);
 begin
-  FTabela.Next;
+  FTabela.Next; // navega para registro próximo
 end;
 
 function TfrPadraoConsultaGVGSTOR.fGetID: Integer;
 begin
+  // Obtem ID do registro
   if Assigned(FTabela) then
      begin
        Result := grConsulta.Columns[0].Field.AsInteger;
@@ -118,16 +119,19 @@ end;
 
 procedure TfrPadraoConsultaGVGSTOR.FormResize(Sender: TObject);
 begin
+  // Centraliza form filho
   pCentralizaForms(Application.MainForm, self);
 end;
 
 function TfrPadraoConsultaGVGSTOR.getPodeExcluir: Boolean;
 begin
+  // Confirma exclusão de registro
   Result := MessageDlg('Deseja realmente excluir esse registro?', mtWarning, [mbYes,mbNo], 0) = mrYes;
 end;
 
 procedure TfrPadraoConsultaGVGSTOR.pCentralizaForms(wFrPai, wFrFilho: TForm);
 begin
+// Centraliza form filho
   wFrFilho.Left := (wFrPai.ClientWidth div 2) - (wFrFilho.Width div 2);
   wFrFilho.Top := (wFrPai.ClientHeight div 2) - (wFrFilho.Height div 2);
   wFrPai.Update;

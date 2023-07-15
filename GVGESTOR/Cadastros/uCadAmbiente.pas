@@ -31,16 +31,15 @@ type
     wCodVistoria : Integer;
   public
     { Public declarations }
-    function setTabela: TClientDataSet; override;
-    function setIDEdit: TWinControl; override;
-    function setLastEdit: TWinControl; override;
-    procedure CarregaCampos; override;
-    procedure SalvarCampos; override;
-    function ValidaCampos: Boolean; override;
-    function fSetFieldName: string; override;
-    procedure pSetHabilitaButton; override;
-
-    property CodVistoria : Integer read wCodVistoria write wCodVistoria;
+    function setTabela: TClientDataSet; override; // deve informar qual tabela será usada
+    function setIDEdit: TWinControl; override;  // informar qual o campo chave da tela
+    function setLastEdit: TWinControl; override;  // informar o último campo da tela para salvar automaticamente
+    procedure CarregaCampos; override; // carregar os campos da tabela para os camnpos da tela
+    procedure SalvarCampos; override; // salvar os valores dos campos da tela para os campos da tabela
+    function ValidaCampos: Boolean; override; // Reescrito nas heranças para a validar os campos
+    function fSetFieldName: string; override; //obter o fieldname da PK da tabela
+    procedure pSetHabilitaButton; override;  // Habilita botões nas heranças
+    property CodVistoria : Integer read wCodVistoria write wCodVistoria; // leitura e escrita do código da vistoria
   end;
 
 var
@@ -57,11 +56,13 @@ uses udmDadosGVGESTOR, uCadVistoria, uConsAmbiente, uCadItem, uCadFoto;
 procedure TfrCadAmbiente.btPesquisarClick(Sender: TObject);
 begin
   inherited;
+  // cria form de consulta de ambiente
   TfrConsAmbiente.Create(self);
 end;
 
 procedure TfrCadAmbiente.CarregaCampos;
 begin
+  // carrega campos na tela
   edNome.Text := FTabela.FieldByName('BDNOME').AsString;
   edObs.Text  := FTabela.FieldByName('BDOBSADC').AsString;
 end;
@@ -69,6 +70,7 @@ end;
 procedure TfrCadAmbiente.edCodigoChange(Sender: TObject);
 begin
   inherited;
+  // verifica ID e habilita botões de adicionar itens e fotos
   if getID then
      begin
        btAdItem.Enabled := True;
@@ -84,6 +86,7 @@ end;
 procedure TfrCadAmbiente.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
+  // habilita o owner do form owner
   if (Owner is TForm) and (not TForm(Owner).Enabled) then
      TForm(Owner).Enabled := True;
 end;
@@ -91,6 +94,7 @@ end;
 procedure TfrCadAmbiente.FormShow(Sender: TObject);
 begin
   inherited;
+  // obtem ID da vistoria
   if Owner is TfrCadVistoria then
      begin
        TfrCadVistoria(Owner).Enabled := False;
@@ -101,18 +105,21 @@ end;
 
 function TfrCadAmbiente.fSetFieldName: string;
 begin
+  // seta campo ID da tabela
   Result := 'BDCODAMB';
 end;
 
 procedure TfrCadAmbiente.pSetHabilitaButton;
 begin
   inherited;
+  // habilita botões adicionar itens e fotos
   btAdItem.Enabled := True;
   btAdFoto.Enabled := True;
 end;
 
 procedure TfrCadAmbiente.SalvarCampos;
 begin
+  // salva os campos na tabela
   FTabela.FieldByName('BDCODAMB').AsInteger   := edCodigo.Codigo;
   FTabela.FieldByName('BDNOME').AsString      := edNome.Text;
   FTabela.FieldByName('BDOBSADC').AsString    := edObs.Text;
@@ -121,28 +128,33 @@ end;
 
 function TfrCadAmbiente.setIDEdit: TWinControl;
 begin
+  // seta campo ID da tela
   Result := edCodigo;
 end;
 
 function TfrCadAmbiente.setLastEdit: TWinControl;
 begin
+  // seta último campo da tela
   Result := edObs;
 end;
 
 function TfrCadAmbiente.setTabela: TClientDataSet;
 begin
+  // seta tabela do BD
   Result := dmTabelas.tbAmbiente;
 end;
 
 procedure TfrCadAmbiente.btAdItemClick(Sender: TObject);
 begin
   inherited;
+  // cria form de cadastro de itens
   TfrCadItem.Create(self);
 end;
 
 procedure TfrCadAmbiente.btAdFotoClick(Sender: TObject);
 begin
   inherited;
+  // cria form de cadastro de fotos
   TfrCadFoto.Create(self);
 end;
 
@@ -151,7 +163,7 @@ var
   wMessage: String;
 begin
   Result := True;
-  if edNome.Text = EmptyStr then
+  if edNome.Text = EmptyStr then // verifica campo de descrição do ambiente
      begin
        wMessage := 'Informe a descrição do ambiente!';
        Result := False;

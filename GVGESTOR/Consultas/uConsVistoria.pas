@@ -29,9 +29,9 @@ type
     { Private declarations }
   public
     { Public declarations }
-    function setTabela: TClientDataSet; override;
-    function setTabelaDetalhe: TClientDataSet; override;
-    function setCamposChaveDetalhe: string; override;
+    function setTabela: TClientDataSet; override;  // seta tabela no BD
+    function setTabelaDetalhe: TClientDataSet; override;  // seta tabela detalhe no BD
+    function setCamposChaveDetalhe: string; override; // seta campo para filtro detalhe
   end;
 
 var
@@ -84,34 +84,41 @@ end;
 procedure TfrConsVistoria.btLimparClick(Sender: TObject);
 begin
   inherited;
+  // desabilita filtros na tabela
   FTabela.Filtered := False;
 end;
 
 procedure TfrConsVistoria.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
+  // desabilita filtros na tabela
   FTabela.Filtered := False;
 end;
 
 procedure TfrConsVistoria.FormCreate(Sender: TObject);
 begin
   inherited;
+  // limpa filtros
   dmTabelas.tbVistoria.Filter := EmptyStr;
+  // Indexa tabela de ambientes pelo campo de código de vistoria
   dmTabelas.tbAmbiente.IndexFieldNames := 'BDPKCODVIST';
 end;
 
 function TfrConsVistoria.setCamposChaveDetalhe: string;
 begin
+  // retorna campo ID no BD
   Result := 'BDCODVIST';
 end;
 
 function TfrConsVistoria.setTabela: TClientDataSet;
 begin
+  // retorna tabela de vistoria no BD
   Result := dmTabelas.tbVistoria;
 end;
 
 function TfrConsVistoria.setTabelaDetalhe: TClientDataSet;
 begin
+  // retorna tabela de ambiente no BD
   Result := dmTabelas.tbAmbiente;
 end;
 

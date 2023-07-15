@@ -24,22 +24,22 @@ type
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btPesquisarClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     wCodAmbiente : Integer;
   public
     { Public declarations }
-    function setTabela: TClientDataSet; override;
-    function setIDEdit: TWinControl; override;
-    function setLastEdit: TWinControl; override;
-    procedure CarregaCampos; override;
-    procedure SalvarCampos; override;
-    function ValidaCampos: Boolean; override;
-    function fGetImageFileName(Sender: TOpenPictureDialog): string;
-    function fSetFieldName: string; override;
-    function fGetIDAmbiente: Integer;
-    function fConvertToBmp(Jpeg : TJpegImage) : TBitmap;
+    function setTabela: TClientDataSet; override; // deve informar qual tabela será usada
+    function setIDEdit: TWinControl; override;   // informar qual o campo chave da tela
+    function setLastEdit: TWinControl; override; // informar o último campo da tela para salvar automaticamente
+    procedure CarregaCampos; override; // carregar os campos da tabela para os camnpos da tela
+    procedure SalvarCampos; override;  // salvar os valores dos campos da tela para os campos da tabela
+    function ValidaCampos: Boolean; override; // Reescrito nas heranças para a validar os campos
+    function fGetImageFileName(Sender: TOpenPictureDialog): string; // obtem caminho do arquivo da foto
+    function fSetFieldName: string; override; //obter o fieldname da PK da tabela
+    function fGetIDAmbiente: Integer;  // obtem o ID do ambiente
+    function fConvertToBmp(Jpeg : TJpegImage) : TBitmap; // converte JPG para BMP
+    procedure pSetHabilitaButton; override; // Habilita botões nas heranças
   end;
 
 var
@@ -56,6 +56,7 @@ uses uCadAmbiente, udmDadosGVGESTOR, uConsFoto;
 procedure TfrCadFoto.btAdicionarClick(Sender: TObject);
 begin
   inherited;
+  // carrega dialogo para selecionar foto no computador
   if opdImagem.Execute = True then
      begin
        iImagem.Picture.LoadFromFile(opdImagem.FileName);
@@ -65,11 +66,13 @@ end;
 procedure TfrCadFoto.btPesquisarClick(Sender: TObject);
 begin
   inherited;
+  // cria form de consulta de fotos
   TfrConsFoto.Create(self);
 end;
 
 procedure TfrCadFoto.CarregaCampos;
 begin
+  // carrega as informações e foto na tela
   edDescricao.Text := FTabela.FieldByName('BDDESC').AsString;
   iImagem.Picture.LoadFromFile(FTabela.FieldByName('BDURL').AsString);
 end;
@@ -77,22 +80,15 @@ end;
 procedure TfrCadFoto.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
+  // devolve owner para a tela owner
   if (Owner is TForm) and (not TForm(Owner).Enabled) then
      TForm(Owner).Enabled := True;
-end;
-
-procedure TfrCadFoto.FormCreate(Sender: TObject);
-begin
-  inherited;
-//  if Owner is TfrConsFoto then
-//     begin
-//       edCodigo.Text := IntToStr(TfrConsFoto(Owner).grConsulta.Columns[0].Field.AsInteger);
-//     end;
 end;
 
 procedure TfrCadFoto.FormShow(Sender: TObject);
 begin
   inherited;
+  // obtem o ID do ambiente e cria form
   if Owner is TfrCadAmbiente then
      begin
        TfrCadAmbiente(Owner).Enabled := False;
@@ -103,7 +99,13 @@ end;
 
 function TfrCadFoto.fSetFieldName: string;
 begin
+  // retorna o campo ID da tabela
   Result := 'BDCODFOTO';
+end;
+
+procedure TfrCadFoto.pSetHabilitaButton;
+begin
+  inherited;
 end;
 
 function TfrCadFoto.fConvertToBmp(Jpeg : TJPEGImage) : TBitmap;
@@ -119,6 +121,7 @@ end;
 
 function TfrCadFoto.fGetIDAmbiente: Integer;
 begin
+  // retorna o ID do ambiente
   Result := wCodAmbiente;
 end;
 
@@ -159,16 +162,19 @@ end;
 
 function TfrCadFoto.setIDEdit: TWinControl;
 begin
+  // retorna o campo ID da tela
   Result := edCodigo;
 end;
 
 function TfrCadFoto.setLastEdit: TWinControl;
 begin
+  // retorna o ultimo campo da tela
   Result := edDescricao;
 end;
 
 function TfrCadFoto.setTabela: TClientDataSet;
 begin
+  // retorna a tabela no BD
   Result := dmTabelas.tbFoto;
 end;
 
@@ -177,14 +183,14 @@ var
   wMessage: String;
 begin
   Result := True;
-  if edDescricao.Text = EmptyStr then
+  if edDescricao.Text = EmptyStr then  // valida campo descrição da foto
      begin
        edDescricao.SetFocus;
        Result := False;
        wMessage := 'Informe a descrição da imagem!' + #13;
      end
   else
-  if iImagem.Picture = nil then
+  if iImagem.Picture = nil then  // valida se imagem foi selecionada
      begin
        Result := False;
        ShowMessage('Selecione uma imagem!');

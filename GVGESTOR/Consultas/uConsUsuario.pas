@@ -15,8 +15,9 @@ type
   private
     { Private declarations }
   public
-    function setTabela: TClientDataSet; override;
     { Public declarations }
+    function setTabela: TClientDataSet; override; // seta tabela no BD
+
 
   end;
 
@@ -33,22 +34,24 @@ uses uCadUsuario, uPrincipal;
 
 procedure TfrConsUsuario.btEditarClick(Sender: TObject);
 begin
+  // cria form de cadastro de usuários
   TfrCadUsuario.Create(self).Show;
 end;
 
 procedure TfrConsUsuario.FormCreate(Sender: TObject);
 begin
   inherited;
+  // verifica perfil do usuário logado e habilita botões de edição e exclusão
   if frPrincipal.fGetUsuarioLogado.Perfil = 'Administrador' then
      begin
        btEditar.Enabled := True;
        btExcluir.Enabled := True;
      end;
-
 end;
 
 function TfrConsUsuario.setTabela: TClientDataSet;
 begin
+  // seta tabela no BD
   Result := dmTabelas.tbUsuario;
 end;
 

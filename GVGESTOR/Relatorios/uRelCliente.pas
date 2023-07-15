@@ -19,11 +19,10 @@ type
     { Private declarations }
   public
     { Public declarations }
-     procedure pGetConsultaSql; override;
-    procedure pGetConsultaMasterSource; override;
-
+     procedure pGetConsultaSql; override; // obtem consulta SQL se houver
+    procedure pGetConsultaMasterSource; override; // obtem consulta MasterSource se houver
+    function fGetNomeArquivo: string; override; // obtem nome do arquivo para salvar como
   end;
-
 var
   frRelCliente: TfrRelCliente;
 
@@ -33,15 +32,21 @@ implementation
 
 { TfrRelCliente }
 
+function TfrRelCliente.fGetNomeArquivo: string;
+begin
+  // Retorna nome do arquivo para o "Salvar como"
+  Result := Caption;
+end;
+
 procedure TfrRelCliente.pGetConsultaMasterSource;
 begin
   inherited;
-
 end;
 
 procedure TfrRelCliente.pGetConsultaSql;
 begin
   inherited;
+  // Consulta na tabela de clientes
   SQLQueryPadrao.Close;
   SQLQueryPadrao.SQL.Clear;
   SQLQueryPadrao.SQL.Add('select * from TCLIENTE');
@@ -52,11 +57,11 @@ begin
        SQLQueryPadrao.ParamByName('codprop').AsInteger := edCodigo.Codigo;
      end
   else
-  if edNome.Text <> EmptyStr then// filtro por endereço
+  if edNome.Text <> EmptyStr then // filtro por endereço
      begin
        SQLQueryPadrao.SQL.Add('where BDNOME like ''%' + edNome.Text + '%''');
-       //SQLQueryPadrao.ParamByName('partnome').AsString := edNome.Text;
      end;
+  // Ordenação da razão social por ordem alfabética
   SQLQueryPadrao.SQL.Add(' order by BDRASOCIAL ASC');
 
   SQLQueryPadrao.Open;

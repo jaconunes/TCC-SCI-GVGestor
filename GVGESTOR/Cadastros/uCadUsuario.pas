@@ -38,14 +38,14 @@ type
     { Private declarations }
   public
     { Public declarations }
-    function setTabela: TClientDataSet; override;
-    function setIDEdit: TWinControl; override;
-    function setLastEdit: TWinControl; override;
-    procedure CarregaCampos; override;
-    procedure SalvarCampos; override;
-    function ValidaCampos: Boolean; override;
-    function fSetFieldName: string; override;
-
+    function setTabela: TClientDataSet; override; // deve informar qual tabela será usada
+    function setIDEdit: TWinControl; override; // informar qual o campo chave da tela
+    function setLastEdit: TWinControl; override; // informar o último campo da tela para salvar automaticamente
+    procedure CarregaCampos; override;  // carregar os campos da tabela para os camnpos da tela
+    procedure SalvarCampos; override;  // salvar os valores dos campos da tela para os campos da tabela
+    function ValidaCampos: Boolean; override; // Reescrito nas heranças para a validar os campos
+    function fSetFieldName: string; override; //obter o fieldname da PK da tabela
+    procedure pSetHabilitaButton; override; // Habilita botões nas heranças
   end;
 
 var
@@ -61,12 +61,13 @@ uses udmDadosGVGESTOR, uConsUsuario, uPrincipal;
 
 procedure TfrCadUsuario.btPesquisarClick(Sender: TObject);
 begin
+  // cria form de consulta de usuários
   TfrConsUsuario.Create(edCodigo);
 end;
 
 procedure TfrCadUsuario.CarregaCampos;
 begin
-  inherited;
+  // carrega campos na tela
   edNome.Text        := FTabela.FieldByName('BDUSUARIO').AsString;
   edCpfCnpj.Text     := FTabela.FieldByName('BDCPFCNPJ').AsString;
   cbPerfil.Text      := FTabela.FieldByName('BDPERFIL').AsString;
@@ -79,31 +80,19 @@ end;
 procedure TfrCadUsuario.edCpfCnpjExit(Sender: TObject);
 begin
   inherited;
-  edCpfCnpj.Text := fAplicaMascara(edCpfCnpj.Text);
+  edCpfCnpj.Text := fAplicaMascara(edCpfCnpj.Text); // mascara de CNPJ
 end;
 
 procedure TfrCadUsuario.edNomeKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
-end;
-
-procedure TfrCadUsuario.edRepitaSenhaKeyPress(Sender: TObject; var Key: Char);
-begin
-  Key := Key;
-end;
-
-procedure TfrCadUsuario.edSenhaKeyPress(Sender: TObject; var Key: Char);
-begin
-  Key := Key;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo nome
 end;
 
 procedure TfrCadUsuario.FormCreate(Sender: TObject);
 begin
   inherited;
-  if Owner is TfrConsUsuario then
-     edCodigo.Text := IntToStr(TfrConsUsuario(Owner).grConsulta.Columns[0].Field.AsInteger)
-  else
+  // se não existir usuário logado, seta perfil padrão e desabilita edição e exclusão
   if frPrincipal.fGetUsuarioLogado = nil then
      begin
        cbPerfil.Text := 'Padrão';
@@ -115,12 +104,19 @@ end;
 
 function TfrCadUsuario.fSetFieldName: string;
 begin
+  // retorna campo ID no BD
   Result := 'BDCODIGO';
+end;
+
+procedure TfrCadUsuario.pSetHabilitaButton;
+begin
+  inherited;
 end;
 
 procedure TfrCadUsuario.rbCnpjClick(Sender: TObject);
 begin
   inherited;
+  // habilita campo CNPJ e seta lenght
   edCpfCnpj.Enabled := True;
   edCpfCnpj.MaxLength := 14;
 end;
@@ -128,6 +124,7 @@ end;
 procedure TfrCadUsuario.rbCpfClick(Sender: TObject);
 begin
   inherited;
+  // habilita campo CPF e seta lenght
   edCpfCnpj.Enabled := True;
   edCpfCnpj.MaxLength := 11;
 end;
@@ -135,10 +132,11 @@ end;
 procedure TfrCadUsuario.SalvarCampos;
 begin
   inherited;
+  // Carrega campos na tela
   FTabela.FieldByName('BDCODIGO').AsInteger := edCodigo.Codigo;
   FTabela.FieldByName('BDNOME').AsString    := edNome.Text;
   FTabela.FieldByName('BDCPFCNPJ').AsString := fCharacterRemove(edCpfCnpj.Text);
-
+   // verifica se existe usuário logado e seta perfil padrão ou selecionado no combobox perfil
   if frPrincipal.fGetUsuarioLogado = nil then
      FTabela.FieldByName('BDPERFIL').AsString  := 'Padrão'
   else
@@ -149,16 +147,19 @@ end;
 
 function TfrCadUsuario.setIDEdit: TWinControl;
 begin
+  // retorna campo ID da tela
   Result:= edCodigo;
 end;
 
 function TfrCadUsuario.setLastEdit: TWinControl;
 begin
+  // retorna ultimo campo da tela
   Result := edRepitaSenha;
 end;
 
 function TfrCadUsuario.setTabela: TClientDataSet;
 begin
+  // retorna tabela no BD
   Result := dmTabelas.tbUsuario;
 end;
 
@@ -167,42 +168,42 @@ var
   wMessage: String;
 begin
   Result := True;
-  if edNome.Text = EmptyStr then
+  if edNome.Text = EmptyStr then  // valida campo nome
      begin
        edNome.SetFocus;
        Result := False;
        wMessage := 'O campo nome não deve ser vazio!' + #13;
      end
   else
-  if edCpfCnpj.Text = EmptyStr then
+  if edCpfCnpj.Text = EmptyStr then // valida campo CNPJ
      begin
        edCpfCnpj.SetFocus;
        Result := False;
        wMessage := wMessage + 'O campo CPF/CNPJ não deve ser vazio!' + #13;
      end
   else
-  if edUsuario.Text = EmptyStr then
+  if edUsuario.Text = EmptyStr then // valida campo usuário
      begin
        edUsuario.SetFocus;
        Result := False;
        wMessage := wMessage + 'O campo usuário não deve ser vazio!' + #13;
      end
   else
-  if edSenha.Text = EmptyStr then
+  if edSenha.Text = EmptyStr then  // valida campo senha
      begin
        edSenha.SetFocus;
        Result := False;
        wMessage := wMessage + 'O campo Senha não deve ser vazio!' + #13;
      end
   else
-  if edRepitaSenha.Text = EmptyStr then
+  if edRepitaSenha.Text = EmptyStr then  // valida campo repitasenha
      begin
        edRepitaSenha.SetFocus;
        Result := False;
        wMessage := wMessage + 'Repita a senha neste campo!' + #13;
      end
   else
-  if edSenha.Text <> edRepitaSenha.Text then
+  if edSenha.Text <> edRepitaSenha.Text then // valida se senhas correspondem
      begin
        edSenha.Clear;
        edRepitaSenha.Clear;
@@ -214,13 +215,7 @@ begin
   if Result then
      begin
        wMessage := 'Registro salvo com sucesso!';
-//       if frPrincipal.fGetUsuarioLogado = nil then
-//          begin
-//            frPrincipal.pnLoginFilho.Visible := True;
-//            Close;
-//          end;
      end;
-
   ShowMessage(wMessage);
 end;
 

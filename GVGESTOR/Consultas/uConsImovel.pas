@@ -28,9 +28,8 @@ type
   private
     { Private declarations }
   public
-    function setTabela: TClientDataSet; override;
     { Public declarations }
-
+    function setTabela: TClientDataSet; override; // seta tabela no BD
   end;
 
 var
@@ -47,6 +46,7 @@ uses udmDadosGVGESTOR, uCadImovel;
 procedure TfrConsImovel.btEditarClick(Sender: TObject);
 begin
   inherited;
+  // cria form de cadastro de imóveis
   TfrCadImovel.Create(self).Show;
 end;
 
@@ -56,14 +56,14 @@ begin
   FTabela.Filtered := False;
   FTabela.Filter :=  EmptyStr;
 
-  if cbFiltro.ItemIndex = 0 then
+  if cbFiltro.ItemIndex = 0 then // filtro por código do imóvel
      begin
        FTabela.IndexFieldNames := 'BDCODIMOVEL';
        FTabela.Filter := ' BDCODIMOVEL =' + Trim(edTextFiltro.Text);
        FTabela.Filtered := True;
      end
   else
-  if cbFiltro.ItemIndex = 1 then
+  if cbFiltro.ItemIndex = 1 then // filtro por data de cadastro
      begin
        FTabela.IndexFieldNames := 'BDDATACAD';
        FTabela.Filter := ' BDDATACAD >= ' + QuotedStr(FormatDateTime('yyyy-mm-dd', dtpInicio.Date)) +
@@ -71,7 +71,7 @@ begin
        FTabela.Filtered := True;
      end
   else
-  if cbFiltro.ItemIndex = 2 then
+  if cbFiltro.ItemIndex = 2 then // filtro por endereço
      begin
        FTabela.IndexFieldNames := 'BDENDERECO';
        FTabela.Filter := ' BDENDERECO like ''%' + edTextFiltro.Text + '%''';
@@ -82,33 +82,36 @@ end;
 procedure TfrConsImovel.btLimparClick(Sender: TObject);
 begin
   inherited;
+  // desabilita filtro na tabela
   FTabela.Filtered := False;
 end;
 
 procedure TfrConsImovel.cbFiltroChange(Sender: TObject);
 begin
   inherited;
-  if cbFiltro.ItemIndex = 0 then
+  if cbFiltro.ItemIndex = 0 then   // habilita filtro por código
      edTextFiltro.Enabled := True
   else
-  if cbFiltro.ItemIndex = 1 then
+  if cbFiltro.ItemIndex = 1 then  // habilita filtro por data
      begin
        dtpInicio.Enabled := True;
        dtpFim.Enabled := True;
      end
   else
-  if cbFiltro.ItemIndex = 2 then
+  if cbFiltro.ItemIndex = 2 then  // habilita filtro por endereço
      edTextFiltro.Enabled := True;
 end;
 
 procedure TfrConsImovel.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
+  // desabilita filtros na tabela
   FTabela.Filtered := False;
 end;
 
 function TfrConsImovel.setTabela: TClientDataSet;
 begin
+  // retorna tabela no BD
   Result := dmTabelas.tbImovel;
 end;
 

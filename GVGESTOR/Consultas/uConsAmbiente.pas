@@ -16,9 +16,8 @@ type
   private
     { Private declarations }
   public
-    function setTabela: TClientDataSet; override;
     { Public declarations }
-
+    function setTabela: TClientDataSet; override; // seta tabela no BD
   end;
 
 var
@@ -52,6 +51,7 @@ begin
   FTabela.Filter := EmptyStr;
   FTabela.Filtered := False;
   FTabela.IndexFieldNames := 'BDPKCODVIST';
+  // cria forma de ambientes filtrados pelo código de vistoria
   if Owner is TfrCadAmbiente then
      begin
        FTabela.Filter := 'BDPKCODVIST = ' + IntToStr(TfrCadAmbiente(Owner).CodVistoria);
@@ -61,6 +61,7 @@ end;
 
 function TfrConsAmbiente.setTabela: TClientDataSet;
 begin
+  // seta tabela no BD
   Result := dmTabelas.tbAmbiente;
 end;
 

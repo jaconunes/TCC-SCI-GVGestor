@@ -18,11 +18,10 @@ type
   private
     { Private declarations }
   public
-    procedure pGetConsultaSql; override;
-    procedure pGetConsultaMasterSource; override;
     { Public declarations }
-
-
+    procedure pGetConsultaSql; override; // obtem consulta SQL se houver
+    procedure pGetConsultaMasterSource; override; // obtem consulta MasterSource se houver
+    function fGetNomeArquivo: string; override; // obtem nome do arquivo para salvar como
   end;
 
 var
@@ -34,15 +33,21 @@ implementation
 
 { TfrRelProprietario }
 
+function TfrRelProprietario.fGetNomeArquivo: string;
+begin
+  // Retorna o nome do arquivo no "Salvar Como"
+  Result := Caption;
+end;
+
 procedure TfrRelProprietario.pGetConsultaMasterSource;
 begin
   inherited;
-
 end;
 
 procedure TfrRelProprietario.pGetConsultaSql;
 begin
   inherited;
+  // Consulta na tabela de proprietários
   SQLQueryPadrao.Close;
   SQLQueryPadrao.SQL.Clear;
   SQLQueryPadrao.SQL.Add('select * from TPROPRIETARIO');
@@ -58,6 +63,7 @@ begin
        SQLQueryPadrao.SQL.Add(' where BDNOME like ''%' + edNome.Text + '%''');
        //SQLQueryPadrao.ParamByName('partnome').AsString := edNome.Text;
      end;
+  // Ordenação por ordem alfabética
   SQLQueryPadrao.SQL.Add(' order by BDNOME ASC');
 
   SQLQueryPadrao.Open;

@@ -36,13 +36,14 @@ type
     procedure edCodigoChange(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
-    procedure pGetConsultaSql; override;
-    procedure pGetConsultaMasterSource; override;
     { Public declarations }
-
+    procedure pGetConsultaSql; override;  // obtem consulta SQL se houver
+    procedure pGetConsultaMasterSource; override;  // obtem consulta MasterSource se houver
+    function fGetNomeArquivo: string; override; // obtem nome do arquivo para salvar como
   end;
 
 var
@@ -52,23 +53,33 @@ implementation
 
 {$R *.dfm}
 
-uses uConsVistoria;
+uses uConsVistoria, uPrincipal;
 
 procedure TfrLaudo.edCodigoChange(Sender: TObject);
 begin
   inherited;
+  // Verifica se existe ID válido, então habilita botões, exceto edição
   if dmTabelas.tbVistoria.FindKey([edCodigo.Text]) then
      begin
        btVisualizar.Enabled := True;
        btSalvarComo.Enabled := True;
        btImprimir.Enabled := True;
-       btEditar.Enabled := True;
+       // Habilita edição somente de usuário é admin
+       if frPrincipal.fGetUsuarioLogado.Perfil = 'Administrador' then
+          btEditar.Enabled := True;
      end;
+end;
+
+function TfrLaudo.fGetNomeArquivo: string;
+begin
+  // Retorna nome do arquivo no botão "Salvar Como"
+  Result := Caption + '-' + edCodigo.Text;
 end;
 
 procedure TfrLaudo.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
+  // Reseta o mastersource de todas as tabelas ao fechar form
   setResetMasterSource(dmTabelas.tbVistoria);
   setResetMasterSource(dmTabelas.tbImovel);
   setResetMasterSource(dmTabelas.tbProprietario);
@@ -78,7 +89,7 @@ begin
   setResetMasterSource(dmTabelas.tbFoto);
   setResetMasterSource(dmTabelas.tbLocatario);
   setResetMasterSource(dmTabelas.tbCliente);
-
+  // Limpa filtros de todas as tabelas
   setLimpaFiltros(dmTabelas.tbVistoria);
   setLimpaFiltros(dmTabelas.tbImovel);
   setLimpaFiltros(dmTabelas.tbProprietario);
@@ -90,17 +101,30 @@ begin
   setLimpaFiltros(dmTabelas.tbUsuario);
 end;
 
+procedure TfrLaudo.FormCreate(Sender: TObject);
+begin
+  inherited;
+  // Verifica se exite um ID válido e se usuário é admin, então habilita botão de edição
+  if dmTabelas.tbVistoria.FindKey([edCodigo.Text]) then
+     begin
+       if frPrincipal.fGetUsuarioLogado.Perfil = 'Administrador' then
+          btEditar.Enabled := True;
+     end
+  else
+     btEditar.Enabled := False;
+end;
+
 procedure TfrLaudo.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   inherited;
   if (Key = VK_F3) then// tecla de atalho para consulta
     btSelecionar.Click;
-
 end;
 
 procedure TfrLaudo.pGetConsultaMasterSource;
 begin
+  // Reseta o mastersource de todas as tabelas
   setResetMasterSource(dmTabelas.tbVistoria);
   setResetMasterSource(dmTabelas.tbImovel);
   setResetMasterSource(dmTabelas.tbProprietario);
@@ -110,7 +134,6 @@ begin
   setResetMasterSource(dmTabelas.tbFoto);
   setResetMasterSource(dmTabelas.tbLocatario);
   setResetMasterSource(dmTabelas.tbCliente);
-
    // refaz todas as ligações entre as tabelas
   dsVistoria.DataSet := dmTabelas.tbVistoria;
   dmTabelas.tbVistoria.IndexFieldNames := 'BDCODVIST;BDDATAVIST';
@@ -172,8 +195,6 @@ begin
   dmTabelas.tbFoto.MasterSource := dsAmbiente;
   frxDBDatasetFoto.DataSource := dsFoto;
   frxDBDatasetFoto.UserName := 'Foto';
-
-
   // filtreando os dados da tabela conforme as informações datela
   setLimpaFiltros(dmTabelas.tbVistoria);// sempre limpar antes de refazer o filtro
   setLimpaFiltros(dmTabelas.tbImovel);
@@ -184,7 +205,7 @@ begin
   setLimpaFiltros(dmTabelas.tbFoto);
   setLimpaFiltros(dmTabelas.tbLocatario);
   setLimpaFiltros(dmTabelas.tbUsuario);
-
+  // Recebe o ID da vistoria para gerar o laudo
   dmTabelas.tbVistoria.Filter := 'BDCODVIST = ' + edCodigo.Text;
 
   dmTabelas.tbVistoria.Filtered := True;
@@ -193,39 +214,20 @@ end;
 procedure TfrLaudo.pGetConsultaSql;
 begin
   inherited;
-//  SQLQueryPadrao.Close;
-//  SQLQueryPadrao.SQL.Clear;
-//  SQLQueryPadrao.SQL.Add('select v.*,');
-//  SQLQueryPadrao.SQL.Add(' i.bdcodimovel, i.bdtipoimovel, i.bdquantamb, i.bdendereco as ENDIMOVEL,');
-//  SQLQueryPadrao.SQL.Add(' i.bdnumero as NUMIMOVEL, I.bdbairro AS BAIRROIMOVEL, I.bdcidade AS CIDADEIMOVEL,');
-//  SQLQueryPadrao.SQL.Add(' P.bdnome as NOMEPROP, P.bdcpfcnpj AS CPFCNPJPROP,');
-//  SQLQueryPadrao.SQL.Add(' L.bdnome AS NOMELOCAT, L.bdcpfcnpj AS CPFCNPJLOCAT,');
-//  SQLQueryPadrao.SQL.Add(' U.bdnome AS NOMEUSUARIO, U.bdcpfcnpj AS CPFCNPJUSUARIO,');
-//  SQLQueryPadrao.SQL.Add(' C.bdrasocial AS RAZAOSOCIALCLI, C.bdcnpj AS CNPJCLIENTE,');
-//  SQLQueryPadrao.SQL.Add(' A.bdnome AS NOMEAMBIENTE, A.bdobsadc AS OBSADAMBIENTE,');
-//  SQLQueryPadrao.SQL.Add(' TI.bddescricao AS DESCITEM, TI.bdestado AS ESTADOITEM, TI.bdobsadc AS OBSADITEM,');
-//  SQLQueryPadrao.SQL.Add(' F.bddesc AS DESCFOTO, F.bdurl AS URLFOTO');
-//
-//  SQLQueryPadrao.SQL.Add(' from  tvistoria v');
-//
-//  SQLQueryPadrao.SQL.Add(' join timovel i on (i.bdcodimovel = v.bdpkcodimov)');
-//  SQLQueryPadrao.SQL.Add(' join tproprietario p on (p.bdcdpropr = i.bdpkcodprop)');
-//  SQLQueryPadrao.SQL.Add(' join tlocatario l on (l.bdcdlocat = v.bdpkcodlocat)');
-//  SQLQueryPadrao.SQL.Add(' join tusuario u on (u.bdcodigo = v.bdpkcodusu)');
-//  SQLQueryPadrao.SQL.Add(' join tcliente c on (c.bdcodcli = v.bdpkcodclt)');
-//  SQLQueryPadrao.SQL.Add(' join tambiente a on(a.bdpkcodvist = v.bdcodvist)');
-//  SQLQueryPadrao.SQL.Add(' join titem ti on (ti.bdpkcodamb = a.bdcodamb)');
-//  SQLQueryPadrao.SQL.Add(' join tfoto f on (f.bdpkcodamb = a.bdcodamb)');
-//
-//  SQLQueryPadrao.SQL.Add('where v.bdcodvist = ' + edCodigo.Text);
-//
-//  SQLQueryPadrao.Open;
-//  frxDBDataset1.UserName := 'Consulta de Laudo';
+  // Consulta SQL para retornar a quantidade de fotos vinculadas a uma vistoria
+  SQLQueryPadrao.Close;
+  SQLQueryPadrao.SQL.Clear;
+  SQLQueryPadrao.SQL.Add('SELECT COUNT(*) as TOTALDEFOTOS FROM tfoto f');
+  SQLQueryPadrao.SQL.Add(' join tambiente a on (f.bdpkcodamb = a.bdcodamb)');
+  SQLQueryPadrao.SQL.Add(' join tvistoria v on (v.bdcodvist = a.bdpkcodvist)');
+  SQLQueryPadrao.Open;
+  frxDBDataset1.UserName := 'Total de Fotos';
 end;
 
 procedure TfrLaudo.btSelecionarClick(Sender: TObject);
 begin
   inherited;
+  // cria form de consulta de vistorias
   TfrConsVistoria.Create(edCodigo);
 end;
 

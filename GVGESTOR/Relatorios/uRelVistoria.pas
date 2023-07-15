@@ -22,11 +22,10 @@ type
   private
     { Private declarations }
   public
-    procedure pGetConsultaSql; override;
-    procedure pGetConsultaMasterSource; override;
     { Public declarations }
-
-
+    procedure pGetConsultaSql; override; // obtem consulta SQL se houver
+    procedure pGetConsultaMasterSource; override; // obtem consulta MasterSource se houver
+    function fGetNomeArquivo: string; override; // obtem nome do arquivo para salvar como
   end;
 
 var
@@ -38,15 +37,21 @@ implementation
 
 { TfrRelVistoria }
 
+function TfrRelVistoria.fGetNomeArquivo: string;
+begin
+  // Retorna o nome do arquivo para o "Salvar como"
+  Result := Caption;
+end;
+
 procedure TfrRelVistoria.pGetConsultaMasterSource;
 begin
   inherited;
-
 end;
 
 procedure TfrRelVistoria.pGetConsultaSql;
 begin
   inherited;
+  // Consulta na tabela de vistorias, vinculando ao imóvel e o locatário
   SQLQueryPadrao.Close;
   SQLQueryPadrao.SQL.Clear;
   SQLQueryPadrao.SQL.Add('select v.bdcodvist, v.bddatavist, v.bdtipoloc,');
@@ -65,6 +70,7 @@ begin
        SQLQueryPadrao.ParamByName('dataini').AsDate := dtpDataInicio.Date;
        SQLQueryPadrao.ParamByName('datafin').AsDate := dtpDataFim.Date;
      end;
+  // Ordenação por data
   SQLQueryPadrao.SQL.Add('order by v.BDDATAVIST');
 
   SQLQueryPadrao.Open;

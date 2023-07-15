@@ -167,6 +167,7 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
       Top = 0
       Hint = 'Editar (F7)'
       Caption = 'btEditar'
+      Enabled = False
       ImageIndex = 3
       ParentShowHint = False
       ShowHint = True
@@ -201,7 +202,7 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
     Left = 376
     Top = 56
     Bitmap = {
-      494C010104000800600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -566,6 +567,7 @@ object frPadraoRelatorioGVGESTOR: TfrPadraoRelatorioGVGESTOR
     Top = 176
   end
   object SaveDialog1: TSaveDialog
+    Filter = 'Adobre Acrobat Reader (PDF)|*.pdf|Microsoft Word (DOCX)|*.docx'
     Left = 536
     Top = 240
   end

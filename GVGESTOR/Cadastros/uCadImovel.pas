@@ -42,15 +42,15 @@ type
     { Private declarations }
   public
     { Public declarations }
-    function setTabela: TClientDataSet; override;
-    function setIDEdit: TWinControl; override;
-    function setLastEdit: TWinControl; override;
-    procedure CarregaCampos; override;
-    procedure SalvarCampos; override;
-    function ValidaCampos: Boolean; override;
-    function fSetFieldName: string; override;
-
-    procedure pCarregaProprietario;
+    function setTabela: TClientDataSet; override;  // deve informar qual tabela será usada
+    function setIDEdit: TWinControl; override;  // informar qual o campo chave da tela
+    function setLastEdit: TWinControl; override; // informar o último campo da tela para salvar automaticamente
+    procedure CarregaCampos; override; // carregar os campos da tabela para os camnpos da tela
+    procedure SalvarCampos; override; // salvar os valores dos campos da tela para os campos da tabela
+    function ValidaCampos: Boolean; override; // Reescrito nas heranças para a validar os campos
+    function fSetFieldName: string; override; //obter o fieldname da PK da tabela
+    procedure pSetHabilitaButton; override; // Habilita botões nas heranças
+    procedure pCarregaProprietario; // carrega nome do proprietário
   end;
 
 var
@@ -67,6 +67,7 @@ uses udmDadosGVGESTOR, uConsProprietario, uConsImovel;
 procedure TfrCadImovel.btPesquisarClick(Sender: TObject);
 begin
   inherited;
+  // cria form de consulta de proprietários ou de imóveis
   if ActiveControl = edCodProp then
      TfrConsProprietario.Create(edCodProp)
   else
@@ -76,6 +77,7 @@ end;
 procedure TfrCadImovel.CarregaCampos;
 begin
   inherited;
+  // carrega campos na tela
   edCodProp.Codigo := FTabela.FieldByName('BDPKCODPROP').AsInteger;
   cbTipo.Text := FTabela.FieldByName('BDTIPOIMOVEL').AsString;
   seAmbientes.Text := IntToStr(FTabela.FieldByName('BDQUANTAMB').AsInteger);
@@ -89,45 +91,38 @@ end;
 procedure TfrCadImovel.edBairroKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo bairro
 end;
 
 procedure TfrCadImovel.edCidadeKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo cidade
 end;
 
 procedure TfrCadImovel.edCodigoExit(Sender: TObject);
 begin
   inherited;
+  // carrega nome do proprietário
   pCarregaProprietario;
 end;
 
 procedure TfrCadImovel.edCodPropChange(Sender: TObject);
 begin
   inherited;
+  // carrega nome do proprietário
   pCarregaProprietario;
 end;
 
 procedure TfrCadImovel.edLogradouroKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
-end;
-
-procedure TfrCadImovel.FormCreate(Sender: TObject);
-begin
-  inherited;
-  if Owner is TfrConsImovel then
-     begin
-       edCodigo.Text := IntToStr(TfrConsImovel(Owner).grConsulta.Columns[0].Field.AsInteger);
-     end;
-
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo logradouro
 end;
 
 function TfrCadImovel.fSetFieldName: string;
 begin
+  // retorna campo ID no BD
   Result := 'BDCODIMOVEL';
 end;
 
@@ -135,6 +130,7 @@ procedure TfrCadImovel.pCarregaProprietario;
 begin
   pLimpaFiltros(dmTabelas.tbProprietario);
   dmTabelas.tbProprietario.IndexFieldNames := 'BDCDPROPR';
+  // verifica ID e carrega nome do proprietário
   if dmTabelas.tbProprietario.FindKey([edCodProp.Codigo]) and Assigned(edCodProp) then
      begin
        lbNomeProprietario.Caption := '- ' + dmTabelas.tbProprietario.FieldByName('BDNOME').AsString;
@@ -143,8 +139,14 @@ begin
      lbNomeProprietario.Caption := EmptyStr;
 end;
 
+procedure TfrCadImovel.pSetHabilitaButton;
+begin
+  inherited;
+end;
+
 procedure TfrCadImovel.SalvarCampos;
 begin
+  // salva campos no BD
   FTabela.FieldByName('BDCODIMOVEL').AsInteger := edCodigo.Codigo;
   FTabela.FieldByName('BDTIPOIMOVEL').AsString := cbTipo.Items[cbTipo.ItemIndex];
   FTabela.FieldByName('BDQUANTAMB').AsInteger := StrToInt(seAmbientes.Text);
@@ -158,16 +160,19 @@ end;
 
 function TfrCadImovel.setIDEdit: TWinControl;
 begin
+  // retorna campo ID da tela
   Result := edCodigo;
 end;
 
 function TfrCadImovel.setLastEdit: TWinControl;
 begin
+  // retorna ultimo campo da tela
   Result := edCidade;
 end;
 
 function TfrCadImovel.setTabela: TClientDataSet;
 begin
+  // retorna tabela no BD
   Result := dmTabelas.tbImovel;
 end;
 
@@ -176,42 +181,42 @@ var
   wMessage: String;
 begin
   Result := True;
-  if (edCodProp.Text = EmptyStr) or (edCodProp.Codigo = 0) then
+  if (edCodProp.Text = EmptyStr) or (edCodProp.Codigo = 0) then // valida campo ID do proprietário
      begin
        edCodProp.SetFocus;
        Result := False;
        wMessage := 'Selecione um código do proprietário!' + #13;
      end
   else
-  if (seAmbientes.Text = EmptyStr) or (seAmbientes.Text = IntToStr(0)) then
+  if (seAmbientes.Text = EmptyStr) or (seAmbientes.Text = IntToStr(0)) then // valida quantidade de ambientes
      begin
        seAmbientes.SetFocus;
        Result := False;
        wMessage := 'Informe o número de ambientes do imóvel!' + #13;
      end
   else
-  if edLogradouro.Text = EmptyStr then
+  if edLogradouro.Text = EmptyStr then  // valida campo logradouro
      begin
        edLogradouro.SetFocus;
        Result := False;
        wMessage := 'Informe o logradouro do imóvel!' + #13;
      end
   else
-  if edNumero.Text = EmptyStr then
+  if edNumero.Text = EmptyStr then   // valida campo número
      begin
        edNumero.SetFocus;
        Result := False;
        wMessage := 'Informe o número do endereço do imóvel!' + #13;
      end
   else
-  if edBairro.Text = EmptyStr then
+  if edBairro.Text = EmptyStr then  // valida campo bairro
      begin
        edBairro.SetFocus;
        Result := False;
        wMessage := 'Informe o bairro do imóvel!' + #13;
      end
   else
-  if edCidade.Text = EmptyStr then
+  if edCidade.Text = EmptyStr then  // valida campo cidade
      begin
        edCidade.SetFocus;
        Result := False;

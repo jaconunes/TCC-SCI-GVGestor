@@ -51,19 +51,17 @@ type
     { Private declarations }
   public
     { Public declarations }
-    function setTabela: TClientDataSet; override;
-    function setIDEdit: TWinControl; override;
-    function setLastEdit: TWinControl; override;
-    procedure CarregaCampos; override;
-    procedure SalvarCampos; override;
-    function ValidaCampos: Boolean; override;
-    function fSetFieldName: string; override;
-    procedure pSetHabilitaButton; override;
-
-
-    procedure pCarregaCliente;
-    procedure pCarregaEndImovel;
-    procedure pCarregaLocatario;
+    function setTabela: TClientDataSet; override; // deve informar qual tabela será usada
+    function setIDEdit: TWinControl; override;  // informar qual o campo chave da tela
+    function setLastEdit: TWinControl; override;  // informar o último campo da tela para salvar automaticamente
+    procedure CarregaCampos; override; // carregar os campos da tabela para os camnpos da tela
+    procedure SalvarCampos; override; // salvar os valores dos campos da tela para os campos da tabela
+    function ValidaCampos: Boolean; override; // Reescrito nas heranças para a validar os campos
+    function fSetFieldName: string; override; //obter o fieldname da PK da tabela
+    procedure pSetHabilitaButton; override;  // Habilita botões nas heranças
+    procedure pCarregaCliente; // Carrega none do cliente
+    procedure pCarregaEndImovel; // Carrega endereço do imóvel
+    procedure pCarregaLocatario;  // Carrega nome do locatário
 
   end;
 
@@ -82,6 +80,7 @@ uses udmDadosGVGESTOR, uConsVistoria, uConsCliente, uConsImovel, uConsLocatario,
 procedure TfrCadVistoria.btPesquisarClick(Sender: TObject);
 begin
   inherited;
+  // Abre a pesquisa de acordo com o campo ativo
   if ActiveControl = edCodCliente then
      TfrConsCliente.Create(edCodCliente)
   else
@@ -96,6 +95,7 @@ end;
 
 procedure TfrCadVistoria.CarregaCampos;
 begin
+  // Carrega as informações na tela
   dtpDataVistoria.Date  := FTabela.FieldByName('BDDATAVIST').AsDateTime;
   cbTipoLocacao.Text    := FTabela.FieldByName('BDTIPOLOC').AsString;
   cbSituacao.Text       := FTabela.FieldByName('BDSITUACAO').AsString;
@@ -112,23 +112,27 @@ end;
 procedure TfrCadVistoria.edCodClienteChange(Sender: TObject);
 begin
   inherited;
+  // Carrega nome do cliente na tela
   pCarregaCliente;
 end;
 
 procedure TfrCadVistoria.edCodImovelChange(Sender: TObject);
 begin
   inherited;
+  // Carrega endereço do imóvel na tela
   pCarregaEndImovel;
 end;
 
 procedure TfrCadVistoria.edCodLocatarioChange(Sender: TObject);
 begin
   inherited;
+  // Carrega nome do locatário na tela
   pCarregaLocatario;
 end;
 
 function TfrCadVistoria.fSetFieldName: string;
 begin
+  // Retorna o campo ID da tabela
   Result := 'BDCODVIST';
 end;
 
@@ -136,6 +140,7 @@ procedure TfrCadVistoria.pCarregaCliente;
 begin
   pLimpaFiltros(dmTabelas.tbCliente);
   dmTabelas.tbCliente.IndexFieldNames := 'BDCODCLI';
+  // Verifica se o ID existe e carrega o nome do cliente na label
   if dmTabelas.tbCliente.FindKey([edCodCliente.Codigo]) and Assigned(edCodCliente) then
      lbNomeCliente.Caption := '- ' + dmTabelas.tbCliente.FieldByName('BDRASOCIAL').AsString
   else
@@ -146,6 +151,7 @@ procedure TfrCadVistoria.pCarregaEndImovel;
 begin
   pLimpaFiltros(dmTabelas.tbImovel);
   dmTabelas.tbImovel.IndexFieldNames := 'BDCODIMOVEL';
+  // Verifica se o ID existe e carrega o endereço do imóvel na label
   if dmTabelas.tbImovel.FindKey([edCodImovel.Codigo]) and Assigned(edCodImovel) then
      lbEnderecoImovel.Caption := '- ' + dmTabelas.tbImovel.FieldByName('BDENDERECO').AsString + ', ' +
                                         dmTabelas.tbImovel.FieldByName('BDNUMERO').AsString + ', ' +
@@ -158,6 +164,7 @@ procedure TfrCadVistoria.pCarregaLocatario;
 begin
   pLimpaFiltros(dmTabelas.tbLocatario);
   dmTabelas.tbLocatario.IndexFieldNames := 'BDCDLOCAT';
+  // Verifica se o ID existe e carrega o nome do locatário na label
   if dmTabelas.tbLocatario.FindKey([edCodLocatario.Codigo]) and Assigned(edCodLocatario) then
      lbNomeLocatario.Caption := '- ' + dmTabelas.tbLocatario.FieldByName('BDNOME').AsString
   else
@@ -167,11 +174,13 @@ end;
 procedure TfrCadVistoria.pSetHabilitaButton;
 begin
   inherited;
+  // Habilita o botão de adicionar ambientes
   btAdAmbiente.Enabled := True;
 end;
 
 procedure TfrCadVistoria.SalvarCampos;
 begin
+  // Salvar os campos na tabela
   FTabela.FieldByName('BDCODVIST').AsInteger   := edCodigo.Codigo;
   FTabela.FieldByName('BDDATAVIST').AsDateTime := dtpDataVistoria.Date;
   FTabela.FieldByName('BDTIPOLOC').AsString    := cbTipoLocacao.Items[cbTipoLocacao.ItemIndex];
@@ -190,29 +199,35 @@ end;
 procedure TfrCadVistoria.btAdAmbienteClick(Sender: TObject);
 begin
   inherited;
+  // Abre o form de cadastro de ambientes
   TfrCadAmbiente.Create(self);
 end;
 
 function TfrCadVistoria.setIDEdit: TWinControl;
 begin
+  // Retornar o campo ID
   Result := edCodigo;
 end;
 
 function TfrCadVistoria.setLastEdit: TWinControl;
 begin
+  // Retorna o ultimo campo da tela
   Result := edLeituraAgua;
 end;
 
 function TfrCadVistoria.setTabela: TClientDataSet;
 begin
+  // Retorna a tabela
   Result := dmTabelas.tbVistoria;
 end;
 
+// Function de validação dos campos da tela
 function TfrCadVistoria.ValidaCampos: Boolean;
 var
   wMessage: String;
 begin
-  Result := True;
+  Result := True; // Seta true por padrão
+  // Verifica campo de código de cliente
   if (edCodCliente.Text = EmptyStr) or (edCodCliente.Codigo = 0) then
      begin
        edCodCliente.SetFocus;
@@ -220,6 +235,7 @@ begin
        wMessage := 'Selecione um código do cliente!' + #13;
      end
   else
+  // Verifica campo de código de imóvel
   if (edCodImovel.Text = EmptyStr) or (edCodImovel.Codigo = 0) then
      begin
        edCodImovel.SetFocus;
@@ -227,6 +243,7 @@ begin
        wMessage := 'Selecione um código do imóvel!' + #13;
      end
   else
+  // Verifica campo de código de locatário
   if (edCodLocatario.Text = EmptyStr) or (edCodLocatario.Codigo = 0) then
      begin
        edCodLocatario.SetFocus;
@@ -234,6 +251,7 @@ begin
        wMessage := 'Selecione um código do locatário!' + #13;
      end
   else
+  // Mensagem de sucesso
   if Result then
      wMessage := 'Registro salvo com sucesso!';
   ShowMessage(wMessage);

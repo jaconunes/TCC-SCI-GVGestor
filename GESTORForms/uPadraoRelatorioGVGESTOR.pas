@@ -44,11 +44,12 @@ type
 
   public
     { Public declarations }
-     procedure pGetConsultaSql; virtual; abstract;
-     procedure fCarregaFrxPadrao(wName: String); virtual;
-     procedure pGetConsultaMasterSource; virtual; abstract;
-     procedure setLimpaFiltros(wTabela: TClientDataset); virtual;
-     procedure setResetMasterSource(wTabela: TClientDataset); virtual;
+     procedure pGetConsultaSql; virtual; abstract; // obtem a consulta sql da herança
+     procedure fCarregaFrxPadrao(wName: String); virtual; // carrega arquivo fastreport padrão da herança
+     procedure pGetConsultaMasterSource; virtual; abstract; // obtem a consulta mastersource da herança
+     function fGetNomeArquivo: String; virtual; abstract;  // obtem nome do arquivo da herança
+     procedure setLimpaFiltros(wTabela: TClientDataset); virtual;  // limpa filtros
+     procedure setResetMasterSource(wTabela: TClientDataset); virtual; // reseta mastersource
   end;
 
 var
@@ -58,18 +59,23 @@ implementation
 
 {$R *.dfm}
 
+uses uPrincipal;
+
 { TfrPadraoRelatorioGVGESTOR }
 
 procedure TfrPadraoRelatorioGVGESTOR.btEditarClick(Sender: TObject);
 begin
+  // Carrega as consultas SQL e MasterSource, se houver
   pGetConsultaMasterSource;
   pGetConsultaSql;
+  // Carrega o arquivo do fastreport correspondente e abre edição
   fCarregaFrxPadrao(Screen.ActiveForm.Name);
   frxReportPadrao.DesignReport;
 end;
 
 procedure TfrPadraoRelatorioGVGESTOR.btImprimirClick(Sender: TObject);
 begin
+  // Prepara o relatório para impressão
   frxReportPadrao.PrepareReport;
   frxReportPadrao.PrintOptions.ShowDialog := False;
   if PrintDialog1.Execute then
@@ -78,32 +84,37 @@ end;
 
 procedure TfrPadraoRelatorioGVGESTOR.btVisualizarClick(Sender: TObject);
 begin
+  // Carrega as consultas SQL e MasterSource, se houver
   pGetConsultaMasterSource;
   pGetConsultaSql;
+  // Carrega o arquivo do fastreport correspondente e abre a visualização
   fCarregaFrxPadrao(Screen.ActiveForm.Name);
   frxReportPadrao.ShowReport;
 end;
 
 procedure TfrPadraoRelatorioGVGESTOR.btSalvarComoClick(Sender: TObject);
 begin
-  SaveDialog1.FileName := Caption;
+  // Recebe o nome do arquivo
+  SaveDialog1.FileName := fGetNomeArquivo;
   if SaveDialog1.Execute then
     begin
+      // Se o uruário quer visuaizar o arquivo após a exportação
       if MessageDlg('Deseja abrir o arquivo exportado para visualização?', mtInformation, [mbYes,mbNo], 0) = mrYes then
-      begin
-        frxPDFExport1.OpenAfterExport := True;
-        frxDOCXExport1.OpenAfterExport := True;
-      end
+         begin
+           frxPDFExport1.OpenAfterExport := True;
+           frxDOCXExport1.OpenAfterExport := True;
+         end
       else
-      begin
-        frxPDFExport1.OpenAfterExport := False;
-        frxDOCXExport1.OpenAfterExport := False;
-      end;
+         begin
+           frxPDFExport1.OpenAfterExport := False;
+           frxDOCXExport1.OpenAfterExport := False;
+         end;
+      // Seta nome dos arquivos de acordo com a extensão selecionada
       frxPDFExport1.FileName := StringReplace(SaveDialog1.FileName, ExtractFileExt(SaveDialog1.FileName), EmptyStr, [rfIgnoreCase]) + '.pdf';
       frxDOCXExport1.FileName := StringReplace(SaveDialog1.FileName, ExtractFileExt(SaveDialog1.FileName), EmptyStr, [rfIgnoreCase]) + '.docx';
 
       frxReportPadrao.PrepareReport;
-
+      // Exporta o arquivo
       case SaveDialog1.FilterIndex of
       1: frxReportPadrao.Export(frxPDFExport1);
       2: frxReportPadrao.Export(frxDOCXExport1);
@@ -114,19 +125,27 @@ end;
 procedure TfrPadraoRelatorioGVGESTOR.fCarregaFrxPadrao(
   wName: String);
 begin
+  // Carrega o arquivo padrão do fastreport correspondente
   frxReportPadrao.LoadFromFile('C:\TCC - Gestor de Vistorias\Reports\' + wName + '.fr3');
 end;
 
 procedure TfrPadraoRelatorioGVGESTOR.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+  // Fechar tela após fechar o form (MDI)
   Action := caFree;
 end;
 
 procedure TfrPadraoRelatorioGVGESTOR.FormCreate(Sender: TObject);
 begin
+  // Seta a conexão ao arquivo SQL Padrão
   SQLQueryPadrao.SQLConnection := dmConnection.SQLConnectionGVGESTOR;
   frxDBDataset1.DataSet        := SQLQueryPadrao;
+  // Verifica perfil do usuário logado e habilita botão de edição do relatório
+  if frPrincipal.fGetUsuarioLogado.Perfil = 'Administrador' then
+     begin
+       btEditar.Enabled := True;
+     end;
 end;
 
 procedure TfrPadraoRelatorioGVGESTOR.FormKeyDown(Sender: TObject; var Key: Word;
@@ -135,27 +154,29 @@ begin
   if Key = VK_ESCAPE then// tecla de atalho para fechar a tela
      Close
   else
-  if Key = VK_F4 then
+  if Key = VK_F4 then // Atalho para visualizar
      btVisualizar.Click
   else
-  if Key = VK_F5 then
+  if Key = VK_F5 then // Atalho para salvar como
      btSalvarComo.Click
   else
-  if Key = VK_F6 then
+  if Key = VK_F6 then  // Atalho para imprimir
      btImprimir.Click
   else
-  if Key = VK_F7 then
+  if Key = VK_F7 then // Atalho para editar
      btEditar.Click;
 end;
 
 procedure TfrPadraoRelatorioGVGESTOR.setLimpaFiltros(wTabela: TClientDataset);
 begin
+  // Limpa filtros da tabela
   wTabela.Filtered := False;
   wTabela.Filter := EmptyStr;
 end;
 
 procedure TfrPadraoRelatorioGVGESTOR.setResetMasterSource(wTabela: TClientDataset);
 begin
+  // Reseta MasterSource da tabela
   wTabela.MasterSource := nil;
   wTabela.IndexFieldNames := EmptyStr;
   wTabela.MasterFields := EmptyStr;
@@ -163,6 +184,7 @@ end;
 
 procedure TfrPadraoRelatorioGVGESTOR.FormResize(Sender: TObject);
 begin
+  // Centralizar form filho dentro do pai
   self.Left := (Application.MainForm.ClientWidth div 2) - (self.Width div 2);
   self.Top := (Application.MainForm.ClientHeight div 2) - (self.Height div 2);
   Application.MainForm.Update;

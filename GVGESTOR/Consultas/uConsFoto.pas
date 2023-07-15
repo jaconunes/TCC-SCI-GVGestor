@@ -16,9 +16,8 @@ type
   private
     { Private declarations }
   public
-    function setTabela: TClientDataSet; override;
     { Public declarations }
-
+    function setTabela: TClientDataSet; override;  // seta tabela no BD
   end;
 
 var
@@ -54,6 +53,7 @@ begin
   FTabela.Filter := EmptyStr;
   FTabela.Filtered := False;
   FTabela.IndexFieldNames := 'BDPKCODAMB';
+  // cria form de consulta de fotos com filtro de código de ambiente
   if Owner is TfrCadFoto then
      begin
        FTabela.Filter := 'BDPKCODAMB = ' + IntToStr(TfrCadFoto(Owner).fGetIDAmbiente);
@@ -63,6 +63,7 @@ end;
 
 function TfrConsFoto.setTabela: TClientDataSet;
 begin
+  // seta tabela no BD
   Result := dmTabelas.tbFoto;
 end;
 

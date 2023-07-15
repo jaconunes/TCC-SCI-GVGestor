@@ -32,10 +32,10 @@ type
     FTabelaDetalhe : TClientDataSet;
   public
     { Public declarations }
-    function setTabelaDetalhe      : TClientDataSet; virtual; abstract;
-    function setCamposChaveDetalhe :  String; virtual; abstract;
-    function getPodeExcluirDetalhe : Boolean; virtual;
-    procedure pLimpaFiltros(wTabela : TClientDataset); virtual;
+    function setTabelaDetalhe      : TClientDataSet; virtual; abstract; // Carrega tabela de detalhe
+    function setCamposChaveDetalhe :  String; virtual; abstract; // Carrega campo chave para detalhe
+    function getPodeExcluirDetalhe : Boolean; virtual; // Confirma exclusão no detalhe
+    procedure pLimpaFiltros(wTabela : TClientDataset); virtual;  // Limpa filtros
   end;
 
 var
@@ -52,12 +52,13 @@ uses udmConnectionGVGestor;
 procedure TfrPadraoConsultaDetalheGVGSTOR.btAnteriorDetalheClick(Sender: TObject);
 begin
   inherited;
-  FTabelaDetalhe.Prior;
+  FTabelaDetalhe.Prior; // navega para registro anterior
 end;
 
 procedure TfrPadraoConsultaDetalheGVGSTOR.btExcluirDetalheClick(Sender: TObject);
 begin
   inherited;
+  // Faz exclusão do registro no grid de detalhe
   if getPodeExcluirDetalhe and Assigned(FTabelaDetalhe) and (not FTabelaDetalhe.IsEmpty) then
     begin
       FTabelaDetalhe.Delete;
@@ -69,7 +70,7 @@ end;
 procedure TfrPadraoConsultaDetalheGVGSTOR.btProximoDetalheClick(Sender: TObject);
 begin
   inherited;
-  FTabelaDetalhe.Next;
+  FTabelaDetalhe.Next; // navega para registro proximo
 end;
 
 procedure TfrPadraoConsultaDetalheGVGSTOR.FormCreate(Sender: TObject);
@@ -77,6 +78,7 @@ begin
   inherited;
   FTabelaDetalhe := setTabelaDetalhe;
   pLimpaFiltros(FTabelaDetalhe);
+  // Carrega o grid com o filtro da chave do grid principal
   if Assigned(FTabelaDetalhe) then
     begin
       dsDetalhe.DataSet  := FTabelaDetalhe;
@@ -87,12 +89,14 @@ end;
 
 function TfrPadraoConsultaDetalheGVGSTOR.getPodeExcluirDetalhe: Boolean;
 begin
+  // Confirma exclusão de registro
   Result:= MessageDlg('Deseja excluir esse registro?',mtWarning,[mbYes,mbNo], 0) = mrYes;
 end;
 
 procedure TfrPadraoConsultaDetalheGVGSTOR.pLimpaFiltros(
   wTabela: TClientDataset);
 begin
+  // Limpa filtros
   wTabela.Filter   := EmptyStr;
   wTabela.Filtered := False;
 end;

@@ -9487,9 +9487,9 @@ object frPrincipal: TfrPrincipal
     ExplicitLeft = -1
   end
   object lbUsuarioLogado: TLabel
-    Left = 385
+    Left = 1096
     Top = 22
-    Width = 715
+    Width = 4
     Height = 21
     Alignment = taRightJustify
     Font.Charset = ANSI_CHARSET

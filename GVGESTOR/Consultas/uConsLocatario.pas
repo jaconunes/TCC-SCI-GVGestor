@@ -23,9 +23,8 @@ type
   private
     { Private declarations }
   public
-    function setTabela: TClientDataSet; override;
     { Public declarations }
-
+    function setTabela: TClientDataSet; override; // seta tabela no BD
   end;
 
 var
@@ -42,6 +41,7 @@ uses udmDadosGVGESTOR, uCadLocatario;
 procedure TfrConsLocatario.btEditarClick(Sender: TObject);
 begin
   inherited;
+  // cria form de cadastro de locatários
   TfrCadLocatario.Create(self).Show;
 end;
 
@@ -51,14 +51,14 @@ begin
   FTabela.Filtered := False;
   FTabela.Filter :=  EmptyStr;
 
-  if cbFiltro.ItemIndex = 0 then
+  if cbFiltro.ItemIndex = 0 then // filtro por código
      begin
        FTabela.IndexFieldNames := 'BDCDLOCAT';
        FTabela.Filter := ' BDCDLOCAT = ' + Trim(edCodigoNome.Text);
        FTabela.Filtered := True;
      end
   else
-  if cbFiltro.ItemIndex = 1 then
+  if cbFiltro.ItemIndex = 1 then // filtro por nome
      begin
        FTabela.IndexFieldNames := 'BDNOME';
        FTabela.Filter := ' BDNOME like ''%' + edCodigoNome.Text + '%''';
@@ -69,17 +69,20 @@ end;
 procedure TfrConsLocatario.btLimparClick(Sender: TObject);
 begin
   inherited;
+  // desabilita filtro na tabela
   FTabela.Filtered := False;
 end;
 
 procedure TfrConsLocatario.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
+  // desabilita filtro na tabela
   FTabela.Filtered := False;
 end;
 
 function TfrConsLocatario.setTabela: TClientDataSet;
 begin
+// seta tabela no BD
   Result := dmTabelas.tbLocatario;
 end;
 

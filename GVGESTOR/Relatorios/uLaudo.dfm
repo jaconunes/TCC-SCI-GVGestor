@@ -1,15 +1,20 @@
 inherited frLaudo: TfrLaudo
   Caption = 'Laudo vistoria'
   ClientHeight = 131
-  ClientWidth = 357
-  ExplicitWidth = 373
+  ClientWidth = 354
+  Constraints.MaxHeight = 170
+  Constraints.MaxWidth = 370
+  Constraints.MinHeight = 170
+  Constraints.MinWidth = 370
+  ExplicitWidth = 370
   ExplicitHeight = 170
   PixelsPerInch = 96
   TextHeight = 13
   inherited ToolBar1: TToolBar
-    Width = 357
-    ExplicitWidth = 357
+    Width = 354
+    ExplicitWidth = 354
     inherited btVisualizar: TToolButton
+      Hint = 'Visualizar (F4)'
       Enabled = False
     end
     inherited ToolButton2: TToolButton
@@ -27,17 +32,14 @@ inherited frLaudo: TfrLaudo
     inherited ToolButton4: TToolButton
       Enabled = False
     end
-    inherited btEditar: TToolButton
-      Enabled = False
-    end
     inherited ToolButton5: TToolButton
       Enabled = False
     end
   end
   inherited Panel1: TPanel
-    Width = 357
+    Width = 354
     Height = 98
-    ExplicitWidth = 357
+    ExplicitWidth = 354
     ExplicitHeight = 98
     inherited GroupBox1: TGroupBox
       Left = 8
@@ -78,7 +80,7 @@ inherited frLaudo: TfrLaudo
   inherited ImageList1: TImageList
     Top = 0
     Bitmap = {
-      494C0101050008009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800DC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
