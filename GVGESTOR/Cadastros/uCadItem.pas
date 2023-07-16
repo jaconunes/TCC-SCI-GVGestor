@@ -157,8 +157,7 @@ begin
        mmObs.SetFocus;
        Result := False;
        wMessage := 'Informe a observação do item!' + #13;
-     end
-  else
+     end;
   if wMessage <> EmptyStr then
      ShowMessage(wMessage);
 end;

@@ -270,8 +270,7 @@ begin
        edCodLocatario.SetFocus;
        Result := False;
        wMessage := 'Selecione um código do locatário!' + #13;
-     end
-  else
+     end;
   if wMessage <> EmptyStr then
      ShowMessage(wMessage);
 end;

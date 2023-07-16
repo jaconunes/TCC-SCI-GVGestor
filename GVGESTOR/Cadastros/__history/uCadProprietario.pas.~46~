@@ -136,8 +136,11 @@ procedure TfrCadProprietario.FormCreate(Sender: TObject);
 begin
   inherited;
   if Owner is TfrConsProprietario then
-     edCodProp.Text := TfrConsProprietario(Owner).grConsulta.Columns[0].Field.AsString;
-     edCodProp.SetFocus;
+     begin
+       edCodProp.Text := TfrConsProprietario(Owner).grConsulta.Columns[0].Field.AsString;
+       if getID then
+          CarregaCampos;
+     end;
 end;
 
 function TfrCadProprietario.fSetFieldName: string;
@@ -187,8 +190,10 @@ end;
 function TfrCadProprietario.ValidaCampos: Boolean;
 var
   wMessage: String;
+  wEmail: String;
 begin
   Result := True;
+  wEmail := edEmail.Text;
   if edNome.Text = EmptyStr then  // valida campo nome
      begin
        edNome.SetFocus;
@@ -238,9 +243,15 @@ begin
        wMessage := 'Informe a cidade do proprietário!' + #13;
      end
   else
-  if Result then
-     wMessage := 'Registro salvo com sucesso!';
-  ShowMessage(wMessage);
+  if not wEmail.Contains('@') then
+     begin
+       edEmail.SetFocus;
+       Result := False;
+       wMessage := wMessage + 'Digite um e-mail válido!' + #13;
+     end
+  else
+  if wMessage <> EmptyStr then
+     ShowMessage(wMessage);
 end;
 
 end.

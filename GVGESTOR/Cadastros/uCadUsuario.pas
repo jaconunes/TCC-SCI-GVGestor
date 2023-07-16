@@ -184,28 +184,28 @@ begin
      begin
        edCpfCnpj.SetFocus;
        Result := False;
-       wMessage := wMessage + 'O campo CPF/CNPJ não deve ser vazio!' + #13;
+       wMessage := 'O campo CPF/CNPJ não deve ser vazio!' + #13;
      end
   else
   if edUsuario.Text = EmptyStr then // valida campo usuário
      begin
        edUsuario.SetFocus;
        Result := False;
-       wMessage := wMessage + 'O campo usuário não deve ser vazio!' + #13;
+       wMessage := 'O campo usuário não deve ser vazio!' + #13;
      end
   else
   if edSenha.Text = EmptyStr then  // valida campo senha
      begin
        edSenha.SetFocus;
        Result := False;
-       wMessage := wMessage + 'O campo Senha não deve ser vazio!' + #13;
+       wMessage := 'O campo Senha não deve ser vazio!' + #13;
      end
   else
   if edRepitaSenha.Text = EmptyStr then  // valida campo repitasenha
      begin
        edRepitaSenha.SetFocus;
        Result := False;
-       wMessage := wMessage + 'Repita a senha neste campo!' + #13;
+       wMessage := 'Repita a senha neste campo!' + #13;
      end
   else
   if edSenha.Text <> edRepitaSenha.Text then // valida se senhas correspondem
@@ -214,9 +214,8 @@ begin
        edRepitaSenha.Clear;
        edSenha.SetFocus;
        Result := False;
-       wMessage := wMessage + 'As senhas não correspondem!' + #13;
-     end
-  else
+       wMessage := 'As senhas não correspondem!' + #13;
+     end;
   if wMessage <> EmptyStr then
      ShowMessage(wMessage);
 end;

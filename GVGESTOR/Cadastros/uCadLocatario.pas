@@ -171,13 +171,12 @@ begin
        wMessage := 'Informe o telefone do locatário!' + #13;
      end
   else
-  if not wEmail.Contains('@') then
+  if not wEmail.Contains('@') then // valida se email é valido
      begin
        edEmail.SetFocus;
        Result := False;
-       wMessage := wMessage + 'Digite um e-mail válido!' + #13;
-     end
-  else
+       wMessage := 'Digite um e-mail válido!' + #13;
+     end;
   if wMessage <> EmptyStr then
      ShowMessage(wMessage);
 end;

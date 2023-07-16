@@ -192,8 +192,7 @@ begin
        wMessage := 'Informe a descrição do ambiente!';
        Result := False;
        edNome.SetFocus;
-     end
-  else
+     end;
   if wMessage <> EmptyStr then
      ShowMessage(wMessage);
 end;

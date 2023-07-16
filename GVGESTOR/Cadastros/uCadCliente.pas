@@ -192,30 +192,29 @@ begin
      begin
        edCnpj.SetFocus;
        Result := False;
-       wMessage := wMessage + 'Informe o CNPJ do cliente!' + #13;
+       wMessage := 'Informe o CNPJ do cliente!' + #13;
      end
   else
   if edTelefone.Text = EmptyStr then  // valida campo de telefone
      begin
        edTelefone.SetFocus;
        Result := False;
-       wMessage := wMessage + 'Informe o telefone do cliente!' + #13;
+       wMessage := 'Informe o telefone do cliente!' + #13;
      end
   else
   if edEmail.Text = EmptyStr then   // valida campo de e-mail
      begin
        edEmail.SetFocus;
        Result := False;
-       wMessage := wMessage + 'Informe o e-mail do cliente!' + #13;
+       wMessage := 'Informe o e-mail do cliente!' + #13;
      end
   else
-  if not wEmail.Contains('@') then
+  if not wEmail.Contains('@') then // valida se email é válido
      begin
        edEmail.SetFocus;
        Result := False;
-       wMessage := wMessage + 'Digite um e-mail válido!' + #13;
-     end
-  else
+       wMessage := 'Digite um e-mail válido!' + #13;
+     end;
   if wMessage <> EmptyStr then
      ShowMessage(wMessage);
 end;

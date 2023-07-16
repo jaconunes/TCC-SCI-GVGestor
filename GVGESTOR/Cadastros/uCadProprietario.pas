@@ -243,15 +243,16 @@ begin
        wMessage := 'Informe a cidade do proprietário!' + #13;
      end
   else
-  if not wEmail.Contains('@') then
+  if not wEmail.Contains('@') then // valida se email é válido
      begin
        edEmail.SetFocus;
        Result := False;
-       wMessage := wMessage + 'Digite um e-mail válido!' + #13;
-     end
-  else
-  if wMessage <> EmptyStr then
-     ShowMessage(wMessage);
+       wMessage := 'Digite um e-mail válido!' + #13;
+     end;
+  if not (wMessage = EmptyStr) then
+     begin
+       ShowMessage(wMessage);
+     end;
 end;
 
 end.

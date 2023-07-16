@@ -220,8 +220,7 @@ begin
           begin
             iImagem.Picture.LoadFromFile(opdImagem.FileName);
           end;
-     end
-  else
+     end;
   if wMessage <> EmptyStr then
      ShowMessage(wMessage);
 end;

@@ -232,8 +232,7 @@ begin
        edCidade.SetFocus;
        Result := False;
        wMessage := 'Informe a cidade do imóvel!' + #13;
-     end
-  else
+     end;
   if wMessage <> EmptyStr then
      ShowMessage(wMessage);
 end;

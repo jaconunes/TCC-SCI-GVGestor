@@ -13,14 +13,15 @@ type
     edCodigo: TEdit_Numero_PEDSCI;
     edDescricao: TEdit;
     cbEstado: TComboBox;
-    edObs: TEdit;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
+    mmObs: TMemo;
     procedure btPesquisarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     wCodAmbiente : Integer;
@@ -60,7 +61,7 @@ begin
   // carrega campos na tela
   edDescricao.Text := FTabela.FieldByName('BDDESCRICAO').AsString;
   cbEstado.Text := FTabela.FieldByName('BDESTADO').AsString;
-  edObs.Text := FTabela.FieldByName('BDOBSADC').AsString;
+  mmObs.Lines.Text := FTabela.FieldByName('BDOBSADC').AsString;
 end;
 
 function TfrCadItem.fGetIDAmbiente: Integer;
@@ -75,6 +76,17 @@ begin
   // devolve owner para form owner
   if (Owner is TForm) and (not TForm(Owner).Enabled) then
      TForm(Owner).Enabled := True;
+end;
+
+procedure TfrCadItem.FormCreate(Sender: TObject);
+begin
+  inherited;
+  if Owner is TfrConsItem then
+     begin
+       edCodigo.Text := TfrConsItem(Owner).grConsulta.Columns[0].Field.AsString;
+       if getID then
+          CarregaCampos;
+     end;
 end;
 
 procedure TfrCadItem.FormShow(Sender: TObject);
@@ -106,7 +118,7 @@ begin
   FTabela.FieldByName('BDCODITEM').AsInteger := edCodigo.Codigo;
   FTabela.FieldByName('BDDESCRICAO').AsString := edDescricao.Text;
   FTabela.FieldByName('BDESTADO').AsString := cbEstado.Items[cbEstado.ItemIndex];
-  FTabela.FieldByName('BDOBSADC').AsString := edObs.Text;
+  FTabela.FieldByName('BDOBSADC').AsString := mmObs.Lines.Text;
   FTabela.FieldByName('BDPKCODAMB').AsInteger := wCodAmbiente; //código do ambiente
 end;
 
@@ -119,7 +131,7 @@ end;
 function TfrCadItem.setLastEdit: TWinControl;
 begin
   // retorna ultimo campo da tela
-  Result := edObs;
+  Result := mmObs;
 end;
 
 function TfrCadItem.setTabela: TClientDataSet;
@@ -140,16 +152,15 @@ begin
        wMessage := 'Informe a descrição do item!' + #13;
      end
   else
-  if edObs.Text = EmptyStr then  // valida campo observação
+  if mmObs.Lines.Text = EmptyStr then  // valida campo observação
      begin
-       edObs.SetFocus;
+       mmObs.SetFocus;
        Result := False;
        wMessage := 'Informe a observação do item!' + #13;
      end
   else
-  if Result then
-     wMessage := 'Registro salvo com sucesso!';
-  ShowMessage(wMessage);
+  if wMessage <> EmptyStr then
+     ShowMessage(wMessage);
 end;
 
 end.
