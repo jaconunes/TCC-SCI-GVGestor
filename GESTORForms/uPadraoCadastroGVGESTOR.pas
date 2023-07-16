@@ -156,13 +156,11 @@ var
   wID : Integer;
 begin
   wID := Random(1000); // Obtem número randômico
-  FTabela.First;
-  while not FTabela.Eof do  // Percorre todos os registros da tabela e verifica se já existe
+  FTabela.IndexFieldNames := FFieldName;
+  while FTabela.FindKey([wID]) do  // Percorre todos os registros da tabela e verifica se já existe
      begin
        if FTabela.FieldByName(FFieldName).AsInteger = wID then
           wID := Random(1000); // Se existir gera um novo
-
-       FTabela.Next;
      end;
   Result := wID; // Retorna ID gerado
 end;

@@ -172,8 +172,9 @@ begin
     end;
   if Pos('violation of FOREIGN KEY', E.Message) > 0 then    // Verifica se a mensagem é sobre violação de foreign key
     begin
-      wMsg := 'A tentativa de atualização iria causar falhas de relacionamento, ' +
-            'por existirem dependencias entre as tabelas envolvidas.';
+      wMsg := 'Não foi possível realizar a exclusão.' + #13 +
+              'A tentativa de atualização iria causar falhas de relacionamento, ' +
+              'por existirem dependencias entre as tabelas envolvidas.';
       // Atualiza a tabela
       FTabela.Close;
       FTabela.Open;

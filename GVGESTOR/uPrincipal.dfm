@@ -99,7 +99,7 @@ object frPrincipal: TfrPrincipal
   OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
-  object Image1: TImage
+  object imgPrincipal: TImage
     Left = 0
     Top = 0
     Width = 1118
@@ -9484,7 +9484,8 @@ object frPrincipal: TfrPrincipal
       C5E6AEEBDB7F4F73D5DBB31AF79F0FEF3FE6A15FFDB5FEF4800D7F5F5A6E7FFF
       D9}
     Stretch = True
-    ExplicitLeft = -1
+    ExplicitLeft = 8
+    ExplicitTop = 8
   end
   object lbUsuarioLogado: TLabel
     Left = 1096
@@ -9492,11 +9493,13 @@ object frPrincipal: TfrPrincipal
     Width = 4
     Height = 21
     Alignment = taRightJustify
+    BiDiMode = bdLeftToRight
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
     Font.Height = -16
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
+    ParentBiDiMode = False
     ParentFont = False
   end
   object pnLoginFilho: TPanel
@@ -14796,6 +14799,13 @@ object frPrincipal: TfrPrincipal
         OnClick = Gerar1Click
       end
     end
+    object Configuraes1: TMenuItem
+      Caption = 'Configura'#231#245'es'
+      object PapeldeParede1: TMenuItem
+        Caption = 'Papel de Parede'
+        OnClick = PapeldeParede1Click
+      end
+    end
     object Sobre1: TMenuItem
       Caption = 'Sobre'
       OnClick = Sobre1Click
@@ -14804,5 +14814,9 @@ object frPrincipal: TfrPrincipal
       Caption = 'Sair'
       OnClick = Sair1Click
     end
+  end
+  object opdImagemPrincipal: TOpenPictureDialog
+    Left = 88
+    Top = 216
   end
 end

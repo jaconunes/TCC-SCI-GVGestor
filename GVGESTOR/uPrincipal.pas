@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ExtCtrls,
-  Vcl.Imaging.jpeg, uUsuarioLogado, Vcl.StdCtrls, Vcl.Imaging.pngimage;
+  Vcl.Imaging.jpeg, uUsuarioLogado, Vcl.StdCtrls, Vcl.Imaging.pngimage,
+  Vcl.ExtDlgs;
 
 type
   TfrPrincipal = class(TForm)
@@ -33,7 +34,7 @@ type
     Vistorias2: TMenuItem;
     Locatrios2: TMenuItem;
     Gerar1: TMenuItem;
-    Image1: TImage;
+    imgPrincipal: TImage;
     pnLoginFilho: TPanel;
     Image2: TImage;
     Image3: TImage;
@@ -46,6 +47,9 @@ type
     lbUsuarioLogado: TLabel;
     Sair1: TMenuItem;
     lbCadastrar: TLabel;
+    opdImagemPrincipal: TOpenPictureDialog;
+    Configuraes1: TMenuItem;
+    PapeldeParede1: TMenuItem;
     procedure mUsuarioClick(Sender: TObject);
     procedure Usurios1Click(Sender: TObject);
     procedure Imvel1Click(Sender: TObject);
@@ -72,6 +76,7 @@ type
     procedure Gerar1Click(Sender: TObject);
     procedure lbCadastrarClick(Sender: TObject);
     procedure Sobre1Click(Sender: TObject);
+    procedure PapeldeParede1Click(Sender: TObject);
   private
     { Private declarations }
     FUsuarioLogado : TUsuario;
@@ -206,23 +211,25 @@ end;
 procedure TfrPrincipal.pPerfilAdm;
 begin
   // Carrega configurações do perfil admin
-  Cadastros1.Enabled := True;
-  Consultas1.Enabled := True;
-  Relatrios1.Enabled := True;
-  Laudo1.Enabled     := True;
-  mUsuario.Enabled   := True;
-  Sair1.Enabled      := True;
+  Cadastros1.Enabled   := True;
+  Consultas1.Enabled   := True;
+  Relatrios1.Enabled   := True;
+  Laudo1.Enabled       := True;
+  Configuraes1.Enabled := True;
+  mUsuario.Enabled     := True;
+  Sair1.Enabled        := True;
 end;
 
 procedure TfrPrincipal.pPerfilPadrao;
 begin
   // Carrega configurações do perfil padrão
-  Cadastros1.Enabled := True;
-  Consultas1.Enabled := True;
-  Relatrios1.Enabled := True;
-  Laudo1.Enabled     := True;
-  mUsuario.Enabled   := False;
-  Sair1.Enabled      := True;
+  Cadastros1.Enabled   := True;
+  Consultas1.Enabled   := True;
+  Relatrios1.Enabled   := True;
+  Laudo1.Enabled       := True;
+  Configuraes1.Enabled := True;
+  mUsuario.Enabled     := False;
+  Sair1.Enabled        := True;
 end;
 
 procedure TfrPrincipal.pSemUsuario;
@@ -231,6 +238,7 @@ begin
   Cadastros1.Enabled      := False;
   Consultas1.Enabled      := False;
   Relatrios1.Enabled      := False;
+  Configuraes1.Enabled    := False;
   Laudo1.Enabled          := False;
   Sair1.Enabled           := False;
   lbUsuarioLogado.Caption := EmptyStr;
@@ -268,6 +276,16 @@ begin
   // fecha painel de login e abre cadastro de usuário padrão
   pnLoginFilho.Visible := False;
   TfrCadUsuario.Create(self);
+end;
+
+procedure TfrPrincipal.PapeldeParede1Click(Sender: TObject);
+begin
+  // carrega dialogo para selecionar foto no computador
+  if opdImagemPrincipal.Execute = True then
+     begin
+       imgPrincipal.Picture.LoadFromFile(opdImagemPrincipal.FileName);
+       imgPrincipal.Update;
+     end;
 end;
 
 // ******** Botões do Menu Principal ****************
