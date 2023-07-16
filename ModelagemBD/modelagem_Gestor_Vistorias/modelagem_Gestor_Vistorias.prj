@@ -581,7 +581,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:GradientFillMode>65</a:GradientFillMode>
 <a:CustomPictureType>4</a:CustomPictureType>
 <a:CustomTextMode>1</a:CustomTextMode>
-<a:CustomPictureID>6359FE8F-426E-4C0A-8432-4695D6A094B5</a:CustomPictureID>
+<a:CustomPictureID>60644174-1E2E-4EA6-BA7F-5E618E1B2BA5</a:CustomPictureID>
 <a:GradientEndColor>16777215</a:GradientEndColor>
 <a:KeepAspect>1</a:KeepAspect>
 <c:Object>
@@ -591,6 +591,7 @@ LABL 0 Arial,8,N</a:FontList>
 <o:ModelDocumentSymbol Id="o6">
 <a:ModificationDate>1689092082</a:ModificationDate>
 <a:IconMode>2</a:IconMode>
+<a:EmptyAreaSize>(1200, 1200)</a:EmptyAreaSize>
 <a:Rect>((-1202,-9647), (1197,-7248))</a:Rect>
 <a:LineColor>12034707</a:LineColor>
 <a:FillColor>16437422</a:FillColor>
@@ -602,7 +603,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:GradientFillMode>65</a:GradientFillMode>
 <a:CustomPictureType>4</a:CustomPictureType>
 <a:CustomTextMode>1</a:CustomTextMode>
-<a:CustomPictureID>6359FE8F-426E-4C0A-8432-4695D6A094B5</a:CustomPictureID>
+<a:CustomPictureID>60644174-1E2E-4EA6-BA7F-5E618E1B2BA5</a:CustomPictureID>
 <a:GradientEndColor>16777215</a:GradientEndColor>
 <a:KeepAspect>1</a:KeepAspect>
 <c:Object>
@@ -652,7 +653,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>BD_CONCEITUAL</a:Code>
 <a:CreationDate>1688344100</a:CreationDate>
 <a:Creator>Prog47</a:Creator>
-<a:ModificationDate>1688407192</a:ModificationDate>
+<a:ModificationDate>1689091634</a:ModificationDate>
 <a:Modifier>Prog47</a:Modifier>
 <a:Location>file:///%[PRJ_ROOT_DIR]%/BD_Conceitual.cdm</a:Location>
 <a:Extension>cdm</a:Extension>
