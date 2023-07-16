@@ -163,7 +163,7 @@ begin
   if Key = VK_F6 then  // Atalho para imprimir
      btImprimir.Click
   else
-  if Key = VK_F7 then // Atalho para editar
+  if (Key = VK_F7) and (btEditar.Enabled) then // Atalho para editar
      btEditar.Click;
 end;
 
