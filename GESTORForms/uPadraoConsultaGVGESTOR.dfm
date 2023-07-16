@@ -141,8 +141,11 @@ object frPadraoConsultaGVGSTOR: TfrPadraoConsultaGVGSTOR
     object btEditar: TToolButton
       Left = 82
       Top = 0
+      Hint = 'Editar (F4)'
       Caption = 'btEditar'
       ImageIndex = 2
+      ParentShowHint = False
+      ShowHint = True
     end
     object ToolButton3: TToolButton
       Left = 115
@@ -155,8 +158,11 @@ object frPadraoConsultaGVGSTOR: TfrPadraoConsultaGVGSTOR
     object btExcluir: TToolButton
       Left = 123
       Top = 0
+      Hint = 'Excluir (Del)'
       Caption = 'btExcluir'
       ImageIndex = 3
+      ParentShowHint = False
+      ShowHint = True
       OnClick = btExcluirClick
     end
     object ToolButton4: TToolButton
@@ -187,7 +193,7 @@ object frPadraoConsultaGVGSTOR: TfrPadraoConsultaGVGSTOR
     Left = 640
     Top = 201
     Bitmap = {
-      494C01010700E000C80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010700E000D00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

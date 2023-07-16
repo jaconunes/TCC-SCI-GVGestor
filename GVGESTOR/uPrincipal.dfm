@@ -9492,7 +9492,6 @@ object frPrincipal: TfrPrincipal
     Top = 22
     Width = 4
     Height = 21
-    Alignment = taRightJustify
     BiDiMode = bdLeftToRight
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
@@ -9501,6 +9500,7 @@ object frPrincipal: TfrPrincipal
     Font.Style = [fsBold]
     ParentBiDiMode = False
     ParentFont = False
+    Layout = tlCenter
   end
   object pnLoginFilho: TPanel
     Left = 176
