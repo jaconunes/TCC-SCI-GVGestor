@@ -29,8 +29,9 @@ type
     edBairro: TEdit;
     Label9: TLabel;
     edCidade: TEdit;
+    edEmail: TEdit;
+    Label10: TLabel;
     procedure btPesquisarClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure edCpfCnpjExit(Sender: TObject);
     procedure cbTipoPessoaChange(Sender: TObject);
     procedure edTelefoneExit(Sender: TObject);
@@ -38,17 +39,19 @@ type
     procedure edLogradouroKeyPress(Sender: TObject; var Key: Char);
     procedure edBairroKeyPress(Sender: TObject; var Key: Char);
     procedure edCidadeKeyPress(Sender: TObject; var Key: Char);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    function setTabela: TClientDataSet; override;
-    function setIDEdit: TWinControl; override;
-    function setLastEdit: TWinControl; override;
-    procedure CarregaCampos; override;
-    procedure SalvarCampos; override;
-    function ValidaCampos: Boolean; override;
-    function fSetFieldName: string; override;
+    function setTabela: TClientDataSet; override; // deve informar qual tabela será usada
+    function setIDEdit: TWinControl; override;  // informar qual o campo chave da tela
+    function setLastEdit: TWinControl; override; // informar o último campo da tela para salvar automaticamente
+    procedure CarregaCampos; override; // carregar os campos da tabela para os camnpos da tela
+    procedure SalvarCampos; override; // salvar os valores dos campos da tela para os campos da tabela
+    function ValidaCampos: Boolean; override; // Reescrito nas heranças para a validar os campos
+    function fSetFieldName: string; override; //obter o fieldname da PK da tabela
+    procedure pSetHabilitaButton; override; // Habilita botões nas heranças
 
   end;
 
@@ -64,25 +67,28 @@ uses udmDadosGVGESTOR, uConsProprietario;
 procedure TfrCadProprietario.btPesquisarClick(Sender: TObject);
 begin
   inherited;
+  // cria form de consulta de proprietários
   TfrConsProprietario.Create(edCodProp);
 end;
 
 procedure TfrCadProprietario.CarregaCampos;
 begin
-  inherited;
-  edNome.Text := FTabela.FieldByName('BDNOME').AsString;
+  // carrega campos na tela
+  edNome.Text       := FTabela.FieldByName('BDNOME').AsString;
   cbTipoPessoa.Text := FTabela.FieldByName('BDTIPOPESSOA').AsString;
-  edCpfCnpj.Text  := FTabela.FieldByName('BDCPFCNPJ').AsString;
-  edTelefone.Text := FTabela.FieldByName('BDTELEFONE').AsString;
-  edLogradouro.Text  := FTabela.FieldByName('BDENDERECO').AsString;
-  edNumero.Codigo  := FTabela.FieldByName('BDNUMERO').AsInteger;
-  edBairro.Text := FTabela.FieldByName('BDBAIRRO').AsString;
-  edCidade.Text := FTabela.FieldByName('BDCIDADE').AsString;
+  edCpfCnpj.Text    := FTabela.FieldByName('BDCPFCNPJ').AsString;
+  edTelefone.Text   := FTabela.FieldByName('BDTELEFONE').AsString;
+  edEmail.Text      := FTabela.FieldByName('BDEMAIL').AsString;
+  edLogradouro.Text := FTabela.FieldByName('BDENDERECO').AsString;
+  edNumero.Codigo   := FTabela.FieldByName('BDNUMERO').AsInteger;
+  edBairro.Text     := FTabela.FieldByName('BDBAIRRO').AsString;
+  edCidade.Text     := FTabela.FieldByName('BDCIDADE').AsString;
 end;
 
 procedure TfrCadProprietario.cbTipoPessoaChange(Sender: TObject);
 begin
   inherited;
+  // seta o length do campo de CPF/CNPJ
   if cbTipoPessoa.ItemIndex = 0 then
      edCpfCnpj.MaxLength := 11
   else
@@ -92,38 +98,38 @@ end;
 procedure TfrCadProprietario.edBairroKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo bairro
 end;
 
 procedure TfrCadProprietario.edCidadeKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo cidade
 end;
 
 procedure TfrCadProprietario.edCpfCnpjExit(Sender: TObject);
 begin
   inherited;
-  edCpfCnpj.Text := fAplicaMascara(edCpfCnpj.Text);
+  edCpfCnpj.Text := fAplicaMascara(edCpfCnpj.Text); // aplica mascara de CNPJ
 end;
 
 procedure TfrCadProprietario.edLogradouroKeyPress(Sender: TObject;
   var Key: Char);
 begin
   inherited;
-  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo logradouro
 end;
 
 procedure TfrCadProprietario.edNomeKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  AnsiUpperCase(Key)[1]; //Letras maiúsculas
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo nome
 end;
 
 procedure TfrCadProprietario.edTelefoneExit(Sender: TObject);
 begin
   inherited;
-  edTelefone.Text := fAplicaMascaraTelefone(edTelefone.Text);
+  edTelefone.Text := fAplicaMascaraTelefone(edTelefone.Text); // aplica mascara de telefone
 end;
 
 procedure TfrCadProprietario.FormCreate(Sender: TObject);
@@ -131,41 +137,53 @@ begin
   inherited;
   if Owner is TfrConsProprietario then
      begin
-       edCodProp.Text := IntToStr(TfrConsProprietario(Owner).grConsulta.Columns[0].Field.AsInteger);
+       edCodProp.Text := TfrConsProprietario(Owner).grConsulta.Columns[0].Field.AsString;
+       if getID then
+          CarregaCampos;
      end;
 end;
 
 function TfrCadProprietario.fSetFieldName: string;
 begin
+  // retorna campo ID no BD
   Result := 'BDCDPROPR';
+end;
+
+procedure TfrCadProprietario.pSetHabilitaButton;
+begin
+  inherited;
 end;
 
 procedure TfrCadProprietario.SalvarCampos;
 begin
-  inherited;
-  FTabela.FieldByName('BDCDPROPR').AsInteger := edCodProp.Codigo;
-  FTabela.FieldByName('BDNOME').AsString := edNome.Text;
+  // salva campos no BD
+  FTabela.FieldByName('BDCDPROPR').AsInteger   := edCodProp.Codigo;
+  FTabela.FieldByName('BDNOME').AsString       := edNome.Text;
   FTabela.FieldByName('BDTIPOPESSOA').AsString := cbTipoPessoa.Items[cbTipoPessoa.ItemIndex];
-  FTabela.FieldByName('BDCPFCNPJ').AsString := fCharacterRemove(edCpfCnpj.Text);
-  FTabela.FieldByName('BDTELEFONE').AsString := fCharacterRemove(edTelefone.Text);
-  FTabela.FieldByName('BDENDERECO').AsString := edLogradouro.Text;
-  FTabela.FieldByName('BDNUMERO').AsInteger := edNumero.Codigo;
-  FTabela.FieldByName('BDBAIRRO').AsString := edBairro.Text;
-  FTabela.FieldByName('BDCIDADE').AsString := edCidade.Text;
+  FTabela.FieldByName('BDCPFCNPJ').AsString    := fCharacterRemove(edCpfCnpj.Text);
+  FTabela.FieldByName('BDTELEFONE').AsString   := fCharacterRemove(edTelefone.Text);
+  FTabela.FieldByName('BDEMAIL').AsString      := edEmail.Text;
+  FTabela.FieldByName('BDENDERECO').AsString   := edLogradouro.Text;
+  FTabela.FieldByName('BDNUMERO').AsInteger    := edNumero.Codigo;
+  FTabela.FieldByName('BDBAIRRO').AsString     := edBairro.Text;
+  FTabela.FieldByName('BDCIDADE').AsString     := edCidade.Text;
 end;
 
 function TfrCadProprietario.setIDEdit: TWinControl;
 begin
+  // retorna campo ID da tela
   Result := edCodProp;
 end;
 
 function TfrCadProprietario.setLastEdit: TWinControl;
 begin
+  // retorna ultimo campo da tela
   Result := edCidade;
 end;
 
 function TfrCadProprietario.setTabela: TClientDataSet;
 begin
+  // retoena tabela no BD
   Result := dmTabelas.tbProprietario;
 end;
 
@@ -174,58 +192,57 @@ var
   wMessage: String;
 begin
   Result := True;
-  if edNome.Text = EmptyStr then
+  if edNome.Text = EmptyStr then  // valida campo nome
      begin
        edNome.SetFocus;
        Result := False;
        wMessage := 'Informe o nome do proprietário!' + #13;
      end
   else
-  if edCpfCnpj.Text = EmptyStr then
+  if edCpfCnpj.Text = EmptyStr then  // valida campo CNPJ
      begin
        edCpfCnpj.SetFocus;
        Result := False;
        wMessage := 'Informe o CPF/CNPJ do proprietário!' + #13;
      end
   else
-  if edTelefone.Text = EmptyStr then
+  if edTelefone.Text = EmptyStr then  // valida campo telefone
      begin
        edTelefone.SetFocus;
        Result := False;
        wMessage := 'Informe o telefone do proprietário!' + #13;
      end
   else
-  if edLogradouro.Text = EmptyStr then
+  if edLogradouro.Text = EmptyStr then  // valida campo logradouro
      begin
        edLogradouro.SetFocus;
        Result := False;
        wMessage := 'Informe o logradouro do proprietário!' + #13;
      end
   else
-  if edNumero.Text = EmptyStr then
+  if edNumero.Text = EmptyStr then // valida campo numero
      begin
        edNumero.SetFocus;
        Result := False;
        wMessage := 'Informe o número do logradouro do proprietário!' + #13;
      end
   else
-  if edBairro.Text = EmptyStr then
+  if edBairro.Text = EmptyStr then // valida campo bairro
      begin
        edBairro.SetFocus;
        Result := False;
        wMessage := 'Informe o bairro do proprietário!' + #13;
      end
   else
-  if edCidade.Text = EmptyStr then
+  if edCidade.Text = EmptyStr then  // valido campo cidade
      begin
        edCidade.SetFocus;
        Result := False;
        wMessage := 'Informe a cidade do proprietário!' + #13;
      end
   else
-  if Result then
-     wMessage := 'Registro salvo com sucesso!';
-  ShowMessage(wMessage);
+  if wMessage <> EmptyStr then
+     ShowMessage(wMessage);
 end;
 
 end.

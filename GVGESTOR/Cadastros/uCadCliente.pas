@@ -177,8 +177,10 @@ end;
 function TfrCadCliente.ValidaCampos: Boolean;
 var
   wMessage: String;
+  wEmail: String;
 begin
   Result := True;
+  wEmail := edEmail.Text;
   if edRazaoSocial.Text = EmptyStr then // valida campo de razão social
      begin
        edRazaoSocial.SetFocus;
@@ -190,21 +192,28 @@ begin
      begin
        edCnpj.SetFocus;
        Result := False;
-       wMessage := 'Informe o CNPJ do cliente!' + #13;
+       wMessage := wMessage + 'Informe o CNPJ do cliente!' + #13;
      end
   else
   if edTelefone.Text = EmptyStr then  // valida campo de telefone
      begin
        edTelefone.SetFocus;
        Result := False;
-       wMessage := 'Informe o telefone do cliente!' + #13;
+       wMessage := wMessage + 'Informe o telefone do cliente!' + #13;
      end
   else
   if edEmail.Text = EmptyStr then   // valida campo de e-mail
      begin
        edEmail.SetFocus;
        Result := False;
-       wMessage := 'Informe o e-mail do cliente!' + #13;
+       wMessage := wMessage + 'Informe o e-mail do cliente!' + #13;
+     end
+  else
+  if not wEmail.Contains('@') then
+     begin
+       edEmail.SetFocus;
+       Result := False;
+       wMessage := wMessage + 'Digite um e-mail válido!' + #13;
      end
   else
   if wMessage <> EmptyStr then

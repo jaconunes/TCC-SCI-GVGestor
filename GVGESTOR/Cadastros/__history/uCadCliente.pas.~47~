@@ -30,24 +30,25 @@ type
     edBairro: TEdit;
     Label9: TLabel;
     procedure btPesquisarClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure edTelefoneExit(Sender: TObject);
     procedure edCnpjExit(Sender: TObject);
     procedure edRazaoSocialKeyPress(Sender: TObject; var Key: Char);
     procedure edLogradouroKeyPress(Sender: TObject; var Key: Char);
     procedure edBairroKeyPress(Sender: TObject; var Key: Char);
     procedure edCidadeKeyPress(Sender: TObject; var Key: Char);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    function setTabela: TClientDataSet; override;
-    function setIDEdit: TWinControl; override;
-    function setLastEdit: TWinControl; override;
-    procedure CarregaCampos; override;
-    procedure SalvarCampos; override;
-    function ValidaCampos: Boolean; override;
+    function setTabela: TClientDataSet; override; // deve informar qual tabela será usada
+    function setIDEdit: TWinControl; override;  // informar qual o campo chave da tela
+    function setLastEdit: TWinControl; override; // informar o último campo da tela para salvar automaticamente
+    procedure CarregaCampos; override; // carregar os campos da tabela para os camnpos da tela
+    procedure SalvarCampos; override;  // salvar os valores dos campos da tela para os campos da tabela
+    function ValidaCampos: Boolean; override; // Reescrito nas heranças para a validar os campos
     function fSetFieldName: string; override;
+    procedure pSetHabilitaButton; override;  //obter o fieldname da PK da tabela
 
   end;
 
@@ -65,12 +66,14 @@ uses udmDadosGVGESTOR, uConsCliente;
 procedure TfrCadCliente.btPesquisarClick(Sender: TObject);
 begin
   inherited;
+  // cria form de consulta de clientes
   TfrConsCliente.Create(edCodigo);
 end;
 
 procedure TfrCadCliente.CarregaCampos;
 begin
   inherited;
+  // carrega campos na tela
   edRazaoSocial.Text := FTabela.FieldByName('BDRASOCIAL').AsString;
   edCnpj.Text        := FTabela.FieldByName('BDCNPJ').AsString;
   edLogradouro.Text  := FTabela.FieldByName('BDENDERECO').AsString;
@@ -84,37 +87,37 @@ end;
 procedure TfrCadCliente.edBairroKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo bairro
 end;
 
 procedure TfrCadCliente.edCidadeKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas  no campo cidade
 end;
 
 procedure TfrCadCliente.edCnpjExit(Sender: TObject);
 begin
   inherited;
-  edCnpj.Text := fAplicaMascara(edCnpj.Text);
+  edCnpj.Text := fAplicaMascara(edCnpj.Text); // aplica mascara CNPJ
 end;
 
 procedure TfrCadCliente.edLogradouroKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  AnsiUpperCase(Key)[1]; //Letras maiúsculas
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo logradouro
 end;
 
 procedure TfrCadCliente.edRazaoSocialKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  AnsiUpperCase(Key)[1]; //Letras maiúsculas
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo razão social
 end;
 
 procedure TfrCadCliente.edTelefoneExit(Sender: TObject);
 begin
   inherited;
-  edTelefone.Text := fAplicaMascaraTelefone(edTelefone.Text);
+  edTelefone.Text := fAplicaMascaraTelefone(edTelefone.Text); // aplica mascara telefone
 end;
 
 procedure TfrCadCliente.FormCreate(Sender: TObject);
@@ -122,17 +125,26 @@ begin
   inherited;
   if Owner is TfrConsCliente then
      begin
-       edCodigo.Text := IntToStr(TfrConsCliente(Owner).grConsulta.Columns[0].Field.AsInteger);
+       edCodigo.Text := TfrConsCliente(Owner).grConsulta.Columns[0].Field.AsString;
+       if getID then
+          CarregaCampos;
      end;
 end;
 
 function TfrCadCliente.fSetFieldName: string;
 begin
+  // Retorna campo ID na tabela
   Result := 'BDCODCLI';
+end;
+
+procedure TfrCadCliente.pSetHabilitaButton;
+begin
+  inherited;
 end;
 
 procedure TfrCadCliente.SalvarCampos;
 begin
+  // salva campos na tabela
   FTabela.FieldByName('BDCODCLI').AsInteger  := edCodigo.Codigo;
   FTabela.FieldByName('BDRASOCIAL').AsString := edRazaoSocial.Text;
   FTabela.FieldByName('BDCNPJ').AsString     := fCharacterRemove(edCnpj.Text);
@@ -146,16 +158,19 @@ end;
 
 function TfrCadCliente.setIDEdit: TWinControl;
 begin
+  // retorna campo ID da tela
   Result := edCodigo;
 end;
 
 function TfrCadCliente.setLastEdit: TWinControl;
 begin
+  // retorna ultimo campo da tela
   Result := edCidade;
 end;
 
 function TfrCadCliente.setTabela: TClientDataSet;
 begin
+  // seta tabela do BD
   Result := dmTabelas.tbCliente;
 end;
 
@@ -164,37 +179,36 @@ var
   wMessage: String;
 begin
   Result := True;
-  if edRazaoSocial.Text = EmptyStr then
+  if edRazaoSocial.Text = EmptyStr then // valida campo de razão social
      begin
        edRazaoSocial.SetFocus;
        Result := False;
        wMessage := 'Informe a razão social do cliente!' + #13;
      end
   else
-  if edCnpj.Text = EmptyStr then
+  if edCnpj.Text = EmptyStr then  // valida campo de CNPJ
      begin
        edCnpj.SetFocus;
        Result := False;
        wMessage := 'Informe o CNPJ do cliente!' + #13;
      end
   else
-  if edTelefone.Text = EmptyStr then
+  if edTelefone.Text = EmptyStr then  // valida campo de telefone
      begin
        edTelefone.SetFocus;
        Result := False;
        wMessage := 'Informe o telefone do cliente!' + #13;
      end
   else
-  if edEmail.Text = EmptyStr then
+  if edEmail.Text = EmptyStr then   // valida campo de e-mail
      begin
        edEmail.SetFocus;
        Result := False;
        wMessage := 'Informe o e-mail do cliente!' + #13;
      end
   else
-  if Result then
-     wMessage := 'Registro salvo com sucesso!';
-  ShowMessage(wMessage);
+  if wMessage <> EmptyStr then
+     ShowMessage(wMessage);
 end;
 
 end.

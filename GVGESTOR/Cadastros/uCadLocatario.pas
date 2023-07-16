@@ -139,8 +139,10 @@ end;
 function TfrCadLocatario.ValidaCampos: Boolean;
 var
   wMessage: String;
+  wEmail: String;
 begin
   Result := True;
+  wEmail := edEmail.Text;
   if edNome.Text = EmptyStr then // valida campo nome
      begin
        edNome.SetFocus;
@@ -167,6 +169,13 @@ begin
        edTelefone.SetFocus;
        Result := False;
        wMessage := 'Informe o telefone do locatário!' + #13;
+     end
+  else
+  if not wEmail.Contains('@') then
+     begin
+       edEmail.SetFocus;
+       Result := False;
+       wMessage := wMessage + 'Digite um e-mail válido!' + #13;
      end
   else
   if wMessage <> EmptyStr then
