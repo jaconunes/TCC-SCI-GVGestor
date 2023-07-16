@@ -91,7 +91,11 @@ procedure TfrCadFoto.FormCreate(Sender: TObject);
 begin
   inherited;
   if Owner is TfrConsFoto then
-     edCodigo.Text := TfrConsFoto(Owner).grConsulta.Columns[0].Field.AsString;
+     begin
+       edCodigo.Text := TfrConsFoto(Owner).grConsulta.Columns[0].Field.AsString;
+       if getID then
+          CarregaCampos;
+     end;
 end;
 
 procedure TfrCadFoto.FormKeyDown(Sender: TObject; var Key: Word;

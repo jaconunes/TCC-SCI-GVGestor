@@ -100,7 +100,11 @@ begin
      end
   else
   if Owner is TfrConsUsuario then
-     edCodigo.Text := TfrConsUsuario(Owner).grConsulta.Columns[0].Field.AsString;
+     begin
+       edCodigo.Text := TfrConsUsuario(Owner).grConsulta.Columns[0].Field.AsString;
+       if getID then
+          CarregaCampos;
+     end;
 end;
 
 function TfrCadUsuario.fSetFieldName: string;

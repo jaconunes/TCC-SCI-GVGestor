@@ -82,7 +82,11 @@ procedure TfrCadItem.FormCreate(Sender: TObject);
 begin
   inherited;
   if Owner is TfrConsItem then
-     edCodigo.Text := TfrConsItem(Owner).grConsulta.Columns[0].Field.AsString;
+     begin
+       edCodigo.Text := TfrConsItem(Owner).grConsulta.Columns[0].Field.AsString;
+       if getID then
+          CarregaCampos;
+     end;
 end;
 
 procedure TfrCadItem.FormShow(Sender: TObject);

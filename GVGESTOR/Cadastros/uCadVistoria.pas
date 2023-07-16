@@ -136,7 +136,11 @@ procedure TfrCadVistoria.FormCreate(Sender: TObject);
 begin
   inherited;
   if Owner is TfrConsVistoria then
-     edCodigo.Text := TfrConsVistoria(Owner).grConsulta.Columns[0].Field.AsString;
+     begin
+       edCodigo.Text := TfrConsVistoria(Owner).grConsulta.Columns[0].Field.AsString;
+       if getID then
+          CarregaCampos;
+     end;
 end;
 
 procedure TfrCadVistoria.FormKeyDown(Sender: TObject; var Key: Word;

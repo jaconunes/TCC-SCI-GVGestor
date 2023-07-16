@@ -113,7 +113,6 @@ begin
                            TCustomEdit(FIDEdit).Text := IntToStr(fGerarID);//Gera ID para novo registro
                            FIDEdit.SetFocus;
                          end;
-
                     end;
                end
             else

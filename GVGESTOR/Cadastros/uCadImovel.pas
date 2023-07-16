@@ -124,7 +124,11 @@ procedure TfrCadImovel.FormCreate(Sender: TObject);
 begin
   inherited;
   if Owner is TfrConsImovel then
-     edCodigo.Text := TfrConsImovel(Owner).grConsulta.Columns[0].Field.AsString;
+     begin
+       edCodigo.Text := TfrConsImovel(Owner).grConsulta.Columns[0].Field.AsString;
+       if getID then
+          CarregaCampos;
+     end;
 end;
 
 function TfrCadImovel.fSetFieldName: string;

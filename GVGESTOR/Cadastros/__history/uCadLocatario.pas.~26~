@@ -92,8 +92,7 @@ begin
   if Owner is TfrConsLocatario then
      begin
        edCodigo.Text := TfrConsLocatario(Owner).grConsulta.Columns[0].Field.AsString;
-       if getID then
-          CarregaCampos;
+       edCodigo.OnChange := CarregaCampos;
      end;
 end;
 

@@ -90,11 +90,7 @@ procedure TfrCadLocatario.FormCreate(Sender: TObject);
 begin
   inherited;
   if Owner is TfrConsLocatario then
-     begin
-       edCodigo.Text := TfrConsLocatario(Owner).grConsulta.Columns[0].Field.AsString;
-       if getID then
-          CarregaCampos;
-     end;
+     edCodigo.Text := TfrConsLocatario(Owner).grConsulta.Columns[0].Field.AsString;
 end;
 
 function TfrCadLocatario.fSetFieldName: string;

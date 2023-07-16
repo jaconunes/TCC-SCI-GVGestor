@@ -97,7 +97,11 @@ procedure TfrCadAmbiente.FormCreate(Sender: TObject);
 begin
   inherited;
   if Owner is TfrConsAmbiente then
-     edCodigo.Text := TfrConsAmbiente(Owner).grConsulta.Columns[0].Field.AsString;
+     begin
+       edCodigo.Text := TfrConsAmbiente(Owner).grConsulta.Columns[0].Field.AsString;
+       if getID then
+          CarregaCampos;
+     end;
 end;
 
 procedure TfrCadAmbiente.FormKeyDown(Sender: TObject; var Key: Word;

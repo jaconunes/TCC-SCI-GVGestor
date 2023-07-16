@@ -124,7 +124,11 @@ procedure TfrCadCliente.FormCreate(Sender: TObject);
 begin
   inherited;
   if Owner is TfrConsCliente then
-     edCodigo.Text := TfrConsCliente(Owner).grConsulta.Columns[0].Field.AsString;
+     begin
+       edCodigo.Text := TfrConsCliente(Owner).grConsulta.Columns[0].Field.AsString;
+       if getID then
+          CarregaCampos;
+     end;
 end;
 
 function TfrCadCliente.fSetFieldName: string;
