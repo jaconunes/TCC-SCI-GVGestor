@@ -158,7 +158,8 @@ begin
        wUrlImagem := 'C:\TCC - Gestor de Vistorias\GVGESTOR\images\Vist_' +
                      IntToStr(TfrCadAmbiente(Owner).CodVistoria) + '_Amb_' +
                      TfrCadAmbiente(Owner).edCodigo.Text + '_Foto_' +
-                     edCodigo.Text + '.bmp';
+                     edCodigo.Text + '_' + FormatDateTime('dd-mm-yyyy', Now) + '-' +
+                     FormatDateTime('HH-MM', Now) + '.bmp';
        wJpg := TJPEGImage.Create;
        wJpg.LoadFromFile(Sender.FileName);
        // Converte o Jpeg em Bmp e retora o Bmp

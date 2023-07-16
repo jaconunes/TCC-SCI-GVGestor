@@ -95,7 +95,7 @@ end;
 procedure TfrPadraoRelatorioGVGESTOR.btSalvarComoClick(Sender: TObject);
 begin
   // Recebe o nome do arquivo
-  SaveDialog1.FileName := fGetNomeArquivo;
+  SaveDialog1.FileName := fGetNomeArquivo + '_' + FormatDateTime('dd-mm-yyyy', Now) + '-' + FormatDateTime('HH-MM', Now);
   if SaveDialog1.Execute then
     begin
       // Se o uruário quer visuaizar o arquivo após a exportação
