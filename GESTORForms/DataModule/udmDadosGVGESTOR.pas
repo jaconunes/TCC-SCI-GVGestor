@@ -180,7 +180,7 @@ begin
       FTabela.Open;
       FTabela.Refresh;
      end;
-  ShowMessage(E.Message + #13 + 'Descrição do Erro: ' + #13 + wMsg);
+  ShowMessage('Descrição do Erro: ' + #13 + wMsg);
 end;
 
 procedure TdmTabelas.setIndexDefs(Tabela: TClientDataSet; fieldIndex: String);

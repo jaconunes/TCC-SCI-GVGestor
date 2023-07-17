@@ -38,7 +38,6 @@ var
 begin
   wUrlImagem := 'C:\TCC - Gestor de Vistorias\GVGESTOR\images\bg\bg-principal.jpg'; // define local da imagem
   DeleteFile(wUrlImagem); // deleta arquivo existente
-  //if opdImagemPrincipal.Execute = True then
   CopyFile(PChar(opdImagemPrincipal.FileName), PChar(wUrlImagem), True); // copia novo arquivo para o local
   frPrincipal.imgPrincipal.Picture.Graphic := nil;
   frPrincipal.imgPrincipal.Picture.LoadFromFile(wUrlImagem); // carrega nova imagem

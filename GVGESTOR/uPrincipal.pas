@@ -139,26 +139,6 @@ begin
   pCentralizarPanel(self, pnLoginFilho);
 end;
 
-function TfrPrincipal.fUsuario_Logado(wUsuario, wSenha: String): boolean;
-begin
-  Result := False; // Retrona false por padrão
-  dmTabelas.tbUsuario.IndexFieldNames := 'BDUSUARIO';
-  // Verifica se o usuário informado existe
-  if dmTabelas.tbUsuario.FindKey([wUsuario]) then
-     begin
-       // se o usuário existe, verifica se a senha informada é igual a do usuário encontrado
-       if wSenha = dmTabelas.tbUsuario.FieldByName('BDSENHA').AsString then
-          begin
-            Result := True;
-            // Cria um objeto com os dados do usuário encontrado
-            FUsuarioLogado := TUsuario.Create;
-            FUsuarioLogado.ID := dmTabelas.tbUsuario.FieldByName('BDCODIGO').AsInteger;
-            FUsuarioLogado.Nome := dmTabelas.tbUsuario.FieldByName('BDNOME').AsString;
-            FUsuarioLogado.Perfil := dmTabelas.tbUsuario.FieldByName('BDPERFIL').AsString;
-          end;
-     end;
-end;
-
 function TfrPrincipal.fGetUsuarioLogado: TUsuario;
 begin
   // Retorna o objeto de usuário criado
@@ -197,6 +177,26 @@ begin
        lbAlertaLogin.Caption := 'O "Usuário" e "Senha" não conferem.' + #13 +
                                 'Tente novamente.';
        edUsuario.SetFocus;
+     end;
+end;
+
+function TfrPrincipal.fUsuario_Logado(wUsuario, wSenha: String): boolean;
+begin
+  Result := False; // Retrona false por padrão
+  dmTabelas.tbUsuario.IndexFieldNames := 'BDUSUARIO';
+  // Verifica se o usuário informado existe
+  if dmTabelas.tbUsuario.FindKey([wUsuario]) then
+     begin
+       // se o usuário existe, verifica se a senha informada é igual a do usuário encontrado
+       if wSenha = dmTabelas.tbUsuario.FieldByName('BDSENHA').AsString then
+          begin
+            Result := True;
+            // Cria um objeto com os dados do usuário encontrado
+            FUsuarioLogado := TUsuario.Create;
+            FUsuarioLogado.ID := dmTabelas.tbUsuario.FieldByName('BDCODIGO').AsInteger;
+            FUsuarioLogado.Nome := dmTabelas.tbUsuario.FieldByName('BDNOME').AsString;
+            FUsuarioLogado.Perfil := dmTabelas.tbUsuario.FieldByName('BDPERFIL').AsString;
+          end;
      end;
 end;
 

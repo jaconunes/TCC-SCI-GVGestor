@@ -212,9 +212,9 @@ begin
   FTabela.FieldByName('BDNMEDAGUA').AsString   := edNumMedAgua.Text;
   FTabela.FieldByName('BDLEITAGUA').AsString   := edLeituraAgua.Text;
   FTabela.FieldByName('BDPKCODUSU').AsInteger  := frPrincipal.fGetUsuarioLogado.ID; // Código Usuário Logado
-  FTabela.FieldByName('BDPKCODCLT').AsInteger := edCodCliente.Codigo;
+  FTabela.FieldByName('BDPKCODCLT').AsInteger  := edCodCliente.Codigo;
   FTabela.FieldByName('BDPKCODIMOV').AsInteger := edCodImovel.Codigo;
-  FTabela.FieldByName('BDPKCODLOCAT').AsInteger := edCodLocatario.Codigo;
+  FTabela.FieldByName('BDPKCODLOCAT').AsInteger:= edCodLocatario.Codigo;
 end;
 
 procedure TfrCadVistoria.btAdAmbienteClick(Sender: TObject);
