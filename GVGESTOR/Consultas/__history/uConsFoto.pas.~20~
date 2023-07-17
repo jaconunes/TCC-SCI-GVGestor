@@ -1,0 +1,96 @@
+unit uConsFoto;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoConsultaGVGESTOR, Data.DB,
+  System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls,
+  Vcl.ToolWin, Datasnap.DBClient;
+
+type
+  TfrConsFoto = class(TfrPadraoConsultaGVGSTOR)
+    dsTabelaPai: TDataSource;
+    procedure FormShow(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btEditarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function setTabela: TClientDataSet; override;  // seta tabela no BD
+  end;
+
+var
+  frConsFoto: TfrConsFoto;
+
+implementation
+
+{$R *.dfm}
+
+uses udmDadosGVGESTOR, uCadAmbiente, uCadFoto;
+
+{ TfrConsFoto }
+
+procedure TfrConsFoto.btEditarClick(Sender: TObject);
+begin
+  inherited;
+  TfrCadFoto.Create(self).Show;
+end;
+
+procedure TfrConsFoto.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  if (Owner is TForm) and (not TForm(Owner).Enabled) then
+     TForm(Owner).Enabled := True;
+end;
+
+procedure TfrConsFoto.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  //inherited;
+  if Key = VK_RETURN then// tecla de atalho para retornar o valor para o campo do cadastro
+     begin
+       if (Owner is TfrCadFoto) and (grConsulta.Columns.Count > 0) then
+          begin
+            // por padrão definimos que o primairo campo da grid é a chave da tabela
+            TfrCadFoto(Owner).edCodigo.Text := grConsulta.Columns[0].Field.AsString;
+            TfrCadFoto(Owner).edCodigo.SetFocus;
+            Close;
+          end;
+     end
+  else
+  if (Key = VK_DELETE) and (btExcluir.Enabled) then// tecla de atalho para excluir
+     btExcluir.Click
+  else
+  if (Key = VK_F4) and (btEditar.Enabled) then
+     btEditar.Click
+  else
+  if Key = VK_ESCAPE then// tecla de atalho para fechar a tela
+     Close;
+end;
+
+procedure TfrConsFoto.FormShow(Sender: TObject);
+begin
+  inherited;
+  FTabela.Filter := EmptyStr;
+  FTabela.Filtered := False;
+  FTabela.IndexFieldNames := 'BDPKCODAMB';
+  // cria form de consulta de fotos com filtro de código de ambiente
+  if Owner is TfrCadFoto then
+     begin
+       TfrCadFoto(Owner).Enabled := False;
+       FTabela.Filter := 'BDPKCODAMB = ' + IntToStr(TfrCadFoto(Owner).fGetIDAmbiente);
+       FTabela.Filtered := True;
+     end;
+end;
+
+function TfrConsFoto.setTabela: TClientDataSet;
+begin
+  // seta tabela no BD
+  Result := dmTabelas.tbFoto;
+end;
+
+end.

@@ -1,0 +1,390 @@
+unit uPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ExtCtrls,
+  Vcl.Imaging.jpeg, uUsuarioLogado, Vcl.StdCtrls, Vcl.Imaging.pngimage,
+  Vcl.ExtDlgs;
+
+type
+  TfrPrincipal = class(TForm)
+    MainMenu1: TMainMenu;
+    Cadastros1: TMenuItem;
+    Consultas1: TMenuItem;
+    Relatrios1: TMenuItem;
+    Sobre1: TMenuItem;
+    Laudo1: TMenuItem;
+    mUsuario: TMenuItem;
+    Imvel1: TMenuItem;
+    Proprietrio1: TMenuItem;
+    Cliente1: TMenuItem;
+    Locatrio1: TMenuItem;
+    Vistoria1: TMenuItem;
+    Usurios1: TMenuItem;
+    Imveis1: TMenuItem;
+    Proprietrios1: TMenuItem;
+    Clientes1: TMenuItem;
+    Vistorias1: TMenuItem;
+    Locatrios1: TMenuItem;
+    Imovis1: TMenuItem;
+    Proprietrios2: TMenuItem;
+    Clientes2: TMenuItem;
+    Vistorias2: TMenuItem;
+    Locatrios2: TMenuItem;
+    Gerar1: TMenuItem;
+    imgPrincipal: TImage;
+    pnLoginFilho: TPanel;
+    Image2: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    Image5: TImage;
+    lbAlertaLogin: TLabel;
+    edUsuario: TEdit;
+    edSenha: TEdit;
+    btLogin: TButton;
+    lbUsuarioLogado: TLabel;
+    Sair1: TMenuItem;
+    lbCadastrar: TLabel;
+    opdImagemPrincipal: TOpenPictureDialog;
+    Configuraes1: TMenuItem;
+    PapeldeParede1: TMenuItem;
+    procedure mUsuarioClick(Sender: TObject);
+    procedure Usurios1Click(Sender: TObject);
+    procedure Imvel1Click(Sender: TObject);
+    procedure Proprietrios1Click(Sender: TObject);
+    procedure Imveis1Click(Sender: TObject);
+    procedure Proprietrio1Click(Sender: TObject);
+    procedure Cliente1Click(Sender: TObject);
+    procedure Clientes1Click(Sender: TObject);
+    procedure Locatrio1Click(Sender: TObject);
+    procedure Locatrios1Click(Sender: TObject);
+    procedure Vistoria1Click(Sender: TObject);
+    procedure Vistorias1Click(Sender: TObject);
+    procedure Imovis1Click(Sender: TObject);
+    procedure Proprietrios2Click(Sender: TObject);
+    procedure Clientes2Click(Sender: TObject);
+    procedure Locatrios2Click(Sender: TObject);
+    procedure Vistorias2Click(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure btLoginClick(Sender: TObject);
+    procedure Sair1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure Gerar1Click(Sender: TObject);
+    procedure lbCadastrarClick(Sender: TObject);
+    procedure Sobre1Click(Sender: TObject);
+    procedure PapeldeParede1Click(Sender: TObject);
+  private
+    { Private declarations }
+    FUsuarioLogado : TUsuario;
+  public
+    { Public declarations }
+    procedure pPerfilAdm; // Configurações para perfil admin
+    procedure pPerfilPadrao; // Configurações para perfil padrão
+    procedure pSemUsuario;  // Configurações quando nenhum usuário logado
+    procedure pCentralizarPanel(AForm: TForm; APanel: TPanel); // Centraliza panel login
+    function fUsuario_Logado(wUsuario: String; wSenha: String): boolean; // Verifica autenticação do usuário
+    function fGetUsuarioLogado: TUsuario;  // Retrona o usuário logado
+  end;
+
+var
+  frPrincipal: TfrPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+uses udmDadosGVGESTOR, uCadUsuario, uConsUsuario, uCadImovel,
+  uConsProprietario, uConsImovel, uCadProprietario, uCadCliente, uConsCliente,
+  uCadLocatario, uConsLocatario, uCadVistoria, uConsVistoria, uRelImovel,
+  uRelProprietario, uRelCliente, uRelLocatario, uRelVistoria, uLaudo, uSobre;
+
+{ TfrPrincipal }
+
+procedure TfrPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  // Limpa o objeto usuário da memória
+  FreeAndNil(FUsuarioLogado);
+end;
+
+procedure TfrPrincipal.FormCreate(Sender: TObject);
+begin
+  // Carrega o form com o panel de login
+  pSemUsuario;
+end;
+
+procedure TfrPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_ESCAPE then// tecla de atalho para fechar a tela
+     begin
+       if MessageDlg('Deseja mesmo fechar da aplicação?', mtConfirmation, mbOKCancel, 0) = mrOk then
+          begin
+            Close;
+          end;
+     end
+  else
+  if (Key = VK_RETURN) then// tecla de atalho para seguir para o próximo campo com <enter>
+     self.Perform(WM_NEXTDLGCTL,0,0);
+end;
+
+procedure TfrPrincipal.FormResize(Sender: TObject);
+begin
+  // Centraliza o panel de login
+  pCentralizarPanel(self, pnLoginFilho);
+end;
+
+function TfrPrincipal.fUsuario_Logado(wUsuario, wSenha: String): boolean;
+begin
+  Result := False; // Retrona false por padrão
+  dmTabelas.tbUsuario.IndexFieldNames := 'BDUSUARIO';
+  // Verifica se o usuário informado existe
+  if dmTabelas.tbUsuario.FindKey([wUsuario]) then
+     begin
+       // se o usuário existe, verifica se a senha informada é igual a do usuário encontrado
+       if wSenha = dmTabelas.tbUsuario.FieldByName('BDSENHA').AsString then
+          begin
+            Result := True;
+            // Cria um objeto com os dados do usuário encontrado
+            FUsuarioLogado := TUsuario.Create;
+            FUsuarioLogado.ID := dmTabelas.tbUsuario.FieldByName('BDCODIGO').AsInteger;
+            FUsuarioLogado.Nome := dmTabelas.tbUsuario.FieldByName('BDNOME').AsString;
+            FUsuarioLogado.Perfil := dmTabelas.tbUsuario.FieldByName('BDPERFIL').AsString;
+          end;
+     end;
+end;
+
+function TfrPrincipal.fGetUsuarioLogado: TUsuario;
+begin
+  // Retorna o objeto de usuário criado
+  Result := FUsuarioLogado;
+end;
+
+// Validações do form de login
+procedure TfrPrincipal.btLoginClick(Sender: TObject);
+begin
+  if edUsuario.Text = EmptyStr then // se o campo usuário for vazio
+     begin
+       lbAlertaLogin.Caption := 'O campo "Usuário" deve ser preenchido!';
+       edUsuario.SetFocus;
+     end
+  else
+  if edSenha.Text = EmptyStr then // se o campo senha for vazio
+     begin
+       lbAlertaLogin.Caption := 'O campo "Senha" deve ser preenchido!';
+       edSenha.SetFocus;
+     end
+  else
+  // se os campos forem preenchidos, verifica a autenticação
+  if fUsuario_Logado(edUsuario.Text, edSenha.Text) then
+     begin
+       if FUsuarioLogado.Perfil = 'Administrador' then // verifica se o usuário tem perfil admin ou padrão
+          pPerfilAdm
+       else
+          pPerfilPadrao;
+       // Carrega nome do usuário na tela inicial e fecha o painel de login
+       lbUsuarioLogado.Caption := 'Olá, ' + FUsuarioLogado.Nome + '! Seja bem-vindo!';
+       pnLoginFilho.Visible := False;
+     end
+  else
+     begin
+       // se não solicita ao usuário tentar novamente
+       lbAlertaLogin.Caption := 'O "Usuário" e "Senha" não conferem.' + #13 +
+                                'Tente novamente.';
+       edUsuario.SetFocus;
+     end;
+end;
+
+procedure TfrPrincipal.pCentralizarPanel(AForm: TForm; APanel: TPanel);
+begin
+  // Procedure para centralizar o panel de login
+  APanel.Left := (AForm.ClientWidth div 2) - (APanel.Width div 2);
+  APanel.Top := (AForm.ClientHeight div 2) - (APanel.Height div 2);
+
+  APanel.Update;
+  AForm.Update;
+end;
+
+procedure TfrPrincipal.pPerfilAdm;
+begin
+  // Carrega configurações do perfil admin
+  Cadastros1.Enabled   := True;
+  Consultas1.Enabled   := True;
+  Relatrios1.Enabled   := True;
+  Laudo1.Enabled       := True;
+  Configuraes1.Enabled := True;
+  mUsuario.Enabled     := True;
+  Sair1.Enabled        := True;
+end;
+
+procedure TfrPrincipal.pPerfilPadrao;
+begin
+  // Carrega configurações do perfil padrão
+  Cadastros1.Enabled   := True;
+  Consultas1.Enabled   := True;
+  Relatrios1.Enabled   := True;
+  Laudo1.Enabled       := True;
+  Configuraes1.Enabled := True;
+  mUsuario.Enabled     := False;
+  Sair1.Enabled        := True;
+end;
+
+procedure TfrPrincipal.pSemUsuario;
+begin
+  // Carrega configurações para aguardar login de usuário
+  Cadastros1.Enabled      := False;
+  Consultas1.Enabled      := False;
+  Relatrios1.Enabled      := False;
+  Configuraes1.Enabled    := False;
+  Laudo1.Enabled          := False;
+  Sair1.Enabled           := False;
+  lbUsuarioLogado.Caption := EmptyStr;
+end;
+
+procedure TfrPrincipal.Sair1Click(Sender: TObject);
+var
+  wI: integer;
+begin
+  // Questiona o usuário se deseja fazer logoff
+  if MessageDlg('Deseja mesmo fazer logoff?', mtConfirmation, mbOKCancel, 0) = mrOk then
+     begin
+       // Fecha todos os forms filhos abertos
+       for wI := 0 to Self.MDIChildCount - 1 do
+          Self.MDIChildren[wI].Close;
+
+       pSemUsuario; // Carrega perfil aguardando usuário
+       lbUsuarioLogado.Caption := EmptyStr;
+       FreeAndNil(FUsuarioLogado);
+       // Exibe o painel de login
+       pnLoginFilho.Visible := True;
+       edUsuario.Clear;
+       edSenha.Clear;
+       edUsuario.SetFocus;
+     end;
+end;
+
+procedure TfrPrincipal.Sobre1Click(Sender: TObject);
+begin
+  TfrSobre.Create(self).Show;
+end;
+
+procedure TfrPrincipal.lbCadastrarClick(Sender: TObject);
+begin
+  // fecha painel de login e abre cadastro de usuário padrão
+  pnLoginFilho.Visible := False;
+  TfrCadUsuario.Create(self);
+end;
+
+procedure TfrPrincipal.PapeldeParede1Click(Sender: TObject);
+var
+  wUrlImagem : String;
+  wJpg : TJPEGImage;
+begin
+  wUrlImagem := 'C:\TCC - Gestor de Vistorias\GVGESTOR\images\bg\bg-principal.jpg';
+  // carrega dialogo para selecionar foto no computador
+  if opdImagemPrincipal.Execute = True then
+     begin
+       wJpg := TJPEGImage.Create;
+       wJpg.LoadFromFile(opdImagemPrincipal.FileName);
+       CopyFile(Char(opdImagemPrincipal.FileName), Char(wUrlImagem), True);
+       imgPrincipal.Picture := nil;
+       imgPrincipal.Picture := wJpg;
+       imgPrincipal.Update;
+     end;
+end;
+
+// ******** Botões do Menu Principal ****************
+procedure TfrPrincipal.Gerar1Click(Sender: TObject);
+begin
+  TfrLaudo.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Clientes1Click(Sender: TObject);
+begin
+  TfrConsCliente.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Clientes2Click(Sender: TObject);
+begin
+  TfrRelCliente.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Cliente1Click(Sender: TObject);
+begin
+  TfrCadCliente.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Imovis1Click(Sender: TObject);
+begin
+  TfrRelImovel.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Imveis1Click(Sender: TObject);
+begin
+  TfrConsImovel.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Imvel1Click(Sender: TObject);
+begin
+  TfrCadImovel.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Locatrio1Click(Sender: TObject);
+begin
+  TfrCadLocatario.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Locatrios1Click(Sender: TObject);
+begin
+  TfrConsLocatario.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Locatrios2Click(Sender: TObject);
+begin
+  TfrRelLocatario.Create(self).Show;
+end;
+
+procedure TfrPrincipal.mUsuarioClick(Sender: TObject);
+begin
+  TfrCadUsuario.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Proprietrio1Click(Sender: TObject);
+begin
+  TfrCadProprietario.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Proprietrios1Click(Sender: TObject);
+begin
+  TfrConsProprietario.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Proprietrios2Click(Sender: TObject);
+begin
+  TfrRelProprietario.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Usurios1Click(Sender: TObject);
+begin
+  TfrConsUsuario.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Vistoria1Click(Sender: TObject);
+begin
+  TfrCadVistoria.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Vistorias1Click(Sender: TObject);
+begin
+  TfrConsVistoria.Create(self).Show;
+end;
+
+procedure TfrPrincipal.Vistorias2Click(Sender: TObject);
+begin
+  TfrRelVistoria.Create(self).Show;
+end;
+
+end.

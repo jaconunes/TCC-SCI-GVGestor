@@ -94,6 +94,7 @@ begin
   FTabela := setTabela;// instanciar a tabela do cadastro
   if Assigned(FTabela) then
      dsConsulta.DataSet := FTabela;// instancia tabela para a grid
+
 end;
 
 procedure TfrPadraoConsultaGVGSTOR.FormKeyDown(Sender: TObject; var Key: Word;

@@ -36,7 +36,8 @@ uses
   uConsAmbiente in 'Consultas\uConsAmbiente.pas' {frConsAmbiente},
   uConsItem in 'Consultas\uConsItem.pas' {frConsItem},
   uConsFoto in 'Consultas\uConsFoto.pas' {frConsFoto},
-  uSobre in 'uSobre.pas' {frSobre};
+  uSobre in 'uSobre.pas' {frSobre},
+  uPapelParede in 'uPapelParede.pas' {frPapelParede};
 
 {$R *.res}
 

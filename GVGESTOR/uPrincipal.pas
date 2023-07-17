@@ -47,7 +47,6 @@ type
     lbUsuarioLogado: TLabel;
     Sair1: TMenuItem;
     lbCadastrar: TLabel;
-    opdImagemPrincipal: TOpenPictureDialog;
     Configuraes1: TMenuItem;
     PapeldeParede1: TMenuItem;
     procedure mUsuarioClick(Sender: TObject);
@@ -100,7 +99,8 @@ implementation
 uses udmDadosGVGESTOR, uCadUsuario, uConsUsuario, uCadImovel,
   uConsProprietario, uConsImovel, uCadProprietario, uCadCliente, uConsCliente,
   uCadLocatario, uConsLocatario, uCadVistoria, uConsVistoria, uRelImovel,
-  uRelProprietario, uRelCliente, uRelLocatario, uRelVistoria, uLaudo, uSobre;
+  uRelProprietario, uRelCliente, uRelLocatario, uRelVistoria, uLaudo, uSobre,
+  uPapelParede;
 
 { TfrPrincipal }
 
@@ -114,6 +114,8 @@ procedure TfrPrincipal.FormCreate(Sender: TObject);
 begin
   // Carrega o form com o panel de login
   pSemUsuario;
+  // Carrega papel de parede
+  imgPrincipal.Picture.LoadFromFile('C:\TCC - Gestor de Vistorias\GVGESTOR\images\bg\bg-principal.jpg');
 end;
 
 procedure TfrPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
@@ -280,12 +282,7 @@ end;
 
 procedure TfrPrincipal.PapeldeParede1Click(Sender: TObject);
 begin
-  // carrega dialogo para selecionar foto no computador
-  if opdImagemPrincipal.Execute = True then
-     begin
-       imgPrincipal.Picture.LoadFromFile(opdImagemPrincipal.FileName);
-       imgPrincipal.Update;
-     end;
+  TfrPapelParede.Create(self).Show;
 end;
 
 // ******** Botões do Menu Principal ****************

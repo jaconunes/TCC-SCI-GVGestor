@@ -118,8 +118,11 @@ procedure TfrLaudo.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   inherited;
-  if (Key = VK_F3) then// tecla de atalho para consulta
-    btSelecionar.Click;
+  if Key = VK_F3 then // tecla de atalho para consulta
+     btSelecionar.Click
+  else
+  if Key = VK_RETURN then // atalho para visualizar
+     btVisualizar.Click;
 end;
 
 procedure TfrLaudo.pGetConsultaMasterSource;

@@ -14,6 +14,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btEditarClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -38,10 +39,17 @@ begin
   TfrCadFoto.Create(self).Show;
 end;
 
+procedure TfrConsFoto.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+//  if (Owner is TForm) and (not TForm(Owner).Enabled) then
+//     TForm(Owner).Enabled := True;
+end;
+
 procedure TfrConsFoto.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  inherited;
+  //inherited;
   if Key = VK_RETURN then// tecla de atalho para retornar o valor para o campo do cadastro
      begin
        if (Owner is TfrCadFoto) and (grConsulta.Columns.Count > 0) then
@@ -51,7 +59,16 @@ begin
             TfrCadFoto(Owner).edCodigo.SetFocus;
             Close;
           end;
-     end;
+     end
+  else
+  if (Key = VK_DELETE) and (btExcluir.Enabled) then// tecla de atalho para excluir
+     btExcluir.Click
+  else
+  if (Key = VK_F4) and (btEditar.Enabled) then
+     btEditar.Click
+  else
+  if Key = VK_ESCAPE then// tecla de atalho para fechar a tela
+     Close;
 end;
 
 procedure TfrConsFoto.FormShow(Sender: TObject);
@@ -63,6 +80,7 @@ begin
   // cria form de consulta de fotos com filtro de código de ambiente
   if Owner is TfrCadFoto then
      begin
+       //TfrCadFoto(Owner).Enabled := False;
        FTabela.Filter := 'BDPKCODAMB = ' + IntToStr(TfrCadFoto(Owner).fGetIDAmbiente);
        FTabela.Filtered := True;
      end;
