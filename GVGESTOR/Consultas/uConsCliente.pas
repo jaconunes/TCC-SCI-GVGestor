@@ -15,11 +15,11 @@ type
     cbFiltro: TComboBox;
     Label1: TLabel;
     btLimpar: TButton;
-    btFiltrar: TButton;
     procedure btEditarClick(Sender: TObject);
-    procedure btFiltrarClick(Sender: TObject);
     procedure btLimparClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure edCodigoNomeChange(Sender: TObject);
+    procedure edCodigoNomeKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -45,7 +45,15 @@ begin
   TfrCadCliente.Create(self).Show;
 end;
 
-procedure TfrConsCliente.btFiltrarClick(Sender: TObject);
+procedure TfrConsCliente.btLimparClick(Sender: TObject);
+begin
+  inherited;
+  // limpa filtro do grid
+  FTabela.Filtered := False;
+  edCodigoNome.Clear;
+end;
+
+procedure TfrConsCliente.edCodigoNomeChange(Sender: TObject);
 begin
   inherited;
   FTabela.Filtered := False;
@@ -54,7 +62,10 @@ begin
   if cbFiltro.ItemIndex = 0 then // filtro por código
      begin
        FTabela.IndexFieldNames := 'BDCODCLI';
-       FTabela.Filter := ' BDCODCLI = ' + Trim(edCodigoNome.Text);
+       if edCodigoNome.Text = EmptyStr then
+          FTabela.Filtered := False
+       else
+          FTabela.Filter := ' BDCODCLI = ' + Trim(edCodigoNome.Text);
        FTabela.Filtered := True;
      end
   else
@@ -66,11 +77,10 @@ begin
      end;
 end;
 
-procedure TfrConsCliente.btLimparClick(Sender: TObject);
+procedure TfrConsCliente.edCodigoNomeKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  // limpa filtro do grid
-  FTabela.Filtered := False;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo filtro
 end;
 
 procedure TfrConsCliente.FormClose(Sender: TObject; var Action: TCloseAction);

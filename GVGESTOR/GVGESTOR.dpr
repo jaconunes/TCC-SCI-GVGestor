@@ -44,7 +44,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  TStyleManager.TrySetStyle('Metropolis UI Blue');
+  TStyleManager.TrySetStyle('Windows10');
   Application.CreateForm(TdmConnection, dmConnection);
   Application.CreateForm(TdmTabelas, dmTabelas);
   Application.CreateForm(TfrPrincipal, frPrincipal);

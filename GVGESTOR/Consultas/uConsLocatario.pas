@@ -15,11 +15,11 @@ type
     cbFiltro: TComboBox;
     Label1: TLabel;
     btLimpar: TButton;
-    btFiltrar: TButton;
     procedure btEditarClick(Sender: TObject);
-    procedure btFiltrarClick(Sender: TObject);
     procedure btLimparClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure edCodigoNomeKeyPress(Sender: TObject; var Key: Char);
+    procedure edCodigoNomeChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,7 +45,15 @@ begin
   TfrCadLocatario.Create(self).Show;
 end;
 
-procedure TfrConsLocatario.btFiltrarClick(Sender: TObject);
+procedure TfrConsLocatario.btLimparClick(Sender: TObject);
+begin
+  inherited;
+  // desabilita filtro na tabela
+  FTabela.Filtered := False;
+  edCodigoNome.Clear;
+end;
+
+procedure TfrConsLocatario.edCodigoNomeChange(Sender: TObject);
 begin
   inherited;
   FTabela.Filtered := False;
@@ -54,7 +62,10 @@ begin
   if cbFiltro.ItemIndex = 0 then // filtro por código
      begin
        FTabela.IndexFieldNames := 'BDCDLOCAT';
-       FTabela.Filter := ' BDCDLOCAT = ' + Trim(edCodigoNome.Text);
+       if edCodigoNome.Text = EmptyStr then
+          FTabela.Filtered := False
+       else
+          FTabela.Filter := ' BDCDLOCAT = ' + Trim(edCodigoNome.Text);
        FTabela.Filtered := True;
      end
   else
@@ -66,11 +77,10 @@ begin
      end;
 end;
 
-procedure TfrConsLocatario.btLimparClick(Sender: TObject);
+procedure TfrConsLocatario.edCodigoNomeKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  // desabilita filtro na tabela
-  FTabela.Filtered := False;
+  Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo filtro
 end;
 
 procedure TfrConsLocatario.FormClose(Sender: TObject; var Action: TCloseAction);
