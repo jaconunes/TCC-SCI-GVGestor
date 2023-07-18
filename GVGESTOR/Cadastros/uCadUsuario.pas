@@ -32,6 +32,7 @@ type
     procedure btPesquisarClick(Sender: TObject);
     procedure edCpfCnpjExit(Sender: TObject);
     procedure edNomeKeyPress(Sender: TObject; var Key: Char);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -85,6 +86,15 @@ procedure TfrCadUsuario.edNomeKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
   Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo nome
+end;
+
+procedure TfrCadUsuario.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  if frPrincipal.fGetUsuarioLogado = nil then
+     begin
+       frPrincipal.pnLoginFilho.Visible := True;
+     end;
 end;
 
 procedure TfrCadUsuario.FormCreate(Sender: TObject);

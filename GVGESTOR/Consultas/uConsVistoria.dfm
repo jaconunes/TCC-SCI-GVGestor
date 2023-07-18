@@ -236,6 +236,7 @@ inherited frConsVistoria: TfrConsVistoria
       Height = 28
       Date = 45119.982287418980000000
       Time = 45119.982287418980000000
+      Enabled = False
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
@@ -252,6 +253,7 @@ inherited frConsVistoria: TfrConsVistoria
       Height = 28
       Date = 45119.982287418980000000
       Time = 45119.982287418980000000
+      Enabled = False
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
