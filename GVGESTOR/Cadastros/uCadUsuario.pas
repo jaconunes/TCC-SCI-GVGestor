@@ -30,9 +30,9 @@ type
     procedure rbCpfClick(Sender: TObject);
     procedure rbCnpjClick(Sender: TObject);
     procedure btPesquisarClick(Sender: TObject);
-    procedure edCpfCnpjExit(Sender: TObject);
     procedure edNomeKeyPress(Sender: TObject; var Key: Char);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure edCpfCnpjExit(Sender: TObject);
   private
     { Private declarations }
   public

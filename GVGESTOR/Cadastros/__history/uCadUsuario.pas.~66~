@@ -30,10 +30,9 @@ type
     procedure rbCpfClick(Sender: TObject);
     procedure rbCnpjClick(Sender: TObject);
     procedure btPesquisarClick(Sender: TObject);
-    procedure edCpfCnpjExit(Sender: TObject);
-    procedure edSenhaKeyPress(Sender: TObject; var Key: Char);
-    procedure edRepitaSenhaKeyPress(Sender: TObject; var Key: Char);
     procedure edNomeKeyPress(Sender: TObject; var Key: Char);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure edCpfCnpjChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -77,7 +76,7 @@ begin
   edNome.Text        := FTabela.FieldByName('BDNOME').AsString;
 end;
 
-procedure TfrCadUsuario.edCpfCnpjExit(Sender: TObject);
+procedure TfrCadUsuario.edCpfCnpjChange(Sender: TObject);
 begin
   inherited;
   edCpfCnpj.Text := fAplicaMascara(edCpfCnpj.Text); // mascara de CNPJ
@@ -87,6 +86,15 @@ procedure TfrCadUsuario.edNomeKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
   Key := AnsiUpperCase(Key)[1]; //Letras maiúsculas no campo nome
+end;
+
+procedure TfrCadUsuario.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  if frPrincipal.fGetUsuarioLogado = nil then
+     begin
+       frPrincipal.pnLoginFilho.Visible := True;
+     end;
 end;
 
 procedure TfrCadUsuario.FormCreate(Sender: TObject);
@@ -99,6 +107,13 @@ begin
        cbPerfil.Enabled := False;
        btPesquisar.Enabled := False;
        btExcluir.Enabled := False;
+     end
+  else
+  if Owner is TfrConsUsuario then
+     begin
+       edCodigo.Text := TfrConsUsuario(Owner).grConsulta.Columns[0].Field.AsString;
+       if getID then
+          CarregaCampos;
      end;
 end;
 
@@ -179,28 +194,28 @@ begin
      begin
        edCpfCnpj.SetFocus;
        Result := False;
-       wMessage := wMessage + 'O campo CPF/CNPJ não deve ser vazio!' + #13;
+       wMessage := 'O campo CPF/CNPJ não deve ser vazio!' + #13;
      end
   else
   if edUsuario.Text = EmptyStr then // valida campo usuário
      begin
        edUsuario.SetFocus;
        Result := False;
-       wMessage := wMessage + 'O campo usuário não deve ser vazio!' + #13;
+       wMessage := 'O campo usuário não deve ser vazio!' + #13;
      end
   else
   if edSenha.Text = EmptyStr then  // valida campo senha
      begin
        edSenha.SetFocus;
        Result := False;
-       wMessage := wMessage + 'O campo Senha não deve ser vazio!' + #13;
+       wMessage := 'O campo Senha não deve ser vazio!' + #13;
      end
   else
   if edRepitaSenha.Text = EmptyStr then  // valida campo repitasenha
      begin
        edRepitaSenha.SetFocus;
        Result := False;
-       wMessage := wMessage + 'Repita a senha neste campo!' + #13;
+       wMessage := 'Repita a senha neste campo!' + #13;
      end
   else
   if edSenha.Text <> edRepitaSenha.Text then // valida se senhas correspondem
@@ -209,14 +224,10 @@ begin
        edRepitaSenha.Clear;
        edSenha.SetFocus;
        Result := False;
-       wMessage := wMessage + 'As senhas não correspondem!' + #13;
-     end
-  else
-  if Result then
-     begin
-       wMessage := 'Registro salvo com sucesso!';
+       wMessage := 'As senhas não correspondem!' + #13;
      end;
-  ShowMessage(wMessage);
+  if wMessage <> EmptyStr then
+     ShowMessage(wMessage);
 end;
 
 end.

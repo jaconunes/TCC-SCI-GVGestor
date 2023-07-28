@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadraoRelatorioGVGESTOR, Data.FMTBcd,
   frxExportDOCX, frxClass, frxExportPDF, Data.DB, Data.SqlExpr, frxDBSet,
   frxDesgn, System.ImageList, Vcl.ImgList, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.ComCtrls, Vcl.ToolWin, Vcl.Buttons, EditSCI, Datasnap.DBClient, udmDadosGVGESTOR;
+  Vcl.ComCtrls, Vcl.ToolWin, Vcl.Buttons, EditSCI, Datasnap.DBClient, udmDadosGVGESTOR, MaskUtils;
 
 type
   TfrLaudo = class(TfrPadraoRelatorioGVGESTOR)
@@ -41,9 +41,9 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure pGetConsultaSql; override;
-    procedure pGetConsultaMasterSource; override;
-    function fGetNomeArquivo: string; override;
+    procedure pGetConsultaSql; override;  // obtem consulta SQL se houver
+    procedure pGetConsultaMasterSource; override;  // obtem consulta MasterSource se houver
+    function fGetNomeArquivo: string; override; // obtem nome do arquivo para salvar como
   end;
 
 var
@@ -53,7 +53,7 @@ implementation
 
 {$R *.dfm}
 
-uses uConsVistoria, uPrincipal;
+uses uConsVistoria, uPrincipal, uPadraoCadastroGVGESTOR;
 
 procedure TfrLaudo.edCodigoChange(Sender: TObject);
 begin
@@ -118,8 +118,14 @@ procedure TfrLaudo.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   inherited;
-  if (Key = VK_F3) then// tecla de atalho para consulta
-    btSelecionar.Click;
+  if Key = VK_F3 then // tecla de atalho para consulta
+     btSelecionar.Click
+  else
+  if Key = VK_RETURN then // atalho para visualizar
+     begin
+       if btVisualizar.Enabled then
+          btVisualizar.Click;
+     end;
 end;
 
 procedure TfrLaudo.pGetConsultaMasterSource;
@@ -227,6 +233,7 @@ end;
 procedure TfrLaudo.btSelecionarClick(Sender: TObject);
 begin
   inherited;
+  // cria form de consulta de vistorias
   TfrConsVistoria.Create(edCodigo);
 end;
 

@@ -98,6 +98,7 @@ begin
                  FTabela.Post;
                  FTabela.ApplyUpdates(0);
                  FTabela.Refresh;
+                 ShowMessage('Registro salvo com sucesso!');
 
                  if (frPrincipal.fGetUsuarioLogado = nil) and (Self.Name = 'frCadUsuario')  then
                     begin   // Verifica se o usuário está logado e oculta o panel de login
@@ -108,7 +109,10 @@ begin
                     begin
                       setLimpaCampos;// limpar campos da tela
                       if Assigned(FIDEdit) and FIDEdit.CanFocus then// apos salvar voltar para o campo chave
-                         FIDEdit.SetFocus;
+                         begin
+                           TCustomEdit(FIDEdit).Text := IntToStr(fGerarID);//Gera ID para novo registro
+                           FIDEdit.SetFocus;
+                         end;
                     end;
                end
             else
@@ -151,13 +155,11 @@ var
   wID : Integer;
 begin
   wID := Random(1000); // Obtem número randômico
-  FTabela.First;
-  while not FTabela.Eof do  // Percorre todos os registros da tabela e verifica se já existe
+  FTabela.IndexFieldNames := FFieldName;
+  if FTabela.FindKey([wID]) then  // Percorre todos os registros da tabela e verifica se já existe
      begin
        if FTabela.FieldByName(FFieldName).AsInteger = wID then
           wID := Random(1000); // Se existir gera um novo
-
-       FTabela.Next;
      end;
   Result := wID; // Retorna ID gerado
 end;
@@ -308,7 +310,10 @@ begin
               TDateTimePicker(Self.Components[I]).Date := Now
            else
            if Self.Components[I] is TImage then
-              TImage(Self.Components[I]).Picture.LoadFromFile('');
+              begin
+                TImage(Self.Components[I]).Picture.Bitmap.Assign(Nil);
+                TImage(Self.Components[I]).Parent.Repaint;
+              end;
 
         end;// verificar a classe para acessar o método que limpa o conteúdo do campo
   end;
@@ -319,7 +324,7 @@ begin
   Result := True; // o valor deve retornar verdadeiro para poder salvar os dados na tabela
 end;
 
-function TfrPadraoCadastroGVGESTOR.fCharacterRemove(wS: String): String;
+function TfrPadraoCadastroGVGESTOR.fCharacterRemove(wS: String): String;  // Percorre todos os caracteres de uma string e remove caracteres
 var
   wI: Integer;
 begin

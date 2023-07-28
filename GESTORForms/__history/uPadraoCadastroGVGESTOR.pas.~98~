@@ -98,6 +98,7 @@ begin
                  FTabela.Post;
                  FTabela.ApplyUpdates(0);
                  FTabela.Refresh;
+                 ShowMessage('Registro salvo com sucesso!');
 
                  if (frPrincipal.fGetUsuarioLogado = nil) and (Self.Name = 'frCadUsuario')  then
                     begin   // Verifica se o usuário está logado e oculta o panel de login
@@ -108,7 +109,10 @@ begin
                     begin
                       setLimpaCampos;// limpar campos da tela
                       if Assigned(FIDEdit) and FIDEdit.CanFocus then// apos salvar voltar para o campo chave
-                         FIDEdit.SetFocus;
+                         begin
+                           TCustomEdit(FIDEdit).Text := IntToStr(fGerarID);//Gera ID para novo registro
+                           FIDEdit.SetFocus;
+                         end;
                     end;
                end
             else
@@ -149,15 +153,15 @@ end;
 function TfrPadraoCadastroGVGESTOR.fGerarID: Integer;
 var
   wID : Integer;
+  wExists : Boolean;
 begin
   wID := Random(1000); // Obtem número randômico
-  FTabela.First;
-  while not FTabela.Eof do  // Percorre todos os registros da tabela e verifica se já existe
+  FTabela.IndexFieldNames := FFieldName;
+  wExists := FTabela.FindKey([wID]);
+  while wExists do  // Percorre todos os registros da tabela e verifica se já existe
      begin
-       if FTabela.FieldByName(FFieldName).AsInteger = wID then
-          wID := Random(1000); // Se existir gera um novo
-
-       FTabela.Next;
+       wID := Random(1000); // Se existir gera um novo
+       wExists := FTabela.FindKey([wID]);
      end;
   Result := wID; // Retorna ID gerado
 end;
@@ -188,14 +192,15 @@ begin
   if Assigned(FLastEdit) then// setar o evento de saida do campo
      begin
        if FLastEdit is TCustomEdit then
-          TEdit(FLastEdit).OnExit := LastEditExit;
+          TEdit(FLastEdit).OnExit := LastEditExit; // Seta eventos OnExit para o último campo da tabela
      end;
 end;
 
 procedure TfrPadraoCadastroGVGESTOR.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  FTeclouEsc := Key = VK_ESCAPE;
+  FTeclouEsc := Key = VK_ESCAPE; //Se usuário teclou ESC
+
   if Key = VK_NEXT then// tecla de atalho para salvar
     btSalvar.Click
   else
@@ -259,7 +264,7 @@ end;
 procedure TfrPadraoCadastroGVGESTOR.IDEditKeyPress(Sender: TObject;
   var Key: Char);
 begin
-  Key := #0;
+  Key := #0; // Impede a edição do campo de código
 end;
 
 procedure TfrPadraoCadastroGVGESTOR.LastEditExit(Sender: TObject);
@@ -278,7 +283,7 @@ end;
 
 procedure TfrPadraoCadastroGVGESTOR.pLimpaFiltros(wTabela : TClientDataset);
 begin
-  wTabela.Filter   := EmptyStr;
+  wTabela.Filter   := EmptyStr;   //Limpa os filtros da tabela
   wTabela.Filtered := False;
 end;
 
@@ -293,18 +298,25 @@ begin
        Continue
       else
       if (Self.Components[I] is TWinControl) then
-        begin
-          if Self.Components[I] is TCustomEdit then
+         begin
+           if Self.Components[I] is TCustomEdit then
               TCustomEdit(Self.Components[I]).Clear
-          else
-          if Self.Components[I] is TCustomComboBox then
+           else
+           if Self.Components[I] is TCustomComboBox then
               TCustomComboBox(Self.Components[I]).ItemIndex := 0
-          else
-          if Self.Components[I] is TCheckBox then
+           else
+           if Self.Components[I] is TCheckBox then
               TCheckBox(Self.Components[I]).Checked := False
-          else
-          if Self.Components[I] is TDateTimePicker then
-              TDateTimePicker(Self.Components[I]).Date := Now;
+           else
+           if Self.Components[I] is TDateTimePicker then
+              TDateTimePicker(Self.Components[I]).Date := Now
+           else
+           if Self.Components[I] is TImage then
+              begin
+                TImage(Self.Components[I]).Picture.Bitmap.Assign(Nil);
+                TImage(Self.Components[I]).Parent.Repaint;
+              end;
+
         end;// verificar a classe para acessar o método que limpa o conteúdo do campo
   end;
 end;
@@ -314,7 +326,7 @@ begin
   Result := True; // o valor deve retornar verdadeiro para poder salvar os dados na tabela
 end;
 
-function TfrPadraoCadastroGVGESTOR.fCharacterRemove(wS: String): String;
+function TfrPadraoCadastroGVGESTOR.fCharacterRemove(wS: String): String;  // Percorre todos os caracteres de uma string e remove caracteres
 var
   wI: Integer;
 begin

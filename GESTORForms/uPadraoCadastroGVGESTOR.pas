@@ -153,13 +153,15 @@ end;
 function TfrPadraoCadastroGVGESTOR.fGerarID: Integer;
 var
   wID : Integer;
+  wExists : Boolean;
 begin
   wID := Random(1000); // Obtem número randômico
   FTabela.IndexFieldNames := FFieldName;
-  while FTabela.FindKey([wID]) do  // Percorre todos os registros da tabela e verifica se já existe
+  wExists := FTabela.FindKey([wID]);
+  while wExists do  // Percorre todos os registros da tabela e verifica se já existe
      begin
-       if FTabela.FieldByName(FFieldName).AsInteger = wID then
-          wID := Random(1000); // Se existir gera um novo
+       wID := Random(1000); // Se existir gera um novo
+       wExists := FTabela.FindKey([wID]);
      end;
   Result := wID; // Retorna ID gerado
 end;
@@ -256,7 +258,6 @@ begin
      begin
        setLimpaCampos;// caso NÃO encontre, deve limpar os campos da tela
      end;
-
 end;
 
 procedure TfrPadraoCadastroGVGESTOR.IDEditKeyPress(Sender: TObject;
@@ -311,8 +312,9 @@ begin
            else
            if Self.Components[I] is TImage then
               begin
-                TImage(Self.Components[I]).Picture.Bitmap.Assign(Nil);
-                TImage(Self.Components[I]).Parent.Repaint;
+//                TImage(Self.Components[I]).Picture.Bitmap.Assign(Nil);
+//                TImage(Self.Components[I]).Parent.Repaint;
+                  TImage(Self.Components[I]).Visible := False;
               end;
 
         end;// verificar a classe para acessar o método que limpa o conteúdo do campo

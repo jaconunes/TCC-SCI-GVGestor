@@ -79,11 +79,11 @@ end;
 
 procedure TfrCadFoto.CarregaCampos;
 begin
-//  if Assigned(iImagem) then
-//     iImagem.Picture.Assign(nil);
+  iImagem.Picture := nil;
 
   // carrega as informações e foto na tela
   edDescricao.Text := FTabela.FieldByName('BDDESC').AsString;
+  iImagem.Visible := True;
   iImagem.Picture.LoadFromFile(FTabela.FieldByName('BDURL').AsString);
 end;
 
@@ -94,7 +94,7 @@ begin
   if (Owner is TForm) and (not TForm(Owner).Enabled) then
      TForm(Owner).Enabled := True;
 
-  FreeAndNil(iImagem);
+  //FreeAndNil(iImagem);
 end;
 
 procedure TfrCadFoto.FormCreate(Sender: TObject);
@@ -156,9 +156,10 @@ begin
   Result := wCodAmbiente;
 end;
 
-function TfrCadFoto.fGetImageFileName(Sender: TBitmap): string;
+function TfrCadFoto.fGetImageFileName(Sender: TOpenPictureDialog): string;
 var
   wUrlImagem : String;
+  wJpg : TJPEGImage;
   wBmp: TBitmap;
 begin
   if Owner is TfrCadAmbiente then
@@ -169,11 +170,15 @@ begin
                      TfrCadAmbiente(Owner).edCodigo.Text + '_Foto_' +
                      edCodigo.Text + '_' + FormatDateTime('dd-mm-yyyy', Now) + '-' +
                      FormatDateTime('HH-MM', Now) + '.bmp';
+       wJpg := TJPEGImage.Create;
        wBmp := TBitmap.Create;
-       wBmp := Sender;
+       wJpg.LoadFromFile(Sender.FileName);
+       // Converte o Jpeg em Bmp e retora o Bmp
+       wBmp := fConvertToBmp(wJpg);
        // salva o Bmp no local especificado
        wBmp.SaveToFile(wUrlImagem);
        wBmp.Free;
+       wJpg.Free;
        // Retorna o caminho da imagem
        Result := wUrlImagem;
      end;
@@ -197,7 +202,7 @@ end;
 function TfrCadFoto.setLastEdit: TWinControl;
 begin
   // retorna o ultimo campo da tela
-  Result := edDescricao;
+   Result := edDescricao;  // Salva apenas pelo atalho F2
 end;
 
 function TfrCadFoto.setTabela: TClientDataSet;
@@ -225,6 +230,7 @@ begin
        if opdImagem.Execute = True then
           begin
             iImagem.Picture.LoadFromFile(opdImagem.FileName);
+            iImagem.Visible := True;
           end;
      end;
   if wMessage <> EmptyStr then

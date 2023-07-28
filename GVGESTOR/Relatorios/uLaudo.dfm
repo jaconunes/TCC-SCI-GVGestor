@@ -69,6 +69,7 @@ inherited frLaudo: TfrLaudo
         Font.Style = []
         ParentFont = False
         TabOrder = 0
+        Text = '0'
         OnChange = edCodigoChange
         Decimal = False
         DecimalSeparador = ','
@@ -79,7 +80,7 @@ inherited frLaudo: TfrLaudo
   inherited ImageList1: TImageList
     Top = 0
     Bitmap = {
-      494C010105000800F80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -500,6 +501,7 @@ inherited frLaudo: TfrLaudo
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
     PreviewOptions.Zoom = 1.000000000000000000
+    PreviewOptions.ZoomMode = zmSavedUserConfig
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45120.893905277780000000

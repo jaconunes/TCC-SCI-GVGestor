@@ -192,9 +192,9 @@ begin
           begin
             Result := True;
             // Cria um objeto com os dados do usuário encontrado
-            FUsuarioLogado := TUsuario.Create;
-            FUsuarioLogado.ID := dmTabelas.tbUsuario.FieldByName('BDCODIGO').AsInteger;
-            FUsuarioLogado.Nome := dmTabelas.tbUsuario.FieldByName('BDNOME').AsString;
+            FUsuarioLogado        := TUsuario.Create;
+            FUsuarioLogado.ID     := dmTabelas.tbUsuario.FieldByName('BDCODIGO').AsInteger;
+            FUsuarioLogado.Nome   := dmTabelas.tbUsuario.FieldByName('BDNOME').AsString;
             FUsuarioLogado.Perfil := dmTabelas.tbUsuario.FieldByName('BDPERFIL').AsString;
           end;
      end;

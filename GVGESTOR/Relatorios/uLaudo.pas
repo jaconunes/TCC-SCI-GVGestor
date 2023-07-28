@@ -59,14 +59,31 @@ procedure TfrLaudo.edCodigoChange(Sender: TObject);
 begin
   inherited;
   // Verifica se existe ID válido, então habilita botões, exceto edição
-  if dmTabelas.tbVistoria.FindKey([edCodigo.Text]) then
+  if (edCodigo.Codigo <> 0) and (edCodigo.Text <> EmptyStr) then
      begin
-       btVisualizar.Enabled := True;
-       btSalvarComo.Enabled := True;
-       btImprimir.Enabled := True;
-       // Habilita edição somente de usuário é admin
-       if frPrincipal.fGetUsuarioLogado.Perfil = 'Administrador' then
-          btEditar.Enabled := True;
+       if dmTabelas.tbVistoria.FindKey([edCodigo.Text]) then
+          begin
+            btVisualizar.Enabled := True;
+            btSalvarComo.Enabled := True;
+            btImprimir.Enabled := True;
+            // Habilita edição somente de usuário é admin
+            if frPrincipal.fGetUsuarioLogado.Perfil = 'Administrador' then
+               btEditar.Enabled := True;
+          end
+       else
+          begin
+            btVisualizar.Enabled := False;
+            btSalvarComo.Enabled := False;
+            btImprimir.Enabled   := False;
+            btEditar.Enabled     := False;
+          end;
+     end
+  else
+     begin
+       btVisualizar.Enabled := False;
+       btSalvarComo.Enabled := False;
+       btImprimir.Enabled   := False;
+       btEditar.Enabled     := False;
      end;
 end;
 
@@ -122,7 +139,10 @@ begin
      btSelecionar.Click
   else
   if Key = VK_RETURN then // atalho para visualizar
-     btVisualizar.Click;
+     begin
+       if btVisualizar.Enabled then
+          btVisualizar.Click;
+     end;
 end;
 
 procedure TfrLaudo.pGetConsultaMasterSource;

@@ -83,6 +83,7 @@ begin
 
   // carrega as informações e foto na tela
   edDescricao.Text := FTabela.FieldByName('BDDESC').AsString;
+  iImagem.Visible := True;
   iImagem.Picture.LoadFromFile(FTabela.FieldByName('BDURL').AsString);
 end;
 
@@ -229,6 +230,7 @@ begin
        if opdImagem.Execute = True then
           begin
             iImagem.Picture.LoadFromFile(opdImagem.FileName);
+            iImagem.Visible := True;
           end;
      end;
   if wMessage <> EmptyStr then
